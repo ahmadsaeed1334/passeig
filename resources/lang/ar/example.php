@@ -1,0 +1,1 @@
+<?php return ['placeholder_key'=>'Placeholder Translation',];

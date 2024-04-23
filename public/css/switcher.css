@@ -1,0 +1,17 @@
+.switcher {
+  text-transform: uppercase;
+  position: absolute;
+  top:50%;
+  /* left:50%; */
+  margin-left:330px;
+  /* color:#FFEB3B; */
+  color:#3699FF;
+  transform:translate(-50%,-50%);
+  font: 20px "Fira Mono", monospace;
+  font-weight: bolder;
+  /*user-select:none;
+  cursor:default;/*It's here if you want it*/
+}
+.switcher .shift {
+  display:none;
+}
