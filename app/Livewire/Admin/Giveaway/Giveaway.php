@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire\Admin\Giveaway;
-
 use App\Models\Giveaway as ModelsGiveaway;
 use App\Models\GiveawayEntry;
 use App\Models\User;

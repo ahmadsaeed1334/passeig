@@ -338,6 +338,7 @@
 
               <li>
 
+                
                 <a href="{{ $footerIcon->url }}"
                     class="position-relative d-inline-block ic-{{ $iconClass }}"
                      target="_blank"><i class="{{ $footerIcon->icon_class }}"></i></a>
