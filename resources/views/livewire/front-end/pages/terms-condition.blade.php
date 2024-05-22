@@ -3,12 +3,17 @@
           {{ $page_title ?? 'Terms & Condition' }}
       </x-slot>
       <style>
-        <style>
+        
   button {
     margin: 5px;
     padding: 5px 10px;
     cursor: pointer;
   }
+  @media (min-width: 992px) {
+    .contact-wrapper {
+        padding: 50px 30px 0 30px;
+    }
+}
 </style>
       </style>
      <!-- inner-hero-section start -->
@@ -20,7 +25,7 @@
             <ul class="page-list">
               <li><a href="/">Home</a></li>
               <li><a href="#0">Pages</a></li>
-              <li class="active">Contact</li>
+              <li class="active">Term & Condition</li>
             </ul>
           </div>
         </div>
@@ -42,11 +47,9 @@
           <div class="col-lg-12">
             <div class="contact-wrapper">
               <div class="row">
-                <div class="col-md-12">
-                    <div wire:ignore>
-                        <textarea id="mytextarea" wire:model.defer="mycontent" name="mycontent"></textarea>
-                      </div>
-                      
+                <div class="col-md-12 ">
+                    
+                  {!! $termsConditionContent !!}
                     
                 </div>
                 
@@ -57,9 +60,9 @@
        
     </section>
     <!-- contact section end -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    {{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> --}}
       
-  <script>
+  {{-- <script>
     tinymce.init({
       selector: '#mytextarea',
       setup: function (editor) {
@@ -68,6 +71,6 @@
         });
       }
     });
-  </script>
+  </script> --}}
   </div>
   

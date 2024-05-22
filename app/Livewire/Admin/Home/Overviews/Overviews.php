@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Home\Overviews;
 
 use App\Models\Overview;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -77,7 +78,7 @@ class Overviews extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Overview added successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Overview added successfully!');
     }
 
    
@@ -103,7 +104,10 @@ class Overviews extends Component
     public function update()
     {
         $overview = Overview::find($this->overviewId);
-        
+        $this->deleteImage($overview->card_icon_1,$this->card_icon_1);
+        $this->deleteImage($overview->card_icon_2,$this->card_icon_2);
+        $this->deleteImage($overview->card_icon_3,$this->card_icon_3);
+
         if ($this->card_icon_1 instanceof UploadedFile) {
             $this->validate([
                 'card_icon_1' => 'required|image|max:3072',
@@ -139,7 +143,7 @@ class Overviews extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'Overview updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Overview updated successfully!');
 
        
     }
@@ -148,6 +152,18 @@ class Overviews extends Component
     {
         $this->overviewId = $overviewId;
         $this->selectedOverview = Overview::find($overviewId);
+        $this->selectedOverview->delete();
+        $this->overviews = Overview::all();
+        $this->dispatch('showAlert', ['type' => 'danger','message' => 'Overview deleted successfully!']);
+        $this->alertMessage('success', 'Operation success', 'Overview deleted successfully!');
+    }
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
     }
     private function handleFileUpload($field)
 {

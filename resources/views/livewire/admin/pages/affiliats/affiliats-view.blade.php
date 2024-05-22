@@ -12,16 +12,16 @@
       <tbody>
           @forelse ($affiliats as $affiliate)
           <tr>
-            <td class="text-gray-800 fw-bolder">
+            <td class="text-white-800 fw-bolder">
               {{ $affiliate->subtitle }}
             </td>
-            <td class="text-gray-800 fw-bolder">
+            <td class="text-white-800 fw-bolder">
               {{ $affiliate->title }}
             </td>
-            <td class="text-gray-800 fw-bolder">
+            <td class="text-white-800 fw-bolder">
               {{ $affiliate->description }}
             </td>
-            <td class="text-gray-800 fw-bolder">
+            <td class="text-white-800 fw-bolder">
               {{ $affiliate->button }}
             </td>
             <td class="text-end">

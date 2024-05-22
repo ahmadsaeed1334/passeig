@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Home\Features;
 
 use App\Models\Feature;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -81,7 +82,7 @@ class Features extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Feature added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Feature added successfully!');
 
     }
     public function edit($featureId)
@@ -108,7 +109,10 @@ class Features extends Component
     public function update()
     {
         $feature = Feature::find($this->featureId);
-       
+        $this->deleteImage($feature->card_icon_1, $this->card_icon_1);
+        $this->deleteImage($feature->card_icon_2, $this->card_icon_2);
+        $this->deleteImage($feature->card_icon_3, $this->card_icon_3);
+        $this->deleteImage($feature->card_icon_4, $this->card_icon_4);
         if ($this->card_icon_1 instanceof UploadedFile) {
             $this->validate([
                 'card_icon_1' => 'required|image|max:3072',
@@ -154,19 +158,28 @@ class Features extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'Feature updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Feature updated successfully!');
 
     }
     public function delete($featureId)
         {
             $feature = Feature::find($featureId);
+            $this->deleteImage($feature->card_icon_1, $this->card_icon_1);
             $feature->delete();
             $this->features = Feature::all();
             $this->dispatch('hide-modal');
             $this->dispatch('showAlert', ['type' => 'danger','message' => 'Feature deleted successfully!']);
-            $this->alertMessage();
+            $this->alertMessage('success', 'Operation success', 'Feature deleted successfully!');
 
         }
+        protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
+    }
         private function handleFileUpload($field)
         {
             if ($this->{$field} instanceof UploadedFile) {

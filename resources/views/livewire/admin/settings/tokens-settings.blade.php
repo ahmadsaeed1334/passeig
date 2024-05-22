@@ -42,7 +42,7 @@
 			<div class="row">
 				<div class="col-lg-10"></div>
 				<div class="col-lg-2">
-					<button wire:click.prevent="tokens()" type="reset" class="btn btn-{{ primary_color() }}">Submit</button>
+					<button wire:click.prevent="tokens()" type="reset" class=" cmn-btn btn btn-{{ primary_color() }}">Submit</button>
 				</div>
 			</div>
 		</div>

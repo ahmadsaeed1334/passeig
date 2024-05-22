@@ -9,6 +9,7 @@ use App\Models\Giveaway;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 #[Layout('layouts.app')]
 class GiveawaySpecifications extends Component
@@ -54,7 +55,7 @@ class GiveawaySpecifications extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Giveaway Specification added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Giveaway Specification added successfully!');
  }
 
  public function edit($id){
@@ -67,6 +68,7 @@ class GiveawaySpecifications extends Component
  }
  public function update(){
     $giveawaySpecifications =GiveawaySpecification::findOrFail($this->giveawaySpecificationsId);
+    $this->deleteImage($giveawaySpecifications->card_icon);
     if ($this->card_icon instanceof UploadedFile) {
         $this->validate([
             'card_icon' =>'required|image|max:3072',
@@ -81,19 +83,26 @@ class GiveawaySpecifications extends Component
     $this->resetFields();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Giveaway Specification updated successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Giveaway Specification updated successfully!');
     $this->giveawaySpecifications = GiveawaySpecification::all();
     // $giveawaySpecifications = GiveawaySpecification::findOrFail($this->giveawaySpecificationsId);
 
 }
 
  public function delete($id){
-    $giveawaySpecification = GiveawaySpecification::findOrFail($id);
-    $giveawaySpecification->delete();
+    $giveawaySpecifications = GiveawaySpecification::findOrFail($id);
+    $this->deleteImage($giveawaySpecifications->card_icon);
+    $giveawaySpecifications->delete();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Giveaway Specification deleted successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Giveaway Specification deleted successfully!');
     $this->giveawaySpecifications = GiveawaySpecification::all();
+ }
+ protected function deleteImage($imagePath)
+ {
+     if ($imagePath) {
+         Storage::disk('public')->delete($imagePath);
+     }
  }
  public function resetFields(){
     $this->title = "";

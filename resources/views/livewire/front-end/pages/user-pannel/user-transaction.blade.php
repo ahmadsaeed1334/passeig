@@ -12,22 +12,8 @@
    <div class="container">
      <div class="row">
        <div class="col-lg-4">
-         <div class="user-card">
-           <div class="avatar-upload">
-             <div class="obj-el"><img src="{{ asset('front-end/assets/images/elements/team-obj.png')}}" alt="image"></div>
-             <div class="avatar-edit">
-                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                 <label for="imageUpload"></label>
-             </div>
-             <div class="avatar-preview">
-                 <div id="imagePreview" style="background-image: url('front-end/assets/images/user/pp.png');">
-                 </div>
-             </div>
-           </div>
-           <h3 class="user-card__name">Albert Owens</h3>
-           <span class="user-card__id">ID : 19535909</span>
-         </div><!-- user-card end -->
-         <div class="user-action-card">
+        @livewire('front-end.pages.user-pannel.user-profile')
+        <div class="user-action-card">
            <ul class="user-action-list">
              <li><a href="{{ route('front-end/user-panel') }}">My Tickets <span class="badge">04</span></a></li>
              <li><a href="{{ route('front-end/user-info') }}">Personal Information</a></li>
@@ -35,16 +21,19 @@
              <li><a href="{{ route('front-end/user-referral') }}">Referral Program</a></li>
              <li><a href="{{ route('front-end/user-lottery') }}">Favorite Lotteries</a></li>
              <li><a href="{{ route('front-end/contact') }}">Help Center</a></li>
-             <li><a href="#0">Log Out</a></li>
+             <li><a href="#0"><form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="dropdown-item">Log Out</button>
+          </form></a></li>
            </ul>
          </div><!-- user-action-card end -->
        </div>
        <div class="col-lg-8 mt-lg-0 mt-4">
-         <div class="transaction-balance-wrapper">
-           <div class="left">
+         <div class="transaction-balance-wrapper mb-10" style="margin-bottom: 10px">
+           <div class="left d-flex" >
              <div class="transaction-balance">
-               <h4 class="balance">$2956.00</h4>
-               <span>Available Balance</span>
+               <h4 class="balance">{{ $personalWalletBalance ? $personalWalletBalance : 00.00 }}</h4>
+               <span>Personal Balance</span>
              </div>
            </div>
            <div class="right">
@@ -58,6 +47,25 @@
              </a>
            </div>
          </div><!-- transaction-balance-wrapper end -->
+         <div class="transaction-balance-wrapper">
+           <div class="left d-flex">
+             <div class="transaction-balance">
+               <h4 class="balance">{{ $businessWalletBalance ? $businessWalletBalance : 00.00  }}</h4>
+               <span>Business Balance</span>
+             </div>
+           </div>
+           <div class="right">
+             <a href="#0" class="transaction-action-btn">
+               <img src="{{ asset('front-end/assets/images/icon/transaction/1.png')}}" alt="image">
+               <span>Deposit</span>
+             </a>
+             <a href="#0" class="transaction-action-btn ms-4">
+               <img src="{{ asset('front-end/assets/images/icon/transaction/2.png')}}" alt="image">
+               <span>Withdraw</span>
+             </a>
+           </div>
+         </div><!-- transaction-balance-wrapper end -->
+        
          <div class="all-transaction">
            <div class="all-transaction__header">
              <h3 class="title">All Transactions</h3>
@@ -70,124 +78,35 @@
              <table>
                <thead>
                  <tr>
-                   <th>Date</th>
-                   <th>Description</th>
-                   <th>Pay. method</th>
-                   <th>Amount</th>
-                   <th>Status</th>
+                   <th>Name</th>
+                   <th>Fee</th>
+                   <th>Total Entries</th>
                  </tr>
                </thead>
                <tbody>
+                @foreach($userEntries as $giveawayId => $entries)
+                
                  <tr>
                    <td>
                      <div class="date">
-                       <span>16</span>
-                       <span>APR</span>
+                       <h3>{{ $entries[0]['entry']->giveaway->name }}</h3>
                      </div>
                    </td>
                    <td>
-                     <p>Withdraw</p>
-                     <span>Withdraw to Bank account</span>
+                     <p>{{ $entries[0]['fee'] }}</p>
+
                    </td>
                    <td>
-                     <p>Visa</p>
-                   </td>
-                   <td>
-                     <span class="amount minus-amount">- $562 (USD)</span>
-                   </td>
-                   <td>
-                     <div class="status-pending"><i class="fas fa-ellipsis-h"></i></div>
+                     <p>{{ count($entries) }}</p>
                    </td>
                  </tr>
-                 <tr>
-                   <td>
-                     <div class="date">
-                       <span>16</span>
-                       <span>APR</span>
-                     </div>
-                   </td>
-                   <td>
-                     <p>lottery purchase</p>
-                     <span>Contest No: D87T</span>
-                   </td>
-                   <td>
-                     <p>Visa</p>
-                   </td>
-                   <td>
-                     <span class="amount minus-amount">-$758.00 (USD)</span>
-                   </td>
-                   <td>
-                     <div class="status-success"><i class="fas fa-check-circle"></i></div>
-                   </td>
-                 </tr>
-                 <tr>
-                   <td>
-                     <div class="date">
-                       <span>16</span>
-                       <span>APR</span>
-                     </div>
-                   </td>
-                   <td>
-                     <p>lottery purchase</p>
-                     <span>Contest No: D87T</span>
-                   </td>
-                   <td>
-                     <p>Visa</p>
-                   </td>
-                   <td>
-                     <span class="amount minus-amount">-$758.00 (USD)</span>
-                   </td>
-                   <td>
-                     <div class="status-success"><i class="fas fa-check-circle"></i></div>
-                   </td>
-                 </tr>
-                 <tr>
-                   <td>
-                     <div class="date">
-                       <span>16</span>
-                       <span>APR</span>
-                     </div>
-                   </td>
-                   <td>
-                     <p>Deposit</p>
-                     <span>Bank account to Rifa Account</span>
-                   </td>
-                   <td>
-                     <p>Visa</p>
-                   </td>
-                   <td>
-                     <span class="amount plus-amount">-$758.00 (USD)</span>
-                   </td>
-                   <td>
-                     <div class="status-success"><i class="fas fa-check-circle"></i></div>
-                   </td>
-                 </tr>
-                 <tr>
-                   <td>
-                     <div class="date">
-                       <span>16</span>
-                       <span>APR</span>
-                     </div>
-                   </td>
-                   <td>
-                     <p>lottery purchase</p>
-                     <span>Contest No: D87T</span>
-                   </td>
-                   <td>
-                     <p>Visa</p>
-                   </td>
-                   <td>
-                     <span class="amount minus-amount">-$758.00 (USD)</span>
-                   </td>
-                   <td>
-                     <div class="status-success"><i class="fas fa-check-circle"></i></div>
-                   </td>
-                 </tr>
+                 @endforeach
                </tbody>
              </table>
            </div>
+
            <div class="load-more">
-             <button type="button">Show More Lotteries <i class="las la-angle-down ml-2"></i></button>
+             <button type="button">Show More Entry<i class="las la-angle-down ml-2"></i></button>
            </div>
          </div>
        </div>

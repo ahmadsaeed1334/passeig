@@ -8,25 +8,11 @@
     <!-- inner-hero-section end -->
 
     <!-- user section start -->
-    <div class="mt-minus-150 pb-120">
+    <div wire:ignore class="mt-minus-150 pb-120">
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
-            <div class="user-card">
-              <div class="avatar-upload">
-                <div class="obj-el"><img src="{{ asset('front-end/assets/images/elements/team-obj.png')}}" alt="image"></div>
-                <div class="avatar-edit">
-                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                    <label for="imageUpload"></label>
-                </div>
-                <div class="avatar-preview">
-                    <div id="imagePreview" style="background-image: url('front-end/assets/images/user/pp.png');">
-                    </div>
-                </div>
-              </div>
-              <h3 class="user-card__name">Albert Owens</h3>
-              <span class="user-card__id">ID : 19535909</span>
-            </div><!-- user-card end -->
+            @livewire('front-end.pages.user-pannel.user-profile')
             <div class="user-action-card">
               <ul class="user-action-list">
                 <li><a href="{{ route('front-end/user-panel') }}">My Tickets <span class="badge">04</span></a></li>
@@ -35,7 +21,10 @@
                 <li><a href="{{ route('front-end/user-referral') }}">Referral Program</a></li>
                 <li class="active"><a href="{{ route('front-end/user-lottery') }}">Favorite Lotteries</a></li>
                 <li><a href="{{ route('front-end/contact') }}">Help Center</a></li>
-                <li><a href="#0">Log Out</a></li>
+                <li><a href="#0"><form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button type="submit" class="dropdown-item">Log Out</button>
+              </form></a></li>
               </ul>
             </div><!-- user-action-card end -->
           </div>
@@ -94,146 +83,59 @@
               </div><!-- draw-ticket-slider end -->
             </div><!-- upcoming-draw-wrapper end -->
             <div class="row mt-30  mb-none-30">
-              <div class="col-xl-6 col-lg-12 col-md-6 mb-30">
-                <div class="contest-card">
-                  <a href="#0" class="item-link"></a>
-                  <div class="contest-card__thumb">
-                    <img src="{{ asset('front-end/assets/images/contest/1.png')}}" alt="image">
-                    <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
-                    <div class="contest-num">
-                      <span>contest no:</span>
-                      <h4 class="number">b2t</h4>
-                    </div>
-                  </div>
-                  <div class="contest-card__content">
-                    <div class="left">
-                      <h5 class="contest-card__name">The Breeze Zodiac IX</h5>
-                    </div>
-                    <div class="right">
-                      <span class="contest-card__price">$3.99</span>
-                      <p>ticket price</p>
-                    </div>
-                  </div>
-                  <div class="contest-card__footer">
-                    <ul class="contest-card__meta">
-                      <li>
-                        <i class="las la-clock"></i>
-                        <span>5d</span>
-                      </li>
-                      <li>
-                        <i class="las la-ticket-alt"></i>
-                        <span>9805</span>
-                        <p>Remaining</p>
-                      </li>
-                    </ul>
-                  </div>
-                </div><!-- contest-card end -->
+              @foreach($favoriteGiveaways as $giveaway)
+        <div class="col-xl-6 col-lg-12 col-md-6 mb-30">
+                    
+            <div class="contest-card">
+              <a href="{{ route('front-end/contest-details-one', ['giveawayId' => $giveaway->id]) }}" class="item-link"></a>
+              <div class="contest-card__thumb">
+                
+                <img src="{{ asset('storage/' . $giveaway->file_path) }}" alt="image">
+                {{-- <a href="#0" class="action-icon"><i class="lar la-heart"></i></a>
+                <a href="#0" class="action-icon"><i class="far fa-heart"></i></a> --}}
+                @if($giveaway->isFavorited())
+      <a href="#" class="action-icon" wire:click.prevent="toggleFavorite({{ $giveaway->id }})">
+          <i class="lar la-heart"></i>
+      </a>
+  @else
+  <a href="#" class="action-icon" wire:click.prevent="toggleFavorite({{ $giveaway->id }})">
+    <i class="lar la-heart"></i>
+</a>
+  @endif
+                <div class="contest-num">
+                  <span>contest no:</span>
+                  <h4 class="number">b2t</h4>
+                </div>
               </div>
-              <div class="col-xl-6 col-lg-12 col-md-6 mb-30">
-                <div class="contest-card">
-                  <a href="#0" class="item-link"></a>
-                  <div class="contest-card__thumb">
-                    <img src="{{ asset('front-end/assets/images/contest/2.png')}}" alt="image">
-                    <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
-                    <div class="contest-num">
-                      <span>contest no:</span>
-                      <h4 class="number">X9U</h4>
-                    </div>
-                  </div>
-                  <div class="contest-card__content">
-                    <div class="left">
-                      <h5 class="contest-card__name">The Del Sol Trailblazer</h5>
-                    </div>
-                    <div class="right">
-                      <span class="contest-card__price">$3.99</span>
-                      <p>ticket price</p>
-                    </div>
-                  </div>
-                  <div class="contest-card__footer">
-                    <ul class="contest-card__meta">
-                      <li>
-                        <i class="las la-clock"></i>
-                        <span>5d</span>
-                      </li>
-                      <li>
-                        <i class="las la-ticket-alt"></i>
-                        <span>9805</span>
-                        <p>Remaining</p>
-                      </li>
-                    </ul>
-                  </div>
-                </div><!-- contest-card end -->
+              <div class="contest-card__content">
+                <div class="left">
+                  <h5 class="contest-card__name">{{ Str::title($giveaway->name) }}</h5>
+                </div>
+                <div class="right">
+                  <span class="contest-card__price">{{ $giveaway->fee }}</span>
+                  <p>Entry price</p>
+                </div>
               </div>
-              <div class="col-xl-6 col-lg-12 col-md-6 mb-30">
-                <div class="contest-card">
-                  <a href="#0" class="item-link"></a>
-                  <div class="contest-card__thumb">
-                    <img src="{{ asset('front-end/assets/images/contest/15.png')}}" alt="image">
-                    <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
-                    <div class="contest-num">
-                      <span>contest no:</span>
-                      <h4 class="number">b2t</h4>
-                    </div>
-                  </div>
-                  <div class="contest-card__content">
-                    <div class="left">
-                      <h5 class="contest-card__name">The Breeze Zodiac IX</h5>
-                    </div>
-                    <div class="right">
-                      <span class="contest-card__price">$3.99</span>
-                      <p>ticket price</p>
-                    </div>
-                  </div>
-                  <div class="contest-card__footer">
-                    <ul class="contest-card__meta">
-                      <li>
-                        <i class="las la-clock"></i>
-                        <span>5d</span>
-                      </li>
-                      <li>
-                        <i class="las la-ticket-alt"></i>
-                        <span>9805</span>
-                        <p>Remaining</p>
-                      </li>
-                    </ul>
-                  </div>
-                </div><!-- contest-card end -->
+              <div class="contest-card__footer">
+                @php
+                 $totalEntries = \App\Models\GiveawayEntry::where('giveaway_id', $giveaway->id)->count();
+                @endphp
+                <ul class="contest-card__meta">
+                  <li>
+                    <i class="las la-clock"></i>
+                    {{ \Carbon\Carbon::now()->diffInDays($giveaway->due_date) }}d</span> 
+                  </li>
+                  <li>
+                    <i class="las la-ticket-alt"></i>
+                    <span>{{ $totalEntries }}</span>
+                    <p>Total Entries</p>
+                  </li>
+                </ul>
               </div>
-              <div class="col-xl-6 col-lg-12 col-md-6 mb-30">
-                <div class="contest-card">
-                  <a href="#0" class="item-link"></a>
-                  <div class="contest-card__thumb">
-                    <img src="{{ asset('front-end/assets/images/contest/16.png')}}" alt="image">
-                    <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
-                    <div class="contest-num">
-                      <span>contest no:</span>
-                      <h4 class="number">X9U</h4>
-                    </div>
-                  </div>
-                  <div class="contest-card__content">
-                    <div class="left">
-                      <h5 class="contest-card__name">The Del Sol Trailblazer</h5>
-                    </div>
-                    <div class="right">
-                      <span class="contest-card__price">$3.99</span>
-                      <p>ticket price</p>
-                    </div>
-                  </div>
-                  <div class="contest-card__footer">
-                    <ul class="contest-card__meta">
-                      <li>
-                        <i class="las la-clock"></i>
-                        <span>5d</span>
-                      </li>
-                      <li>
-                        <i class="las la-ticket-alt"></i>
-                        <span>9805</span>
-                        <p>Remaining</p>
-                      </li>
-                    </ul>
-                  </div>
-                </div><!-- contest-card end -->
-              </div>
+           
+          </div> <!-- contest-card end -->
+        </div>
+    @endforeach
             </div>
           </div>
         </div>

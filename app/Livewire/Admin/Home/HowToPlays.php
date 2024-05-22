@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Home;
 use App\Models\HowToPlay;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -74,7 +75,7 @@ class HowToPlays extends Component
     $this->resetFields();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'success', 'message' => 'How to Play added successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'How to Play added successfully!');
       
     }
     public function edit($howToPlayId){
@@ -96,7 +97,16 @@ class HowToPlays extends Component
     }
     public function update(){
         $howToPlay = HowToPlay::find($this->howToPlayId);
-       
+        $this->deleteImage(
+            $howToPlay->play_card_icon_1,$this->play_card_icon_1
+        );
+        $this->deleteImage(
+            $howToPlay->play_card_icon_2,$this->play_card_icon_2
+        );
+        $this->deleteImage(
+            $howToPlay->play_card_icon_3,$this->play_card_icon_3
+        );
+        
         if ($this->play_card_icon_1 instanceof UploadedFile) {
             $this->validate([
                 'play_card_icon_1' => 'required|image|max:3072',
@@ -132,7 +142,7 @@ class HowToPlays extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'Hero Banner updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Hero Banner updated successfully!');
     }
     private function handleFileUpload($field)
 {
@@ -142,7 +152,14 @@ class HowToPlays extends Component
         $this->{$field} = $this->{$field}->storeAs('playCardIcons', $filename, 'public');
     }
 }
-
+protected function deleteImage($oldImagePath, $newImage)
+{
+    if ($newImage instanceof UploadedFile) {
+        if ($oldImagePath) {
+            Storage::disk('public')->delete($oldImagePath);
+        }
+    }
+}
 
     public function resetFields(){
         $this->subtitle = '';

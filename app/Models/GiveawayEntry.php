@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class GiveawayEntry extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'giveaway_id'];
+    protected $fillable = [
+        'giveaway_id',
+        'user_id',
+        'quantity',
+    ];
 
     public function user()
     {

@@ -18,8 +18,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('button_text_1');
             $table->string('button_link_1');
-            $table->string('button_text_2');
-            $table->string('button_link_2');
             $table->string('file');
             $table->timestamps();
         });

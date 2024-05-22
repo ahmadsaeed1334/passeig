@@ -293,7 +293,7 @@
                     </div>
                   </div><!-- winner-card end -->
                   <div class="btn-grp">
-                    <a href="{{ route('front-end/contest-details-one') }}" class="btn-border">browse more</a>
+                    <a href="{{ route('front-end/winner-details') }}" class="btn-border">browse more</a>
                   </div>
                 </div>
               </div>

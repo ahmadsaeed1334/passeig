@@ -45,3 +45,42 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
  @livewireStyles
+
+ <style>
+	.contest-card {
+	 position: relative;
+   }
+   
+   .item-link {
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 right: 0;
+	 bottom: 0;
+	 z-index: 1;
+   }
+   
+   .action-icon, .action-btn-wrapper {
+	 /* position: relative; */
+	 z-index: 2;
+   }
+   .action-btn[disabled] {
+	   cursor: not-allowed;
+	   opacity: 0.6;
+   }
+   
+   .action-btn {
+	position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+   }
+   </style>

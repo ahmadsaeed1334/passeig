@@ -44,7 +44,7 @@
 								<!--begin::Card body-->
 								<div class="card-body scroll pt-0">
 									<!--begin::Permissions-->
-									<div class="d-flex flex-column text-gray-600">
+									<div class="d-flex flex-column text-white-600">
 										@foreach ($role->permissions->pluck('name') as $row)
 											<div class="d-flex align-items-center py-2">
 												<span class="bullet bg-{{ primary_color() }} me-3"></span>
@@ -76,7 +76,7 @@
 									<!--begin::Card title-->
 									<div class="card-title">
 										<h2 class="d-flex align-items-center">Users Assigned
-											<span class="fs-6 ms-1 text-gray-600"> ({{ $role->users_count }})</span>
+											<span class="fs-6 ms-1 text-white-600"> ({{ $role->users_count }})</span>
 										</h2>
 									</div>
 									<!--end::Card title-->
@@ -121,7 +121,7 @@
 										</thead>
 										<!--end::Table head-->
 										<!--begin::Table body-->
-										<tbody class="fw-semibold text-gray-600">
+										<tbody class="fw-semibold text-white-600">
 											@forelse ($role->users as $user)
 												<tr>
 													<!--begin::Checkbox-->
@@ -145,7 +145,7 @@
 														<!--end::Avatar-->
 														<!--begin::User details-->
 														<div class="d-flex flex-column">
-															<span class="text-hover-primary mb-1 text-gray-800">
+															<span class="text-hover-primary mb-1 text-white-800">
 																{{ $user->name }}
 																<span class="text-muted" style="font-size: 11px">
 																</span>

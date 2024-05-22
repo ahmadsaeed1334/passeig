@@ -27,7 +27,7 @@
             <div id="kt_app_content_container" class="app-container container{{ general('layout') }}">
                 <!--begin::View-->
                 <div class="card card-flush">
-                    @include('livewire.admin.pages.top-affiliates.top_affiliates-cart')
+                    {{-- @include('livewire.admin.pages.top-affiliates.top_affiliates-cart') --}}
                     @include('livewire.admin.pages.top-affiliates.top_affiliates-view')
                     <!--end::View-->
                 </div>
@@ -35,7 +35,7 @@
                     <!--begin::Content container-->
                     <div id="kt_app_content_container" class="app-container container{{ general('layout') }}">
                         @include('livewire.admin.pages.top-affiliates.top_affiliates-edit')
-                        @include('livewire.admin.pages.top-affiliates.top_affiliates-form')
+                        {{-- @include('livewire.admin.pages.top-affiliates.top_affiliates-form') --}}
 
 
                     </div>

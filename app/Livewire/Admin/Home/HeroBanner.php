@@ -72,6 +72,9 @@ class HeroBanner extends Component
         //     $updateData['file'] = $fileModel->path;
         // }
         $heroBanner = ModalHeroBanner::find($this->heroBannerId);
+        $this->deleteImage(
+            $heroBanner->file,$this->file
+        );
         if ($this->file instanceof UploadedFile) {
             $this->validate([
                 'file' => 'required|image|max:3072',
@@ -90,7 +93,15 @@ class HeroBanner extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Hero Banner updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Hero Banner updated successfully!');
+    }
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
     }
     private function handleFileUpload($file)
     {

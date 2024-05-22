@@ -42,4 +42,5 @@
     @empty
         {!! no_data() !!}
     @endforelse
+    {{$contestCards->links()}}
 </div>

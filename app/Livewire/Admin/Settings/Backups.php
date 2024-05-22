@@ -26,7 +26,9 @@ class Backups extends Component
                 backup_clean();
             }
         )->delay(now());
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Backup Cleared Successfully!');
+  
     }
 
     public function runBackup()
@@ -40,7 +42,9 @@ class Backups extends Component
                 backup_run();
             }
         )->delay(now());
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Backup Run Successfully!'
+    );
     }
 
     public function deleteDropBox($file)

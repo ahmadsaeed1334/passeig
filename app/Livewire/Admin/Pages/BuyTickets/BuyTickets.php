@@ -53,7 +53,7 @@ class BuyTickets extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Buy Ticket added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Buy Ticket added successfully!');
     }
 
     public function edit($id){
@@ -88,14 +88,14 @@ class BuyTickets extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Buy Ticket updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Buy Ticket updated successfully!');
     }
     public function delete($id){
         BuyTicket::find($id)->delete();
         $this->buyTickets = BuyTicket::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Buy Ticket deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Buy Ticket deleted successfully!');
     }
 
     public function resetFields(){

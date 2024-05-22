@@ -1,17 +1,45 @@
 <!-- meta tags and other links -->
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from pixner.net/rifa1/demo/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Mar 2024 10:04:46 GMT -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
  @include('livewire.front-end.partial.style')
+ <style>
+  /* ::-webkit-scrollbar {
+      width: 100px; 
+      height: 20px;
+  } */
+
+  /* ::-webkit-scrollbar-track {
+      background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
+  } */
+
+  /* ::-webkit-scrollbar-thumb {
+      background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
+      border-radius: 10px;
+      border: 3px solid #f1f1f1; 
+  } */
+  /* ::-webkit-scrollbar-thumb:hover {
+      background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
+  } */
+  html {
+      scrollbar-width:50px; 
+      scrollbar-color: rgb(236, 19, 121) rgb(7, 11, 40);
+      /* scrollbar-background-color: #070B28; */
+  }
+  .scrollbar {
+      -ms-overflow-style: none; 
+  }
+  .scrollbar::-ms-scrollbar {
+      display: none; 
+  }
  
+</style>
 </head>
   <body>
-    <div class="preloader">
+    <div class="preloader ">
       <svg class="mainSVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>   
           <path id="puff" d="M4.5,8.3C6,8.4,6.5,7,6.5,7s2,0.7,2.9-0.1C10,6.4,10.3,4.1,9.1,4c2-0.5,1.5-2.4-0.1-2.9c-1.1-0.3-1.8,0-1.8,0

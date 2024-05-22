@@ -140,7 +140,7 @@
                         </div> 
                         <!-- Form Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
+                        <button type="button" class="btn btn-danger" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
                         <button type="button" class="btn btn-primary" wire:click="update">Update</button>
                     </div>
                 </form>

@@ -166,7 +166,12 @@ td {
   position: absolute;
   z-index: -1;
 }
-
+@media screen and (min-width: 320px and max-width:2560) {
+  ribbon {
+  width: 31rem;
+ 
+}
+}
 #buttons {
   width: 100%;
   margin-top: 3rem;
@@ -210,21 +215,29 @@ td {
   border-bottom: 0;
 }
 
-@media (max-width: 740px) {
-    * {
-      font-size: 70%;
-    }
+@media (max-width: 768px) {
+    /* * {
+      font-size: 100%;
+    } */
+    .ribbon {
+        width: 664px;
+}
 }
 
 @media (max-width: 500px) {
     * {
-      font-size: 55%;
+      font-size: 88%;
     }
 }
 
 @media (max-width: 390px) {
     * {
-      font-size: 45%;
+      font-size: 62%;
+    }
+}
+@media (max-width: 375px) {
+    * {
+      font-size: 75%;
     }
 }
 </style>

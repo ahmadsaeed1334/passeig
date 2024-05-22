@@ -56,7 +56,7 @@ class Abouts extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'About Added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'About Added successfully!');
     }
     public function edit($id){
         $about = About::find($id);
@@ -89,7 +89,7 @@ class Abouts extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'About Updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','About Added successfully!');
 
     }
     public function delete($id){
@@ -97,7 +97,7 @@ class Abouts extends Component
         $about->delete();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger','message' => 'About Deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'About Deleted successfully!');
     }
     public function resetFields(){
         $this->top_title = '';

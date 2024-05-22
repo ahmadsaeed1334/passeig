@@ -63,7 +63,8 @@ class Permissions extends Component
             ]
         );
         Permission::updateOrCreate(['id' => $this->permissionId], ['name' => $this->permissionName, 'guard_name' => 'web']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Permission updated successfully');
         $this->reset();
         $this->dispatch('closeModal', ['modalId' => "addPermissionsModel"]);
     }

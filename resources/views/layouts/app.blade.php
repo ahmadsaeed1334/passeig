@@ -7,6 +7,20 @@
 	<base href="" />
 	<title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
 	@include('livewire.admin.partial.style')
+	<style>
+		  html {
+      scrollbar-width:50px; 
+      scrollbar-color: rgb(236, 19, 121) rgb(7, 11, 40);
+      /* scrollbar-background-color: #070B28; */
+  }
+  .scrollbar {
+      -ms-overflow-style: none; 
+  }
+  .scrollbar::-ms-scrollbar {
+      display: none; 
+  }
+
+	</style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -59,6 +73,7 @@
 					<!--begin::Wrapper-->
 					<div class="w-lg-500px bg-body p-lg-15 mx-auto rounded p-10 shadow-sm">
 						{{ $slot }}
+						{{--  --}}
 					</div>
 					<!--begin::Footer-->
 					<div class="d-flex flex-center flex-column-auto p-10">

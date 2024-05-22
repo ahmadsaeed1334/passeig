@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Pages\Faqs;
 use App\Models\Faq;
 use App\Models\FaqsCategory;
 use App\Models\FaqTop;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -51,7 +52,7 @@ class Faqs extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Faq added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Faq added successfully!');
     }
     public function edit($faqsId){
         $this->selectedFaqs = Faq::find($faqsId);
@@ -80,14 +81,15 @@ class Faqs extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Faq updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Faq updated successfully!');
     }
     public function delete($id){
         Faq::find($id)->delete();
         $this->faqs = Faq::all();
         $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Faq deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Faq deleted successfully!');
     }
+    
     public function createFaqTops(){
         $this->validate([
             'subtitle' => 'required',
@@ -104,7 +106,7 @@ class Faqs extends Component
         $this->resetFieldstop();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'faq added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','faq added successfully!');
     }
     public function editFaqTops($faqTopsId){
        $selectedfaqTops = FaqTop::find($faqTopsId);
@@ -130,13 +132,13 @@ class Faqs extends Component
         $this->resetFieldstop();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'faq updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','faq updated successfully!');
     }
     public function deleteFaqTops($faqTopsId){
         FaqTop::find($faqTopsId)->delete();
         $this->faqTops = FaqTop::all();
         $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'faq deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','faq deleted successfully!');
     }
 
     public function resetFieldstop(){

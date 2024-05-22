@@ -44,7 +44,7 @@
 </div>
          
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click="discardChanges">Close</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" wire:click="discardChanges">Close</button>
             <button type="button" class="btn btn-primary" wire:click="submitEntry">Submit Entry</button>
         </div>
             <!-- You can add footer content if needed -->

@@ -43,7 +43,7 @@ class Footers extends Component
     $this->resetFields();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Footer Icon Added successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Footer Icon Added successfully!');
 }
 public function footerTextCreate(){
     $this->validate([
@@ -59,7 +59,7 @@ public function footerTextCreate(){
     $this->foooterResetFields();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Footer Text Added successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Footer Text Added successfully!');
 }
 public function edit($id)
 {
@@ -87,7 +87,7 @@ public function update(){
     $this->resetFields();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Footer Icon Updated successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Footer Icon Updated successfully!');
 }
 public function footerTextUpdate(){
     $this->validate([
@@ -103,20 +103,20 @@ public function footerTextUpdate(){
     $this->foooterResetFields();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Footer Text Updated successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Footer Text Updated successfully!');
 }
 public function delete($id)
 {
     FooterIcon::find($id)->delete();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Footer Icon Deleted successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Footer Icon Deleted successfully!');
 }
 public function footerTextDelete($id){
     FooterText::find($id)->delete();
     $this->dispatch('hide-modal');
     $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Footer Text Deleted successfully!']);
-    $this->alertMessage();
+    $this->alertMessage('success', 'Operation success', 'Footer Text Deleted successfully!');
 }
 
 public function resetFields()

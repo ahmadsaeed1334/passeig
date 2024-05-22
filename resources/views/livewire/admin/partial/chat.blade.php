@@ -9,7 +9,7 @@
 			<div class="card-title">
 				<!--begin::User-->
 				<div class="d-flex justify-content-center flex-column me-3">
-					<a href="#" class="fs-4 fw-bold text-hover-primary me-1 lh-1 mb-2 text-gray-900">Brian Cox</a>
+					<a href="#" class="fs-4 fw-bold text-hover-primary me-1 lh-1 mb-2 ">Brian Cox</a>
 					<!--begin::Info-->
 					<div class="lh-1 mb-0">
 						<span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
@@ -30,7 +30,7 @@
 					</button>
 					<!--begin::Menu 3-->
 					<div
-						class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-3"
+						class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-white-800 menu-state-bg-light-primary fw-semibold w-200px py-3"
 						data-kt-menu="true">
 						<!--begin::Heading-->
 						<div class="menu-item px-3">
@@ -126,7 +126,7 @@
 							<!--end::Avatar-->
 							<!--begin::Details-->
 							<div class="ms-3">
-								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-gray-900">Brian Cox</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-white-900">Brian Cox</a>
 								<span class="text-muted fs-7 mb-1">2 mins</span>
 							</div>
 							<!--end::Details-->
@@ -149,7 +149,7 @@
 							<!--begin::Details-->
 							<div class="me-3">
 								<span class="text-muted fs-7 mb-1">5 mins</span>
-								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-gray-900">You</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-white-900">You</a>
 							</div>
 							<!--end::Details-->
 							<!--begin::Avatar-->
@@ -181,7 +181,7 @@
 							<!--end::Avatar-->
 							<!--begin::Details-->
 							<div class="ms-3">
-								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-gray-900">Brian Cox</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-white-900">Brian Cox</a>
 								<span class="text-muted fs-7 mb-1">1 Hour</span>
 							</div>
 							<!--end::Details-->
@@ -204,7 +204,7 @@
 							<!--begin::Details-->
 							<div class="me-3">
 								<span class="text-muted fs-7 mb-1">2 Hours</span>
-								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-gray-900">You</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-white-900">You</a>
 							</div>
 							<!--end::Details-->
 							<!--begin::Avatar-->
@@ -235,7 +235,7 @@
 							<!--end::Avatar-->
 							<!--begin::Details-->
 							<div class="ms-3">
-								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-gray-900">Brian Cox</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-white-900">Brian Cox</a>
 								<span class="text-muted fs-7 mb-1">3 Hours</span>
 							</div>
 							<!--end::Details-->
@@ -260,7 +260,7 @@
 							<!--begin::Details-->
 							<div class="me-3">
 								<span class="text-muted fs-7 mb-1">4 Hours</span>
-								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-gray-900">You</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-white-900">You</a>
 							</div>
 							<!--end::Details-->
 							<!--begin::Avatar-->
@@ -291,7 +291,7 @@
 							<!--end::Avatar-->
 							<!--begin::Details-->
 							<div class="ms-3">
-								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-gray-900">Brian Cox</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-white-900">Brian Cox</a>
 								<span class="text-muted fs-7 mb-1">5 Hours</span>
 							</div>
 							<!--end::Details-->
@@ -315,7 +315,7 @@
 							<!--begin::Details-->
 							<div class="me-3">
 								<span class="text-muted fs-7 mb-1">Just now</span>
-								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-gray-900">You</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary ms-1 text-white-900">You</a>
 							</div>
 							<!--end::Details-->
 							<!--begin::Avatar-->
@@ -346,7 +346,7 @@
 							<!--end::Avatar-->
 							<!--begin::Details-->
 							<div class="ms-3">
-								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-gray-900">Brian Cox</a>
+								<a href="#" class="fs-5 fw-bold text-hover-primary me-1 text-white-900">Brian Cox</a>
 								<span class="text-muted fs-7 mb-1">Just now</span>
 							</div>
 							<!--end::Details-->

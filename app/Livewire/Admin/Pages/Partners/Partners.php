@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Pages\Partners;
 
 use App\Models\Partner;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -41,7 +42,7 @@ class Partners extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Partner added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Partner added successfully!');
     }
     public function resetFields(){
         $this->partner_image = "";
@@ -55,6 +56,9 @@ class Partners extends Component
 
     public function update(){
         $partner = Partner::find($this->partnerId);
+        $this->deleteImage(
+            $partner->partner_image,$this->partner_image
+        );
         if ($this->partner_image instanceof UploadedFile) {
             $this->validate([
                 'partner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
@@ -67,13 +71,26 @@ class Partners extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Partner updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Partner updated successfully!');
     }
     public function delete($id){
-        Partner::find($id)->delete();
-        $this->partners = Partner::all();
+        $partner = Partner::find($id);
+
+        // $this->partners = Partner::all();
+        $this->deleteImage(
+            $partner->partner_image,$this->partner_image
+        );
+        $partner->delete();
         $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Partner deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Partner deleted successfully!');
+    }
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
     }
     private function handleFileUpload($field)
     {

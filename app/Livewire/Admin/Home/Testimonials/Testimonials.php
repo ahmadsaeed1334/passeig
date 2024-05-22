@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Home\Testimonials;
 
 use App\Models\Testimonial;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -78,7 +79,7 @@ class Testimonials extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Testimonial added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Testimonial added successfully!');
     }
 
 
@@ -122,6 +123,16 @@ class Testimonials extends Component
     public function update()
     {
         $testimonial =  Testimonial::find($this->testimonialId);
+        $this->deleteImage(
+            $testimonial->slider_image_1,$this->slider_image_1
+        );
+        $this->deleteImage(
+            $testimonial->slider_image_2,$this->slider_image_2
+        );
+        $this->deleteImage(
+            $testimonial->slider_image_3,$this->slider_image_3
+        );
+        
         if ($this->slider_image_1 instanceof UploadedFile) {
             $this->validate([
                 'slider_image_1' => 'required|image|max:3048',
@@ -157,16 +168,23 @@ class Testimonials extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'Testimonial updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Testimonial updated successfully!');
 
     }
-
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
+    }
     public function delete($id)
         {
             Testimonial::find($id)->delete();
             $this->testimonials = Testimonial::all();
             $this->dispatch('showAlert', ['type' => 'danger','message' => 'Testimonial deleted successfully!']);
-            $this->alertMessage();
+            $this->alertMessage('success', 'Operation success', 'Testimonial deleted successfully!');
         }
     public function alertMessage($type = null, $title = null, $message = null, $position = null)
     {

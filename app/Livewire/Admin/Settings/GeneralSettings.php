@@ -105,7 +105,8 @@ class GeneralSettings extends Component
         $this->icon = null;
         $this->dispatch('reload');
         $this->dispatch('refreshData');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Avatar Updated Successfully.');
     }
 
     public function icondelete()
@@ -124,7 +125,8 @@ class GeneralSettings extends Component
             $this->icon = null;
         }
         $this->dispatch('refreshData');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Avatar Updated Successfully.');
     }
 
     public function updatedLogo()
@@ -152,7 +154,8 @@ class GeneralSettings extends Component
         // $this->logo->store('public/profile-logos');
         $this->logo = null;
         $this->dispatch('refreshData');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Avatar Updated Successfully.');
     }
 
     public function logodelete()
@@ -171,7 +174,8 @@ class GeneralSettings extends Component
             $this->logo = null;
         }
         $this->dispatch('refreshData');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Avatar Updated Successfully.');
     }
 
     public function updatedPhoto()
@@ -199,7 +203,8 @@ class GeneralSettings extends Component
         // $this->photo->store('public/profile-photos');
         $this->photo = null;
         $this->dispatch('refreshData');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+    'Avatar Updated Successfully.');
     }
 
     public function imagedelete()
@@ -218,7 +223,8 @@ class GeneralSettings extends Component
             $this->photo = null;
         }
         $this->dispatch('refreshData');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+    'Avatar Updated Successfully.');
     }
 
     public function general()
@@ -249,7 +255,8 @@ class GeneralSettings extends Component
         // Artisan::call("env:set APP_NAME='$this->app_name'");
         // Artisan::call("env:set TIME_ZONE='$this->app_timezone'");
         $this->dispatch('reload');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+    'General Settings Updated Successfully.');
     }
 
     public function mount()

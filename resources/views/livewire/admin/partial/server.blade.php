@@ -28,14 +28,14 @@
 		<!--begin::Header-->
 		<div class="card-header pt-5">
 			<!--begin::Title-->
-			<h3 class="card-title text-gray-800">Software/Server Information</h3>
+			<h3 class="card-title text-white-800">Software/Server Information</h3>
 			<!--end::Title-->
 		</div>
 		<!--end::Header-->
 		<!--begin::Header-->
 		<div class="card-header pt-5">
 			<!--begin::Title-->
-			<h3 class="card-title text-gray-800">Server Information</h3>
+			<h3 class="card-title text-white-800">Server Information</h3>
 			<!--end::Title-->
 		</div>
 		<!--end::Header-->
@@ -46,12 +46,12 @@
 				<div class="d-flex flex-stack">
 					<!--begin::Section-->
 					<!-- phpinfo(); -->
-					<div class="fw-semibold fs-6 me-2 text-gray-700">{{ $key }}: </div>
+					<div class="fw-semibold fs-6 me-2 text-white-700">{{ $key }}: </div>
 					<!--end::Section-->
 					<!--begin::Statistics-->
 					<div class="d-flex align-items-senter">
 						<!--begin::Number-->
-						<span class="fw-bolder fs-6 text-gray-900">{{ $value }}</span>
+						<span class="fw-bolder fs-6 text-white-900">{{ $value }}</span>
 						<!--end::Number-->
 					</div>
 					<!--end::Statistics-->
@@ -66,7 +66,7 @@
 		<!--begin::Header-->
 		<div class="card-header pt-5">
 			<!--begin::Title-->
-			<h3 class="card-title text-gray-800">Software Information </h3>
+			<h3 class="card-title text-white-800">Software Information </h3>
 			<!--end::Title-->
 		</div>
 		<!--end::Header-->
@@ -76,12 +76,12 @@
 			<div class="d-flex flex-stack">
 				<!--begin::Section-->
 				<!-- phpinfo(); -->
-				<div class="fw-semibold fs-6 me-2 text-gray-700">PHP Version: </div>
+				<div class="fw-semibold fs-6 me-2 text-white-700">PHP Version: </div>
 				<!--end::Section-->
 				<!--begin::Statistics-->
 				<div class="d-flex align-items-senter">
 					<!--begin::Number-->
-					<span class="fw-bolder fs-6 text-gray-900">v{{ phpversion() }}</span>
+					<span class="fw-bolder fs-6 text-white-900">v{{ phpversion() }}</span>
 					<!--end::Number-->
 				</div>
 				<!--end::Statistics-->
@@ -94,13 +94,13 @@
 			<div class="d-flex flex-stack">
 				<!--begin::Section-->
 				<!-- phpinfo(); -->
-				<div class="fw-semibold fs-6 me-2 text-gray-700">Laravel Framwork: </div>
+				<div class="fw-semibold fs-6 me-2 text-white-700">Laravel Framwork: </div>
 				<!--end::Section-->
 				<!--begin::Statistics-->
 				<div class="d-flex align-items-senter">
 					<!--begin::Number-->
 					{{-- app()->version(); --}}
-					<span class="fw-bolder fs-6 text-gray-900">{{ app()->version() }}</span>
+					<span class="fw-bolder fs-6 text-white-900">{{ app()->version() }}</span>
 					<!--end::Number-->
 				</div>
 				<!--end::Statistics-->
@@ -113,13 +113,13 @@
 			<div class="d-flex flex-stack">
 				<!--begin::Section-->
 				<!-- phpinfo(); -->
-				<div class="fw-semibold fs-6 me-2 text-gray-700">Laravel Livewire: </div>
+				<div class="fw-semibold fs-6 me-2 text-white-700">Laravel Livewire: </div>
 				<!--end::Section-->
 				<!--begin::Statistics-->
 				<div class="d-flex align-items-senter">
 					<!--begin::Number-->
 					<span
-						class="fw-bolder fs-6 text-gray-900">{{ \Composer\InstalledVersions::getPrettyVersion('livewire/livewire') }}</span>
+						class="fw-bolder fs-6 text-white-900">{{ \Composer\InstalledVersions::getPrettyVersion('livewire/livewire') }}</span>
 					<!--end::Number-->
 				</div>
 				<!--end::Statistics-->

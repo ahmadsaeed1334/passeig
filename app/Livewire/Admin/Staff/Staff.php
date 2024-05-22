@@ -142,7 +142,8 @@ class Staff extends Component
 
 
         $user->syncRoles($this->roleName);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+            'User '. $this->staffName.'has been '. ($this->staffId? 'updated' : 'created'));
         $this->reset();
         $this->dispatch('closeModal', ['modalId' => "addStaffModal"]);
     }
@@ -153,7 +154,8 @@ class Staff extends Component
             return $this->alertMessage('error', 'Operation failed', 'some operations are Not allowed in demo mode');
         }
         $user->delete();
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'User '. $user->name.'has been deleted');
     }
 
     public function alertMessage($type = null, $title = null, $message = null, $position = null)
@@ -187,7 +189,9 @@ class Staff extends Component
         $user->update([
             'password' =>  Hash::make($this->password)
         ]);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'User '. $user->name.'has been updated');
+   
         $this->password = null;
         $this->dispatch('closeModal', ['modalId' => "usersModal"]);
     }
@@ -200,7 +204,9 @@ class Staff extends Component
         $id->update([
             'status' => $status,
         ]);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'User '. $id->name.'has been '. ($status? 'activated' : 'deactivated'));
+   
     }
 
 

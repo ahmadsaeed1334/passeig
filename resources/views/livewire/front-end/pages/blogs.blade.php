@@ -307,6 +307,11 @@
                     <li><a href="#0">Inspiration <span>22</span></a></li>
                     <li><a href="#0">Bonus <span>38</span></a></li>
                   </ul>
+                  {{-- <ul class="category-list">
+                    @foreach($categories as $category)
+                        <li><a href="{{ $category->categoryTranslations[0]->url($locale, $routeWithoutLocale) }}">{{ $category->categoryTranslations[0]->category_name }} <span>{{ $category->count }}</span></a></li>
+                    @endforeach
+                </ul> --}}
                 </div><!-- widget end -->
                 <div class="widget">
                   <h3 class="widget__title">Featured Tags</h3>

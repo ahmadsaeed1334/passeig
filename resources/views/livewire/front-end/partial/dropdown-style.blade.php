@@ -1,201 +1,152 @@
 <style>
-    .icons{
-        margin-left: -20px;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* *{
+  margin:0;
+  padding:0;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  background:rgba(128, 234, 209,1);
+} */
+/* .container{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(112.72013189013455deg, rgba(186, 213, 241,1) 4.927083333333334%,rgba(42, 39, 107,1) 97.84374999999999%);
+  height:100vh;
+  width:100%;
+  
+} */
+/* .action{
+  position:fixed;
+  top:20px;
+  right:30px;
+} */
+.action .profile{
+  
+  overflow: hidden;
+    cursor: pointer;
+    /* width: 45px;
+    height: 45px; */
+    /* border-radius: 50%; */
+    overflow: hidden;
+    /* border: 2px solid #fff; */
+  
+    margin-right: 22px;
+}
+.action .profile img{
+  /* position:absolute;
+  top:0; left:0;
+  widht:100%; height:100%;
+  object-fit:cover;
+  border-radius:50%; */
+  width: 100%; /* Make the image fill the circular container */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; 
+}
+.action .menu{
+  position:absolute;
+  /* top: calc(100% + 10px);
+  right:-10px; */
+  padding:10px 20px;
+  /* background: #fff;
+   */
+   background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
+  width:200px;
+  box-sizing: 0 5px 25px rgba(0,0,0,.1);
+  border-radius:15px;
+  transition:.5s;
+  visibility:hidden;
+  opacity:0;
+}
+.action .menu.active{
+  top: 63px;
+  visibility:visible;
+  opacity:1;
+}
+.action .menu::before{
+  content:'';
+  position:absolute;
+  top:-6px;
+  right:132px;
+  /* right: 20px; */
+  width:20px;
+  height:20px;
+  /* background: #fff; */
+
+   background-image:  -webkit-linear-gradient(7deg, rgb(174, 0, 141) 0%, rgb(174, 0, 141) 100%);
+   /* background-image:  -webkit-linear-gradient(7deg, rgb(174, 0, 141) 0%, rgb(109, 3, 146) 100%); */
+  transform: rotate(45deg);
+}
+.action .menu h3{
+  width:100%;
+  text-align:center;
+  font-size: 18px;
+  padding:20px 0;
+  font-weight: 500;
+  font-size: 18px;
+  color:#fff;
+  line-height: 1.2em;
+}
+.action .menu h3 span{
+  font-size: 14px;
+  color:#cecece;
+  font-weight: 400;
+}
+.action .menu ul li{
+  list-style:none;
+  padding:10px 0;
+  border-top:1px solid rgba(0,0,0,0.05);
+  display:flex;
+  align-items:center;
+  
+}
+.action .menu ul li i{
+  font-size: 26px;
+  width:32px;
+  margin-right: 10px;
+  opacity:.6;
+  transition:.5s;
+  color: #fff
+}
+.action .menu ul li:hover i{
+  opacity:1;
+}
+.action .menu ul li a{
+  display:inline-block;
+  text-decoration:none;
+  /* color:#ffff; */
+  font-weight: 500;
+  transition:.5s;
+}
+.action .menu ul li a button{
+  background-image: -webkit-linear-gradient(86deg, rgb(236, 3, 139) 0%, rgb(251, 100, 104) 44%, rgb(251, 185, 54) 100%);
+    border-radius: 30px;
+    padding: 9px;
+    color: #ffff;
+    width: 160px;
+}
+.action .menu ul li a button:hover{
+  color:#f90019;
+}
+.action .menu ul li:hover a{
+  color:#f90019;
+  text-decoration:#ffff;
+}
+@media (max-width: 768px) {
+    .action .menu {
+        top: 45px;
+        right: 50px;
+        width: 191px;
+    
     }
-    .icons > li {
-    position: relative;
-    display: inline-block;
-    margin: 0;
-    padding: 0 15px;
-    /* margin-left: -43px */
-		/* background-color:#333; */
-    /* background-image: -moz-linear-gradient(90deg, rgb(232, 42, 122) 0%, rgb(54, 3, 84) 100%);
-    background-image: -webkit-linear-gradient(90deg, rgb(232, 42, 122) 0%, rgb(54, 3, 84) 100%);
-    background-image: -ms-linear-gradient(90deg, rgb(232, 42, 122) 0%, rgb(54, 3, 84) 100%); */
+    .action .menu::before{
+      right: 40px;
+    }
+    .action .menu.active {
+    top: 96px;
+    visibility: visible;
+    opacity: 1;
 }
-
-.icons > li > a {
-    display: block;
-    color: #fff;
-    font-weight: lighter;
-    font-size: 14px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -ms-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-		line-height:45px;
 }
-
-.icons > li > ul {
-    position: absolute;
-    left: 10px;
-    opacity: 0;
-    min-width: 200px;
-    margin: 0;
-    pointer-events: none;
-    z-index: 999;
-	/* Adding a transition timing on here will cause mouse out bugs after hover! */
-    background-image: -moz-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
-    background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
-    background-image: -ms-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%)
-}
-
-  .icons > li > ul > li {
-    padding: 0;
-		
-    float: left;
-    display: block;
-		width:100%;
-        color: white;
-}
-
-.icons > li > ul > li > a {
-    border-bottom: 0;
-    display: block;
-    padding: 0 5px;
-    color: #fff;
-    width: 100%;
-    padding: 0 5%;
-	text-transform:none;
-}
-
-/* Fade = no need for animations - just timing effects... */
-
-.ddFade {
-	 -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-}
-
-.ddFadeFast {
-	 -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}
-
-.ddFadeSlow {
-	 -webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -ms-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
-}
-
-/* General Animation settings */
-  .icons > li > ul {
-	opacity:0;
-	display:block;
-	perspective:1000px;
-	min-width:inherit;
-	width:200px;
-}
-
-
-
-li:hover ul.hov {
-	animation-duration: 0.3s;
-	animation-delay 0.3s;
-}
-
-li:hover ul.hov li {
-		animation-direction: normal;
-		animation-iteration-count:1;
-		animation-timing-function : ease-in-out;
-		background:#333;
-		animation-fill-mode: forwards;
-}
-
-
-
-
-/* sort all the overing, going on... */
- .icons li:hover a { 
-	/* color: #999; */
-}
-  .icons > li:hover ul {
-		opacity:1;
-		top:24px;
-		pointer-events: auto;
-	}
-  .icons > li > ul .ico:hover, 
-  .icons > li > ul a:hover { background-color: rgba(0,0,0,0.3); }
-  .icons > li:hover ul { top :45px; }
-
-/* A non image based mobile menu and close button */
-#hamburger {
-    display: none;
-    width: 25px;
-    height: 24px;
-    position: fixed;
-    right: 15px;
-    top: 15px;
-    cursor: pointer;
-}
-
-#hamburger > span {
-    background: #fff;
-    display: block;
-    width: 100%;
-    height: 3px;
-    position: relative;
-    margin-top: 3px;
-    color: #fff;
-			-webkit-transition:all .3s ease;
-		-moz-transition:all .3s ease;
-		-ms-transition:all .3s ease;
-		-o-transition:all .3s ease;
-		transition:all .3s ease;
-}
-
-#close {
-    position: fixed;
-    top: 10px;
-    right: 13px;
-    width: 30px;
-    height: 30px;
-    z-index: 1200;
-    display: none;
-    cursor: pointer;
-}
-
-#close > span, #close > span::after {
-    content: "";
-    display: block;
-    width: 4px;
-    height: 100%;
-    background: #eee;
-    position: absolute;
-    left: 50%;
-    margin-left: -3px;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-#close > span::after {
-	-webkit-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-	-ms-transform: rotate(-90deg);
-	-o-transform: rotate(-90deg);
-	transform: rotate(-90deg);
-}
-#close:hover > span,
-#close:hover > span::after { background: #ccc; }
-#hamburger:hover > span,
-#hamburger:hover > span::after,
-#hamburger:hover > span::before {
-	background: rgba(250,250,250,0.5);
-}
-
-
-
-    </style>
+</style>

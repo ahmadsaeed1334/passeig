@@ -44,7 +44,7 @@ class Affiliats extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Affiliate added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Affiliate added successfully!');
     }
     public function edit($affiliatId)
     {
@@ -69,7 +69,7 @@ class Affiliats extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'Affiliate updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Affiliate updated successfully!');
     }
 
     public function delete($id)
@@ -79,7 +79,7 @@ class Affiliats extends Component
         $this->affiliats = Affiliate::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger','message' => 'Affiliate deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Affiliate deleted successfully!');
     }
 
     public function resetFields()

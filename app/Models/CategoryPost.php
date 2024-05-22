@@ -9,4 +9,16 @@ class CategoryPost extends Model
 {
     use HasFactory;
     protected $table = 'category_posts';
+
+    public function posts()
+{
+    return $this->belongsToMany(Post::class);
+}
+public function categories()
+{
+    return $this->belongsToMany(BlogCategorie::class);
+}
+
+
+
 }

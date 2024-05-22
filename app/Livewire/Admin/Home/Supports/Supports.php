@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Home\Supports;
 
 use App\Models\Support;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -64,7 +65,7 @@ class Supports extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Support added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Support added successfully!');
     }
 
     public function resetFields(){
@@ -99,6 +100,15 @@ class Supports extends Component
 
     public function update(){
         $support = Support::find($this->support_id);
+        $this->deleteImage(
+            $support->card_icon_1,
+            $this->card_icon_1
+        );
+        $this->deleteImage(
+            $support->card_icon_2,
+            $this->card_icon_2
+        );
+        
         if ($this->card_icon_1 instanceof UploadedFile) {
             $this->validate([
                 'card_icon_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
@@ -127,14 +137,22 @@ class Supports extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'Support updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Support updated successfully!');
     }
     public function delete($id){
         Support::find($id)->delete();
         $this->supports = Support::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger','message' => 'Support deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Support deleted successfully!');
+    }
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
     }
     public function alertMessage($type = null, $title = null, $message = null, $position = null)
     {

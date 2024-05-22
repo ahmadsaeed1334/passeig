@@ -4155,7 +4155,7 @@ span.is-active:after {
 }
 
 .contest-card__meta li:first-child {
-    width: 35%;
+    width: 26%;
     border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -4456,11 +4456,16 @@ span.is-active:after {
 }
 
 .contest-wrapper .action-btn {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+    text-align: center;
+    line-height: 30px;
     width: 30px;
     height: 30px;
     background-color: #5a4bcc;
-    font-size: 20px;
-    color: #aeaef1;
+    /* font-size: 20px; */
+    color: white;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -4470,6 +4475,7 @@ span.is-active:after {
     align-items: center;
     justify-content: center;
     margin: 5px 10px;
+    font-size:22px;
 }
 
 /* contest section css end */
@@ -6942,7 +6948,7 @@ span.is-active:after {
 
 .contest-details__nav-slider .slick-arrow.next {
     left: auto;
-    right: 0;
+    right: 4px;
 }
 
 .contest-details-content .subtitle {

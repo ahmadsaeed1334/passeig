@@ -1,4 +1,5 @@
-<div class="modal fade" id="loginModal" tabindex="1" role="dialog" aria-hidden="true">
+<div>
+<div wire:ignore.self class="modal fade" id="loginModal" tabindex="1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
           <div class="modal-body">
@@ -13,19 +14,23 @@
                               <label>Email <sup>*</sup></label>
                               <input type="email" wire:model="email" id="login_name" class="form-control"
                                   placeholder="Enter your Email">
+                                  @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+
                           </div>
                           <div class="form-group">
                               <label>Password <sup>*</sup></label>
                               <input type="password" wire:model="password" id="login_pass" class="form-control"
                                   placeholder="Password">
+                                  @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+
                           </div>
                           <div class="d-flex flex-wrap justify-content-between mt-2">
                               <div class="custom-checkbox">
                                   <input type="checkbox" name="remember_me" id="remember_me" wire:model="remember_me">
                                   <label for="remember_me">Remember Me</label>
                               </div>
-                              <a href="#0" class="link">Forgot Password?</a>
-                          </div>
+                              <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
+                            </div>
                           <div class="form-group text-center mt-5">
                               <button type="submit" class="btn btn-primary">Log In</button>
                           </div>
@@ -45,4 +50,29 @@
           </div>
       </div>
   </div>
+</div>
+<!-- Forgot Password Link -->
+{{-- <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a> --}}
+
+<!-- Forgot Password Modal -->
+<div wire:ignore.self class="modal fade" id="forgotPasswordModal" tabindex="1" role="dialog" aria-hidden="true">
+
+{{-- <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-hidden="true"> --}}
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body">
+                @livewire('forgot-password')
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // JavaScript to switch between modals
+$('#forgotPasswordModal').on('show.bs.modal', function (event) {
+    $('#loginModal').modal('hide');
+});
+$('#loginModal').on('show.bs.modal', function (event) {
+    $('#forgotPasswordModal').modal('hide');
+});
+</script>
 </div>

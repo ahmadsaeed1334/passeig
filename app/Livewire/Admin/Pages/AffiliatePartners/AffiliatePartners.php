@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Pages\AffiliatePartners;
 
 use App\Models\AffiliatePartner;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -80,7 +81,7 @@ class AffiliatePartners extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Affiliate Partner added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Affiliate Partner added successfully!');
 
     }
     public function edit($affiliatePartnerId){
@@ -105,7 +106,18 @@ class AffiliatePartners extends Component
     public function update(){
        
          $affiliatePartner =  AffiliatePartner::find($this->affiliatePartnerId);
-         
+         $this->deleteImage(
+            $affiliatePartner->card_icon_1,$this->card_icon_1
+         );
+         $this->deleteImage(
+            $affiliatePartner->card_icon_2,$this->card_icon_2
+         );
+         $this->deleteImage(
+            $affiliatePartner->card_icon_3,$this->card_icon_3
+         );
+         $this->deleteImage(
+            $affiliatePartner->card_icon_4,$this->card_icon_4
+         );
         if ($this->card_icon_1 instanceof UploadedFile) {
             $this->validate([
                 'card_icon_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
@@ -150,15 +162,24 @@ class AffiliatePartners extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Affiliate Partner updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Affiliate Partner updated successfully!');
     }
     public function delete($affiliatePartnerId){
         AffiliatePartner::find($affiliatePartnerId)->delete();
         $this->affiliatePartners = AffiliatePartner::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Affiliate Partner deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Affiliate Partner deleted successfully!');
     }
+    protected function deleteImage($oldImagePath, $newImage)
+{
+    if ($newImage instanceof UploadedFile) {
+        if ($oldImagePath) {
+            Storage::disk('public')->delete($oldImagePath);
+        }
+    }
+}
+
     public function resetFields(){
         $this->subtitle = '';
         $this->title = '';

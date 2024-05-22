@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Pages\HowItWorks;
 
 use App\Models\HowItWork;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -69,7 +70,7 @@ class HowItWorks extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'HowItWork added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'HowItWork added successfully!');
 
     }
     public function edit($howItWorkId)
@@ -93,6 +94,15 @@ class HowItWorks extends Component
     public function update(){
         // $this->validate();
         $howItWork = HowItWork::find($this->howItWorkId);
+        $this->deleteImage(
+            $howItWork->card_icon_1,$this->card_icon_1
+        );
+        $this->deleteImage(
+            $howItWork->card_icon_2,$this->card_icon_2
+        );
+        $this->deleteImage(
+            $howItWork->card_icon_3,$this->card_icon_3
+        );
         if ($this->card_icon_1 instanceof UploadedFile) {
             $this->validate([
                 'card_icon_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
@@ -128,10 +138,17 @@ class HowItWorks extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'HowItWork updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','HowItWork updated successfully!');
 
     }
-
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
+    }
     public function resetFields(){
         $this->subtitle = "";
         $this->title = "";
@@ -151,7 +168,7 @@ class HowItWorks extends Component
         HowItWork::find($howItWorkId)->delete();
         $this->howItWorks = HowItWork::all();
         $this->dispatch('showAlert', ['type' => 'danger','message' => 'HowItWork deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','HowItWork deleted successfully!');
     }
     private function handleFileUpload($field)
     {

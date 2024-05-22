@@ -10,7 +10,7 @@ use Livewire\Attributes\Layout;
 class TermsConditions extends Component
 {
     use LivewireAlert;
-    protected $listeners = ['trixContentChanged'];
+    // protected $listeners = ['trixContentChanged'];
     public $termsConditions;
     public $contentsId;
     public $content;
@@ -18,6 +18,8 @@ class TermsConditions extends Component
     public function mount()
     {
         $this->termsConditions = TermsCondition::all();
+        $this->dispatch('initCkEditor', ['#content' => $this->content]); 
+
     }
     public function create(){
 
@@ -32,18 +34,22 @@ class TermsConditions extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Terms Condition added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Terms Condition added successfully!');
     }
     public function TermsConditionEdit($id){
         $this->contentsId = $id;
         $this->selectedcontents = TermsCondition::find($id);
         $this->content = $this->selectedcontents->content;
-        dd($this->selectedcontents->content); 
+        // $this->dispatch('initCkEditor', ['#contentEdit' => $this->content]); 
+
+        // dd($this->content); 
+        // $this->dispatch('contentLoaded', ['content' => $this->content]);
+
     }
-    public function trixContentChanged($value)
-    {
-        $this->content = $value;
-    }
+    public function updatedContent($value)
+{
+    $this->content = $value;
+}
     public function update(){
         $this->validate([
             'content' =>'required'
@@ -53,11 +59,11 @@ class TermsConditions extends Component
             'content' => $this->content
         ]);
         $this->termsConditions = TermsCondition::all();
-        dd( $this->termsConditions);
+        // dd( $this->termsConditions);
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Terms Condition updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Terms Condition updated successfully!');
     }
     public function resetFields(){
         $this->content = '';
@@ -65,12 +71,12 @@ class TermsConditions extends Component
     
 
     public function delete($contentsId){
-        dd($contentsId);
+        // dd($contentsId);
         TermsCondition::find($contentsId)->delete();
         $this->termsConditions = TermsCondition::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Terms Condition deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Terms Condition deleted successfully!');
     }
     
     public function alertMessage($type = null, $title = null, $message = null, $position = null)

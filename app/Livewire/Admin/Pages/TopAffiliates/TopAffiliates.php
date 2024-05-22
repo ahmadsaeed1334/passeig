@@ -4,12 +4,12 @@ namespace App\Livewire\Admin\Pages\TopAffiliates;
 
 use App\Models\TopAffiliate;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 #[Layout('layouts.app')]
-
 class TopAffiliates extends Component
 {
     use LivewireAlert;
@@ -34,7 +34,6 @@ class TopAffiliates extends Component
         'card_name_3' => 'nullable|string|max:255',
         'card_amount_3' => 'nullable|numeric',
     ];
-
  public function mount()
     {
         $this->topAffiliates = TopAffiliate::all();
@@ -70,7 +69,7 @@ class TopAffiliates extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Top Affiliate added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Top Affiliate added successfully!');
     }
     public function edit($topAffiliateId){
         $this->selectedTopAffiliates = TopAffiliate::find($topAffiliateId);
@@ -91,6 +90,15 @@ class TopAffiliates extends Component
     public function update(){
         // $this->validate();
         $topAffiliate = TopAffiliate::find($this->topAffiliateId);
+        $this->deleteImage(
+            $topAffiliate->card_image_1,$this->card_image_1
+        );
+        $this->deleteImage(
+            $topAffiliate->card_image_2,$this->card_image_2
+        );
+        $this->deleteImage(
+            $topAffiliate->card_image_3,$this->card_image_3
+        );
         if ($this->card_image_1 instanceof UploadedFile) {
             $this->validate([
                 'card_image_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
@@ -129,7 +137,7 @@ class TopAffiliates extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Top Affiliate updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Top Affiliate updated successfully!');
     }
     public function delete($topAffiliateId){
 
@@ -137,9 +145,16 @@ class TopAffiliates extends Component
         $this->topAffiliates = TopAffiliate::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Top Affiliate deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Top Affiliate deleted successfully!');
     }
-
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
+    }
     public function resetFields(){
         $this->subtitle = '';
         $this->title = '';

@@ -54,7 +54,7 @@
 						<div class="d-flex flex-stack flex-grow-1">
 							<!--begin::Content-->
 							<div class="fw-semibold">
-								<div class="fs-6 text-gray-700">
+								<div class="fs-6 text-white-700">
 									<strong class="me-1">Warning!</strong>By editing the permission name, you might break the system
 									permissions functionality. Please ensure you're absolutely certain before proceeding.
 								</div>

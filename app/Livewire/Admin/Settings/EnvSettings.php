@@ -25,7 +25,8 @@ class EnvSettings extends Component
         Artisan::call("env:set APP_ENV='$this->APP_ENV'");
         Artisan::call("env:set APP_DEBUG='$this->APP_DEBUG'");
         Artisan::call("env:set APP_URL='$this->APP_URL'");
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Your changes have been saved successfully');
     }
 
     public function mount()

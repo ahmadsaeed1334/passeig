@@ -65,7 +65,7 @@
 		<div class="card-footer d-flex justify-content-end py-6 px-9">
 			<button wire:click.prevent="sendEmail()" type="reset" class="btn btn-dark me-3">Send Test
 				Mail</button>
-			<button wire:click.prevent="email_settings()" type="reset" class="btn btn-{{ primary_color() }}">Submit</button>
+			<button wire:click.prevent="email_settings()" type="reset" class="cmn-btn btn btn-{{ primary_color() }}">Submit</button>
 		</div>
 	</form>
 	<!--end::Form-->

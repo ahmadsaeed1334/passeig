@@ -111,7 +111,7 @@
                             <div class="col-lg-12">
                                 <label class="fs-6 fw-semibold form-label mb-2 mt-2 required">Categories</label>
             
-                                        <select wire:model="selectedCategories" class="form-select">
+                                        <select wire:model="selectedCategories" class="form-select"  multiple>
                                     @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -139,13 +139,13 @@
                                     {{-- <div class="image-input-wrapper" style="background-image: url({{ is_string($file) ? asset('storage/'.$file) : ($file ? $file->temporaryUrl() : asset('img/bg-back.jpg')) }}); background-size:100% 100%;width:300px">
                                     </div> --}}
                                     <!-- Inputs -->
-                                    <label class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change File">
+                                    <label 	class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3 shadow"                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change File">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <input wire:model="file" type="file" id="file" name="file" accept=".jpeg, .png, .jpg, .gif, .mp4, .mov, .ogg, .qt" />
                                         <input type="hidden" name="avatar_remove" />
                                     </label>
                                     <!-- Cancel -->
-                                    <span class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel File">
+                                    <span class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3 shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel File">
                                         <i class="bi bi-x fs-2"></i>
                                     </span>
                                     <!-- Remove -->
@@ -166,7 +166,7 @@
                     
                         <!-- Inside your modal -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
+                            <button type="button" class="btn btn-danger" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
                             <button type="button" class="btn btn-primary" wire:click="update">Update</button>
                         </div>
 

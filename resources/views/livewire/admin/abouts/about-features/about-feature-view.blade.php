@@ -50,8 +50,8 @@
     </ul>
         <ul class="mt-5">
         
-        <li style="--i: 3;" class="bg-danger">
-            <img src="{{ asset('storage/' . $aboutfeature->inner_icon_1) }}" alt="user image">
+        <li style="--i: 3;" class="bg-warning">
+            <img src="{{ asset('storage/' . $aboutfeature->inner_icon_3) }}" alt="user image">
             <div class="content">
                 <h3>{{ $aboutfeature->icon_title_3 }}</h3>
                 
@@ -68,7 +68,7 @@
     </ul>
         <ul class="mt-5">
         
-        <li style="--i: 5;" class="bg-primary">
+        <li style="--i: 5;" class="bg-info">
             <img src="{{ asset('storage/' . $aboutfeature->inner_icon_5) }}" alt="user image">
             <div class="content">
                 <h3>{{ $aboutfeature->icon_title_5 }}</h3>

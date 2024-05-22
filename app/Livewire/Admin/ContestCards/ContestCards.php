@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\ContestCards;
 
 use App\Models\ContestCard;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,7 +17,7 @@ class ContestCards extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $contestCards;
+    // public $contestCards;
     public $card_icon, $card_title, $card_description;
     public $selectedContests, $contestId;
     protected $rules = [
@@ -25,7 +26,7 @@ class ContestCards extends Component
         'card_description' =>'required',
     ];
     public function mount(){
-        $this->contestCards = ContestCard::all();
+        // $this->contestCards = ContestCard::all();
     }
     public function create(){
         $this->validate();
@@ -38,11 +39,11 @@ class ContestCards extends Component
             'card_title' => $this->card_title,
             'card_description' => $this->card_description,
         ]);
-        $this->contestCards = ContestCard::all();
+        // $this->contestCards = ContestCard::all();
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Contest Card added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Contest Card added successfully!');
     }
 
     public function edit($id){
@@ -55,7 +56,10 @@ class ContestCards extends Component
     }
     public function update(){
       $contestCards =  ContestCard::find($this->contestId);
-      
+      $this->deleteImage(
+        $contestCards->card_icon, 
+        $this->card_icon
+      );
         if ($this->card_icon instanceof UploadedFile) {
             $this->validate([
                 'card_icon' =>'required|image|max:3072',
@@ -66,21 +70,32 @@ class ContestCards extends Component
         $contestCards->card_title = $this->card_title;
         $contestCards->card_description = $this->card_description;
         $contestCards->save();
-        $this->contestCards = ContestCard::all();
+        // $this->contestCards = ContestCard::all();
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Contest Card updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Contest Card added successfully!');
     }
     public function delete($id){
         $contestCards = ContestCard::find($id);
+        $this->deleteImage(
+            $contestCards->card_icon,
+            $this->card_icon
+          );
         $contestCards->delete();
-        $this->contestCards = ContestCard::all();
+        // $this->contestCards = ContestCard::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Contest Card deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Contest Card added successfully!');
     }
-
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
+    }
     public function resetFields(){
         $this->card_icon = '';
         $this->card_title = '';
@@ -107,6 +122,7 @@ class ContestCards extends Component
 
     public function render()
     {
-        return view('livewire.admin.contest-cards.contest-cards');
+        $contestCards = ContestCard::where('id','!=',null)->paginate(3);
+        return view('livewire.admin.contest-cards.contest-cards', ['contestCards' => $contestCards]);
     }
 }

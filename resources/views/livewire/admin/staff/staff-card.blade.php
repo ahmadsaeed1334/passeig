@@ -68,7 +68,7 @@
 			</thead>
 			<!--end::Table head-->
 			<!--begin::Table body-->
-			<tbody class="fw-semibold text-gray-600">
+			<tbody class="fw-semibold text-white-600">
 				@forelse ($users as $index => $user)
 					<tr>
 						<td class="text-{{ primary_color() }}">

@@ -6,28 +6,12 @@
     <div class="inner-hero-section style--five">
  </div>
  <!-- inner-hero-section end -->
- 
- 
  <!-- user section start -->
  <div class="mt-minus-150 pb-120">
    <div class="container">
      <div class="row">
        <div class="col-lg-4">
-         <div class="user-card">
-           <div class="avatar-upload">
-             <div class="obj-el"><img src="{{ asset('front-end/assets/images/elements/team-obj.png')}}" alt="image"></div>
-             <div class="avatar-edit">
-                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                 <label for="imageUpload"></label>
-             </div>
-             <div class="avatar-preview">
-                 <div id="imagePreview" style="background-image: url('front-end/assets/images/user/pp.png');">
-                 </div>
-             </div>
-           </div>
-           <h3 class="user-card__name">Albert Owens</h3>
-           <span class="user-card__id">ID : 19535909</span>
-         </div><!-- user-card end -->
+        @livewire('front-end.pages.user-pannel.user-profile')
          <div class="user-action-card">
            <ul class="user-action-list">
              <li><a href="{{ route('front-end/user-panel') }}">My Tickets <span class="badge">04</span></a></li>
@@ -36,7 +20,10 @@
              <li class="active"><a href="{{ route('front-end/user-referral') }}">Referral Program</a></li>
              <li><a href="{{ route('front-end/user-lottery') }}">Favorite Lotteries</a></li>
              <li><a href="{{ route('front-end/contact') }}">Help Center</a></li>
-             <li><a href="#0">Log Out</a></li>
+             <li><a href="#0"><form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="dropdown-item">Log Out</button>
+          </form></a></li>
            </ul>
          </div><!-- user-action-card end -->
        </div>
@@ -57,27 +44,36 @@
  
          <div class="referral-overview mt-30">
            <div class="row justify-content-center mb-none-30">
-             <div class="col-lg-5 col-sm-6 mb-30">
+             <div class="col-lg-10 col-sm-12 mb-30">
                <div class="referral-crad">
-                 <div class="referral-crad__icon"><img src="{{ asset('front-end/assets/images/icon/referral/1.png')}}" alt="image"></div>
-                 <div class="referral-crad__content">
-                   <h3 class="number">$2956.00</h3>
-                   <span>Earned Referral</span>
-                 </div>
-               </div><!-- referral-crad end -->
-             </div>
-             <div class="col-lg-5 col-sm-6 mb-30">
-               <div class="referral-crad">
-                 <div class="referral-crad__icon"><img src="{{ asset('front-end/assets/images/icon/referral/2.png')}}" alt="image"></div>
-                 <div class="referral-crad__content">
-                   <h3 class="number">$208.00</h3>
-                   <span>Last Month</span>
-                 </div>
+                <h3 class="title">Share To Points with Friends</h3>
+                <div class="sidebar">
+                <div class="widget">
+                  {{-- <h3 class="widget__title">sidebar</h3> --}}
+                  <form wire:ignore wire:submit.prevent="shareBalance" class="sidebar-search" >
+                    <input type="search" wire:model="recipientEmail" name="sidebar-search" id="sidebar-search" placeholder="Recipient's Email">
+                    <input type="search" wire:model="amount" name="sidebar-search" id="sidebar-search" placeholder="Enter your Amount to Share">
+                    <!-- Select option to choose wallet type -->
+                    <select wire:model="selectedWallet" name="selectedWallet" class="mt-2" id="selectedWallet">
+                      <option value="">-- Select Wallet --</option>
+                      <option value="business">Business Wallet</option>
+                      <option value="personal">Personal Wallet</option>
+                  </select>
+                    <button wire:loading.class="loading" type="submit"> Share</button>
+                  </form>
+                  <style>
+                    .loading {
+                     opacity: 0.5; 
+                     cursor: wait;
+                     }
+                  </style>
+                </div><!-- widget end -->
+                </div><!-- widget end -->
+          
                </div><!-- referral-crad end -->
              </div>
            </div>
          </div>
- 
          <div class="referral-transaction">
            <div class="all-transaction__header">
              <h3 class="title">Your Partners:</h3>
@@ -175,5 +171,31 @@
    </div>
  </div>
  <!-- user section end -->
- </div>
+
  
+ <style>
+  .nice-select.open .list{
+    background-color: transparent;
+    background-image: -moz-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
+    background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
+    background-image: -ms-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+    /* width: 75px; */
+  }
+  .nice-select.open .list:hover{
+    background-color: transparent;
+
+  }
+.nice-select .option{
+    color: white;
+    background-color: transparent;
+  }
+  .nice-select .option.focus, .nice-select .option.selected.focus{
+    background-color: transparent;
+  }
+  .nice-select .option, .nice-select .option.selected{
+    background-color: transparent;
+ 
+  }
+ </style>
+  </div>

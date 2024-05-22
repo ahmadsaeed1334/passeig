@@ -113,7 +113,7 @@
                         <div class="col-lg-12">
                             <label class="fs-6 fw-semibold form-label mb-2 mt-2 required">Categories</label>
         
-                                    <select wire:model="selectedCategories" class="form-select">
+                                    <select wire:model="selectedCategories" class="form-select"  multiple>
                                         <option >Select Categories</option>
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -168,7 +168,7 @@
                     
                     <!-- Form Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
+                        <button type="button" class="btn btn-danger" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
                         <button type="button" class="btn btn-primary" wire:click="create">Submit</button>
                     </div>
                 </form>

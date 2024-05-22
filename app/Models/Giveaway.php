@@ -4,14 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Rinvex\Categories\Models\Category;
 use Rinvex\Categories\Traits\Categorizable;
-use Nicolaslopezj\Searchable\SearchableTrait;
+use Abbasudo\Purity\Traits\Filterable;
+use Abbasudo\Purity\Traits\Sortable;
+
 class Giveaway extends Model
 {
     use HasFactory;
     use Categorizable;
-    use SearchableTrait;
+    use Filterable;
+    use Sortable;
+
     protected $fillable = [
         'subtitle',     
         'title',
@@ -46,6 +51,17 @@ class Giveaway extends Model
     {
         return $this->hasMany(GiveawaySpecification::class);
     }
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class, 'giveaway_id');
+    }
+
+    public function isFavorited()
+    {
+        return $this->favorites()->where('user_id', Auth::id())->exists();
+    }
+    
+    
     protected $searchable = [
         /**
          * Columns and their priority in search results.

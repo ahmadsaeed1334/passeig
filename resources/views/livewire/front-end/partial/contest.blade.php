@@ -28,40 +28,60 @@
             </li>
           </ul>
          
-          <div class="tab-content" id="myTabContent">
+          <div  class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
               <div class="row mb-none-30">
                 @foreach ($giveaways->take(9) as $giveaway)
                 <div class="col-xl-4 col-md-6 mb-30">
                   <div class="contest-card">
-                    <a href="{{ route('front-end/contest-details-one' , ['giveawayId' => $giveaway->id]) }}" class="item-link"></a>
+                    <!-- The link that wraps the card, excluding the heart icon -->
+                    <a href="{{ route('front-end/contest-details-one', ['giveawayId' => $giveaway->id]) }}" class="item-link"></a>
+                
                     <div class="contest-card__thumb">
                       <img src="{{ asset('storage/' . $giveaway->file_path) }}" alt="image">
-                      <a href="#0" class="action-icon"><i class="far fa-heart"></i></a>
+                
+                      <!-- Separate container for the heart icon to prevent it from being covered by the link -->
+                      @if($giveaway->isFavorited())
+                        <a href="#" class="action-icon" wire:click.prevent="toggleFavorite({{ $giveaway->id }})" wire:loading.attr="disabled">
+                          <i class="lar la-heart"></i>
+                        </a>
+                      @else
+                        <div class="action-btn-wrapper">
+                          <button type="button" class="action-btn" wire:click.prevent="toggleFavorite({{ $giveaway->id }})" wire:loading.attr="disabled">
+                            <i class="far fa-heart"></i>
+                          </button>
+                        </div>
+                      @endif
+                
                       <div class="contest-num">
                         <span>contest no:</span>
                         <h4 class="number">b2t</h4>
                       </div>
                     </div>
+                
                     <div class="contest-card__content">
                       <div class="left">
                         <h5 class="contest-card__name">{{ Str::title($giveaway->name) }}</h5>
                       </div>
                       <div class="right">
                         <span class="contest-card__price">{{ $giveaway->fee }}</span>
-                        <p>ticket price</p>
+                        <p>Entry price</p>
                       </div>
                     </div>
+                
                     <div class="contest-card__footer">
+                      @php
+                      $totalEntries = \App\Models\GiveawayEntry::where('giveaway_id', $giveaway->id)->count();
+                      @endphp
                       <ul class="contest-card__meta">
                         <li>
                           <i class="las la-clock"></i>
-                          <span>5d</span>
+                          {{ \Carbon\Carbon::now()->diffInDays($giveaway->due_date) }}d
                         </li>
                         <li>
                           <i class="las la-ticket-alt"></i>
-                          <span>9805</span>
-                          <p>Remaining</p>
+                          <span>{{ $totalEntries }}</span>
+                          <p>Total Entries</p>
                         </li>
                       </ul>
                     </div>

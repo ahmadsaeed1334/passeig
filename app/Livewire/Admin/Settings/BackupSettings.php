@@ -24,7 +24,8 @@ class BackupSettings extends Component
         }
         Artisan::call("env:set DROPBOX_TOKEN='$this->DROPBOX_TOKEN'");
         Artisan::call("env:set BACKUP_NAME='$this->BACKUP_NAME'");
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Backup has been created successfully');
     }
     public function mount()
     {

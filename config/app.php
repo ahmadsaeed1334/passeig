@@ -189,6 +189,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        // App\Exceptions\RouteNotFoundExceptionHandler::class,
+
     ])->toArray(),
 
     /*

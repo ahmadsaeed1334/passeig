@@ -311,6 +311,20 @@
 					// 'counter' => auth()->user()->newThreadsCount(),
 				])
 				<!--end:Menu item-->
+				<!--begin:Menu item-->
+				@include('livewire.admin.partial.sidebar-menu-header', [
+					'name' => 'Wallet Manager',
+				])
+				<!--end:Menu item-->
+				<!--begin:Menu item-->
+				@include('livewire.admin.partial.sidebar-menu-item', [
+					'route' => 'admin/wallet-manager',
+					'name' => 'Wallet Manager',
+					'icon' => 'fa-solid fa-message',
+					// 'counter' => auth()->user()->newThreadsCount(),
+				])
+				<!--end:Menu item-->
+				
 				@canany(['super staff', 'super roles', 'super permissions'])
 					<!--begin:Menu item-->
 					@include('livewire.admin.partial.sidebar-menu-header', [

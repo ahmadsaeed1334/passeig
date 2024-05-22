@@ -77,7 +77,8 @@ class Roles extends Component
         $per = Permission::whereIn('id', $this->per)->get();
         $role->syncPermissions($per);
         // $permission->syncRoles($role);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Role has been updated successfully');
         $this->reset();
         $this->dispatch('closeModal', ['modalId' => "addRolesModel"]);
     }

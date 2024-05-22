@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\LanguageController;
 use App\Livewire\Admin\Abouts\AboutFeatures\AboutFeatures;
 use App\Livewire\Admin\Abouts\Abouts;
@@ -20,6 +21,7 @@ use App\Livewire\Admin\Home\Testimonials\Testimonials;
 use App\Livewire\Admin\Language\LanguageManager;
 use App\Livewire\Admin\Logs\LogViewer;
 use App\Livewire\Admin\Mail\Maileditor;
+use App\Livewire\Admin\WalletManager\WalletManager;
 use App\Livewire\Admin\Messenger\Messenger;
 use App\Livewire\Admin\News\News;
 use App\Livewire\Admin\Pages\AffiliatePartners\AffiliatePartners;
@@ -64,6 +66,8 @@ use App\Livewire\FrontEnd\WinnerDetails\WinnerDetails;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Middleware\RedirectIfAdminAccessAttempt;
+use App\Http\Middleware\RouteNotFoundExceptionHandler;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,13 +89,21 @@ Route::impersonate();
 |--------------------------------------------------------------------------
 |
 */
-Route::middleware([
-    'auth',
-    'verified'
-])->group(function () {
-    Route::get('admin/dashboard', function () {
-        return redirect()->to('admin/dashboard');
-    });
+Route::get('forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+// Route::post('forgot-password', function () {
+//     return view('auth.forgot-password');
+// })->middleware('guest')->name('password.request');
+// Route::middleware([
+//     'auth',
+//     'verified'
+// ])->group(function () {
+//     Route::get('admin/dashboard', function () {
+//         return redirect()->to('admin/dashboard');
+//     });
+
+Route::middleware(['auth', 'verified' , 'admin.attempt'])->group(function () {
     // Route::get('/', Dashboard::class);
     Route::get('/admin/dashboard', Dashboard::class)->name('admin/dashboard');
     Route::get('/admin/messenger', Messenger::class)->name('admin/messenger');
@@ -128,10 +140,12 @@ Route::middleware([
     Route::get('/admin/giveaway-specifications', GiveawaySpecifications::class)->name('admin/giveaway-specifications');
     Route::get('/admin/terms-conditions', TermsConditions::class)->name('admin/pages/terms-conditions');
     Route::get('/admin/footers', Footers::class)->name('admin/footers');
+    Route::get('/admin/wallet-manager', WalletManager::class)->name('admin/wallet-manager');
 
     //  Giveawaye
     Route::get('/admin/giveaway', Giveaway::class)->name('admin/giveaway');
     // End  Giveawaye
+});
     Route::get("/storage-link", function () {
         Artisan::call('storage:link');
         echo 'Symlink process successfully completed';
@@ -176,9 +190,11 @@ Route::middleware([
         Artisan::call("config:clear");
         return "cleared";
     });
-
-});
-      /*
+    Route::fallback(function() {
+        return response()->view('livewire.front-end.pages.page404', [], 404);
+    });
+// });
+/*
 |--------------------------------------------------------------------------
 | Front End Routes
 |--------------------------------------------------------------------------
@@ -207,10 +223,15 @@ Route::get('/chectout', CheckOut::class)->name('front-end/check-out');
 Route::get('/faq', Faq::class)->name('front-end/faq');
 Route::get('/404', Page404::class)->name('front-end/page404');
 Route::get('/', Navbar::class)->name('front-end/navbar');
-// Route::get('/', Navbar::class)->name('front-end/navbar');
 Route::get('/signup', SignUpModal::class)->name('front-end/signup');
-Route::get('/header', Header::class)->name('front-end/header');
 Route::get('/login-modal', LoginModal::class)->name('front-end/login-modal');
 Route::get('/front-end/terms-condition', TermsCondition::class)->name('front-end/pages/terms-condition');
 Route::get('/{post:slug}', [PostController::class, 'show'])->name('view');
-Route::get('/home', [PostController::class, 'home'])->name('home');
+Route::get('/blog-home', [PostController::class, 'home'])->name('home');
+// Route::get('/home', [BlogsController::class, 'home'])->name('home');
+// Route::get('/post/{post}', 'BlogsController@show')->name('post.show');
+// Route::get('/category/{category}', 'BlogsController@byCategory')->name('category.show');
+// Route::get('/search', 'BlogsController@search')->name('search');
+// Route::fallback(function() {
+//     return response()->view('livewire.front-end.pages.page404', [], 404);
+// });

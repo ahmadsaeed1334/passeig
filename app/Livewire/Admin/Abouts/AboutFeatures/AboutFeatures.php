@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Abouts\AboutFeatures;
 use App\Models\AboutFeature;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -93,7 +94,7 @@ class AboutFeatures extends Component
       $this->resetFields();
       $this->dispatch('hide-modal');
       $this->dispatch('showAlert', ['type' => 'success', 'message' => 'About Feacture added successfully!']);
-      $this->alertMessage();
+      $this->alertMessage('success', 'Operation success', 'About Feacture added successfully!');
 
 
     }
@@ -120,55 +121,67 @@ class AboutFeatures extends Component
     }
     public function update(){
         $aboutfeature =  AboutFeature::find($this->aboutfeature_id);
-        if ($this->image instanceof UploadedFile) {
-            $this->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->image = $this->image->store('aboutFeactureIcons', 'public');
-            $aboutfeature->image = $this->image;
-        }
-        if ($this->inner_icon_1 instanceof UploadedFile) {
-            $this->validate([
-                'inner_icon_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->inner_icon_1 = $this->inner_icon_1->store('aboutFeactureIcons', 'public');
-            $aboutfeature->inner_icon_1 = $this->inner_icon_1;
-        }
-        if ($this->inner_icon_2 instanceof UploadedFile) {
-            $this->validate([
-                'inner_icon_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->inner_icon_2 = $this->inner_icon_2->store('aboutFeactureIcons', 'public');
-            $aboutfeature->inner_icon_2 = $this->inner_icon_2;
-        }
-        if ($this->inner_icon_3 instanceof UploadedFile) {
-            $this->validate([
-                'inner_icon_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->inner_icon_3 = $this->inner_icon_3->store('aboutFeactureIcons', 'public');
-            $aboutfeature->inner_icon_3 = $this->inner_icon_3;
-        }
-        if ($this->inner_icon_4 instanceof UploadedFile) {
-            $this->validate([
-                'inner_icon_4' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->inner_icon_4 = $this->inner_icon_4->store('aboutFeactureIcons', 'public');
-            $aboutfeature->inner_icon_4 = $this->inner_icon_4;
-        }
-        if ($this->inner_icon_5 instanceof UploadedFile) {
-            $this->validate([
-                'inner_icon_5' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->inner_icon_5 = $this->inner_icon_5->store('aboutFeactureIcons', 'public');
-            $aboutfeature->inner_icon_5 = $this->inner_icon_5;
-        }
-        if ($this->inner_icon_6 instanceof UploadedFile) {
-            $this->validate([
-                'inner_icon_6' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->inner_icon_6 = $this->inner_icon_6->store('aboutFeactureIcons', 'public');
-            $aboutfeature->inner_icon_6 = $this->inner_icon_6;
-        }
+           // Delete existing images
+           
+    // Delete existing images for the icons being updated
+    $this->deleteImage($aboutfeature->image , $this->image);
+    if ($this->image instanceof UploadedFile) {
+        $this->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
+        ]);
+        $this->image = $this->image->store('aboutFeactureIcons', 'public');
+        $aboutfeature->image = $this->image;
+    }
+
+    // Repeat the above process for each inner icon
+    $this->deleteImage($aboutfeature->inner_icon_1 , $this->inner_icon_1);
+    if ($this->inner_icon_1 instanceof UploadedFile) {
+        $this->validate([
+            'inner_icon_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
+        ]);
+        $this->inner_icon_1 = $this->inner_icon_1->store('aboutFeactureIcons', 'public');
+        $aboutfeature->inner_icon_1 = $this->inner_icon_1;
+    }
+    $this->deleteImage($aboutfeature->inner_icon_2 , $this->inner_icon_2);
+    if ($this->inner_icon_2 instanceof UploadedFile) {
+        $this->validate([
+            'inner_icon_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
+        ]);
+        $this->inner_icon_2 = $this->inner_icon_2->store('aboutFeactureIcons', 'public');
+        $aboutfeature->inner_icon_2 = $this->inner_icon_2;
+    }
+    $this->deleteImage($aboutfeature->inner_icon_3 , $this->inner_icon_3);
+    if ($this->inner_icon_3 instanceof UploadedFile) {
+        $this->validate([
+            'inner_icon_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
+        ]);
+        $this->inner_icon_3 = $this->inner_icon_3->store('aboutFeactureIcons', 'public');
+        $aboutfeature->inner_icon_3 = $this->inner_icon_3;
+    }
+    $this->deleteImage($aboutfeature->inner_icon_4 , $this->inner_icon_4);
+    if ($this->inner_icon_4 instanceof UploadedFile) {
+        $this->validate([
+            'inner_icon_4' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
+        ]);
+        $this->inner_icon_4 = $this->inner_icon_4->store('aboutFeactureIcons', 'public');
+        $aboutfeature->inner_icon_4 = $this->inner_icon_4;
+    }
+    $this->deleteImage($aboutfeature->inner_icon_5, $this->inner_icon_5);
+    if ($this->inner_icon_5 instanceof UploadedFile) {
+        $this->validate([
+            'inner_icon_5' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
+        ]);
+        $this->inner_icon_5 = $this->inner_icon_5->store('aboutFeactureIcons', 'public');
+        $aboutfeature->inner_icon_5 = $this->inner_icon_5;
+    }
+    $this->deleteImage($aboutfeature->inner_icon_6, $this->inner_icon_6);
+    if ($this->inner_icon_6 instanceof UploadedFile) {
+        $this->validate([
+            'inner_icon_6' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
+        ]);
+        $this->inner_icon_6 = $this->inner_icon_6->store('aboutFeactureIcons', 'public');
+        $aboutfeature->inner_icon_6 = $this->inner_icon_6;
+    }
         $aboutfeature->subtitle = $this->subtitle;
         $aboutfeature->title = $this->title;
         $aboutfeature->description = $this->description;
@@ -183,16 +196,24 @@ class AboutFeatures extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'About Feacture updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'About Feacture updated successfully!');
     }
+    protected function deleteImage($oldImagePath, $newImage)
+{
+    if ($newImage instanceof UploadedFile) {
+        if ($oldImagePath) {
+            Storage::disk('public')->delete($oldImagePath);
+        }
+    }
+}
     public function delete($id){
         AboutFeature::find($id)->delete();
         $this->aboutfeatures = AboutFeature::all();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger','message' => 'About Feacture deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','About Feacture deleted successfully!');
     }
-    
+     
     private function handleFileUpload($field)
     {
         if ($this->{$field} instanceof UploadedFile) {

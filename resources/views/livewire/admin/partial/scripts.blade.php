@@ -1,15 +1,8 @@
 <script>
 	var hostUrl = "assets/";
 </script>
-<script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
-<script>
-   
-	document.addEventListener('trix-change', function (event) {
-    var detail = event.target.value;
-    window.livewire.dispatch('trixContentChanged', detail);
-});
-  
-</script>
+
+
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 
@@ -83,8 +76,15 @@
 	window.addEventListener('message', adjustIframeHeight, false);
 </script>
 @livewireScripts
-<script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
-	data-turbolinks-eval="false" data-turbo-eval="false"></script>
+<script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+<script>
+   
+	document.addEventListener('trix-change', function (event) {
+    var detail = event.target.value;
+    window.livewire.dispatch('trixContentChanged', detail);
+});
+  
+</script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 	$("#dob").flatpickr();

@@ -1,5 +1,16 @@
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
     @include('livewire.admin.partial.preloader')
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/theme/classic.css">
+        <style>
+            .ck-content {
+                color: black;
+            }
+            .ck-content h1,
+.ck-content h2,
+.ck-content h3 {
+    color: black; /* Set text color to black for header styles */
+}
+        </style>
     <div class="d-flex flex-column flex-column-fluid">
         <x-slot name="page_title">
             {{ $page_title ?? 'Terms Condition' }}
@@ -58,4 +69,85 @@
             </div>
         </div>
     </div>
+           <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+           <script>
+            ClassicEditor.create(document.querySelector('#content'))
+           .then(editor => {
+               editor.model.document.on('change:data', () => {
+                   @this.set('content', editor.getData());
+               });
+           })
+           .catch(error => {
+               console.error(error);
+           });
+         </script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#contentEdit'))
+        .then(editor => {
+            editor.model.document.on('change:data', () => {
+                @this.set('contentEdit', editor.getData());
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+      </script> 
+      {{-- <script>
+        document.addEventListener('livewire:load', function () {
+            ClassicEditor
+                .create(document.querySelector('#content'), {
+                    // Define custom configuration options here
+                    ckfinder: {
+                        uploadUrl: '/your-upload-url', // Specify the CKFinder upload URL
+                    },
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'undo', 'redo'],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+                        ]
+                    }
+                })
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        @this.set('content', editor.getData());
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    </script>
+<script>
+    document.addEventListener('livewire:load', function () {
+        ClassicEditor
+            .create(document.querySelector('#contentEdit'), {
+                // Define custom configuration options here
+                ckfinder: {
+                    uploadUrl: '/your-upload-url', // Specify the CKFinder upload URL
+                },
+                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'undo', 'redo'],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+                    ]
+                }
+            })
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    @this.set('contentEdit', editor.getData());
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+     --}}
 </div>

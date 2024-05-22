@@ -15,7 +15,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <input wire:model.debounce.500ms="searchTerm" type="text" data-kt-Users-table-filter="searchTerm"
+                <input wire:model.debounce.500ms="search" type="text" data-kt-Users-table-filter="searchT"
                     class="form-control form-control-solid w-250px ps-15 text-{{ primary_color() }} fst-italic "
                     placeholder="Search {{ Str::singular($page_title ?? 'Giveaway') }} by id or name" />
                 

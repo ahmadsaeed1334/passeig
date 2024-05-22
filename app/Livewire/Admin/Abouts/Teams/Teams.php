@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Abouts\Teams;
 
 use Illuminate\Http\UploadedFile;
 use App\Models\Team;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -69,7 +70,7 @@ class Teams extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'About Added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'About Added successfully!');
 
     }
     public function edit($id){
@@ -91,6 +92,9 @@ class Teams extends Component
     }
     public function update(){
         $team = Team::find($this->teamId);
+        $this->deleteImage($team->team_image_1, $this->team_image_1);
+        $this->deleteImage($team->team_image_2, $this->team_image_2);
+        $this->deleteImage($team->team_image_3, $this->team_image_3);
         if ($this->team_image_1 instanceof UploadedFile) {
             $this->validate([
                 'team_image_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
@@ -126,15 +130,23 @@ class Teams extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info','message' => 'About Updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'About Added successfully!');
 
+    }
+    protected function deleteImage($oldImagePath, $newImage)
+    {
+        if ($newImage instanceof UploadedFile) {
+            if ($oldImagePath) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
     }
     public function delete($id){
         $team = Team::find($id);
         $team->delete();
         $this->teams = Team::all();
         $this->dispatch('showAlert', ['type' => 'danger','message' => 'About Deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'About Added successfully!');
     }
     public function resetFields(){
         $this->title = '';

@@ -1,4 +1,5 @@
 <div>
+  @include('livewire.front-end.partial.style')
   <x-slot name="page_title">
 		{{ $page_title ?? '404' }}
 	</x-slot>
@@ -21,4 +22,6 @@
         </div>
       </div>
       <!-- error-section end -->
+      @include('livewire.front-end.partial.script')
+
 </div>

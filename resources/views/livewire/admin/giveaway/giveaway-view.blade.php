@@ -44,11 +44,11 @@
         </thead>
         <!--end::Table head-->
         <!--begin::Table body-->
-        <tbody class="fw-semibold text-gray-600">
+        <tbody class="fw-semibold">
             {{-- @if ($giveaways) --}}
             @forelse ($giveaways as $giveaway)
             <tr>
-                <td class="text-gray-800 fw-bolder">
+                <td class="fw-bolder">
                     {{$loop->index + 1 }}
                 </td>
                 <td class="">
@@ -80,30 +80,30 @@
 
 
 
-                <td class="text-gray-800 fw-bolder">
+                <td class=" fw-bolder">
                     {{ substr($giveaway->short_description, 0, 20) }}{{ strlen($giveaway->short_description) > 20 ? '...' : '' }}
                 </td>
-                <td class="text-gray-800 fw-bolder">
+                <td class=" fw-bolder">
                     {{ substr($giveaway->long_description, 0, 20) }}{{ strlen($giveaway->long_description) > 20 ? '...' : '' }}
                 </td>
-                <td class="text-gray-800 fw-bolder">
+                <td class=" fw-bolder">
                     @foreach ($giveaway->categories as $category)
                     {{ $category->name }}
                     @endforeach
                 </td>
-                <td class="text-gray-800 fw-bolder">
+                <td class=" fw-bolder">
                     {{ custom_date_format( $giveaway->start_date) }}
                 </td>
-                <td class="text-gray-800 fw-bolder">
+                <td class=" fw-bolder">
                     {{custom_date_format( $giveaway->due_date) }}
                 </td>
-                <td class="text-gray-800 fw-bolder">
+                <td class=" fw-bolder">
                     {{ $giveaway->actual_price }}
                 </td>
-                {{-- <td class="text-gray-800 fw-bolder">
+                {{-- <td class=" fw-bolder">
                     {{ $giveaway->start_date }}
                 </td> --}}
-                <td class="text-gray-800 fw-bolder">
+                <td class=" fw-bolder">
                     <span class="d-flex position-relative pointer">
                         @php
                         $statusClass = ($giveaway->status === 'active') ? 'bg-success' : 'bg-danger';
@@ -180,12 +180,13 @@
             {!! no_data() !!}
             @endforelse
             {{-- {{ $giveaways->links('livewire.pagination-link') }} --}}
-            {{-- {{ $giveaways->links() }} --}}
+          
 
         </tbody>
         <!--end::Table body-->
     </table>
     <!--end::Table-->
+    {{ $giveaways->links() }}
     <script>
         document.addEventListener('livewire:load', function() {
             Livewire.on('giveawayEntered', function() {

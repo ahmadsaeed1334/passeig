@@ -11,21 +11,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
-            <div class="user-card">
-              <div class="avatar-upload">
-                <div class="obj-el"><img src="{{ asset('front-end/assets/images/elements/team-obj.png')}}" alt="image"></div>
-                <div class="avatar-edit">
-                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                    <label for="imageUpload"></label>
-                </div>
-                <div class="avatar-preview">
-                    <div id="imagePreview" style="background-image: url('front-end/assets/images/user/pp.png');">
-                    </div>
-                </div>
-              </div>
-              <h3 class="user-card__name">Albert Owens</h3>
-              <span class="user-card__id">ID : 19535909</span>
-            </div><!-- user-card end -->
+            @livewire('front-end.pages.user-pannel.user-profile')
             <div class="user-action-card">
               <ul class="user-action-list">
                 <li class="active"><a href="{{ route('front-end/user-panel') }}">My Tickets <span class="badge">04</span></a></li>
@@ -34,7 +20,10 @@
                 <li><a href="{{ route('front-end/user-referral') }}">Referral Program</a></li>
                 <li><a href="{{ route('front-end/user-lottery') }}">Favorite Lotteries</a></li>
                 <li><a href="{{ route('front-end/contact') }}">Help Center</a></li>
-                <li><a href="#0">Log Out</a></li>
+                <li><a href="#0"><form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button type="submit" class="dropdown-item">Log Out</button>
+              </form></a></li>
               </ul>
             </div><!-- user-action-card end -->
           </div>

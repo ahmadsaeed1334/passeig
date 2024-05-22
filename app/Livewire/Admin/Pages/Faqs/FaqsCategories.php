@@ -47,7 +47,7 @@ class FaqsCategories extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Faqs Category added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Faqs Category added successfully!');
     }
 
     public function resetFields(){
@@ -70,14 +70,14 @@ class FaqsCategories extends Component
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Faqs Category updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Faqs Category updated successfully!');
     }
     public function delete($id){
         $faqsCategories = FaqsCategory::find($id);
         $faqsCategories->delete();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'danger', 'message' =>  ' Faqs Categories deleted successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',' Faqs Categories deleted successfully!');
     }
     
     public function alertMessage($type = null, $title = null, $message = null, $position = null)

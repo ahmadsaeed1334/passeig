@@ -26,9 +26,10 @@ class Giveaway extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $total_giveaways;
-    public $searchTerm = '';
+    // public $giveaways;
+    // public $searchTerm = '';
     public $name, $short_description, $long_description, $fee, $start_date, $due_date, $actual_price;
-    public $status, $file, $giveaways;
+    public $status, $file;
     public $selectedGiveaway;
     public $fileView = false;
     public $custom_date_format;
@@ -68,7 +69,7 @@ class Giveaway extends Component
     public function filterGiveaways($categoryId = null)
     {
         $this->selectedCategoryId = $categoryId;
-        $this->giveaways = ModelsGiveaway::when($categoryId, function ($query) use ($categoryId) {
+        $giveaways = ModelsGiveaway::when($categoryId, function ($query) use ($categoryId) {
             return $query->whereHas('categories', function ($query) use ($categoryId) {
                 $query->where('categories.id', $categoryId);
             });
@@ -77,7 +78,7 @@ class Giveaway extends Component
     public function mount()
     {
         $this->contestTops = ContestTop::all();
-        $this->giveaways = ModelsGiveaway::all();
+        // $giveaways = ModelsGiveaway::all();
         $this->categories = Categorie::all(); 
     }
 
@@ -100,13 +101,13 @@ class Giveaway extends Component
         ]);
         $selectedCategoryIds = $this->selectedCategories;
         $giveaway->categories()->attach($selectedCategoryIds);
-        $this->giveaways = ModelsGiveaway::all();
+        // $giveaways = ModelsGiveaway::all();
         $this->resetFields();
 
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Giveaway created successfully!']);
         $this->dispatch('closeModal', ['modalId' => "addGiveawayModal"]);
 
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Giveaway created successfully!');
     }
 
 
@@ -137,10 +138,12 @@ class Giveaway extends Component
     public function update()
     {
         $giveaway = ModelsGiveaway::find($this->giveawayId);
+        // $this->deleteImage($giveaway->file_path, $this->file_path);
         if ($this->file instanceof UploadedFile) {
             $this->validate([
                 'file' => 'required|image|max:3072',
             ]);
+            $this->deleteImage($giveaway->file_path);
             $this->file = $this->file->store('giveaways', 'public');
             $giveaway->file_path = $this->file;
         }
@@ -153,26 +156,48 @@ class Giveaway extends Component
         $giveaway->actual_price = $this->actual_price;
         $giveaway->status = $this->status;
         $giveaway->save();
-        $this->giveaways = ModelsGiveaway::all();
+        // $giveaways = ModelsGiveaway::all();
         $selectedCategoryIds = $this->selectedCategories; 
         $giveaway->categories()->sync($selectedCategoryIds);
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Giveaway updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success','Giveaway updated successfully!');
     }
+   
     public function destroyGiveaway($giveawayId)
     {
-        $giveaway = ModelsGiveaway::find($giveawayId);
-        if ($giveaway) {
-            $giveaway->delete();
-            $this->giveaways = ModelsGiveaway::all();
-            $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Giveaway deleted successfully!']);
-            $this->dispatch('closeModal', ['modalId' => "editGiveawayModal"]);
-            $this->alertMessage();
+        $giveaway = ModelsGiveaway::findOrFail($giveawayId);
+        $this->deleteImage($giveaway->file_path);
+        $giveaway->delete();
+        $this->alertMessage('success', 'Operation success', 'Giveaway deleted successfully!');
+    }
+    // public function destroyGiveaway($giveawayId)
+    // {
+    //     $giveaway = ModelsGiveaway::find($giveawayId);
+    //     $this->deleteImage($giveaway->file_path, $this->file_path);
+    //     if ($giveaway) {
+    //         $giveaway->delete();
+    //         // $giveaways = ModelsGiveaway::all();
+    //         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Giveaway deleted successfully!']);
+    //         $this->dispatch('closeModal', ['modalId' => "editGiveawayModal"]);
+    //         $this->alertMessage('success', 'Operation success', 'Giveaway deleted successfully!');
+    //     }
+    // }
+    // protected function deleteImage($oldImagePath, $newImage)
+    // {
+    //     if ($newImage instanceof UploadedFile) {
+    //         if ($oldImagePath) {
+    //             Storage::disk('public')->delete($oldImagePath);
+    //         }
+    //     }
+    // }
+    protected function deleteImage($path)
+    {
+        if ($path && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
         }
     }
-
     private function handleFileUpload($file)
     {
         $extension = $file->getClientOriginalExtension();
@@ -195,7 +220,7 @@ class Giveaway extends Component
     }
     public function render()
     {
-        $query = ModelsGiveaway::query();
+        // $query = ModelsGiveaway::query();
 
     // if ($this->search !== '') {
     //     $query->where('name', 'like', '%' . $this->search . '%')
@@ -208,28 +233,29 @@ class Giveaway extends Component
         if (!$this->registeredUsers) {
             $this->registeredUsers = [];
         }
-        if ($this->searchTerm !== '') {
-            $searchTerm = trim($this->search); // Trim the search term
-            // Apply search to relevant columns
-            $query->where('subtitle', 'like', '%' . $searchTerm . '%')
-                  ->orWhere('title', 'like', '%' . $searchTerm . '%')
-                  ->orWhere('description', 'like', '%' . $searchTerm . '%')
-                  ->orWhere('name', 'like', '%' . $searchTerm . '%')
-                  ->orWhere('short_description', 'like', '%' . $searchTerm . '%')
-                  ->orWhere('long_description', 'like', '%' . $searchTerm . '%');
-        };
+        // if ($this->searchTerm !== '') {
+        //     $searchTerm = trim($this->search); // Trim the search term
+        //     // Apply search to relevant columns
+        //     $query->where('subtitle', 'like', '%' . $searchTerm . '%')
+        //           ->orWhere('title', 'like', '%' . $searchTerm . '%')
+        //           ->orWhere('description', 'like', '%' . $searchTerm . '%')
+        //           ->orWhere('name', 'like', '%' . $searchTerm . '%')
+        //           ->orWhere('short_description', 'like', '%' . $searchTerm . '%')
+        //           ->orWhere('long_description', 'like', '%' . $searchTerm . '%');
+        // }
         // if ($this->searchTerm !== '') {
         //     $query->search($this->searchTerm);
         // }
         // $giveaways = ModelsGiveaway::paginate(10);
-        $giveaways = ModelsGiveaway::all();
+        
+        $giveaways = ModelsGiveaway::where('id','!=',null)->paginate(5);
         $categories = Categorie::all();
-        $this->giveaways = $giveaways;
-        $this->categories = $categories;
-      
+        // $this->giveaways = $giveaways;
+        // $this->categories = $categories;
+    //   dd($giveaways);
         return view('livewire.admin.giveaway.giveaway', [
-            'giveaways' => $this->giveaways,
-            'categories' => $this->categories,
+            'giveaways' => $giveaways,
+            'categories' => $categories,
         ]);
     }
     public function discardChanges()
@@ -331,7 +357,7 @@ class Giveaway extends Component
         $entry->save();
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Your entry has been submitted successfully!']);
         $this->dispatch('closeModal', ['modalId' => "entryGiveawayModal"]);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Your entry has been submitted successfully!');
         $this->userSelection = '';
     }
 
@@ -352,7 +378,7 @@ class Giveaway extends Component
         $this->resetFieldstop();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Contest added successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Contest added successfully!');
     }
     public function resetFieldstop()
     {
@@ -366,7 +392,7 @@ class Giveaway extends Component
         $this->contestTops = ContestTop::all();
         $this->dispatch('showAlert', ['type' => 'warning', 'message' => 'Contest deleted successfully!']);
         $this->dispatch('closeModal', ['modalId' => "contestTopModal"]);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Contest deleted successfully!');
     }
     public function editContestTops($id)
     {
@@ -388,6 +414,6 @@ class Giveaway extends Component
         $this->resetFieldstop();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'warning', 'message' => 'Contest updated successfully!']);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success', 'Contest updated successfully!');
     }
 }

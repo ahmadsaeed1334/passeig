@@ -23,7 +23,7 @@
 					<!--end::Item-->
 					<!--begin::Item-->
 					<li class="breadcrumb-item">
-						<span class="bullet w-5px h-2px bg-gray-400"></span>
+						<span class="bullet w-5px h-2px bg-white-400"></span>
 					</li>
 					<!--end::Item-->
 					<!--begin::Item-->
@@ -51,6 +51,8 @@
 			<!--begin::Modals-->
 			<!--begin::Modal - Add role-->
 			@include('livewire.admin.staff.role-model')
+			 {{-- @livewire('admin.staff.role-details')
+		     @livewire('admin.staff.permission-details')  --}}
 			{{-- @livewire('admin.staff.role-details')
 		@livewire('admin.staff.permission-details') --}}
 			<!--end::Modal - Add role-->

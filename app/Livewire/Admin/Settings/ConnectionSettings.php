@@ -31,7 +31,8 @@ class ConnectionSettings extends Component
         Artisan::call("env:set DB_DATABASE='$this->DB_DATABASE'");
         Artisan::call("env:set DB_USERNAME='$this->DB_USERNAME'");
         Artisan::call("env:set DB_PASSWORD='$this->DB_PASSWORD'");
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Database connection settings updated successfully');
     }
 
     public function mount()

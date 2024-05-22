@@ -5,7 +5,7 @@
         <div class="col-lg-6">
           <ul class="page-list">
             <li><a href="{{ route('front-end/navbar') }}">Home</a></li>
-            <li><a href="{{ route('front-end/lottery-details') }}">Lottery</a></li>
+            <li><a href="{{ route('front-end/contests') }}">Contest</a></li>
             <li class="active">Contest No: B2T</li>
           </ul>
         </div>

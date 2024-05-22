@@ -234,7 +234,7 @@ class Messenger extends Component
         $this->newContacts = [];
         $this->search = null;
         $this->results = [];
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',);
     }
 
     public function addNewContact($contactId)
@@ -303,7 +303,7 @@ class Messenger extends Component
 
         // Clear the search field
         $this->search = null;
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',);
     }
 
 
@@ -329,7 +329,7 @@ class Messenger extends Component
 
         // Refresh the current thread
         $this->getLoad($this->currentThread->id);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',);
     }
 
     public function deleteMessage($messageId)
@@ -349,7 +349,7 @@ class Messenger extends Component
 
         // Refresh the current thread
         $this->getLoad($this->currentThread->id);
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',);
     }
 
     public function forceDeleteConversation($threadId)
@@ -373,7 +373,7 @@ class Messenger extends Component
         $this->currentThread = null;
         $this->threadId = null;
         $this->threads = $this->getThreads();
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',);
     }
 
 

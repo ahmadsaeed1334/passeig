@@ -27,7 +27,7 @@
                         <input wire:model="card_icon_1" type="file" class="form-control" id="card_icon_1" rows="3"></input>
                         @error('card_icon_1') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                    
+        
                     <div class="mb-3">
                         <label for="card_title_1" class="form-label required">Card Title 1</label>
                         <input wire:model="card_title_1" class="form-control" id="card_title_1" rows="3"></input>
@@ -85,7 +85,7 @@
                         </div> 
                         <!-- Form Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
+                        <button type="button" class="btn btn-danger" wire:click="discardChanges" data-bs-dismiss="modal">Discard</button>
                         <button type="button" class="btn btn-primary" wire:click="create">Submit</button>
                     </div>
                 </form>

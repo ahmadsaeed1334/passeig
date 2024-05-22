@@ -31,7 +31,8 @@ class EmailSettings extends Component
         ])->save();
         Artisan::call("env:set MAIL_FROM_ADDRESS='$this->from_email'");
         $this->dispatch('refreshPhoto');
-        $this->alertMessage();
+        $this->alertMessage('success', 'Operation success',
+        'Email settings updated successfully');
     }
 
     public function mount()

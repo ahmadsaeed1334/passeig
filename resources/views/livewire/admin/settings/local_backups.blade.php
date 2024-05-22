@@ -18,7 +18,7 @@
 				<!--begin::Table-->
 				<table class="table-row-dashed fs-6 gy-5 mb-0 table align-middle" id="kt_roles_view_table">
 					<thead>
-						<tr class="bg-gray-100 text-left">
+						<tr class=" text-left">
 							<th style="w-10px pe-2"></th>
 							<th style="min-width: 250px" class="pl-7">
 								<span class="text-dark-75">Name</span>
@@ -26,7 +26,7 @@
 							<th style="min-width: 110px"></th>
 						</tr>
 					</thead>
-					<tbody class="fw-semibold text-gray-600">
+					<tbody class="fw-semibold text-white">
 						@forelse ($files as $file)
 							<tr>
 								<td>
@@ -45,7 +45,7 @@
 									<!--begin::User details-->
 									<div class="d-flex flex-column">
 										<span wire:click.prevent="download('{{ $file }}')"
-											class="text-hover-{{ primary_color() }} pointer text-gray-800">{{ \File::basename($file) }}</span>
+											class="text-hover-{{ primary_color() }} pointer text-white">{{ \File::basename($file) }}</span>
 										<span class="text-muted">
 											@php
 												$date = \Storage::lastModified($file);
