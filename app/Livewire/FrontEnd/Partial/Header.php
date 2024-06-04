@@ -75,6 +75,7 @@ class Header extends Component
     }
     public function render()
     {
+        // $this->email = Str::limit($this->email, 20);
         return view('livewire.front-end.partial.header');
     }
 }

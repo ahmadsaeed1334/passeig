@@ -37,15 +37,17 @@
              </div>
            </div>
            <div class="right">
-             <a href="#0" class="transaction-action-btn">
-               <img src="{{ asset('front-end/assets/images/icon/transaction/1.png')}}" alt="image">
-               <span>Deposit</span>
-             </a>
-             <a href="#0" class="transaction-action-btn ms-4">
-               <img src="{{ asset('front-end/assets/images/icon/transaction/2.png')}}" alt="image">
-               <span>Withdraw</span>
-             </a>
-           </div>
+            <a href="#0" class="transaction-action-btn" data-bs-toggle="modal" data-bs-target="#depositModal">
+                <img src="{{ asset('front-end/assets/images/icon/transaction/1.png') }}" alt="image">
+                <span>Deposit</span>
+            </a>
+            <a href="#0" class="transaction-action-btn ms-4" data-bs-toggle="modal" data-bs-target="#withdrawModal">
+                <img src="{{ asset('front-end/assets/images/icon/transaction/2.png') }}" alt="image">
+                <span>Withdraw</span>
+            </a>
+        </div>
+        @livewire('front-end.partial.deposit-modal')
+        
          </div><!-- transaction-balance-wrapper end -->
          <div class="transaction-balance-wrapper">
            <div class="left d-flex">
@@ -55,7 +57,7 @@
              </div>
            </div>
            <div class="right">
-             <a href="#0" class="transaction-action-btn">
+             <a href="#0" class="transaction-action-btn" data-bs-toggle="modal" data-bs-target="#depositModal">
                <img src="{{ asset('front-end/assets/images/icon/transaction/1.png')}}" alt="image">
                <span>Deposit</span>
              </a>

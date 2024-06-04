@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
@@ -42,4 +42,28 @@
             </div>
         </div>
     </x-authentication-card>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+<!-- resources/views/auth/verify-email.blade.php -->
+<x-app-layout>
+    <x-slot name="page_title">
+        {{ $page_title ?? 'Email Verification' }}
+    </x-slot>
+  <form class="form w-100"  method="POST" action="{{ route('verification.send') }}">
+    @csrf
+    <x-validation-errors class="rounded-0 mb-3" />
+
+    @if (session('status'))
+        <div class="alert alert-success rounded-0 mb-3" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
+    <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-danger w-100 mb-5">
+            <span class="indicator-label">Resend Verification Email </span>
+            <span class="indicator-progress">{{ __('Please wait...') }}
+                <span class="spinner-border spinner-border-sm ms-2 align-middle"></span></span>
+        </button>
+    </div>
+</form>
+</x-app-layout>

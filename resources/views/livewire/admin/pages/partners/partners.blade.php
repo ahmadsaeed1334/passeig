@@ -2,7 +2,7 @@
     @include('livewire.admin.partial.preloader')
     <div class="d-flex flex-column flex-column-fluid">
         <x-slot name="page_title">
-            {{ $page_title ?? 'Home' }}
+            {{ $page_title ?? 'Partner' }}
         </x-slot>
         <!--begin::Toolbar-->
         <div id="kt_app_toolbar" class="app-toolbar py-lg-6 py-3">

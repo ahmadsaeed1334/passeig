@@ -37,6 +37,7 @@ use App\Livewire\Admin\Settings\Backups;
 use App\Livewire\Admin\Staff\Permissions;
 use App\Livewire\Admin\Staff\Roles;
 use App\Livewire\Admin\Staff\Staff;
+use App\Livewire\Admin\DepositRequests\DepositRequests;
 use App\Livewire\FrontEnd\Pages\AboutSection;
 use App\Livewire\FrontEnd\Pages\AffiliateSingle;
 use App\Livewire\FrontEnd\Pages\Blogs;
@@ -68,6 +69,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Middleware\RedirectIfAdminAccessAttempt;
 use App\Http\Middleware\RouteNotFoundExceptionHandler;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use App\Http\Controllers\EmailVerificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +83,54 @@ use App\Http\Middleware\RouteNotFoundExceptionHandler;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Email verification routes
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+
+//     return redirect('/');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/email/verify', function () {
+//         return view('auth.verify-email');
+//     })->middleware('auth')->name('verification.notice');
+
+//     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//         $request->fulfill();
+//         return redirect('/');
+//     })->middleware(['auth', 'signed'])->name('verification.verify');
+
+//     Route::post('/email/resend', function (Request $request) {
+//         $request->user()->sendEmailVerificationNotification();
+//         return back()->with('message', 'Verification link sent!');
+//     })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+// });
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('status', 'verification-link-sent');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 Route::impersonate();
 
 // Route::get('/', function () {
@@ -141,6 +194,8 @@ Route::middleware(['auth', 'verified' , 'admin.attempt'])->group(function () {
     Route::get('/admin/terms-conditions', TermsConditions::class)->name('admin/pages/terms-conditions');
     Route::get('/admin/footers', Footers::class)->name('admin/footers');
     Route::get('/admin/wallet-manager', WalletManager::class)->name('admin/wallet-manager');
+
+    Route::get('/admin/deposit-requests', DepositRequests::class)->name('admin/deposit-requests');
 
     //  Giveawaye
     Route::get('/admin/giveaway', Giveaway::class)->name('admin/giveaway');
@@ -228,6 +283,8 @@ Route::get('/login-modal', LoginModal::class)->name('front-end/login-modal');
 Route::get('/front-end/terms-condition', TermsCondition::class)->name('front-end/pages/terms-condition');
 Route::get('/{post:slug}', [PostController::class, 'show'])->name('view');
 Route::get('/blog-home', [PostController::class, 'home'])->name('home');
+Route::post('/email/verify', [EmailVerificationController::class, 'verify'])->name('email.verify');
+
 // Route::get('/home', [BlogsController::class, 'home'])->name('home');
 // Route::get('/post/{post}', 'BlogsController@show')->name('post.show');
 // Route::get('/category/{category}', 'BlogsController@byCategory')->name('category.show');

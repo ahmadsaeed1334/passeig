@@ -22,7 +22,7 @@ class RedirectIfAdminAccessAttempt
         }
 
         // Check if user is admin or super admin
-        if (Auth::user()->user_type !== 0 && Auth::user()->user_type !== -1) {
+        if (Auth::user()->user_type != 0 && Auth::user()->user_type != -1) {
             // return redirect('/404');
             return response()->view('livewire.front-end.pages.page404', [], 404);
 

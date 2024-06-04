@@ -2,7 +2,7 @@
 
 namespace App\Livewire\FrontEnd\Contests;
 
-use App\Models\categorie;
+use App\Models\Categorie;
 use App\Models\Favorite;
 use Livewire\Component;
 use App\Models\Giveaway;
@@ -26,7 +26,7 @@ class ContestSection extends Component
     {
         // $this->sortByUpdated();
         $this->selectedFilters = ['categories' => 'all']; 
-        $this->categories = categorie::all();
+        $this->categories = Categorie::all();
     }
     public function updated($propertyName)
     {

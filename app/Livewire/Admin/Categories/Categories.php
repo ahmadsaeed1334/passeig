@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire\Admin\Categories;
-
 use App\Models\Categorie;
 use App\Models\Giveaway;
 use Jantinnerezo\LivewireAlert\LivewireAlert;

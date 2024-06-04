@@ -25,7 +25,7 @@
       background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
   } */
   html {
-      scrollbar-width:50px; 
+      scrollbar-width:10px; 
       scrollbar-color: rgb(236, 19, 121) rgb(7, 11, 40);
       /* scrollbar-background-color: #070B28; */
   }
@@ -106,6 +106,15 @@
  </div> --}}
  <!-- page-wrapper end -->
  @include('livewire.front-end.partial.script')
+ {{-- @livewire('frontend.partial.email-verification-modal') --}}
+ {{-- <script>
+     // Automatically open the modal if there's a message
+     document.addEventListener('DOMContentLoaded', function () {
+         @if(session('message'))
+             $('#emailVerificationModal').modal('show');
+         @endif
+     }); --}}
+ </script>
   {{-- <div class="page-wrapper">
   {{ $slot }} --}}
  </div> 

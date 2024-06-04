@@ -324,6 +324,18 @@
 					// 'counter' => auth()->user()->newThreadsCount(),
 				])
 				<!--end:Menu item-->
+				@include('livewire.admin.partial.sidebar-menu-header', [
+					'name' => 'Deposit Manager',
+				])
+				<!--end:Menu item-->
+				<!--begin:Menu item-->
+				@include('livewire.admin.partial.sidebar-menu-item', [
+					'route' => 'admin/deposit-requests',
+					'name' => 'Deposit Manager',
+					'icon' => 'fa-solid fa-message',
+					// 'counter' => auth()->user()->newThreadsCount(),
+				])
+				<!--end:Menu item-->
 				
 				@canany(['super staff', 'super roles', 'super permissions'])
 					<!--begin:Menu item-->

@@ -1,4 +1,4 @@
-<header wire:ignore class="header">
+<header  class="header">
   <style>
     .user-info-tooltip {
         width: 150px;
@@ -13,13 +13,13 @@
               <a href="tel:65655655"><i class="las la-phone-volume"></i> Customer Support</a>
               <div class="language">
                 <i class="las la-globe-europe"></i>
-                <select>
+             <select>
                   <option>En</option>
                   <option>Rus</option>
                   <option>Bn</option>
                   <option>Hp</option>
                   <option>Frn</option>
-                </select>
+                </select> 
               </div>
             </div>
           </div>
@@ -63,7 +63,9 @@
                           alt="{{ $user->name }}" />                     
                            </div>
                         <div class="menu">
-                          <h3>{{ $user->name }}<br/><span>{{ $user->email }}</span></h3>
+                         
+
+                          <h3>{{ $user->name }}<br/> <span>{{ Str::limit($user->email, 10) }}</span></h3>
                           <ul>
                             <li>
                               <i class="far fa-user-circle"></i>

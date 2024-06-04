@@ -69,8 +69,8 @@ class Teams extends Component
         $this->teams = Team::all();
         $this->resetFields();
         $this->dispatch('hide-modal');
-        $this->dispatch('showAlert', ['type' => 'success', 'message' => 'About Added successfully!']);
-        $this->alertMessage('success', 'Operation success', 'About Added successfully!');
+        $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Team Added successfully!']);
+        $this->alertMessage('success', 'Operation success', 'Team Added successfully!');
 
     }
     public function edit($id){

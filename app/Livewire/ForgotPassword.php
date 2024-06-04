@@ -2,13 +2,14 @@
 
 namespace App\Livewire;
 use Illuminate\Support\Facades\Password;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 #[Layout('layouts.front')]
 class ForgotPassword extends Component
 {
+    use LivewireAlert;
     public $email;
-
     public function sendResetLink()
     {
         $this->validate(['email' => 'required|email']);
