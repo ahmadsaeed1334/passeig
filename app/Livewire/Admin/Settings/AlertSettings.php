@@ -31,7 +31,7 @@ class AlertSettings extends Component
             'alert.background' => $this->background
         ])->save();
         $this->dispatch('refreshPhoto');
-        $this->alertMessage('success', 'Operation success','Settings Saved Successfuly!');
+        $this->alertMessage();
     }
 
     public function mount()

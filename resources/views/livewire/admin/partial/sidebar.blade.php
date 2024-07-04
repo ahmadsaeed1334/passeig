@@ -40,7 +40,7 @@
 			<!--begin::Menu-->
 			<div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true"
 				data-kt-menu-expand="false">
-				@can('super dashboard')
+				{{-- @can('super dashboard') --}}
 					<!--begin:Menu item-->
 					@include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'admin/dashboard',
@@ -49,255 +49,116 @@
 						'counter' => null,
 					])
 					<!--end:Menu item-->
-				@endcan
+				{{-- @endcan --}}
+                @canany(['super staff', 'super roles', 'super permissions'])
+
+                @include('livewire.admin.partial.sidebar-menu-header', [
+						'name' => 'Pages',
+					])
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'aboutus.index',
+						'name' => 'About Us',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'passions.index',
+						'name' => 'Our Passions',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'our-services.index',
+						'name' => 'Services',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'footer.index',
+						'name' => 'Footer',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'appointments.index',
+						'name' => 'Appointment',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+
+					@endcanany
+
+					<!--end:Menu item-->
+				<!--begin:Menu item-->
+				@include('livewire.admin.partial.sidebar-menu-header', [
+						'name' => 'Authentication',
+					])
+					<!--end:Menu item-->
+				{{-- @endcanany --}}
 				@canany(['super staff', 'super roles', 'super permissions'])
 					<!--begin:Menu item here show-->
 					<div data-kt-menu-trigger="click"
-						class="menu-item menu-accordion @if ($route_name == 'admin/Home') here show @endif">
+						class="menu-item menu-accordion show">
 						<!--begin:Menu link-->
 						<span class="menu-link">
 							<span class="menu-icon">
 								<i class="fa-solid fa-user-gear fs-5"></i>
 							</span>
-							<span class="menu-title">{{ __('Home') }}</span>
+							<span class="menu-title">{{ __('Product management') }}</span>
 							<span class="menu-arrow"></span>
 						</span>
 						<!--end:Menu link-->
 						<!--begin:Menu sub-->
 						<div class="menu-sub menu-sub-accordion">
-							@can('super staff')
+							{{-- @can('super staff') --}}
 								<!--begin:Menu item-->
 								@include('livewire.admin.partial.sidebar-menu-item', [
-									'route' => 'admin/hero-banner',
-									'name' => 'Hero',
+									'route' => 'admin/categories',
+									'name' => 'Category',
 									'icon' => null,
 									'counter' => null,
 								])
-								<!--end:Menu item-->
-							@endcan
-							@can('super roles')
-								<!--begin:Menu link-->
 								@include('livewire.admin.partial.sidebar-menu-item', [
-									'route' => 'admin/how-to-play',
-									'name' => 'How To Play',
+									'route' => 'admin/products',
+									'name' => 'Products',
 									'icon' => null,
 									'counter' => null,
 								])
-								
-								<!--end:Menu item-->
-							@endcan
-							@can('super permissions')
-								<!--begin:Menu item-->
-								@include('livewire.admin.partial.sidebar-menu-item', [
-									'route' => 'admin/overview',
-									'name' => 'Overview',
-									'icon' => null,
-									'counter' => null,
-								])
-								<!--end:Menu link-->
-							@endcan
-							@can('super permissions')
-								<!--begin:Menu item-->
-								@include('livewire.admin.partial.sidebar-menu-item', [
-									'route' => 'admin/features',
-									'name' => 'Features',
-									'icon' => null,
-									'counter' => null,
-								])
-								<!--end:Menu link-->
-							@endcan
-							@can('super permissions')
-								<!--begin:Menu item-->
-								@include('livewire.admin.partial.sidebar-menu-item', [
-									'route' => 'admin/testimonials',
-									'name' => 'Testimonials',
-									'icon' => null,
-									'counter' => null,
-								])
-								<!--end:Menu link-->
-							@endcan
-							@can('super permissions')
-								<!--begin:Menu item-->
-								@include('livewire.admin.partial.sidebar-menu-item', [
-									'route' => 'admin/supports',
-									'name' => 'Supports',
-									'icon' => null,
-									'counter' => null,
-								])
-								<!--end:Menu link-->
-							@endcan
-							@include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'admin/footers',
-						'name' => 'Footer',
-						'icon' => null,
-						// 'counter' => auth()->user()->newThreadsCount(),
-					     ])
 						</div>
-				
 						<!--end:Menu sub-->
 					</div>
 					<!--end:Menu item-->
 				@endcanany
-				
-				<!--begin:Menu item here show-->
-				<div data-kt-menu-trigger="click"
-					class="menu-item menu-accordion">
-					<!--begin:Menu link-->
-					<span class="menu-link">
-						<span class="menu-icon">
-							<i class="fa-solid fa-user-gear fs-5"></i>
-						</span>
-						<span class="menu-title">{{ __('About Page') }}</span>
-						<span class="menu-arrow"></span>
-					</span>
-					<!--end:Menu link-->
-					<!--begin:Menu sub-->
-					<div class="menu-sub menu-sub-accordion">
-						@can('super staff')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/about',
-								'name' => 'About',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu item-->
-						@endcan
-						@can('super roles')
-							<!--begin:Menu link-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/aboutfeature',
-								'name' => 'Features',
-								'icon' => null,
-								'counter' => null,
-							])
-							
-							<!--end:Menu item-->
-						@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/teams',
-								'name' => 'Teams',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu link-->
-						@endcan
-					</div>
-					<!--end:Menu sub-->
-				</div>
-				<!--end:Menu item-->
-				<!--begin:Menu item here show-->
-				<div data-kt-menu-trigger="click"
-					class="menu-item menu-accordion">
-					<!--begin:Menu link-->
-					<span class="menu-link">
-						<span class="menu-icon">
-							<i class="fa-solid fa-user-gear fs-5"></i>
-						</span>
-						<span class="menu-title">{{ __('Affiliates Page') }}</span>
-						<span class="menu-arrow"></span>
-					</span>
-					<!--end:Menu link-->
-					<!--begin:Menu sub-->
-					<div class="menu-sub menu-sub-accordion">
-						@can('super staff')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/affiliats',
-								'name' => 'Affiliates',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu item-->
-						@endcan
-						@can('super roles')
-							<!--begin:Menu link-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/howitwork',
-								'name' => 'How It Work',
-								'icon' => null,
-								'counter' => null,
-							])
-							
-							<!--end:Menu item-->
-						@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/affiliatePartners',
-								'name' => 'Affiliate Partners',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu link-->
-						@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/topAffiliates',
-								'name' => 'Top Affiliate',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu link-->
-						@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/buyTickets',
-								'name' => 'Buy Tickets',
-								'icon' => null,
-								'counter' => null,
-							])
-							@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/faqs',
-								'name' => 'FAQ',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu link-->
-						@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/faqs/faqs-categories',
-								'name' => 'FAQ Categories',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu link-->
-						@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/partner',
-								'name' => 'Partner',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu link-->
-						@endcan
-						@can('super permissions')
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/pages/terms-conditions',
-								'name' => 'Terms Conditions',
-								'icon' => null,
-								'counter' => null,
-							])
-							<!--end:Menu link-->
-						@endcan
-					</div>
-					<!--end:Menu sub-->
-				</div>
-				<!--end:Menu item-->
-					
-					
+				<!--begin:Menu item-->
+					<!--begin:Menu item-->
+					@include('livewire.admin.partial.sidebar-menu-header', [
+						'name' => 'Home Page',
+					])
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'admin/banner',
+						'name' => 'Banner Slider',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'admin/about',
+						'name' => 'Abouts',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'admin/partners',
+						'name' => 'Partners',
+						'icon' => 'fa-solid fa-message',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					<!--end:Menu item-->
 				<!--begin:Menu item-->
 				@include('livewire.admin.partial.sidebar-menu-header', [
 					'name' => 'Communication',
@@ -311,39 +172,13 @@
 					// 'counter' => auth()->user()->newThreadsCount(),
 				])
 				<!--end:Menu item-->
-				<!--begin:Menu item-->
-				@include('livewire.admin.partial.sidebar-menu-header', [
-					'name' => 'Wallet Manager',
-				])
-				<!--end:Menu item-->
-				<!--begin:Menu item-->
-				@include('livewire.admin.partial.sidebar-menu-item', [
-					'route' => 'admin/wallet-manager',
-					'name' => 'Wallet Manager',
-					'icon' => 'fa-solid fa-message',
-					// 'counter' => auth()->user()->newThreadsCount(),
-				])
-				<!--end:Menu item-->
-				@include('livewire.admin.partial.sidebar-menu-header', [
-					'name' => 'Deposit Manager',
-				])
-				<!--end:Menu item-->
-				<!--begin:Menu item-->
-				@include('livewire.admin.partial.sidebar-menu-item', [
-					'route' => 'admin/deposit-requests',
-					'name' => 'Deposit Manager',
-					'icon' => 'fa-solid fa-message',
-					// 'counter' => auth()->user()->newThreadsCount(),
-				])
-				<!--end:Menu item-->
-				
-				@canany(['super staff', 'super roles', 'super permissions'])
+				{{-- @canany(['super staff', 'super roles', 'super permissions']) --}}
 					<!--begin:Menu item-->
 					@include('livewire.admin.partial.sidebar-menu-header', [
 						'name' => 'Authentication',
 					])
 					<!--end:Menu item-->
-				@endcanany
+				{{-- @endcanany --}}
 				@canany(['super staff', 'super roles', 'super permissions'])
 					<!--begin:Menu item here show-->
 					<div data-kt-menu-trigger="click"
@@ -359,7 +194,7 @@
 						<!--end:Menu link-->
 						<!--begin:Menu sub-->
 						<div class="menu-sub menu-sub-accordion">
-							@can('super staff')
+							{{-- @can('super staff') --}}
 								<!--begin:Menu item-->
 								@include('livewire.admin.partial.sidebar-menu-item', [
 									'route' => 'admin/staff',
@@ -368,8 +203,8 @@
 									'counter' => null,
 								])
 								<!--end:Menu item-->
-							@endcan
-							@can('super roles')
+							{{-- @endcan --}}
+							{{-- @can('super roles') --}}
 								<!--begin:Menu link-->
 								@include('livewire.admin.partial.sidebar-menu-item', [
 									'route' => 'admin/roles',
@@ -377,9 +212,8 @@
 									'icon' => null,
 									'counter' => null,
 								])
-								
 								<!--end:Menu item-->
-							@endcan
+							{{-- @endcan --}}
 							@can('super permissions')
 								<!--begin:Menu item-->
 								@include('livewire.admin.partial.sidebar-menu-item', [
@@ -407,6 +241,12 @@
 					'icon' => 'fa-solid fa-language',
 					'counter' => null,
 				])
+				@include('livewire.admin.partial.sidebar-menu-item', [
+					'route' => 'admin/services',
+					'name' => 'Services',
+					'icon' => 'fa-solid fa-message',
+					// 'counter' => auth()->user()->newThreadsCount(),
+				])
 				<!--end:Menu item-->
 				<!--begin:Menu item-->
 				@include('livewire.admin.partial.sidebar-menu-header', [
@@ -421,6 +261,23 @@
 					'counter' => count($this->slides),
 				])
 				<!--end:Menu item-->
+				@include('livewire.admin.partial.sidebar-menu-header', [
+					'name' => 'Blogs section',
+				])
+				<!--end:Menu item-->
+				<!--begin:Menu item-->
+				@include('livewire.admin.partial.sidebar-menu-item', [
+					'route' => 'admin/blogs',
+					'name' => 'Blogs',
+					'icon' => 'fa-solid fa-newspaper',
+					'counter' => count($this->slides),
+				])
+				@include('livewire.admin.partial.sidebar-menu-item', [
+					'route' => 'admin/blog-categories',
+					'name' => 'Categories',
+					'icon' => 'fa-solid fa-newspaper',
+					'counter' => count($this->slides),
+				])
 				<!--begin:Menu item-->
 				@include('livewire.admin.partial.sidebar-menu-header', [
 					'name' => 'administration',
@@ -438,7 +295,7 @@
 				<!--begin:Menu link-->
 				@include('livewire.admin.partial.sidebar-menu-item', [
 					'route' => 'admin/backups',
-					'name' => 'Backups',
+					'name' => 'backups',
 					'icon' => 'fa-solid fa-vault',
 					'counter' => null,
 				])
@@ -446,7 +303,7 @@
 				<!--begin:Menu link-->
 				@include('livewire.admin.partial.sidebar-menu-item', [
 					'route' => 'admin/settings',
-					'name' => 'Settings',
+					'name' => 'settings',
 					'icon' => 'fa-solid fa-gear spin',
 					'counter' => null,
 				])
@@ -454,85 +311,11 @@
 				<!--begin:Menu link-->
 				@include('livewire.admin.partial.sidebar-menu-item', [
 					'route' => 'admin/logs',
-					'name' => 'Logs',
+					'name' => 'logs',
 					'icon' => 'fa-solid fa-calendar-days',
 					'counter' => '3rd Party',
 				])
 				<!--end:Menu item-->
-				<!--begin:Menu item-->
-				@include('livewire.admin.partial.sidebar-menu-header', [
-					'name' => 'Giveaway',
-				])
-				<!--end:Menu item-->
-					<!--begin:Menu link-->
-					{{-- @include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'admin/giveaway',
-						'name' => 'Giveaway',
-						'icon' => 'fa-solid fa-gift',
-						'counter' => '3rd Party',
-					]) --}}
-					<!--end:Menu item-->
-					<!--begin:Menu item here show-->
-				<div data-kt-menu-trigger="click"
-				class="menu-item menu-accordion">
-				<!--begin:Menu link-->
-				<span class="menu-link">
-					<span class="menu-icon">
-						<i class="fa-solid fa-user-gear fs-5"></i>
-					</span>
-					<span class="menu-title">{{ __('Contest Page') }}</span>
-					<span class="menu-arrow"></span>
-				</span>
-				<!--end:Menu link-->
-				<!--begin:Menu sub-->
-				<div class="menu-sub menu-sub-accordion">
-					@can('super staff')
-						<!--begin:Menu item-->
-						@include('livewire.admin.partial.sidebar-menu-item', [
-							'route' => 'admin/giveaway',
-							'name' => 'Giveaway',
-							'icon' => 'fa-solid fa-gift',
-							'counter' => null,
-						])
-						<!--end:Menu item-->
-					@endcan
-					@can('super roles')
-						<!--begin:Menu link-->
-						@include('livewire.admin.partial.sidebar-menu-item', [
-							'route' => 'admin/contestcard',
-							'name' => 'Contest Card',
-							'icon' => null,
-							'counter' => null,
-						])
-						
-						<!--end:Menu item-->
-					@endcan
-					@can('super permissions')
-						<!--begin:Menu item-->
-						@include('livewire.admin.partial.sidebar-menu-item', [
-							'route' => 'admin/categories',
-							'name' => 'Categories',
-							'icon' => null,
-							'counter' => null,
-						])
-						<!--end:Menu link-->
-					@endcan
-					@can('super permissions')
-						<!--begin:Menu item-->
-						@include('livewire.admin.partial.sidebar-menu-item', [
-							'route' => 'admin/giveaway-specifications',
-							'name' => 'Specification',
-							'icon' => null,
-							'counter' => null,
-						])
-						<!--end:Menu link-->
-					@endcan
-				</div>
-				<!--end:Menu sub-->
-			
-				</div>
-				<!--end:Menu item-->
-					
 			</div>
 			<!--end::Menu-->
 		</div>

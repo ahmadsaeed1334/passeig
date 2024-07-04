@@ -24,7 +24,7 @@
 						<!--end::Item-->
 						<!--begin::Item-->
 						<li class="breadcrumb-item">
-							<span class="bullet w-5px h-2px bg-white-400"></span>
+							<span class="bullet w-5px h-2px bg-gray-400"></span>
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->

@@ -1,47 +1,45 @@
-<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-    @include('livewire.admin.partial.preloader')
-    <div class="d-flex flex-column flex-column-fluid">
-        <x-slot name="page_title">
-            {{ $page_title ?? 'Home' }}
-        </x-slot>
-        <!--begin::Toolbar-->
-        <div id="kt_app_toolbar" class="app-toolbar py-lg-6 py-3">
-            <!--begin::Toolbar container-->
-            <div id="kt_app_toolbar_container" class="app-container container{{ general('layout') }} d-flex flex-stack">
-                <!--begin::Page title-->
-                <div class="page-title d-flex flex-column justify-content-center me-3 flex-wrap">
-                    <!--begin::Title-->
-                    <h1 wire:click.prevent="$dispatch('refresh')" class="page-heading d-flex text-{{ primary_color() }} fw-bold fs-3 flex-column justify-content-center pointer my-0">
-                        {{-- {{ $page_title }} --}}
+<!-- resources/views/livewire/footer-manager.blade.php -->
+<div>
+    @if (session()->has('message'))
+        <div>{{ session('message') }}</div>
+    @endif
 
-                        {{ $page_title?? 'Footer' }}
-                    </h1>
-                </div>
-                <!--end::Page title-->
+    <form wire:submit.prevent="{{ $isUpdate ? 'update' : 'store' }}">
+        <input type="text" wire:model="number" placeholder="Number" />
+        @error('number') <span>{{ $message }}</span> @enderror
+
+        <input type="text" wire:model="address" placeholder="Address" />
+        @error('address') <span>{{ $message }}</span> @enderror
+
+        <textarea wire:model="description" placeholder="Description"></textarea>
+        @error('description') <span>{{ $message }}</span> @enderror
+
+        <input type="text" wire:model="working_hours" placeholder="Working Hours" />
+        @error('working_hours') <span>{{ $message }}</span> @enderror
+
+        <h4>Icons</h4>
+        @foreach ($icons as $index => $icon)
+            <div>
+                <input type="text" wire:model="icons.{{ $index }}.name" placeholder="Icon Name" />
+                <input type="url" wire:model="icons.{{ $index }}.link" placeholder="Icon Link" />
+                @error('icons.'.$index.'.name') <span>{{ $message }}</span> @enderror
+                @error('icons.'.$index.'.link') <span>{{ $message }}</span> @enderror
+                <button type="button" wire:click="removeIcon({{ $index }})">Remove Icon</button>
             </div>
-            <!--end::Toolbar container-->
-        </div>
-        <!--end::Card header-->
-        <div id="kt_app_content" class="app-content flex-column-fluid">
-            <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container container{{ general('layout') }}">
-                <!--begin::View-->
-                <div class="card card-flush">
-                    @include('livewire.admin.footers.footerIcons-cart')
-                    @include('livewire.admin.footers.footerIcons-view')
-                    <!--end::View-->
-                </div>
-                <div id="kt_app_content" class="app-content flex-column-fluid">
-                    <!--begin::Content container-->
-                    <div id="kt_app_content_container" class="app-container container{{ general('layout') }}">
-                        @include('livewire.admin.footers.footerIcons-edit')
-                        @include('livewire.admin.footers.footerIcons-form')
+        @endforeach
+        <button type="button" wire:click="addIcon">Add Icon</button>
 
+        <button type="submit">{{ $isUpdate ? 'Update' : 'Create' }}</button>
+    </form>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <h2>Footers List</h2>
+    <ul>
+        @foreach ($footers as $footer)
+            <li>
+                {{ $footer->description }}
+                <button wire:click="edit({{ $footer->id }})">Edit</button>
+                <button wire:click="delete({{ $footer->id }})">Delete</button>
+            </li>
+        @endforeach
+    </ul>
 </div>

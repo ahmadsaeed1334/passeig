@@ -60,8 +60,7 @@ class MailSettings extends Component
         Artisan::call("env:set MAIL_USERNAME='$this->MAIL_USERNAME'");
         Artisan::call("env:set MAIL_PASSWORD='$this->MAIL_PASSWORD'");
         Artisan::call("env:set MAIL_ENCRYPTION='$this->MAIL_ENCRYPTION'");
-        $this->alertMessage('success', 'Operation success',
-        'Email settings updated successfully');
+        $this->alertMessage();
     }
 
     public function mount()

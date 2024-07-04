@@ -6,7 +6,7 @@
 		<div class="card rounded-0 w-100 shadow-none">
 			<!--begin::Header-->
 			<div class="card-header" id="kt_help_header">
-				<h5 class="card-title fw-semibold">Ultimate Control panel</h5>
+				<h5 class="card-title fw-semibold text-gray-600">Ultimate Control panel</h5>
 				<div class="card-toolbar">
 					<button type="button" class="btn btn-sm btn-icon explore-btn-dismiss me-n5" id="kt_drawer_example_basic_close">
 						<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
@@ -28,7 +28,7 @@
 				<!--begin::Content-->
 				<div id="kt_help_scroll" class="hover-scroll-overlay-y" data-kt-scroll="true" data-kt-scroll-height="1000px"
 					data-kt-scroll-wrappers="#kt_help_body" data-kt-scroll-dependencies="#kt_help_header" data-kt-scroll-offset="5px">
-					<div class="p-lg-8 mb-10 rounded border border-dashed border-white-800 p-6">
+					<div class="p-lg-8 mb-10 rounded border border-dashed border-gray-300 p-6">
 						<div class="form-group">
 							<label>Run Custom Command</label>
 							<div class="input-group">
@@ -56,7 +56,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="p-lg-8 mb-10 rounded border border-dashed border-white-300 p-6">
+					<div class="p-lg-8 mb-10 rounded border border-dashed border-gray-300 p-6">
 						<div class="form-group row align-items-center mb-0">
 							<label class="col-8 col-form-label">Enable App Debug Mode?</label>
 							<div class="col-4 d-flex justify-content-end">
@@ -69,7 +69,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="p-lg-8 mb-10 rounded border border-dashed border-white-300 p-6">
+					<div class="p-lg-8 mb-10 rounded border border-dashed border-gray-300 p-6">
 						<div class="form-group row align-items-center mb-0">
 							<label class="col-8 col-form-label">Theme Primary Color: </label>
 							<div class="col-4 d-flex justify-content-end">
@@ -92,7 +92,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="p-lg-8 mb-10 rounded border border-dashed border-white-300 p-6">
+					<div class="p-lg-8 mb-10 rounded border border-dashed border-gray-300 p-6">
 						<div class="form-group">
 							<div class="btn-group" role="group" aria-label="Basic example">
 								<button wire:click.prevent="$set('commandRun','optimize:clear')" type="button"

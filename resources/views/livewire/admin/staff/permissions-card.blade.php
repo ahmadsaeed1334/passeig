@@ -63,7 +63,7 @@
 			</thead>
 			<!--end::Table head-->
 			<!--begin::Table body-->
-			<tbody class="fw-semibold text-white-600">
+			<tbody class="fw-semibold text-gray-600">
 				@forelse ($permissions as $index => $permission)
 					<tr>
 						<td class="text-{{ primary_color() }} fst-italic">

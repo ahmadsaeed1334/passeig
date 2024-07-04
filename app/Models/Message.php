@@ -9,8 +9,4 @@ class Message extends \Cmgmyr\Messenger\Models\Message
         'body',
         'is',
     ];
-//     public function user()
-// {
-//     return $this->belongsTo(User::class);
-// }
 }

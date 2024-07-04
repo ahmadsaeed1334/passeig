@@ -82,7 +82,7 @@ class LanguageManager extends Component
 
         $this->resetTranslations();
         $this->dispatch('closeModal', ['modalId' => "addKeysModal"]);
-        $this->alertMessage('success', 'Operation success',);
+        $this->alertMessage();
         $this->resetAll();
     }
 
@@ -109,7 +109,7 @@ class LanguageManager extends Component
         // Write the updated JSON data to the file
         file_put_contents($filePath, $jsonData);
         $this->manageLanguage($lang);
-        $this->alertMessage('success', 'Operation success',);
+        $this->alertMessage();
     }
 
     public function updatingTab()
@@ -182,7 +182,7 @@ class LanguageManager extends Component
         }
         $Filesystem->copyDirectory($langDir . "en", $dir . "/");
         $this->dispatch('closeModal', ['modalId' => "addLanguageModal"]);
-        $this->alertMessage('success', 'Operation success',);
+        $this->alertMessage();
         $this->resetAll();
     }
 
@@ -215,7 +215,7 @@ class LanguageManager extends Component
 
     public function render()
     {
-        access('super languages');
+        // access('super languages');
         // app()->setLocale('ar');
         $this->languages = UtilityFacades::languages();
         // dd($languages);

@@ -7,6 +7,7 @@
 		@csrf
 		<div class="card-body">
 			<div class="form-group row">
+
 				<!--begin::Image input-->
 				<div class="col-lg-4">
 					<label class="text-dark-75 font-weight-bolder font-size-lg">White Logo:</label>
@@ -30,15 +31,11 @@
 									style="background-image: url({{ asset('img/logo-placeholder.png') }}); background-size:100% 100%;width:300px">
 								</div>
 								<!--end::Preview existing avatar-->
-							</div>
-							<!--end::Preview existing avatar-->
-						</div>
-
 					@endif
 					<!--begin::Label-->
-					<label 	class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-30px h-30px  btn-sm mr-3"
+					<label class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 						data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change Logo">
-						<i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
+						<i class="bi bi-pencil-fill fs-7"></i>
 						<!--begin::Inputs-->
 						<input wire:model="photo" type="file" name="photo" accept=".png, .jpg, .jpeg" />
 						<input type="hidden" name="avatar_remove" />
@@ -46,7 +43,7 @@
 					</label>
 					<!--end::Label-->
 					<!--begin::Cancel-->
-					<span 	class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3" 
+					<span class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 						data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel Logo">
 						<i class="bi bi-x fs-2"></i>
 					</span>
@@ -54,7 +51,7 @@
 					<!--begin::Remove-->
 					@if ($photo || $userAvatar)
 						<span wire:click.prevent="imagedelete()"
-											class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3"
+							class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 							data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove Logo">
 							<i class="bi bi-x fs-2"></i>
 						</span>
@@ -93,9 +90,9 @@
 							<!--end::Preview existing avatar-->
 				@endif
 				<!--begin::Label-->
-				<label 					class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-30px h-30px  btn-sm mr-3"
+				<label class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 					data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change Logo">
-					<i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
+					<i class="bi bi-pencil-fill fs-7"></i>
 					<!--begin::Inputs-->
 					<input wire:model="logo" type="file" name="photo" accept=".png, .jpg, .jpeg" />
 					<input type="hidden" name="avatar_remove" />
@@ -103,7 +100,7 @@
 				</label>
 				<!--end::Label-->
 				<!--begin::Cancel-->
-				<span 					class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3" 
+				<span class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 					data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel Logo">
 					<i class="bi bi-x fs-2"></i>
 				</span>
@@ -111,8 +108,7 @@
 				<!--begin::Remove-->
 				@if ($logo || $blacklogo)
 					<span wire:click.prevent="logodelete()"
-					class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3"
-						{{-- class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow" --}}
+						class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 						data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove Logo">
 						<i class="bi bi-x fs-2"></i>
 					</span>
@@ -151,9 +147,9 @@
 						<!--end::Preview existing avatar-->
 			@endif
 			<!--begin::Label-->
-			<label 					class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-30px h-30px  btn-sm mr-3"
+			<label class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 				data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change Favicon">
-				<i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
+				<i class="bi bi-pencil-fill fs-7"></i>
 				<!--begin::Inputs-->
 				<input wire:model="icon" type="file" name="photo" accept=".png, .jpg, .jpeg" />
 				<input type="hidden" name="avatar_remove" />
@@ -161,7 +157,7 @@
 			</label>
 			<!--end::Label-->
 			<!--begin::Cancel-->
-			<span 					class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3"
+			<span class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 				data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel Favicon">
 				<i class="bi bi-x fs-2"></i>
 			</span>
@@ -169,7 +165,7 @@
 			<!--begin::Remove-->
 			@if ($icon || $favicon)
 				<span wire:click.prevent="icondelete()"
-									class="btn btn-icon btn-light btn-circle btn-active-light-{{ primary_color() }} w-25px h-25px  btn-sm mr-3"
+					class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
 					data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove Favicon">
 					<i class="bi bi-x fs-2"></i>
 				</span>
@@ -305,13 +301,12 @@
 	<div class="row">
 		<div class="col-lg-10"></div>
 		<div class="col-lg-2">
-			<button wire:click.prevent="general()" type="reset" class="cmn-btn btn btn-{{ primary_color() }}">Submit</button>
+			<button wire:click.prevent="general()" type="reset" class="btn btn-{{ primary_color() }}">Submit</button>
 		</div>
 	</div>
 </div>
 </form>
 <!--end::Form-->
-
 </div>
 {{-- @push('scripts')
 	<script>

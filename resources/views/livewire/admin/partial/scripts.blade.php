@@ -1,11 +1,25 @@
+<!--begin::Javascript-->
 <script>
 	var hostUrl = "assets/";
 </script>
-
-
+<!-- Include CKEditor JavaScript -->
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/balloon/ckeditor.js"></script> --}}
+<script src="{{ asset('assets/ckeditor.js')}}"></script>
+<script>
+	ClassicEditor
+		.create( document.querySelector( '#editor' ), {
+			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+</script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-
 <!--end::Global Javascript Bundle-->
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -75,7 +89,7 @@
 	// Listen for the 'message' event
 	window.addEventListener('message', adjustIframeHeight, false);
 </script>
-@livewireScripts
+
 <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 <script>
    
@@ -90,5 +104,5 @@
 	$("#dob").flatpickr();
 	$("#join").flatpickr();
 </script>
-
+@livewireScripts
 <x-livewire-alert::scripts />

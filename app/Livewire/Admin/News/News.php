@@ -39,16 +39,16 @@ class News extends Component
 
     public function mount()
     {
-        // $this->slides = json_decode(file_get_contents(storage_path('app/slides.json')), true);
-        // $data = json_decode(file_get_contents(storage_path('app/slides.json')), true);
+        $this->slides = json_decode(file_get_contents(storage_path('app/slides.json')), true);
+        $data = json_decode(file_get_contents(storage_path('app/slides.json')), true);
 
-        // $this->slides = array_filter($data, function ($slide) {
-        //     $slideTimestamp = strtotime($slide['date']);
-        //     $nowTimestamp = time() + 5; // Add 5 seconds to the current timestamp
-        //     return $slideTimestamp >= $nowTimestamp;
-        // });
+        $this->slides = array_filter($data, function ($slide) {
+            $slideTimestamp = strtotime($slide['date']);
+            $nowTimestamp = time() + 5; // Add 5 seconds to the current timestamp
+            return $slideTimestamp >= $nowTimestamp;
+        });
 
-        // $this->slides = array_values($this->slides);
+        $this->slides = array_values($this->slides);
         if (auth()->user()->user_type == -1)
             $this->slides = json_decode(file_get_contents(storage_path('app/slides.json')), true);
         else {
@@ -86,7 +86,7 @@ class News extends Component
         file_put_contents(storage_path('app/slides.json'), json_encode($this->slides));
 
         $this->resetInputs();
-        $this->dispatch('closeModal', ['modalId' => "addSlidesModel"]);
+        $this->dispatchBrowserEvent('closeModal', ['modalId' => "addSlidesModel"]);
     }
 
     public function edit($index)
@@ -123,7 +123,7 @@ class News extends Component
         file_put_contents(storage_path('app/slides.json'), json_encode($this->slides));
 
         $this->resetInputs();
-        $this->dispatch('closeModal', ['modalId' => "addSlidesModel"]);
+        $this->dispatchBrowserEvent('closeModal', ['modalId' => "addSlidesModel"]);
     }
 
     public function delete($index)

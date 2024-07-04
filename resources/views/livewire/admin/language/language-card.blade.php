@@ -5,7 +5,7 @@
 		<div class="card-title">
 		</div>
 		<!--end::Card title-->
-		@can('super staff create')
+		{{-- @can('super staff create') --}}
 			<!--begin::Card toolbar-->
 			<div class="card-toolbar">
 				<!--begin::Button-->
@@ -26,7 +26,7 @@
 				<!--end::Button-->
 			</div>
 			<!--end::Card toolbar-->
-		@endcan
+		{{-- @endcan --}}
 	</div>
 	<!--end::Card header-->
 	<!--begin::Card body-->
@@ -80,7 +80,7 @@
 							<!--end::Name=-->
 
 							<td class="text-center">
-								@can('super language edit')
+								{{-- @can('super language edit') --}}
 									<button wire:click="addKeys('{{ $lang }}')"
 										class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Add New Translations') !!}>
 										<span class="svg-icon svg-icon-md svg-icon-primary">
@@ -106,9 +106,9 @@
 											<!--end::Svg Icon-->
 										</span>
 									</button>
-								@endcan
+								{{-- @endcan --}}
 								@if ($lang != 'en' && $lang != default_lang())
-									@can('super language delete')
+									{{-- @can('super language delete') --}}
 										<!--begin::Update-->
 										<a wire:click.prevent="destroyLang('{{ $lang }}')" {!! confirm() !!} href="#"
 											class="btn btn-sm btn-icon btn-light btn-active-light-{{ primary_color() }}" data-bs-toggle="tooltip"
@@ -116,7 +116,7 @@
 											<i class="fa-solid fa-trash fs-6 fw-bold fw-bolder"></i>
 										</a>
 										<!--end::Update-->
-									@endcan
+									{{-- @endcan --}}
 								@endif
 							</td>
 							<!--end::Action=-->

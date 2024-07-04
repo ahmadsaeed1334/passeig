@@ -17,7 +17,7 @@
             <div class="table-responsive">
                 <table class="table-row-dashed fs-6 gy-5 mb-0 table align-middle" id="kt_roles_view_table">
                     <thead>
-                        <tr class=" text-left">
+                        <tr class="bg-gray-100 text-left">
                             <th style="min-width: 10px pe-2"></th>
                             <th style="min-width: 250px" class="pl-7">
                                 <span class="text-dark-75">Name</span>
@@ -25,7 +25,7 @@
                             <th style="min-width: 110px"></th>
                         </tr>
                     </thead>
-                    <tbody class="fw-semibold text-white">
+                    <tbody class="fw-semibold text-gray-600">
                         @foreach ($dropBoxFiles as $file)
                         <tr>
                             <td>

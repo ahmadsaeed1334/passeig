@@ -6,8 +6,7 @@ use Illuminate\Auth\Access\Gate;
 use Illuminate\Auth\Access\Response;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\Attributes\Layout;
-#[Layout('layouts.app')]
+
 class Dashboard extends Component
 {
     use LivewireAlert;
@@ -22,6 +21,6 @@ class Dashboard extends Component
         ini_set('memory_limit', '-1');
         return view(
             'livewire.admin.dashboard.dashboard'
-        );
+        )->layout('layouts/app');
     }
 }

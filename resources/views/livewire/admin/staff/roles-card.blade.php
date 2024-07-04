@@ -41,11 +41,11 @@
 				<!--begin::Card body-->
 				<div class="card-body pt-1">
 					<!--begin::Users-->
-					<div class="fw-bold mb-5 text-white-600">Total users with this role: <span class="text-{{ primary_color() }}">
+					<div class="fw-bold mb-5 text-gray-600">Total users with this role: <span class="text-{{ primary_color() }}">
 							{{ $role->users_count }} </span> </div>
 					<!--end::Users-->
 					<!--begin::Permissions-->
-					<div class="d-flex flex-column text-white-600">
+					<div class="d-flex flex-column text-gray-600">
 						@php
 							$counter = 1;
 						@endphp
@@ -89,5 +89,4 @@
 		</div>
 		<!--end::Col-->
 	@endforeach
-	
 </div>

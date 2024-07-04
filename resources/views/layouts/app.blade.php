@@ -6,21 +6,22 @@
 <head>
 	<base href="" />
 	<title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
+	<link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track/>
 	@include('livewire.admin.partial.style')
-	<style>
+	{{-- <style>
 		  html {
-      scrollbar-width:50px; 
+      scrollbar-width:50px;
       scrollbar-color: rgb(236, 19, 121) rgb(7, 11, 40);
       /* scrollbar-background-color: #070B28; */
   }
   .scrollbar {
-      -ms-overflow-style: none; 
+      -ms-overflow-style: none;
   }
   .scrollbar::-ms-scrollbar {
-      display: none; 
+      display: none;
   }
 
-	</style>
+	</style> --}}
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -72,7 +73,13 @@
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
 					<div class="w-lg-500px bg-body p-lg-15 mx-auto rounded p-10 shadow-sm">
-						{{ $slot }}
+						<main class="content">
+                            @if (isset($slot))
+                                {{ $slot }}
+                            @else
+                                @yield('content')
+                            @endif
+                        </main>
 						{{--  --}}
 					</div>
 					<!--begin::Footer-->
@@ -107,14 +114,20 @@
 				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
 					<!--begin::Sidebar-->
 					@livewire('admin.partial.sidebar')
-				
+
 					<!--end::Sidebar-->
 					<!--begin::Main-->
 
 					<!--begin::Content wrapper-->
-					{{ $slot }}
+					<main class="content">
+						@if (isset($slot))
+							{{ $slot }}
+						@else
+							@yield('content')
+						@endif
+					</main>
 					<!--end::Content wrapper-->
-					
+
 					<!--begin::Footer-->
 					@livewire('admin.partial.footer')
 					<!--end::Footer-->

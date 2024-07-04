@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Partner extends Model
 {
     use HasFactory;
+    protected $table = 'partners';
     protected $fillable = [
-        'partner_image',
+        'name',
+        'partner_image'
     ];
-    
 }

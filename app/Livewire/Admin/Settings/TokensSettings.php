@@ -22,9 +22,7 @@ class TokensSettings extends Component
             return $this->alertMessage('error', 'Operation failed', 'some operations are Not allowed in demo mode');
         }
         Artisan::call("env:set SLACK_WEBHOOK_URL='$this->SLACK_WEBHOOK_URL'");
-        $this->alertMessage('success', 'Operation success',
-        'some operations are Not allowed in demo mode');
-
+        $this->alertMessage();
     }
 
     public function mount()

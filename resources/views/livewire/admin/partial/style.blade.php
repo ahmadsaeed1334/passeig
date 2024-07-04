@@ -1,3 +1,4 @@
+
 <meta charset="utf-8" />
 <meta name="description" content="{{ setting('general_settings.app_description') }}" />
 <meta name="keywords" content="crm,firedirect" />
@@ -12,7 +13,16 @@
 <!--begin::Fonts(mandatory for all pages)-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" data-navigate-track/>
 <!--end::Fonts-->
-<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+<!-- Include Jodit CSS Styling -->
+<link type="text/css" href="{{ asset('assets/sample/css/sample.css') }}" rel="stylesheet" media="screen" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.css"
+/><!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+<link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('assets/richtexteditor/rte_theme_default.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/res/style.css') }}" />
+<link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
 <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" data-navigate-track/>
 <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" data-navigate-track/>
 <!--end::Global Stylesheets Bundle-->
@@ -27,43 +37,3 @@
 @stack('styles')
 
 @livewireStyles
-{{-- <script src="{{ asset(mix('js/app.js')) }}"></script> --}}
-<style>
-		.cmn-btn {
-    padding: 15px 35px;
-    font-size: 15px;
-    font-weight: 400;
-    text-transform: uppercase;
-    border-radius: 999px;
-    -webkit-border-radius: 999px;
-    -moz-border-radius: 999px;
-    -ms-border-radius: 999px;
-    -o-border-radius: 999px;
-    background-image: -moz-linear-gradient(86deg, rgb(236, 3, 139) 0%, rgb(251, 100, 104) 44%, rgb(251, 185, 54) 100%);
-    background-image: -webkit-linear-gradient(86deg, rgb(236, 3, 139) 0%, rgb(251, 100, 104) 44%, rgb(251, 185, 54) 100%);
-    background-image: -ms-linear-gradient(86deg, rgb(236, 3, 139) 0%, rgb(251, 100, 104) 44%, rgb(251, 185, 54) 100%);
-    box-shadow: 0px 17px 40px 0px rgba(124, 78, 25, 0.35);
-    -webkit-transition: background-size 0.3s;
-    -o-transition: background-size 0.3s;
-    transition: background-size 0.3s;
-    color: #ffffff;
-}
-.cmn-btn:hover {
-    background-size: 300%;
-    color: #ffffff;
-}
-
-.cmn-btn.style--two {
-    background-image: -moz-linear-gradient(45deg, rgb(215, 61, 245) 0%, rgb(143, 61, 245) 100%);
-    background-image: -webkit-linear-gradient(45deg, rgb(215, 61, 245) 0%, rgb(143, 61, 245) 100%);
-    background-image: -ms-linear-gradient(45deg, rgb(215, 61, 245) 0%, rgb(143, 61, 245) 100%);
-    box-shadow: -1.113px 7.922px 16px 0px rgba(143, 61, 245, 0.63);
-}
-
-.cmn-btn.style--three {
-    background-image: -moz-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
-    background-image: -webkit-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
-    background-image: -ms-linear-gradient(7deg, rgb(236, 19, 121) 0%, rgb(108, 0, 146) 100%);
-    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
-}
-</style>

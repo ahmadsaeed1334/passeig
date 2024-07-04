@@ -1,16 +1,14 @@
 <?php
 
 namespace App\Livewire\Admin\Categories;
-use App\Models\Categorie;
-use App\Models\Giveaway;
+
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use Rinvex\Categories\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\Categorie;
+use App\Models\Product;
 use Livewire\Attributes\Layout;
 #[Layout('layouts.app')]
 class Categories extends Component
@@ -18,61 +16,29 @@ class Categories extends Component
 
     use LivewireAlert;
     use WithPagination;
-    use WithFileUploads;
-
+    // public $products;
     public $categories;
     public $categorieId;
     public $name;
     public $selectedCategoryId;
-    protected $listeners = ['categorySelected'];
-    public $giveaways;
-
     public $description;
-    public $icon;
+    public $isOpen = false;
     protected $rules = [
         'name' => 'required|string|max:255',
-        'icon' => 'nullable|image|max:2048', // 2MB Max
         'description' => 'nullable|string|max:255',
     ];
-
-    // public function filterGiveaways($categoryId = null)
-    // {
-    //     $this->selectedCategoryId = $categoryId;
-    //     $this->giveaways = Giveaway::when($categoryId, function ($query) use ($categoryId) {
-    //         return $query->whereHas('categories', function ($query) use ($categoryId) {
-    //             $query->where('categories.id', $categoryId);
-    //         });
-    //     })->get();
-    // }
-    
     public function mount()
     {
         
         $this->categories = Categorie::all();
-        $this->giveaways = Giveaway::all();
-        $this->selectedCategoryId = $this->categories->first()->id ?? null;
+        // $this->products = Product::all();
     }
-    public function selectCategory($categorieId)
-    {
-        $this->selectedCategoryId = $categorieId;
-        dd( $this->selectedCategoryId);
-    }
-
-    public function categorySelected($categorieId)
-    {
-        $this->selectedCategoryId = $categorieId;
-    }
-
     public function create(){
         $this->validate();
-        if ($this->icon instanceof UploadedFile) {
-            $this->icon = $this->icon->store('Categories', 'public');
-        }
-
         Categorie::create([
             'name' => $this->name,
-            'icon' => $this->icon,
             'description' => $this->description,
+           
 
         ]);
         // $this->categories->push($category); 
@@ -82,60 +48,77 @@ class Categories extends Component
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Categories added successfully!']);
         $this->alertMessage('success', 'Operation success', 'Categories added successfully!');
     }
-    public function resetFields(){
-        $this->name = '';
-        $this->icon = '';
-        $this->description = '';
-    }
-    public function edit($id){
+    // public function edit($id)
+    // {
+    //     $category = Categorie::find($id);
+    //     $this->categorieId = $id;
+    //     $this->name = $category->name;
+    //     $this->description = $category->description;
+    // }
+ 
+    public function edit($id)
+    {
         $category = Categorie::find($id);
-        $this->categorieId = $id;
-        $this->name = $category->name;
-        $this->icon = $category->icon;
-        $this->description = $category->description;
-    }
-    public function update(){
-        $category = Categorie::find($this->categorieId);
-        $this->deleteImage($category->icon, $this->icon);
+        if ($category) {
+            $this->categorieId = $id;
+            $this->name = $category->name;
+            $this->description = $category->description;
 
-        if ($this->icon instanceof UploadedFile) {
-            $this->validate([
-                'icon' => 'image|max:2048', // 2MB Max
-            ]);
-            $this->icon = $this->icon->store('Categories', 'public');
-            $category->icon = $this->icon;
+            // Log for debugging
+            Log::info("Category loaded for edit:", ['id' => $id, 'name' => $this->name, 'description' => $this->description]);
         }
-        $category->name = $this->name;
-        $category->slug = Str::slug($this->name);
-        $category->description = $this->description;
-        $category->save();
-        $this->resetFields();
-        $this->dispatch('hide-modal');
-        $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Categories updated successfully!']);
-        $this->alertMessage('success', 'Operation success', 'Categories added successfully!');
+    }
+
+    
+    // public function update(){
+    //     $this->validate();
+    //     $category = Categorie::find($this->categorieId);
+    //     $category->update([
+    //         'name' => $this->name,
+    //         'description' => $this->description,
+    //     ]);
+    //     $this->categories = Categorie::all();
+    //     $this->resetFields();
+    //     $this->dispatch('hide-modal');
+    //     $this->dispatch('showAlert', ['type' =>'success','message' => 'Categories updated successfully!']);
+    //     $this->alertMessage('success', 'Operation success', 'Categories updated successfully!');
+    // }
+    public function update()
+    {
+        $this->validate();
+
+        $category = Categorie::find($this->categorieId);
+        if ($category) {
+            $category->update([
+                'name' => $this->name,
+                'description' => $this->description,
+            ]);
+
+            $this->categories = Categorie::all();
+            $this->resetFields();
+            $this->dispatch('hide-modal');
+            $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Categories updated successfully!']);
+            $this->alertMessage('success', 'Operation success', 'Categories updated successfully!');
+        } else {
+            Log::error("Category not found for update:", ['id' => $this->categorieId]);
+        }
     }
 
     public function delete($id){
         $category = Categorie::find($id);
-        $this->deleteImage($category->icon, $this->icon);
         $category->delete();
+        $this->categories = Categorie::all();
+        $this->resetFields();
         $this->dispatch('hide-modal');
-        $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Categories deleted successfully!']);
-        $this->alertMessage('success', 'Operation success', 'Categories added successfully!');
+        $this->dispatch('showAlert', ['type' =>'success','message' => 'Categories deleted successfully!']);
+        $this->alertMessage('success', 'Operation success', 'Categories deleted successfully!');
     }
-//     protected function deleteImage($imagePath)
-// {
-//     if ($imagePath) {
-//         Storage::disk('public')->delete($imagePath);
-//     }
-// }
-protected function deleteImage($oldImagePath, $newImage)
-    {
-        if ($newImage instanceof UploadedFile) {
-            if ($oldImagePath) {
-                Storage::disk('public')->delete($oldImagePath);
-            }
-        }
+    public function categorySelected($id){
+        $this->selectedCategoryId = $id;
+    }
+    public function resetFields(){
+        $this->name = '';
+        $this->description = '';
     }
     public function alertMessage($type = null, $title = null, $message = null, $position = null)
     {
@@ -150,16 +133,7 @@ protected function deleteImage($oldImagePath, $newImage)
     public function discardChanges()
     {
         $this->resetFields();
-        $this->dispatch('hide-modal'); // You may need to handle modal hiding through JavaScript
-    }
-
-    private function handleFileUpload($field)
-    {
-        if ($this->{$field} instanceof UploadedFile) {
-            $extension = $this->{$field}->getClientOriginalExtension();
-            $filename = uniqid() . '.' . $extension;
-            $this->{$field} = $this->{$field}->storeAs('Categories', $filename, 'public');
-        }
+        $this->dispatch('hide-modal'); 
     }
 
     public function render()

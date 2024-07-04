@@ -1,77 +1,37 @@
 <?php
 
-use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\LanguageController;
-use App\Livewire\Admin\Abouts\AboutFeatures\AboutFeatures;
-use App\Livewire\Admin\Abouts\Abouts;
-use App\Livewire\Admin\Abouts\Teams\Teams;
-use App\Livewire\Admin\Categories\Categories;
-use App\Livewire\Admin\ContestCards\ContestCards;
+use App\Livewire\Admin\Products\ProductsForm;
+use App\Livewire\Admin\Blogs\Blogs;
+use App\Livewire\Admin\Blogs\BlogsCategories;
 use App\Livewire\Admin\Settings\Settings;
 use App\Livewire\Admin\Dashboard\Dashboard;
-use App\Livewire\Admin\Footers\Footers;
-use App\Livewire\Admin\Giveaway\Giveaway;
-use App\Livewire\Admin\Giveaway\GiveawaySpecifications\GiveawaySpecifications;
-use App\Livewire\Admin\Home\Features\Features;
-use App\Livewire\Admin\Home\HeroBanner;
-use App\Livewire\Admin\Home\HowToPlays;
-use App\Livewire\Admin\Home\Overviews\Overviews;
-use App\Livewire\Admin\Home\Supports\Supports;
-use App\Livewire\Admin\Home\Testimonials\Testimonials;
+use App\Livewire\Admin\Home\Abouts\Abouts;
+use App\Livewire\Admin\Home\Banners;
+use App\Livewire\Admin\Partners\Partners;
+use App\Livewire\Admin\products\Products;
 use App\Livewire\Admin\Language\LanguageManager;
 use App\Livewire\Admin\Logs\LogViewer;
 use App\Livewire\Admin\Mail\Maileditor;
-use App\Livewire\Admin\WalletManager\WalletManager;
+use App\Livewire\Admin\Categories\Categories;
 use App\Livewire\Admin\Messenger\Messenger;
 use App\Livewire\Admin\News\News;
-use App\Livewire\Admin\Pages\AffiliatePartners\AffiliatePartners;
-use App\Livewire\Admin\Pages\Affiliats\Affiliats;
-use App\Livewire\Admin\Pages\BuyTickets\BuyTickets;
-use App\Livewire\Admin\Pages\Faqs\Faqs;
-use App\Livewire\Admin\Pages\Faqs\FaqsCategories;
-use App\Livewire\Admin\Pages\HowItWorks\HowItWorks;
-use App\Livewire\Admin\Pages\Partners\Partners;
-use App\Livewire\Admin\Pages\TermsConditions\TermsConditions;
-use App\Livewire\Admin\Pages\TopAffiliates\TopAffiliates;
+use App\Livewire\Admin\Products\ProductUpdate;
+use App\Livewire\Admin\Services\Services;
 use App\Livewire\Admin\Settings\Backups;
 use App\Livewire\Admin\Staff\Permissions;
 use App\Livewire\Admin\Staff\Roles;
 use App\Livewire\Admin\Staff\Staff;
-use App\Livewire\Admin\DepositRequests\DepositRequests;
-use App\Livewire\FrontEnd\Pages\AboutSection;
-use App\Livewire\FrontEnd\Pages\AffiliateSingle;
-use App\Livewire\FrontEnd\Pages\Blogs;
-use App\Livewire\FrontEnd\Pages\BlogsSingle;
-use App\Livewire\FrontEnd\Pages\Cart;
-use App\Livewire\FrontEnd\Pages\CheckOut;
-use App\Livewire\FrontEnd\Contact\Contact;
-use App\Livewire\FrontEnd\Contests\Contests;
-use App\Livewire\FrontEnd\Contests\ContestsDetailsTwo;
-use App\Livewire\FrontEnd\Contests\ContestDetailsOne;
-use App\Livewire\FrontEnd\Pages\Faq;
-use App\Livewire\FrontEnd\Pages\Page404;
-use App\Livewire\FrontEnd\Pages\HowWork;
-use App\Livewire\FrontEnd\Contests\LotteryDetails;
-use App\Livewire\FrontEnd\Contests\LotteryDetailsTwo;
-use App\Livewire\FrontEnd\Pages\TermsCondition;
-use App\Livewire\FrontEnd\Partial\Navbar;
-use App\Livewire\FrontEnd\Pages\UserPannel\UserInfo;
-use App\Livewire\FrontEnd\Pages\UserPannel\UserLottery;
-use App\Livewire\FrontEnd\Pages\UserPannel\UserPanel;
-use App\Livewire\FrontEnd\Pages\UserPannel\UserReferral;
-use App\Livewire\FrontEnd\Pages\UserPannel\UserTransaction;
-use App\Livewire\FrontEnd\Partial\Header;
-use App\Livewire\FrontEnd\Partial\LoginModal;
-use App\Livewire\FrontEnd\Partial\SignUpModal;
-use App\Livewire\FrontEnd\WinnerDetails\WinnerDetails;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Middleware\RedirectIfAdminAccessAttempt;
-use App\Http\Middleware\RouteNotFoundExceptionHandler;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
-use App\Http\Controllers\EmailVerificationController;
+
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\FooterController;
+use App\Http\Controllers\PassionsController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\ServicesTitleController;
+use App\Livewire\Front\AboutUs;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,80 +43,32 @@ use App\Http\Controllers\EmailVerificationController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Email verification routes
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
-
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//     $request->fulfill();
-
-//     return redirect('/');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
-
-// Route::post('/email/verification-notification', function (Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
-
-//     return back()->with('message', 'Verification link sent!');
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/email/verify', function () {
-//         return view('auth.verify-email');
-//     })->middleware('auth')->name('verification.notice');
-
-//     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//         $request->fulfill();
-//         return redirect('/');
-//     })->middleware(['auth', 'signed'])->name('verification.verify');
-
-//     Route::post('/email/resend', function (Request $request) {
-//         $request->user()->sendEmailVerificationNotification();
-//         return back()->with('message', 'Verification link sent!');
-//     })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+// Route::get('/', function () {
+//     return view('welcome');
 // });
 
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('status', 'verification-link-sent');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('admin/dashboard');
+//     })->name('admin/dashboard');
+// });
 Route::impersonate();
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-      /*
-|--------------------------------------------------------------------------
-| Admin Routes
-|--------------------------------------------------------------------------
-|
-*/
-Route::get('forgot-password', function () {
-    return view('auth.forgot-password');
-})->middleware('guest')->name('password.request');
-// Route::post('forgot-password', function () {
-//     return view('auth.forgot-password');
-// })->middleware('guest')->name('password.request');
-// Route::middleware([
-//     'auth',
-//     'verified'
-// ])->group(function () {
-//     Route::get('admin/dashboard', function () {
-//         return redirect()->to('admin/dashboard');
-//     });
 
-Route::middleware(['auth', 'verified' , 'admin.attempt'])->group(function () {
+Route::middleware([
+    'auth',
+    'verified'
+])->group(function () {
+    Route::get('/', function () {
+        return redirect()->to('admin/dashboard');
+    });
     // Route::get('/', Dashboard::class);
     Route::get('/admin/dashboard', Dashboard::class)->name('admin/dashboard');
     Route::get('/admin/messenger', Messenger::class)->name('admin/messenger');
@@ -171,36 +83,17 @@ Route::middleware(['auth', 'verified' , 'admin.attempt'])->group(function () {
     Route::get('/admin/logss', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('admin/logss');
     Route::get('/admin/logs', LogViewer::class)->name('admin/logs');
     Route::get('/admin/mails-editor', Maileditor::class)->name('admin/mails-editor');
-    Route::get('/admin/hero-banner', HeroBanner::class)->name('admin/hero-banner');
-    Route::get('/admin/how-to-play', HowToPlays::class)->name('admin/how-to-play');
-    Route::get('/admin/overview', Overviews::class)->name('admin/overview');
-    Route::get('/admin/features', Features::class)->name('admin/features');
-    Route::get('/admin/testimonials', Testimonials::class)->name('admin/testimonials');
-    Route::get('/admin/supports', Supports::class)->name('admin/supports');
+    Route::get('/admin/banner', Banners::class)->name('admin/banner');
     Route::get('/admin/about', Abouts::class)->name('admin/about');
-    Route::get('/admin/aboutfeature', AboutFeatures::class)->name('admin/aboutfeature');
-    Route::get('/admin/teams', Teams::class)->name('admin/teams');
-    Route::get('/admin/affiliats', Affiliats::class)->name('admin/affiliats');
-    Route::get('/admin/howitwork', HowItWorks::class)->name('admin/howitwork');
-    Route::get('/admin/affiliatePartners', AffiliatePartners::class)->name('admin/affiliatePartners');
-    Route::get('/admin/topAffiliates', TopAffiliates::class)->name('admin/topAffiliates');
-    Route::get('/admin/buyTickets', BuyTickets::class)->name('admin/buyTickets');
-    Route::get('/admin/faqs', Faqs::class)->name('admin/faqs');
-    Route::get('/admin/faqs/faqs-categories', FaqsCategories::class)->name('admin/faqs/faqs-categories');
-    Route::get('/admin/partner', Partners::class)->name('admin/partner');
-    Route::get('/admin/contestcard', ContestCards::class)->name('admin/contestcard');
     Route::get('/admin/categories', Categories::class)->name('admin/categories');
-    Route::get('/admin/giveaway-specifications', GiveawaySpecifications::class)->name('admin/giveaway-specifications');
-    Route::get('/admin/terms-conditions', TermsConditions::class)->name('admin/pages/terms-conditions');
-    Route::get('/admin/footers', Footers::class)->name('admin/footers');
-    Route::get('/admin/wallet-manager', WalletManager::class)->name('admin/wallet-manager');
+    Route::get('/admin/products', Products::class)->name('admin/products');
+    Route::get('/admin/products/create', ProductsForm::class)->name('admin.products.products-form');
+    Route::get('/admin/products/update/{id}', ProductUpdate::class)->name('admin.products.update');
+    Route::get('/admin/partners', Partners::class)->name('admin/partners');
+    Route::get('/admin/services', Services::class)->name('admin/services');
+    Route::get('/admin/blogs', Blogs::class)->name('admin/blogs');
+    Route::get('/admin/blog-categories', BlogsCategories::class)->name('admin/blog-categories');
 
-    Route::get('/admin/deposit-requests', DepositRequests::class)->name('admin/deposit-requests');
-
-    //  Giveawaye
-    Route::get('/admin/giveaway', Giveaway::class)->name('admin/giveaway');
-    // End  Giveawaye
-});
     Route::get("/storage-link", function () {
         Artisan::call('storage:link');
         echo 'Symlink process successfully completed';
@@ -245,50 +138,56 @@ Route::middleware(['auth', 'verified' , 'admin.attempt'])->group(function () {
         Artisan::call("config:clear");
         return "cleared";
     });
-    Route::fallback(function() {
-        return response()->view('livewire.front-end.pages.page404', [], 404);
-    });
-// });
-/*
-|--------------------------------------------------------------------------
-| Front End Routes
-|--------------------------------------------------------------------------
-|
-*/
-// Route::get('/', function () { return view('welcome');});
-Route::get('/contests', Contests::class)->name('front-end/contests');
-Route::get('/contest-details-one/{giveawayId?}', ContestDetailsOne::class)->name('front-end/contest-details-one');
-Route::get('/contest-details-two', ContestsDetailsTwo::class)->name('front-end/contest-details-two');
-Route::get('/lottery', LotteryDetails::class)->name('front-end/lottery-details');
-Route::get('/lottery-detail-two', LotteryDetailsTwo::class)->name('front-end/lottery-details-two');
-Route::get('/winner', WinnerDetails::class)->name('front-end/winner-details');
-Route::get('/about', AboutSection::class)->name('front-end/about-section');
-Route::get('/affiliate', AffiliateSingle::class)->name('front-end/affiliate-single');
-Route::get('/how-work', HowWork::class)->name('front-end/how-work');
-Route::get('/user-panel', UserPanel::class)->name('front-end/user-panel');
-Route::get('/user-info', UserInfo::class)->name('front-end/user-info');
-Route::get('/user-lottery', UserLottery::class)->name('front-end/user-lottery');
-Route::get('/user-referral', UserReferral::class)->name('front-end/user-referral');
-Route::get('/user-transaction', UserTransaction::class)->name('front-end/user-transaction');
-Route::get('/contact', Contact::class)->name('front-end/contact');
-Route::get('/blog', Blogs::class)->name('front-end/blogs');
-Route::get('/blog-single', BlogsSingle::class)->name('front-end/blogs-single');
-Route::get('/cart', Cart::class)->name('front-end/cart');
-Route::get('/chectout', CheckOut::class)->name('front-end/check-out');
-Route::get('/faq', Faq::class)->name('front-end/faq');
-Route::get('/404', Page404::class)->name('front-end/page404');
-Route::get('/', Navbar::class)->name('front-end/navbar');
-Route::get('/signup', SignUpModal::class)->name('front-end/signup');
-Route::get('/login-modal', LoginModal::class)->name('front-end/login-modal');
-Route::get('/front-end/terms-condition', TermsCondition::class)->name('front-end/pages/terms-condition');
-Route::get('/{post:slug}', [PostController::class, 'show'])->name('view');
-Route::get('/blog-home', [PostController::class, 'home'])->name('home');
-Route::post('/email/verify', [EmailVerificationController::class, 'verify'])->name('email.verify');
 
-// Route::get('/home', [BlogsController::class, 'home'])->name('home');
-// Route::get('/post/{post}', 'BlogsController@show')->name('post.show');
-// Route::get('/category/{category}', 'BlogsController@byCategory')->name('category.show');
-// Route::get('/search', 'BlogsController@search')->name('search');
-// Route::fallback(function() {
-//     return response()->view('livewire.front-end.pages.page404', [], 404);
-// });
+    Route::prefix('admin')->group(function () {
+        // About Us Routes
+        Route::get('aboutus', [AboutUsController::class, 'index'])->name('aboutus.index');
+        Route::get('aboutus/create', [AboutUsController::class, 'create'])->name('aboutus.create');
+        Route::post('aboutus', [AboutUsController::class, 'store'])->name('aboutus.store');
+        Route::get('aboutus/{about}/edit', [AboutUsController::class, 'edit'])->name('aboutus.edit');
+        Route::put('aboutus/{about}', [AboutUsController::class, 'update'])->name('aboutus.update');
+        Route::delete('aboutus/{about}', [AboutUsController::class, 'destroy'])->name('aboutus.destroy');
+        // Our Passions Routes
+        Route::get('passions', [PassionsController::class, 'index'])->name('passions.index');
+        Route::get('passions/create', [PassionsController::class, 'create'])->name('passions.create');
+        Route::post('passions', [PassionsController::class, 'store'])->name('passions.store');
+        Route::get('passions/{passion}/edit', [PassionsController::class, 'edit'])->name('passions.edit');
+        Route::put('passions/{passion}', [PassionsController::class, 'update'])->name('passions.update');
+        Route::delete('passions/{passion}', [PassionsController::class, 'destroy'])->name('passions.destroy');
+         // Services Routes
+         Route::get('our-services', [ServicesController::class, 'index'])->name('our-services.index');
+         Route::get('our-services/create', [ServicesController::class, 'create'])->name('our-services.create');
+         Route::post('our-services', [ServicesController::class,'store'])->name('our-services.store');
+         Route::get('our-services/{service}/edit', [ServicesController::class, 'edit'])->name('our-services.edit');
+         Route::put('our-services/{service}', [ServicesController::class, 'update'])->name('our-services.update');
+         Route::delete('our-services/{service}', [ServicesController::class, 'destroy'])->name('our-services.destroy');
+          // Services Title Routes
+          Route::get('services-title/create', [ServicesController::class, 'createTitle'])->name('our-services.titlecreate');
+          Route::post('services-title', [ServicesController::class, 'storeTitle'])->name('our-services.titlestore');
+          Route::get('services-title/{servicesTitle}/edit', [ServicesController::class, 'editTitle'])->name('our-services.titleedit');
+          Route::put('services-title/{servicesTitle}', [ServicesController::class, 'updateTitle'])->name('our-services.titleupdate');
+          Route::delete('services-title/{servicesTitle}', [ServicesController::class, 'destroyTitle'])->name('our-services.titledestroy');
+        // Footers Routes
+          Route::get('footer', [FooterController::class, 'index'])->name('footer.index');
+             Route::get('footer/create', [FooterController::class, 'create'])->name('footer.create');
+             Route::post('footer', [FooterController::class, 'store'])->name('footer.store');
+             Route::get('footer/{footer}/edit', [FooterController::class, 'edit'])->name('footer.edit');
+             Route::put('footer/{footer}', [FooterController::class, 'update'])->name('footer.update');
+             Route::delete('footer/{footer}', [FooterController::class, 'destroy'])->name('footer.destroy');
+
+            // Appointment Routes
+            Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+            Route::get('appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
+            Route::post('appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+            Route::get('appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
+            Route::put('appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
+            Route::delete('appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
+
+
+        });
+
+        // Front End Pages
+        Route::get('/aboutus', AboutUs::class)->name('about-us');
+
+
+});

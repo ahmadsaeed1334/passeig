@@ -122,7 +122,6 @@
 									class="btn btn-sm btn-icon btn-active-light-danger w-30px h-30px me-2" data-bs-toggle="tooltip"
 									data-bs-custom-class="tooltip-inverse" data-bs-placement="top" title="Delete slide">
 									<i class="fa-solid fa-trash fs-6 fw-bold fw-bolder"></i>
-								
 								</a>
 								<!--end::Update-->
 							</td>

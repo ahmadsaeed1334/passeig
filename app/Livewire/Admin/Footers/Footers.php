@@ -2,158 +2,100 @@
 
 namespace App\Livewire\Admin\Footers;
 
-use App\Models\FooterIcon;
-use App\Models\FooterText;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Models\Footer;
 use Livewire\Component;
-use Livewire\Features\SupportFileUploads\WithFileUploads;
-use Livewire\WithPagination;
-use Livewire\Attributes\Layout;
-#[Layout('layouts.app')]
+
 class Footers extends Component
 {
-    use LivewireAlert;
-    use WithPagination;
-    use WithFileUploads;
-    public $footerIcons;
-    public $icon_class;
-    public $url;
-    public $selectedId;
-    public $footerTexts;
-    public $text;
-    public $link_text;
-    public $link_url;
-    public $footerSelectedId;
-    public function mount()
-    {
-        $this->footerIcons = FooterIcon::all();
-        $this->footerTexts = FooterText::all();
-    }
+    public $footers, $number, $address, $description, $icons = [], $working_hours;
+    public $footerId;
+    public $isUpdate = false;
 
-    public function create()
-{
-    $this->validate([
-        'icon_class' =>'required',
-        'url' =>'required',
-    ]);
-    FooterIcon::create([
-        'icon_class' => $this->icon_class,
-        'url' => $this->url,
-    ]);
-    $this->resetFields();
-    $this->dispatch('hide-modal');
-    $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Footer Icon Added successfully!']);
-    $this->alertMessage('success', 'Operation success', 'Footer Icon Added successfully!');
-}
-public function footerTextCreate(){
-    $this->validate([
-        'text' =>'required',
-        'link_text' =>'required',
-        'link_url' =>'required',
-    ]);
-    FooterText::create([
-        'text' => $this->text,
-        'link_text' => $this->link_text,
-        'link_url' => $this->link_url,
-    ]);
-    $this->foooterResetFields();
-    $this->dispatch('hide-modal');
-    $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Footer Text Added successfully!']);
-    $this->alertMessage('success', 'Operation success', 'Footer Text Added successfully!');
-}
-public function edit($id)
-{
-    $this->selectedId = $id;
-    $footerIcon = FooterIcon::find($id);
-    $this->icon_class = $footerIcon->icon_class;
-    $this->url = $footerIcon->url;
-}
-public function footerTextEdit($id){
-    $this->footerSelectedId = $id;
-    $footerText = FooterText::find($id);
-    $this->text = $footerText->text;
-    $this->link_text = $footerText->link_text;
-    $this->link_url = $footerText->link_url;
-}
-public function update(){
-    $this->validate([
-        'icon_class' =>'required',
-        'url' =>'required',
-    ]);
-    FooterIcon::find($this->selectedId)->update([
-        'icon_class' => $this->icon_class,
-        'url' => $this->url,
-    ]);
-    $this->resetFields();
-    $this->dispatch('hide-modal');
-    $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Footer Icon Updated successfully!']);
-    $this->alertMessage('success', 'Operation success', 'Footer Icon Updated successfully!');
-}
-public function footerTextUpdate(){
-    $this->validate([
-        'text' =>'required',
-        'link_text' =>'required',
-        'link_url' =>'required',
-    ]);
-    FooterText::find($this->footerSelectedId)->update([
-        'text' => $this->text,
-        'link_text' => $this->link_text,
-        'link_url' => $this->link_url,
-    ]);
-    $this->foooterResetFields();
-    $this->dispatch('hide-modal');
-    $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Footer Text Updated successfully!']);
-    $this->alertMessage('success', 'Operation success', 'Footer Text Updated successfully!');
-}
-public function delete($id)
-{
-    FooterIcon::find($id)->delete();
-    $this->dispatch('hide-modal');
-    $this->dispatch('showAlert', ['type' => 'danger', 'message' => 'Footer Icon Deleted successfully!']);
-    $this->alertMessage('success', 'Operation success', 'Footer Icon Deleted successfully!');
-}
-public function footerTextDelete($id){
-    FooterText::find($id)->delete();
-    $this->dispatch('hide-modal');
-    $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Footer Text Deleted successfully!']);
-    $this->alertMessage('success', 'Operation success', 'Footer Text Deleted successfully!');
-}
+    protected $rules = [
+        'number' => 'required|string',
+        'address' => 'required|string',
+        'description' => 'required|string',
+        'working_hours' => 'required|string',
+        'icons.*.name' => 'required|string',
+        'icons.*.link' => 'required|url',
+    ];
 
-public function resetFields()
-{
-    $this->icon_class = '';
-    $this->url = '';
-    $this->selectedId = '';
-}
-public function foooterResetFields()
-{
-    $this->text = '';
-    $this->link_text = '';
-    $this->link_url = '';
-    $this->footerSelectedId = '';
-}
-public function alertMessage($type = null, $title = null, $message = null, $position = null)
-{
-    $this->alert($type ? $type : 'success', $title ? $title : alert('title'), [
-        'position' => $position ? $position : alert('position'),
-        'timer' =>  alert('timer'),
-        'toast' =>  true,
-        'text' => $message ? $message : alert('message'),
-        'background' => alert('background'),
-    ]);
-}
-public function discardChanges()
-{
-    $this->resetFields();
-    $this->dispatch('hide-modal'); // You may need to handle modal hiding through JavaScript
-}
-public function footerdiscardChanges()
-{
-    $this->foooterResetFields();
-    $this->dispatch('hide-modal'); // You may need to handle modal hiding through JavaScript
-}
     public function render()
     {
+        $this->footers = Footer::all();
+
         return view('livewire.admin.footers.footers');
+    }
+    
+    public function resetInputFields()
+    {
+        $this->number = '';
+        $this->address = '';
+        $this->description = '';
+        $this->icons = [];
+        $this->working_hours = '';
+    }
+
+    public function store()
+    {
+        $this->validate();
+
+        Footer::create([
+            'number' => $this->number,
+            'address' => $this->address,
+            'description' => $this->description,
+            'icons' => $this->icons,
+            'working_hours' => $this->working_hours,
+        ]);
+
+        $this->resetInputFields();
+        $this->alert('success', 'Footer Created Successfully.');
+    }
+
+    public function edit($id)
+    {
+        $footer = Footer::findOrFail($id);
+        $this->footerId = $id;
+        $this->number = $footer->number;
+        $this->address = $footer->address;
+        $this->description = $footer->description;
+        $this->icons = $footer->icons;
+        $this->working_hours = $footer->working_hours;
+        $this->isUpdate = true;
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        $footer = Footer::find($this->footerId);
+        $footer->update([
+            'number' => $this->number,
+            'address' => $this->address,
+            'description' => $this->description,
+            'icons' => $this->icons,
+            'working_hours' => $this->working_hours,
+        ]);
+
+        $this->resetInputFields();
+        $this->isUpdate = false;
+        $this->alert('success', 'Footer Updated Successfully.');
+    }
+
+    public function delete($id)
+    {
+        Footer::find($id)->delete();
+        $this->alert('success', 'Footer Deleted Successfully.');
+    }
+
+    public function addIcon()
+    {
+        $this->icons[] = ['name' => '', 'link' => ''];
+    }
+
+    public function removeIcon($index)
+    {
+        unset($this->icons[$index]);
+        $this->icons = array_values($this->icons);
     }
 }
