@@ -12,16 +12,16 @@
                             <h1>{{ $page_title }}</h1>
                         </div>
                     </div>
-                    <form action="{{ route('our-services.update', $services->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('our-services.update', $service->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="title">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $services->title) }}">
+                            <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $service->title) }}">
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="short_description">Short Description</label>
-                            <input type="text" class="form-control" id="short_description" name="short_description" value="{{ old('short_description', $services->short_description) }}">
+                            <input type="text" class="form-control" id="short_description" name="short_description" value="{{ old('short_description', $service->short_description) }}">
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <div class="col-lg-4">
@@ -30,7 +30,7 @@
                                 </label>
                                 <br>
                                 <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">
-                                    <div class="image-input-wrapper" id="image-preview" style="background-image: url({{ $services->image ? asset('storage/'.$services->image) : asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">
+                                    <div class="image-input-wrapper" id="image-preview" style="background-image: url({{ $service->image ? asset('storage/'.$service->image) : asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">
                                     </div>
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                         <i class="bi bi-pencil-fill fs-7"></i>
@@ -46,10 +46,10 @@
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="long_description">Long Description</label>
-                            <textarea class="form-control" id="long_description" name="long_description" rows="5">{{ old('long_description', $services->long_description) }}</textarea>
+                            <textarea class="form-control" id="long_description" name="long_description" rows="5">{{ old('long_description', $service->long_description) }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary ms-3 mt-3 mb-5">Update</button>
-                        <a href="{{ route('servicesus.index') }}" class="btn btn-secondary ms-5 mt-3 mb-5">Cancel</a>
+                        <a href="{{ route('our-services.index') }}" class="btn btn-secondary ms-5 mt-3 mb-5">Cancel</a>
                     </form>
                 </div>
             </div>

@@ -94,7 +94,7 @@
 								<div class="d-flex flex-column">
 									<span wire:click="userProfile('{{ $user->id }}')" data-bs-toggle="modal"
 										data-bs-target="#userProfileModel"
-										class="text-dark font-weight-bolder text-hover-{{ primary_color() }} fs-2 fw-bold pointer mb-1"
+										class="text-white font-weight-bolder text-hover-{{ primary_color() }} fs-2 fw-bold pointer mb-1"
 										{!! show_toltip('View Details') !!}>
 										{{ Str::title($user->name) }}
 										<span class="menu-title position-relative" {!! show_toltip('Language: ' . getLanguageName($user->lang)) !!}>
@@ -128,14 +128,14 @@
 							@if ($user->last_seen == null)
 								<span class="text-muted font-weight-bold d-block">Never Loged-in</span>
 							@else
-								<span class="text-dark font-weight-bolder font-size-lg mb-1">
+								<span class="text-white font-weight-bolder font-size-lg mb-1">
 									{{ diff_for_humans_long($user->last_seen) }}
 								</span>
 								<span class="text-muted font-weight-bold d-block">{{ custom_datetime_format($user->last_seen) }}</span>
 							@endif
 						</td>
 						<td>
-							<span class="text-dark font-weight-bolder font-size-lg mb-1">
+							<span class="text-white font-weight-bolder font-size-lg mb-1">
 								Updated: {{ diff_for_humans_long($user->updated_at) }}
 							</span>
 							<span class="text-muted font-weight-bolder d-block font-size-lg mb-1">
@@ -143,7 +143,7 @@
 							</span>
 						</td>
 						{{-- <td>
-							<span class="text-dark font-weight-bolder font-size-lg mb-1">
+							<span class="text-white font-weight-bolder font-size-lg mb-1">
 								{{ diff_for_humans_long($user->created_at) }}
 							</span>
 							<span class="text-muted font-weight-bold d-block">{{ custom_date_format($user->created_at) }}</span>
@@ -154,7 +154,7 @@
 								<span wire:click.prevent="activeInactive('{{ $user->id }}','0')" class="d-flex position-relative pointer"
 									{!! show_toltip('Change Status') !!}>
 									<!--begin::Label-->
-									<span class="d-inline-block fs-2 fw-bold text-dark mb-2">
+									<span class="d-inline-block fs-2 fw-bold text-white mb-2">
 										Active
 									</span>
 									<!--end::Label-->
@@ -170,7 +170,7 @@
 								<span wire:click.prevent="activeInactive('{{ $user->id }}','1')" class="d-flex position-relative pointer"
 									{!! show_toltip('Change Status') !!}>
 									<!--begin::Label-->
-									<span class="d-inline-block fs-2 fw-bold text-dark mb-2">
+									<span class="d-inline-block fs-2 fw-bold text-white mb-2">
 										Inactive
 									</span>
 									<!--end::Label-->

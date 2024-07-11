@@ -10,3 +10,6 @@
     <!-- Brown Sugar Font -->
     <link href="https://fonts.cdnfonts.com/css/brown-sugar-2" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+  <!-- GSAP ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>

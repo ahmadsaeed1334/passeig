@@ -87,7 +87,8 @@ class GeneralSettings extends Component
         $this->validate([
             'icon' => 'image|max:10024',
         ]);
-        Storage::disk('public')->delete(general('favicon'));
+        if(general('favicon'))
+            Storage::disk('public')->delete(general('favicon'));
         setting([
             'general_settings.favicon' => null,
         ])->save();
@@ -135,7 +136,8 @@ class GeneralSettings extends Component
         $this->validate([
             'logo' => 'image|max:10024',
         ]);
-        Storage::disk('public')->delete(general('logo_black'));
+        if(general('logo_black'))
+            Storage::disk('public')->delete(general('logo_black'));
         setting([
             'general_settings.logo_black' => null,
         ])->save();
@@ -182,7 +184,10 @@ class GeneralSettings extends Component
         $this->validate([
             'photo' => 'image|max:10024',
         ]);
-        Storage::disk('public')->delete(general('logo'));
+
+        if(general('logo'))
+            Storage::disk('public')->delete(general('logo'));
+
         setting([
             'general_settings.logo' => null,
         ])->save();

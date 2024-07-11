@@ -25,7 +25,7 @@
                                 <!-- Inputs -->
                                 <label class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" name="Change partner_image">
                                     <i class="bi bi-pencil-fill fs-7"></i>
-                                    <input wire:model="partner_image" type="file" id="card_image_1" name="file" accept=".jpeg, .png, .jpg, .gif, .mp4, .mov, .ogg, .qt" />
+                                    <input wire:model.defer="partner_image" type="file" id="card_image_1" name="file" accept=".jpeg, .png, .jpg, .gif, .mp4, .mov, .ogg, .qt" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 @error('partner_image')

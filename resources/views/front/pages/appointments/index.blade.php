@@ -44,7 +44,7 @@
                                     placeholder="Search {{ Str::singular($page_title ?? ' Appointment') }} by id or name" />
                             </div>
                         </div>
-                        <div class="card-toolbar">
+                        {{-- <div class="card-toolbar">
                             <a type="button" class="btn btn-light-{{ primary_color() }}" href="{{ route('appointments.create') }}">
                                 <span class="svg-icon svg-icon-3">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,7 @@
                                 </span>
                                 Add Appointments
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="card-body scroll-x pt-0">
                         <table class="table-row-dashed fs-6 gy-5 mb-0 table align-middle" id="kt_HeroBanners_table">
@@ -81,12 +81,12 @@
                                             <a href="{{ route('appointments.edit', $appointment->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Update Appointment ') !!}>
                                                 <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
                                             </a>
-                                            <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST" style="display:inline-block;">
+                                            {{-- <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" {!! confirm() !!} class="btn btn-sm btn-icon btn-light btn-active-light-{{ primary_color() }}" data-bs-placement="top" title="Delete {{ Str::singular('Appointment ') }}" data-bs-toggle="tooltip">
                                                     <i class="fa-solid fa-trash fs-6 fw-bold fw-bolder"></i></button>
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach

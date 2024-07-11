@@ -1,7 +1,7 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5">
     <div class="card bg-dark text-white p-4" style="width: 100%; max-width: 1000px;">
-    <div class="card-body" wire:ignore.self> 
-        <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/theme/classic.css">
+    <div class="card-body" wire:ignore.self>
+        {{-- <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/theme/classic.css">
             <style>
                 .ck-content {
                     color: black;
@@ -9,17 +9,17 @@
                 .ck-content h1,
     .ck-content h2,
     .ck-content h3 {
-        color: black; 
+        color: black;
     }
-            </style>
+            </style> --}}
         <x-slot name="page_title">
             {{ $page_title ?? 'Products' }}
         </x-slot>
-    
+
         @if (session()->has('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
-    
+
         <form wire:submit.prevent="update" class="mt-4">
             @csrf
             <div class="mb-3">
@@ -28,16 +28,16 @@
                 @error('name') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col-lg-12" wire:ignore>
-                        <label for="description" class="form-label required mt-2">Description</label>
-                        <textarea class="form-control ckeditor" id="description" name="description" cols="30" rows="10" wire:model.defer="description"></textarea>
+                        <label for="description" class="form-label required text-white mt-2">Description</label>
+                        <textarea class="form-control " id="description" name="description" cols="30" rows="10" wire:model.defer="description"></textarea>
                         @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
             <div class="mb-3">
-                <label for="short_description" class="form-label text-white">Short Description</label>
+                <label for="short_description" class="form-label text-white mt-2">Short Description</label>
                 <input type="text" id="short_description" wire:model="short_description" class="form-control">
                 @error('short_description') <span class="error">{{ $message }}</span> @enderror
             </div>
-        
+
             <div class="mb-3">
                 <label for="categorie_id" class="form-label text-white">Category</label>
                 <select id="categorie_id" wire:model="categorie_id" class="form-select">
@@ -69,12 +69,12 @@
                     <div class="form-text">jpeg, png, jpg, gif, mp4, mov, ogg, qt.</div>
                 </div>
             </div>
-    
+
             <button type="submit" class="btn btn-success">Add Product</button>
         </form>
     </div>
     </div>
-         <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+         {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
                <script>
                 ClassicEditor.create(document.querySelector('#description'))
                .then(editor => {
@@ -97,7 +97,11 @@
             .catch(error => {
                 console.error(error);
             });
-          </script> 
-    
+          </script> --}}
+          <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+          <script>
+
+              CKEDITOR.replace('description');
+          </script>
+
     </div>
-    

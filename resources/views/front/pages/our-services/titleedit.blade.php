@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="long_description">Long Description</label>
-                            <textarea class="form-control" id="long_description" name="long_description" rows="5">{{ old('long_description', $passion->long_description) }}</textarea>
+                            <textarea class="form-control" id="long_description" name="long_description" rows="5">{{ old('long_description', $servicesTitle->long_description) }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary ms-3 mt-3 mb-5">Update</button>
                         <a href="{{ route('our-services.index') }}" class="btn btn-secondary ms-5 mt-3 mb-5">Cancel</a>

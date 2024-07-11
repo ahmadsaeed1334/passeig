@@ -84,26 +84,26 @@ function toggleTab(e) {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    window.scrollTo(0, 0);
-    gsap.timeline()
-        .fromTo(".load_animation", {
-            duration: 1.5,
-            clipPath: 'inset(84% 43% 0 42% round 120px)',
-            ease: "power2.inOut"
-        },
-            {
-                duration: 1.5,
-                clipPath: 'inset(48% 43% 0 42% round 120px)',
-                ease: "power2.inOut"
-            })
-        .to(".load_animation", {
-            duration: 1.5,
-            delay: 0.4,
-            clipPath: 'inset(0% 0% 0% 0% round 0px)',
-            ease: "power2.inOut"
-        });
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//     window.scrollTo(0, 0);
+//     gsap.timeline()
+//         .fromTo(".load_animation", {
+//             duration: 1.5,
+//             clipPath: 'inset(84% 43% 0 42% round 120px)',
+//             ease: "power2.inOut"
+//         },
+//             {
+//                 duration: 1.5,
+//                 clipPath: 'inset(48% 43% 0 42% round 120px)',
+//                 ease: "power2.inOut"
+//             })
+//         .to(".load_animation", {
+//             duration: 1.5,
+//             delay: 0.4,
+//             clipPath: 'inset(0% 0% 0% 0% round 0px)',
+//             ease: "power2.inOut"
+//         });
+// });
 
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -126,7 +126,7 @@ gsap.utils.toArray('.animation').forEach(function (element) {
             }
         }
     );
-}); 
+});
 
 jQuery(document).ready(function ($) {
 
@@ -152,7 +152,7 @@ jQuery(document).ready(function ($) {
         //    prevArrow: '<span class="icon-angle-left"><img src="../images/product_slider_left.png" alt=""></span>',
         //    nextArrow: '<span class="icon-angle-right"> <img src="../images/product_slider_right.png" alt=""></span>',
          });
-   
+
    $('.slider-for').slick({
            slidesToShow: 1,
            slidesToScroll: 1,
@@ -179,7 +179,7 @@ jQuery(document).ready(function ($) {
                  breakpoint: 450,
                  settings: {
                    dots: false,
-                   slidesToShow: 3,  
+                   slidesToShow: 3,
                    centerPadding: '0px',
                    }
                },
@@ -194,4 +194,4 @@ jQuery(document).ready(function ($) {
                }
            ]
        });
-    });	
+    });

@@ -27,7 +27,7 @@
                     @yield('content')
                 @endif
             </main>
-            <section id="hero">
+            {{-- <section id="hero">
                 <div class="container">
                     <div class="text-center">
                         <div class="col-lg-8 mx-auto">
@@ -39,12 +39,12 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
         </div>
     </div>
 
     {{-- @include('front.partial.main') --}}
-    @include('front.partial.footer')
+    @livewire('front.footers')
     @include('front.partial.script')
 </body>
 </html>

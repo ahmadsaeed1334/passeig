@@ -3,6 +3,7 @@
 use App\Http\Controllers\LanguageController;
 use App\Livewire\Admin\Products\ProductsForm;
 use App\Livewire\Admin\Blogs\Blogs;
+use App\Livewire\Front\Blogs as Frontblog;
 use App\Livewire\Admin\Blogs\BlogsCategories;
 use App\Livewire\Admin\Settings\Settings;
 use App\Livewire\Admin\Dashboard\Dashboard;
@@ -10,6 +11,7 @@ use App\Livewire\Admin\Home\Abouts\Abouts;
 use App\Livewire\Admin\Home\Banners;
 use App\Livewire\Admin\Partners\Partners;
 use App\Livewire\Admin\products\Products;
+use App\Livewire\Front\Products as Product;
 use App\Livewire\Admin\Language\LanguageManager;
 use App\Livewire\Admin\Logs\LogViewer;
 use App\Livewire\Admin\Mail\Maileditor;
@@ -18,12 +20,14 @@ use App\Livewire\Admin\Messenger\Messenger;
 use App\Livewire\Admin\News\News;
 use App\Livewire\Admin\Products\ProductUpdate;
 use App\Livewire\Admin\Services\Services;
+use App\Livewire\Front\Services as FrontServices;
 use App\Livewire\Admin\Settings\Backups;
 use App\Livewire\Admin\Staff\Permissions;
 use App\Livewire\Admin\Staff\Roles;
 use App\Livewire\Admin\Staff\Staff;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Products\ProductTitles;
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AppointmentController;
@@ -32,6 +36,12 @@ use App\Http\Controllers\PassionsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ServicesTitleController;
 use App\Livewire\Front\AboutUs;
+use App\Livewire\Front\Appointments;
+use App\Livewire\Front\HomePage;
+use App\Livewire\Front\SingleService;
+use App\Livewire\Front\SingleBlog;
+use App\Http\Controllers\HomeController;
+use App\Livewire\Admin\User\UserProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,11 +76,11 @@ Route::middleware([
     'auth',
     'verified'
 ])->group(function () {
-    Route::get('/', function () {
+    Route::get('/admin/dashboard', function () {
         return redirect()->to('admin/dashboard');
     });
     // Route::get('/', Dashboard::class);
-    Route::get('/admin/dashboard', Dashboard::class)->name('admin/dashboard');
+    // Route::get('/admin/dashboard', Dashboard::class)->name('admin/dashboard');
     Route::get('/admin/messenger', Messenger::class)->name('admin/messenger');
     Route::get('/admin/staff', Staff::class)->name('admin/staff');
     Route::get('/admin/backups', Backups::class)->name('admin/backups');
@@ -91,8 +101,11 @@ Route::middleware([
     Route::get('/admin/products/update/{id}', ProductUpdate::class)->name('admin.products.update');
     Route::get('/admin/partners', Partners::class)->name('admin/partners');
     Route::get('/admin/services', Services::class)->name('admin/services');
-    Route::get('/admin/blogs', Blogs::class)->name('admin/blogs');
+    // Route::get('/admin/blogs', Blogs::class)->name('admin/blogs');
     Route::get('/admin/blog-categories', BlogsCategories::class)->name('admin/blog-categories');
+    Route::get('admin/product-titles', ProductTitles::class)->name('admin.product-titles');
+    Route::get('admin/user-profile', UserProfile::class)->name('admin/user-profile');
+
 
     Route::get("/storage-link", function () {
         Artisan::call('storage:link');
@@ -183,11 +196,18 @@ Route::middleware([
             Route::put('appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
             Route::delete('appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 
+            Route::resource('blogs', 'Admin\BlogController');
 
         });
 
+
         // Front End Pages
-        Route::get('/aboutus', AboutUs::class)->name('about-us');
-
-
-});
+       });
+       Route::get('/aboutus', AboutUs::class)->name('about-us');
+       Route::get('/products', Product::class)->name('products');
+       Route::get('/blogs', Frontblog::class)->name('blogs');
+       Route::get('/services', FrontServices::class)->name('services');
+       Route::get('/services/{id}', SingleService::class)->name('single-service');
+       Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
+       Route::get('/appointments', Appointments::class)->name('appointments');
+       Route::get('/', [HomeController::class, 'index'])->name('home');

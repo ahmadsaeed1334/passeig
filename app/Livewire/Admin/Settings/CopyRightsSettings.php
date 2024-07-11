@@ -15,8 +15,9 @@ class CopyRightsSettings extends Component
 
     protected $listeners = ['reload' => '$refresh'];
 
-    public function copy_right()
+    public function saveCopyRight()
     {
+        // dd('saveCopyRight() called');
         if (env('APP_ENV') == 'demo') {
             return $this->alertMessage('error', 'Operation failed', 'some operations are Not allowed in demo mode');
         }
@@ -24,17 +25,11 @@ class CopyRightsSettings extends Component
             'copy_right' => $this->copy_right,
             'copy_right_url' => $this->copy_right_url
         ])->save();
-        $this->alert('success', 'Settings Saved Successfuly!', [
-            'position' =>  setting('general_settings.alert_position'),
-            'timer' =>  3000,
-            'toast' =>  true,
-            'text' => '',
-            'confirmButtonText' =>  'Ok',
-            'cancelButtonText' =>  'Cancel',
-            'showCancelButton' =>  false,
-            'showConfirmButton' =>  false,
-        ]);
+        $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Settings Saved  Successfully!']);
+        $this->alertMessage('success', 'Settings Saved Successfully!');
     }
+
+
 
     public function alertMessage($type = null, $title = null, $message = null, $position = null)
     {

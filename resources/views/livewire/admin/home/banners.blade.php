@@ -1,5 +1,5 @@
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-    @include('livewire.admin.partial.preloader')
+    {{-- @include('livewire.admin.partial.preloader') --}}
     <div class="d-flex flex-column flex-column-fluid">
         <x-slot name="page_title">
             {{ $page_title ?? 'Banner' }}
@@ -17,22 +17,22 @@
                         {{ $page_title ?? 'Banner' }}
                     </h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-						<!--begin::Item-->
-						<div class="breadcrumb-item text-muted">
-							{{ __('total') }} {{ 'Banner'}}
-						</div>
-						<!--end::Item-->
-						<!--begin::Item-->
-						<div class="breadcrumb-item">
-							<span class="bullet w-5px h-2px bg-gray-400"></span>
-						</div>
-						<!--end::Item-->
-						<!--begin::Item-->
-						<div class="breadcrumb-item text-{{ primary_color() }}">
-							{{ count($banners) }}
-						</div>
-						<!--end::Item-->
-					</ul>
+                        <!--begin::Item-->
+                        <div class="breadcrumb-item text-muted">
+                            {{ __('total') }} {{ 'Banner'}}
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="breadcrumb-item">
+                            <span class="bullet w-5px h-2px bg-gray-400"></span>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="breadcrumb-item text-{{ primary_color() }}">
+                            {{ count($banners) }}
+                        </div>
+                        <!--end::Item-->
+                    </ul>
                 </div>
                 <!--end::Page title-->
             </div>
