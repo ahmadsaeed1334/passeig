@@ -31,7 +31,7 @@ class BlogsCategories extends Component
     ];
     public function mount()
     {
-        
+
         $this->blogCategories = BlogCategorie::all();
         // $this->blogs = Blog::all();
     }
@@ -41,7 +41,7 @@ class BlogsCategories extends Component
             'name' => $this->name,
             'description' => $this->description,
         ]);
-        // $this->categories->push($category); 
+        // $this->categories->push($category);
         $this->blogCategories = BlogCategorie::all();
         $this->resetFields();
         $this->dispatch('hide-modal');
@@ -106,11 +106,16 @@ class BlogsCategories extends Component
     public function discardChanges()
     {
         $this->resetFields();
-        $this->dispatch('hide-modal'); 
+        $this->dispatch('hide-modal');
     }
 
     public function render()
     {
-        return view('livewire.admin.blogs.blogs-categories');
+        $categories = BlogCategorie::orderBy('created_at', 'desc')->paginate(10);
+        $totalCategorie = BlogCategorie::count();
+        return view('livewire.admin.blogs.blogs-categories',[
+            'categories' => $categories,
+            'totalCategorie' => $totalCategorie,
+        ]);
     }
 }

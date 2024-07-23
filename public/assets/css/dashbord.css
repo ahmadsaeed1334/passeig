@@ -1,0 +1,447 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: black;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    height: 100%;
+    min-height: 100vh;
+}
+.sidebar {
+    background-color: #483A30;
+    border-radius: 50px;
+    padding: 20px;
+    color: white;
+    position: relative;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+@media (max-width:990px) {
+.sidebar {
+    border-radius: 20px;
+}
+
+}
+.sidebar .img-radius,
+ .img-radius {
+    border-radius: 50%;
+}
+.sidebar a {
+    color: white;
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    padding-left: 24px;
+}
+.sidebar a:hover {
+    background-color: #6e5849;
+    border-radius: 5px;
+}
+.content-profile {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.btn-save {
+    background-color: #61b8a4;
+    color: white;
+    border: none;
+}
+.content-inner-panding{
+    padding: 13px;
+}
+.content-inner {
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    color: #000;
+    width: 1000px;
+    max-width: 100%;
+    margin: auto;
+    /* min-width: 120vh; */
+}
+.form-control {
+    border-radius: 5px;
+    padding: 25px;
+    border: 2px solid #B19C3B;
+}
+.bt\n-save {
+    text-align: end;
+    margin-top: 25%;
+    background-color: #4A8A91;
+    color: white;
+    border: none;
+    padding: 15px 50px;
+}
+@media (max-width: 450px) {
+    .bt\n-save {
+        text-align: end;
+        margin-top: 25%;
+        background-color: #4A8A91;
+        color: white;
+        border: none;
+        padding: 10px 5px;
+    }
+
+}
+
+.primary {
+    color: #B19C3B;
+    font-weight: 600;
+}
+.main-content {
+    background-color: #483A30;
+    border-radius: 65px;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+}
+.line {
+    width: 85%;
+    height: 1px;
+    background-color: #8B7E7E;
+    margin: 0 auto;
+}
+@media (max-width: 992px) {
+    .main-content {
+position: relative; /* Ensure the parent container is positioned relative to use height 100% in the sidebar */
+height: 100vh; /* or any other specific height */
+}
+
+.sidebar {
+position: absolute;
+top: 0;
+left: -250px;
+transition: left 0.3s ease;
+z-index: 1050;
+height: 100%; /* Adjust the height to match the parent container */
+}
+
+    .sidebar.active {
+        left: 0;
+    }
+    .content-profile {
+        margin-left: 0;
+    }
+
+}
+@media (min-width:990) {
+
+.navbar-toggler {
+    display: none;
+
+
+}
+
+}
+@media (max-width:990){
+
+.navbar-toggler {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    z-index: 999;
+    color: white;
+}
+.navbar-toggler-icon {
+    font-size: 30px;
+    color:white;
+}
+}
+.navbar-toggler-icon {
+display: none;
+}
+
+@media (max-width: 991.98px) {
+.navbar-toggler-icon {
+
+display: block;
+}
+}
+.notification {
+    position: relative;
+    display: inline-block;
+    font-size: 25px;
+}
+.notification .badge {
+    position: absolute;
+    top: -10px; /* Adjusted to match the image */
+    right: -5px; /* Adjusted to match the image */
+    padding: 3px 6px; /* Adjusted to match the image */
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 12px; /* Adjusted to match the image */
+    border: 1px solid white; /* Border color */
+}
+.date-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.date-filter span {
+    font-size: 1em;
+    color: #555;
+}
+
+.date-filter select {
+    padding: 5px 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.appointments-table th, .appointments-table td {
+    padding: 8px;
+    text-align: left;
+}
+
+.appointments-table th {
+    background-color: #f4f4f4;
+    color: #555;
+}
+.appointments-table tr {
+    border-bottom: 2px solid #333; /* Dark line between rows */
+}
+.appointments-table td {
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.appointments-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.appointments-table td:nth-child(5) {
+    font-weight: bold;
+    color: #333;
+}
+@media (max-width: 768px) {
+    .appointments-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .appointments-table thead {
+        display: none;
+    }
+
+    .appointments-table tbody,
+    .appointments-table tr,
+    .appointments-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .appointments-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        /* border-bottom: 2px solid #333; Dark line between rows */
+    }
+
+    .appointments-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+.image-spacing {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+h3 span {
+    float: right;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+p {
+    margin: 5px 0;
+}
+
+.appointment-item {
+    display: flex;
+    padding: 10px 0;
+}
+
+.appointment-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.details {
+    flex-grow: 1;
+}
+
+.price {
+    color: #333;
+}
+@media(min-width:550px){
+    .appointment-item img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+    }
+    .appointment-item {
+        display: flex;
+        padding: 5px 0;
+    }
+    h3 span {
+        float: right;
+        font-size: 7px;
+        color: #007bff;
+        cursor: pointer;
+    }
+    p {
+        margin: 2px 0;
+    }
+
+
+}
+.dashboard-container {
+    display: flex;
+}
+
+.appointments-section {
+    background-color: white;
+    padding: 20px;
+    width: 63%;
+}
+
+.past-appointments-section {
+    background-color: #F9FAFC;
+    border-radius: 8px;
+    padding: 20px;
+    width: 35%;
+    position: relative;
+}
+
+.appointments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.appointments-header h1 {
+    margin: 0;
+    color: #b19a4d;
+}
+
+.appointments-header p {
+    margin: 0;
+    color: #777777;
+}
+
+.see-all {
+    color: #007bff;
+    text-decoration: none;
+}
+
+h2 {
+    color: #333333;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.appointment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.appointment-info p {
+    margin: 0;
+    color: #333333;
+}
+
+.appointment-price {
+    color: #333333;
+}
+
+.appointment-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.appointment-details {
+    display: flex;
+    align-items: center;
+}
+
+.notification-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/e/eb/Notification-icon.svg') no-repeat center center;
+    background-size: cover;
+}
+.sidebar.active{
+    background-color: #483A30;
+}
+.appointments-content.upcoming {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+.dashboard-container .p{
+    font-weight: 1px;
+}
+.content-line {
+
+    border-bottom: 1px solid #eaeaea;
+}
+.custom-icon {
+    font-size: 2rem; /* Adjust the size as needed */
+}
+@media (max-width: 650px) {
+    .sidebar {
+        position: absolute;
+        left: -250px;
+        top: 0;
+        height: 100%;
+        z-index: 10;
+    }
+    .sidebar.active {
+        left: 0;
+    }
+    .navbar-toggler {
+        display: block;
+    }
+    .content-profile {
+        padding-left: 0;
+        padding-right: 0;
+    }
+} @media (max-width: 510px) {
+        .sidebar {
+            min-width: 200px;
+            max-width: 200px;
+        }
+        .sidebar.active {
+            /* left: -200px; */
+        }
+    }

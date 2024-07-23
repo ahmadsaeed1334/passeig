@@ -25,7 +25,7 @@ $(document).ready(function () {
 
 // Appointment tabs Slider
 // $(document).ready(function () {
-//     $('.appointment-slider ul').slick({
+//     $('.appointment-slider').slick({
 //         infinite: true,
 //         slidesToShow: 7,  // Number of items to show
 //         slidesToScroll: 1,
@@ -194,4 +194,46 @@ jQuery(document).ready(function ($) {
                }
            ]
        });
+    });
+
+    $(document).ready(function(){
+        $('.products-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: true,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+        $('.products-text-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.products-slider'
+        });
+
+        $('.products-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.products-text-slider',
+            dots: true,
+            centerMode: true,
+            focusOnSelect: true
+        });
     });

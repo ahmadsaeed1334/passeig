@@ -17,7 +17,7 @@ class Categories extends Component
     use LivewireAlert;
     use WithPagination;
     // public $products;
-    public $categories;
+    // public $categories;
     public $categorieId;
     public $name;
     public $selectedCategoryId;
@@ -29,7 +29,7 @@ class Categories extends Component
     ];
     public function mount()
     {
-        
+
         $this->categories = Categorie::all();
         // $this->products = Product::all();
     }
@@ -38,10 +38,10 @@ class Categories extends Component
         Categorie::create([
             'name' => $this->name,
             'description' => $this->description,
-           
+
 
         ]);
-        // $this->categories->push($category); 
+        // $this->categories->push($category);
         $this->categories = Categorie::all();
         $this->resetFields();
         $this->dispatch('hide-modal');
@@ -55,7 +55,7 @@ class Categories extends Component
     //     $this->name = $category->name;
     //     $this->description = $category->description;
     // }
- 
+
     public function edit($id)
     {
         $category = Categorie::find($id);
@@ -69,7 +69,7 @@ class Categories extends Component
         }
     }
 
-    
+
     // public function update(){
     //     $this->validate();
     //     $category = Categorie::find($this->categorieId);
@@ -133,11 +133,16 @@ class Categories extends Component
     public function discardChanges()
     {
         $this->resetFields();
-        $this->dispatch('hide-modal'); 
+        $this->dispatch('hide-modal');
     }
 
     public function render()
     {
-        return view('livewire.admin.categories.categories');
+        $categories = Categorie::orderBy('created_at', 'desc')->paginate(10);
+        $totalCategorie = Categorie::count();
+        return view('livewire.admin.categories.categories',[
+            'categories' => $categories,
+            'totalCategorie' => $totalCategorie,
+        ]);
     }
 }

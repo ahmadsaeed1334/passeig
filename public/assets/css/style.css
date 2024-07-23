@@ -75,6 +75,7 @@ nav {
     box-shadow: none;
 }
 
+
 /* Footer */
 footer a,
 footer p {
@@ -125,7 +126,7 @@ button.btn.btn-regular {
     border: 1px solid var(--secondary-color);
     border-radius: 0;
     padding: 20px 32px;
-    font-size: 22px;
+    font-size: 19px;
     color: var(--secondary-color);
 }
 
@@ -270,6 +271,7 @@ a.appointment-nav-container {
     font-weight: 300;
     font-size: 18px;
     color: var(--secondary-color);
+    cursor: pointer;
 }
 
 .services-container {
@@ -280,6 +282,7 @@ a.appointment-nav-container {
     font-size: 20px;
     font-weight: 400;
     color: var(--secondary-color);
+    cursor: pointer;
 }
 
 .services-container .inner-content span {
@@ -398,6 +401,11 @@ a.appointment-nav-container {
     color: var(--white-clr);
     width: 100%;
     height: 120px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 /* Blog-Details-section */
@@ -529,11 +537,11 @@ a.appointment-nav-container {
     cursor: pointer;
 }
 
-.products .products-slider .slick-list {
+/* .products .products-slider .slick-list {
     overflow: visible;
-}
+} */
 
-.products .products-slider .icon-angle-left {
+ .products .products-slider .icon-angle-left {
     left: 20px;
     z-index: 999;
 }
@@ -554,6 +562,33 @@ a.appointment-nav-container {
     text-align: center;
     z-index: 9;
 }
+/*
+.slider_products .products-slider img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.slider_products .products-text-slider {
+    text-align: center;
+}
+
+/* Responsive adjustments */
+/* @media (max-width: 768px) {
+    .slider_products .products-slider img {
+        height: auto;
+    } */
+
+    /* .slider_products .grid-x {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .slider_products .cell {
+        width: 100%;
+    }
+} */
 
 .products .sin-testiText {
     outline: none;
@@ -583,6 +618,7 @@ a.appointment-nav-container {
     border-radius: 49.76px;
     padding: 24px 0px 0px 31px;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .product_item p {
@@ -595,8 +631,8 @@ a.appointment-nav-container {
 }
 
 .product_item img {
-    width: 100%;
-    height: 300px;
+    width: 80%;
+    height: 290px;
 }
 
 .products_section h3,
@@ -673,14 +709,7 @@ a.appointment-nav-container {
     line-height: 36.07px;
     margin-bottom: 5px;
 }
-.single_cards .card_main p {
-    font-family: var(--helvatica-font);
-    font-size: 23.38px;
-    font-weight: 300;
-    line-height: 34.3px;
-    letter-spacing: -0.01em;
-    text-align: center;
-}
+
 .appointment-tabs {
     justify-content: space-between;
 }

@@ -31,6 +31,7 @@ use App\Livewire\Admin\Products\ProductTitles;
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\PassionsController;
 use App\Http\Controllers\ServicesController;
@@ -42,6 +43,15 @@ use App\Livewire\Front\SingleService;
 use App\Livewire\Front\SingleBlog;
 use App\Http\Controllers\HomeController;
 use App\Livewire\Admin\User\UserProfile;
+use App\Http\Controllers\ServicesCategoryController;
+use App\Http\Controllers\AppointmentServiceController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\AppointmentView\AppointmentView;
+use App\Livewire\Front\ProfileEdit;
+use App\Livewire\Front\UserAppointments;
+use App\Livewire\Front\UserDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,15 +82,10 @@ Route::impersonate();
 //     return view('welcome');
 // });
 
-Route::middleware([
-    'auth',
-    'verified'
-])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return redirect()->to('admin/dashboard');
-    });
-    // Route::get('/', Dashboard::class);
-    // Route::get('/admin/dashboard', Dashboard::class)->name('admin/dashboard');
+
+
+Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
+    Route::get('/admin/dashboard', Dashboard::class)->name('admin/dashboard');
     Route::get('/admin/messenger', Messenger::class)->name('admin/messenger');
     Route::get('/admin/staff', Staff::class)->name('admin/staff');
     Route::get('/admin/backups', Backups::class)->name('admin/backups');
@@ -96,61 +101,14 @@ Route::middleware([
     Route::get('/admin/banner', Banners::class)->name('admin/banner');
     Route::get('/admin/about', Abouts::class)->name('admin/about');
     Route::get('/admin/categories', Categories::class)->name('admin/categories');
-    Route::get('/admin/products', Products::class)->name('admin/products');
     Route::get('/admin/products/create', ProductsForm::class)->name('admin.products.products-form');
     Route::get('/admin/products/update/{id}', ProductUpdate::class)->name('admin.products.update');
     Route::get('/admin/partners', Partners::class)->name('admin/partners');
     Route::get('/admin/services', Services::class)->name('admin/services');
-    // Route::get('/admin/blogs', Blogs::class)->name('admin/blogs');
     Route::get('/admin/blog-categories', BlogsCategories::class)->name('admin/blog-categories');
     Route::get('admin/product-titles', ProductTitles::class)->name('admin.product-titles');
     Route::get('admin/user-profile', UserProfile::class)->name('admin/user-profile');
-
-
-    Route::get("/storage-link", function () {
-        Artisan::call('storage:link');
-        echo 'Symlink process successfully completed';
-    });
-    Route::get("/clear", function () {
-        Artisan::call("optimize:clear");
-        return "cleared";
-    });
-    Route::get("/optimize", function () {
-        Artisan::call("optimize");
-        return "optimized";
-    });
-    Route::get("/view-clear", function () {
-        Artisan::call("view:clear");
-        return "cleared";
-    });
-    Route::get("/view-optimize", function () {
-        Artisan::call("view:optimize");
-        return "optimized";
-    });
-    Route::get("/route-clear", function () {
-        Artisan::call("route:clear");
-        return "cleared";
-    });
-    Route::get("/route-cache", function () {
-        Artisan::call("route:cache");
-        return "cached";
-    });
-    Route::get("/config-cache", function () {
-        Artisan::call("config:cache");
-        return "cached";
-    });
-    Route::get("/view-cache", function () {
-        Artisan::call("view:cache");
-        return "cached";
-    });
-    Route::get("/clear-compiled", function () {
-        Artisan::call("cache:clear");
-        return "cleared";
-    });
-    Route::get("/config-clear", function () {
-        Artisan::call("config:clear");
-        return "cleared";
-    });
+    Route::get('admin/appointments-view', AppointmentView::class)->name('admin/appointments-view');
 
     Route::prefix('admin')->group(function () {
         // About Us Routes
@@ -174,6 +132,7 @@ Route::middleware([
          Route::get('our-services/{service}/edit', [ServicesController::class, 'edit'])->name('our-services.edit');
          Route::put('our-services/{service}', [ServicesController::class, 'update'])->name('our-services.update');
          Route::delete('our-services/{service}', [ServicesController::class, 'destroy'])->name('our-services.destroy');
+        Route::get('/admin/services', Services::class)->name('admin.services');
           // Services Title Routes
           Route::get('services-title/create', [ServicesController::class, 'createTitle'])->name('our-services.titlecreate');
           Route::post('services-title', [ServicesController::class, 'storeTitle'])->name('our-services.titlestore');
@@ -196,18 +155,121 @@ Route::middleware([
             Route::put('appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
             Route::delete('appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 
-            Route::resource('blogs', 'Admin\BlogController');
+            // Route::resource('blogs', 'Admin\BlogController');
+            Route::get('/services/preview', [ServicesController::class, 'preview'])->name('single-service-preview');
 
+            // Blogs Routes
+            Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
+            Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+            Route::post('blogs', [BlogController::class, 'store'])->name('blogs.store');
+            Route::get('blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+            Route::put('blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+            Route::delete('blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+            Route::get('blogs/titles/create', [BlogController::class, 'createTitle'])->name('blogs.createTitle');
+            Route::post('blogs/titles', [BlogController::class, 'storeTitle'])->name('blogs.storeTitle');
+            Route::get('blogs/titles/{id}/edit', [BlogController::class, 'editTitle'])->name('blogs.editTitle');
+            Route::put('blogs/titles/{id}', [BlogController::class, 'updateTitle'])->name('blogs.updateTitle');
+            Route::delete('blogs/titles/{id}', [BlogController::class, 'destroyTitle'])->name('blogs.destroyTitle');
+
+             // Services Category Routes
+             Route::get('services-category', [ServicesCategoryController::class, 'index'])->name('services-category.index');
+             Route::get('services-category/create', [ServicesCategoryController::class, 'create'])->name('services-category.create');
+             Route::post('services-category', [ServicesCategoryController::class, 'store'])->name('services-category.store');
+             Route::get('services-category/{category}/edit', [ServicesCategoryController::class, 'edit'])->name('services-category.edit');
+             Route::put('services-category/{category}', [ServicesCategoryController::class, 'update'])->name('services-category.update');
+             Route::delete('services-category/{category}', [ServicesCategoryController::class, 'destroy'])->name('services-category.destroy');
+
+              // Appointment Service Routes
+              Route::get('appointment-services', [AppointmentServiceController::class, 'index'])->name('appointment-services.index');
+              Route::get('appointment-services/create', [AppointmentServiceController::class, 'create'])->name('appointment-services.create');
+              Route::post('appointment-services', [AppointmentServiceController::class, 'store'])->name('appointment-services.store');
+              Route::get('appointment-services/{service}/edit', [AppointmentServiceController::class, 'edit'])->name('appointment-services.edit');
+              Route::put('appointment-services/{service}', [AppointmentServiceController::class, 'update'])->name('appointment-services.update');
+              Route::delete('appointment-services/{service}', [AppointmentServiceController::class, 'destroy'])->name('appointment-services.destroy');
+
+               // Products Routes
+               Route::get('products', [ProductController::class, 'index'])->name('products.index');
+               Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+               Route::post('products', [ProductController::class, 'store'])->name('products.store');
+               Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+               Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+               Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+               // Products Title Routes
+               Route::get('products/create-title', [ProductController::class, 'createTitle'])->name('products.createTitle');
+               Route::post('products/store-title', [ProductController::class, 'storeTitle'])->name('products.storeTitle');
+               Route::get('products/edit-title/{id}', [ProductController::class, 'editTitle'])->name('products.editTitle');
+               Route::put('products/update-title/{id}', [ProductController::class, 'updateTitle'])->name('products.updateTitle');
+               Route::delete('products/destroy-title/{id}', [ProductController::class, 'destroyTitle'])->name('products.destroyTitle');
+            //    Route::get('/appointments-book', AppointmentBook::class)->name('appointments');
+        });
+    });
+        // Route::get('/download', [AboutUsController::class, 'showDownloadPage']);
+
+        Route::get("/storage-link", function () {
+            Artisan::call('storage:link');
+            echo 'Symlink process successfully completed';
+        });
+        Route::get("/clear", function () {
+            Artisan::call("optimize:clear");
+            return "cleared";
+        });
+        Route::get("/optimize", function () {
+            Artisan::call("optimize");
+            return "optimized";
+        });
+        Route::get("/view-clear", function () {
+            Artisan::call("view:clear");
+            return "cleared";
+        });
+        Route::get("/view-optimize", function () {
+            Artisan::call("view:optimize");
+            return "optimized";
+        });
+        Route::get("/route-clear", function () {
+            Artisan::call("route:clear");
+            return "cleared";
+        });
+        Route::get("/route-cache", function () {
+            Artisan::call("route:cache");
+            return "cached";
+        });
+        Route::get("/config-cache", function () {
+            Artisan::call("config:cache");
+            return "cached";
+        });
+        Route::get("/view-cache", function () {
+            Artisan::call("view:cache");
+            return "cached";
+        });
+        Route::get("/clear-compiled", function () {
+            Artisan::call("cache:clear");
+            return "cleared";
+        });
+        Route::get("/config-clear", function () {
+            Artisan::call("config:clear");
+            return "cleared";
         });
 
-
         // Front End Pages
-       });
-       Route::get('/aboutus', AboutUs::class)->name('about-us');
-       Route::get('/products', Product::class)->name('products');
-       Route::get('/blogs', Frontblog::class)->name('blogs');
-       Route::get('/services', FrontServices::class)->name('services');
-       Route::get('/services/{id}', SingleService::class)->name('single-service');
-       Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
-       Route::get('/appointments', Appointments::class)->name('appointments');
-       Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+
+        Route::get('/', function () {
+            return view('home');
+        })->name('home');
+
+        Route::get('/aboutus', AboutUs::class)->name('about-us');
+        Route::get('/products', Product::class)->name('products');
+        Route::get('/blogs', Frontblog::class)->name('blogs');
+        Route::get('/services', FrontServices::class)->name('services');
+        Route::get('/services/{id}', SingleService::class)->name('single-service');
+        Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
+        Route::get('/appointments', Appointments::class)->name('appointments');
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+        Route::middleware('auth')->group(function () {
+            Route::get('/profile', ProfileEdit::class)->name('profile.edit');
+            Route::get('/user-appointments', UserAppointments::class)->name('user-appointments');
+            Route::get('/user-dashboard', UserDashboard::class)->name('user-dashboard');
+        });

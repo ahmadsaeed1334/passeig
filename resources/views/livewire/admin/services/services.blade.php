@@ -1,70 +1,57 @@
-<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-    {{-- @include('livewire.admin.partial.preloader') --}}
-    <div class="d-flex flex-column flex-column-fluid">
-        <x-slot name="page_title">
-            {{ $page_title ?? 'Services' }}
-        </x-slot>
-        <!--begin::Toolbar-->
-        <div id="kt_app_toolbar" class="app-toolbar py-lg-6 py-3">
-            <!--begin::Toolbar container-->
-            <div id="kt_app_toolbar_container" class="app-container container{{ general('layout') }} d-flex flex-stack">
-                <!--begin::Page title-->
-                <div class="page-title d-flex flex-column justify-content-center me-3 flex-wrap">
-                    <!--begin::Title-->
-                    <h1 wire:click.prevent="$dispatch('refresh')" class="page-heading d-flex text-{{ primary_color() }} fw-bold fs-3 flex-column justify-content-center pointer my-0">
-                        {{-- {{ $page_title }} --}}
-                        {{ $page_title ?? 'Services' }}
-                    </h1>
-                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                        <!--begin::Item-->
-                        <div class="breadcrumb-item text-muted">
-                            {{ __('total') }} {{ 'Services'}}
-                        </div>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <div class="breadcrumb-item">
-                            <span class="bullet w-5px h-2px bg-gray-400"></span>
-                        </div>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <div class="breadcrumb-item text-{{ primary_color() }}">
-                            {{ count($services) }}
-                        </div>
-                        <!--end::Item-->
-                    </ul>
-                </div>
-                <!--end::Page title-->
-            </div>
-            <!--end::Toolbar container-->
-        </div>
-        <!--end::Card header-->
-        <div id="kt_app_content" class="app-content flex-column-fluid">
-            <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container container{{ general('layout') }}">
-                <!--begin::View-->
-                <div class="card card-flush">
-                    @include('livewire.admin.services.services-cart')
-                    @include('livewire.admin.services.services-view')
-                    <!--end::View-->
-                </div>
-                <div id="kt_app_content" class="app-content flex-column-fluid">
-                    <!--begin::Content container-->
-                    <div id="kt_app_content_container" class="app-container container{{ general('layout') }}">
-                        @include('livewire.admin.services.services-edit')
-                        @include('livewire.admin.services.services-form')
+<div>
+    <x-slot name="page_title">
+        Services
+    </x-slot>
 
-
-                    </div>
+    <section class="py_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <form wire:submit.prevent="store">
+                        <div class="form-group ms-3 me-3 mt-3">
+                            <label class="mb-3 ms-3 required" for="title">Title</label>
+                            <input type="text" class="form-control" id="title" wire:model.live="title">
+                            @error('title') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group ms-3 me-3 mt-3">
+                            <label class="mb-3 ms-3 required" for="short_description">Short Description</label>
+                            <input type="text" class="form-control" id="short_description" wire:model.live="short_description">
+                            @error('short_description') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group ms-3 me-3 mt-3">
+                            <div class="col-lg-4">
+                                <label class="mb-3 ms-3 required" class="fs-6 fw-semibold form-label mb-2 mt-2">
+                                    <span class="required">Image</span>
+                                </label>
+                                <br>
+                                <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">
+                                    <div class="image-input-wrapper" id="image-preview" style="background-size:100% 100%;width:300px">
+                                    </div>
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input name="image" type="file" id="image" wire:model.live="image">
+                                        <input type="hidden" name="avatar_remove">
+                                    </label>
+                                    @error('image')
+                                    <div class="text-primary">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-text">jpeg, png, jpg, gif.</div>
+                            </div>
+                        </div>
+                        <div class="form-group ms-3 me-3 mt-3">
+                            <label class="mb-3 ms-3 required" for="long_description">Long Description</label>
+                            <textarea class="form-control" id="long_description" wire:model.live="long_description" rows="5"></textarea>
+                            @error('long_description') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary ms-3 mt-3 mb-5">Submit</button>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Preview</h3>
+                    @livewire('front.service-preview', ['title' => $title, 'short_description' => $short_description, 'long_description' => $long_description, 'image' => $image])
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-<!--end::Button-->
-</div>
-<!--end::Card toolbar-->
-{{-- @endcan --}}
+    </section>
 </div>

@@ -4,30 +4,28 @@
 <!--begin::Head-->
 
 <head>
-	<base href="" />
-	<title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
-	<link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track/>
-	@include('front.partial.style')
+    <base href="" />
+    <title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
+    <link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track />
+    @include('front.partial.style')
 
 
-	</style>
+    </style>
 </head>
 
 <body>
 
-
+    @include('front.partial.header')
     <div class="load_animation first">
-        <div class="load_animation first">
 
-            @include('front.partial.header')
-            <main class="content">
-                @if (isset($slot))
-                    {{ $slot }}
-                @else
-                    @yield('content')
-                @endif
-            </main>
-            {{-- <section id="hero">
+
+
+        @if (isset($slot))
+        {{ $slot }}
+        @else
+        @yield('content')
+        @endif
+        {{-- <section id="hero">
                 <div class="container">
                     <div class="text-center">
                         <div class="col-lg-8 mx-auto">
@@ -40,7 +38,7 @@
                     </div>
                 </div>
             </section> --}}
-        </div>
+
     </div>
 
     {{-- @include('front.partial.main') --}}

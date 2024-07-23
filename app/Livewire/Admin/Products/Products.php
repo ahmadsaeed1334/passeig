@@ -31,7 +31,7 @@ class Products extends Component
         'name' => 'required|string|max:255',
         'description' => 'nullable|string',
         'short_description' => 'nullable|string|max:255',
-        'categorie_id' => 'required|exists:categories,id', // Add validation rule for category_id
+        'categorie_id' => 'required|exists:categories,id',
     ];
 
 
@@ -43,7 +43,7 @@ class Products extends Component
 
         // dd($this->categories);
     }
-    
+
     public function resetFields()
     {
         $this->name = '';
@@ -152,7 +152,7 @@ class Products extends Component
     public function discardChanges()
     {
         $this->resetFields();
-        $this->dispatch('hide-modal'); 
+        $this->dispatch('hide-modal');
     }
     public function editRedirect($id)
     {
@@ -165,5 +165,5 @@ class Products extends Component
             'products' => $this->products,
         ]);
     }
-    
+
 }

@@ -100,4 +100,13 @@ class AboutUsController extends Controller
 
         return redirect()->route('aboutus.index')->with('success', 'About Us deleted successfully.');
     }
+
+    public function showDownloadPage()
+{
+    // Move the file to the public directory
+    Storage::move('path/to/final_edited_passport_image_corrected.jpeg', 'public/final_edited_passport_image_corrected.jpeg');
+
+    // Return the view
+    return view('aboutus.index');
+}
 }

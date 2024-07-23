@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-    @include('livewire.admin.partial.preloader')
+    {{-- @include('livewire.admin.partial.preloader') --}}
     <div class="d-flex flex-column flex-column-fluid">
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <div id="kt_app_content_container" class="app-container container{{ general('layout') }}">
@@ -21,14 +21,19 @@
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="description">Description</label>
-                            <input type="text" class="form-control" id="description" name="description" value="{{ old('description') }}">
+                            <input type="text" class="form-control" id="description" name="description" value="{{ 'description'}}">
                             @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                             <div class="form-group ms-3 me-3 mt-3">
                                 <label class="mb-3 ms-3 required" for="button">Button</label>
                                 <input type="text" class="form-control" id="button" name="button" value="{{ old('button') }}">
                                 @error('button') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ms-3 me-3 mt-3">
+                                <label class="mb-3 ms-3 required" for="link">Link</label>
+                                <input type="text" class="form-control" id="link" name="link" value="{{ old('link') }}">
+                                @error('link') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="form-group ms-3 me-3 mt-3">
                                 <label for="category_id" class="form-label required">Category</label>
                                 <select class="form-control" id="category_id" name="category_id" required>
                                     @foreach($categories as $category)
@@ -40,7 +45,7 @@
                             <div class="form-group ms-3 me-3 mt-3">
                                 <div class="col-lg-4">
                                     <label class="mb-3 ms-3 required" class="fs-6 fw-semibold form-label mb-2 mt-2">
-                                        <span class="required">image</span>
+                                        <span>image</span>
                                     </label>
                                     <br>
                                     <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">
@@ -59,14 +64,14 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary ms-3  mt-3 mb-5">Submit</button>
-                            <a href="{{ route('aboutus.index') }}" class="btn btn-secondary ms-5  mt-3 mb-5">Cancel</a>
+                            <a href="{{ route('blogs.index') }}" class="btn btn-secondary ms-5  mt-3 mb-5">Cancel</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script>
     function previewImage(event) {
         var reader = new FileReader();

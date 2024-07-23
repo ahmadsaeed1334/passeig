@@ -1,89 +1,46 @@
-<x-app-layout>
-    <x-slot name="page_title">
-        {{ $page_title ?? 'Login' }}
-    </x-slot>
-
-    <!--begin::Form-->
-    <form class="form w-100" method="POST" action="{{ route('login') }}">
-        @csrf
-        <!--begin::Heading-->
-        <div class="mb-10 text-center">
-            <!--begin::Title-->
-            <h1 class="text-white mb-3">{{ __('Sign In to') }} <span class="text-{{ primary_color() }}">{{ setting('general_settings.app_name') }}</span>
-            </h1>
-            <!--end::Title-->
-            <!--begin::Link-->
-            <div class="text-center">
-                @livewire('partial.slider')
-                {{-- {{ __('New Here?') }}<a href="{{ route('register') }}" class="link-primary fw-bolder">
-                    {{ __('Create an Account') }}</a> --}}
+@extends('layouts.login')
+@section('content')
+<div class="container ">
+    <div class="content-login ">
+        <div class="signup-container">
+            <div class="btn-container text-end">
+                <a href="{{ route('home') }}" class="btn boder text-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </a>
             </div>
-            <!--end::Link-->
+            <h1 class="text-start">Sign in</h1>
+            <p class="text-start">Please enter the details to create your account</p>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="center">
+                    <div class="custom-input-container">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="password-container">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                        <i class="bi bi-eye-slash" id="togglePassword"></i>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="remember">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <p class="mb-3"><a href="{{ route('password.request') }}" class=" text-dark">Forgot Password?</a></p>
+                </div>
+                <button type="submit" class="btn btn-primarys">Sign in</button>
+                <div class="divider mt-3">or</div>
+                <div class="d-flex justify-content-center">
+                    <a href="#" class="google-btn text-dark">Sign in with Google &nbsp;&nbsp;
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" width="15px">
+                    </a>
+                </div>
+                <p class="mt-3">Don’t have an account? <a href="{{ route('register') }}">Sign up</a></p>
+            </form>
         </div>
-        <!--begin::Heading-->
-        <x-validation-errors class="rounded-0 mb-3" />
-
-        @if (session('status'))
-        <div class="alert alert-success rounded-0 mb-3" role="alert">
-            {{ session('status') }}
-        </div>
-        @endif
-        <!--begin::Input group-->
-        <div class="fv-row mb-10">
-            <!--begin::Label-->
-            <label class="form-label fs-6 fw-bolder text-white">{{ __('Email') }}</label>
-            <!--end::Label-->
-            <!--begin::Input-->
-            <input class="form-control form-control-lg form-control-solid {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" value="{{ old('email') }}" required autocomplete="on" autofocus />
-            <x-input-error for="email"></x-input-error>
-
-            {{-- <input class="form-control form-control-lg form-control-solid {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-            type="email" name="phone" value="{{ old('phone') }}" required autocomplete="on" autofocus />
-            <x-input-error for="phone"></x-input-error> --}}
-            <!--end::Input-->
-        </div>
-        <!--end::Input group-->
-        <!--begin::Input group-->
-        <div class="fv-row mb-10">
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-stack mb-2">
-                <!--begin::Label-->
-                <label class="form-label fw-bolder text-white fs-6 mb-0">{{ __('Password') }}</label>
-                <!--end::Label-->
-                <!--begin::Link-->
-                @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="link-danger fs-6 fw-bolder">{{ __('Forgot Password?') }}</a>
-                @endif
-                <!--end::Link-->
-            </div>
-            <!--end::Wrapper-->
-            <!--begin::Input-->
-            <input class="form-control form-control-lg form-control-solid {{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" name="password" required autocomplete="current-password" />
-            <x-input-error for="password"></x-input-error>
-            <!--end::Input-->
-        </div>
-        <!--end::Input group-->
-        <!--begin::Input group-->
-        <div class="fv-row mb-10" style="float: right">
-            <!--begin::Wrapper-->
-            <div class="form-check form-check-custom form-check-{{ primary_color() }} form-check-solid">
-                <input class="form-check-input pointer mr-5" type="checkbox" id="remember_me" name="remember" />
-                <label class="text-white fs-6 fw-bolder text-hover-{{ primary_color() }} pointer" style="margin-left: 10px" for="remember_me">
-                    {{ __('Remember Me') }}
-                </label>
-            </div>
-        </div>
-        <!--begin::Actions-->
-        <div class="text-center">
-            <!--begin::Submit button-->
-            <button type="submit" class="btn btn-lg btn-danger w-100 mb-5">
-                <span class="indicator-label">{{ __('Login') }}</span>
-                <span class="indicator-progress">{{ __('Please wait...') }}
-                    <span class="spinner-border spinner-border-sm ms-2 align-middle"></span></span>
-            </button>
-            <!--end::Submit button-->
-        </div>
-        <!--end::Actions-->
-    </form>
-    <!--end::Form-->
-</x-app-layout>
+    </div>
+</div>
+@endsection

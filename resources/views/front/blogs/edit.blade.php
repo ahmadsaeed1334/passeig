@@ -20,12 +20,16 @@
                             <input type="text" class="form-control" id="title" name="title" value="{{ $blog->title }}">
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
-                            <label class="mb-3 ms-3 required" for="short_description">Description</label>
+                            <label class="mb-3 ms-3 required" for="description">Description</label>
                             <textarea class="form-control" id="description" name="description" required>{{ $blog->description }}</textarea>
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="button">button</label>
                             <input class="form-control" id="button" name="button" required value="{{ $blog->button }}">
+                        </div>
+                        <div class="form-group ms-3 me-3 mt-3">
+                            <label class="mb-3 ms-3 required" for="link">link</label>
+                            <input class="form-control" id="link" name="link" required value="{{ $blog->link }}">
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="category_id">Category</label>
@@ -38,7 +42,7 @@
                         <div class="form-group ms-3 me-3 mt-3">
                             <div class="col-lg-4">
                                 <label class="mb-3 ms-3 required" class="fs-6 fw-semibold form-label mb-2 mt-2">
-                                    <span class="required">Image</span>
+                                    <span>Image</span>
                                 </label>
                                 <br>
                                 <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">

@@ -2,25 +2,25 @@
     <x-slot name="page_title">
         {{ $page_title ?? 'Services' }}
     </x-slot>
-<section id="hero">
-    <div class="container">
-        <div class="text-center">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="animation">{{ $service->title }}</h2>
-                <p class="lead mb-4 p-below animation"> {{ \Illuminate\Support\Str::words(strip_tags($service->short_description)) }}</p>
+    <section id="hero">
+        <div class="container">
+            <div class="text-center">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="animation">{{ $service->title }}</h2>
+                    <p class="lead mb-4 p-below animation"> {{ \Illuminate\Support\Str::words(strip_tags($service->short_description)) }}</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="py_section">
-    <div class="container">
-        <div class="single_cards">
-            <div class="row gy-5">
-                <div class="col-12 card_main">
-                    <img src="{{ asset('storage/' . $service->image) }}" alt="services">
-                    <p>{{ \Illuminate\Support\Str::words(strip_tags($service->long_description)) }}</p>
-                </div>
-                @foreach ($relatedServices as $relatedService)
+    </section>
+    <section class="py_section">
+        <div class="container">
+            <div class="single_cards">
+                <div class="row gy-5">
+                    <div class="col-12 card_main">
+                        <img src="{{ asset('storage/' . $service->image) }}" alt="services">
+                        <p>{{strip_tags($service->long_description)}}</p>
+                    </div>
+                    @foreach ($relatedServices as $relatedService)
                     <div class="col-lg-6">
                         <div class="other_card">
                             <div class="img">
@@ -36,9 +36,9 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </div>

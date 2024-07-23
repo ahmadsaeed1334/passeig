@@ -142,7 +142,17 @@ return [
     | these features or you can even remove all of these if you need to.
     |
     */
+    'guard' => 'web',
 
+    'middleware' => ['web'],
+
+    'passwords' => 'users',
+
+    'username' => 'email',
+
+    'email' => 'email',
+
+    'views' => true,
     'features' => [
         Features::registration(),
         Features::resetPasswords(),

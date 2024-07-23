@@ -2,101 +2,117 @@
 
 namespace App\Livewire\Admin\Services;
 
+use App\Models\Massage;
 use App\Models\Service;
+use App\Models\ServicesTitle;
 use Livewire\Component;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
-#[Layout('layouts.app')]
+#[Layout('layouts.front')]
 class Services extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
-    public $services;
-    public $title,$description,$image;
-    public $servicesId,$selectedservices;
-    public $isOpen = false;
+    public $title, $short_description, $long_description, $image;
+    public $serviceId;
+    public $services, $servicesTitles;
     public function mount()
     {
-        $this->services = Service::all();
+        $this->services = Massage::all();
+        $this->servicesTitles = ServicesTitle::all();
     }
     protected $rules = [
         'title' =>'required',
         'description' =>'required',
         'image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:3072',
     ];
-    public function create(){
-        $this->validate();
-    
-        if ($this->image instanceof UploadedFile) {
-            $this->image = $this->image->store('ServicesImages', 'public');
-        }
-        Service::create([
-            'title' => $this->title,
-            'description' => $this->description,
-            'image' => $this->image,
-        ]);
-        $this->services = Service::all();
-        $this->resetFields();
-        $this->dispatch('hide-modal');
-        $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Services added successfully!']);
-        $this->alertMessage('success', 'Operation success','Partner added successfully!');
-    }
-    public function edit($id){
-        $service = Service::find($id);
-        $this->servicesId = $service->id;
-        $this->title = $service->title;
-        $this->description = $service->description;
-        $this->image = $service->image;
-        $this->dispatch('show-modal');
-    }
-    public function delete($id){
-        $service = Service::find($id);
-        $service->delete();
-        $this->services = Service::all();
-        $this->resetFields();
-        $this->dispatch('hide-modal');
-        $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Services deleted successfully!']);
-        $this->alertMessage('success', 'Operation success','Services deleted successfully!');
-    }
-    public function update(){
-        $service = Service::find($this->servicesId);
-        $this->deleteImage(
-            $service->image,$this->image
-        );
-        if ($this->image instanceof UploadedFile) {
-            $this->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072',
-            ]);
-            $this->image = $this->mage->store('ServicesImages', 'public');
-            $service->image = $this->image;
-            $service->save();
-        }
-        $service->title = $this->title;
-        $service->description = $this->description;
-        $service->save();
-        $this->services = Service::all();
-        $this->resetFields();
-        $this->dispatch('hide-modal');
-        $this->dispatch('showAlert', ['type' => 'info', 'message' => 'Services updated successfully!']);
-        $this->alertMessage('success', 'Operation success','Services updated successfully!');
-    }
-    public function resetFields(){
-        $this->title = '';
-        $this->description = '';
-        $this->image = '';
-        $this->servicesId = '';
-        $this->selectedservices = '';
-    }
-    protected function deleteImage($oldImagePath, $newImage)
+    public function store()
     {
-        if ($newImage instanceof UploadedFile) {
-            if ($oldImagePath) {
-                Storage::disk('public')->delete($oldImagePath);
-            }
+        $this->validate([
+            'title' => 'required|string|max:255',
+            'short_description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'long_description' => 'required|string',
+        ]);
+
+        $imagePath = null;
+        if ($this->image) {
+            $imagePath = $this->image->store('servicesImage', 'public');
         }
+
+        Massage::create([
+            'title' => $this->title,
+            'short_description' => $this->short_description,
+            'image' => $imagePath,
+            'long_description' => $this->long_description,
+        ]);
+
+        session()->flash('message', 'Service created successfully.');
+        $this->resetInputFields();
+        $this->dispatch('serviceStore'); // Close modal using JavaScript
+    }
+
+    private function resetInputFields()
+    {
+        $this->title = '';
+        $this->short_description = '';
+        $this->long_description = '';
+        $this->image = null;
+    }
+
+    public function edit($id)
+    {
+        $service = Massage::findOrFail($id);
+        $this->serviceId = $id;
+        $this->title = $service->title;
+        $this->short_description = $service->short_description;
+        $this->long_description = $service->long_description;
+        $this->image = $service->image;
+    }
+
+    public function update()
+    {
+        $this->validate([
+            'title' => 'required|string|max:255',
+            'short_description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'long_description' => 'required|string',
+        ]);
+
+        $service = Massage::find($this->serviceId);
+        $imagePath = $service->image;
+
+        if ($this->image) {
+            if ($service->image) {
+                Storage::disk('public')->delete($service->image);
+            }
+            $imagePath = $this->image->store('servicesImage', 'public');
+        }
+
+        $service->update([
+            'title' => $this->title,
+            'short_description' => $this->short_description,
+            'image' => $imagePath,
+            'long_description' => $this->long_description,
+        ]);
+
+        session()->flash('message', 'Service updated successfully.');
+        $this->resetInputFields();
+        $this->dispatch('serviceUpdate'); // Close modal using JavaScript
+    }
+
+    public function delete($id)
+    {
+        $service = Massage::find($id);
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
+        }
+        $service->delete();
+
+        session()->flash('message', 'Service deleted successfully.');
     }
     public function alertMessage($type = null, $title = null, $message = null, $position = null)
     {
@@ -111,10 +127,13 @@ class Services extends Component
     public function discardChanges()
     {
         $this->resetFields();
-        $this->dispatch('hide-modal'); 
+        $this->dispatch('hide-modal');
     }
     public function render()
     {
-        return view('livewire.admin.services.services');
+        return view('livewire.admin.services.services', [
+            'services' => $this->services,
+            'servicesTitles' => $this->servicesTitles,
+        ]);
     }
 }

@@ -2,185 +2,181 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
-  <link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track/>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
+    <link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-  <!-- GSAP ScrollTrigger -->
-  {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
-  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script> --}}
 
-  <link rel="stylesheet" href="{{ asset('assets/css/frontend.css')}}">
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    <style>
+        @media (min-width: 768px) {
+
+            .custom-margin {
+                margin-left: 150px;
+                /* Adjust the value as needed */
+            }
+
+            .custom-margin-bottom {
+                margin-bottom: 20%;
+            }
+
+        }
+
+        @media (min-width:585px) and (max-width: 990px) {
+
+            .margin-about-t20 {
+                margin-bottom: 50%;
+
+            }
+
+        }
+
+        @media (min-width:450px) and (max-width: 585px) {
+
+            .margin-about-t20 {
+                margin-bottom: 60%;
+
+            }
+
+        }
+
+        @media (max-width: 450px) {
+
+            .margin-about-t20 {
+                margin-bottom: 70%;
+
+            }
+
+        }
+
+    </style>
 </head>
 
-<body id="services-fullpage">
-  <div id="videoContainer">
-    <video id="backgroundVideo" autoplay muted onended="handleVideoEnd()">
-      <source src="{{ asset('assets/1720076221375.mp4_1720076778665.mp4')}}" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-
-
-  <div id="contentContainer">
-      <div class="load_animation">
-        @include('front.partial.header')
-
-        <section id="hero">
-          <div class="container">
-            <div class="text-center">
-              <div class="col-lg-8 mx-auto">
-                <img class="d-block mx-auto mb-4 img-fluid" src="{{env('APP_URL').'/storage' .'/'.general('logo_black')}}" alt="Passeig Logo">
-                <p class="lead mb-4 p-below">Risus scelerisque a non turpis vitae malesuada sed venenatis. In
-                  fringilla sollicitudin euismod sed.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+<body>
+    <div id="videoContainer">
+        <video id="backgroundVideo" autoplay muted onended="handleVideoEnd()">
+            <source src="{{ asset('assets/background.mp4')}}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
-  </section>
-  <main class="content">
-    @if (isset($slot))
-        {{ $slot }}
-    @else
-        @yield('content')
-    @endif
-</main>
+    {{-- <div id="videoContainer">
+        <video id="backgroundVideo" autoplay muted onended="handleVideoEnd()">
+            <source src="{{ asset('assets/1720076221375.mp4_1720076778665.mp4')}}" type="video/mp4">
+    Your browser does not support the video tag.
+    </video>
+    </div> --}}
+
+    <div id="contentContainer">
+        <div class="load_animation">
+            <header class="navbar-pading ">
+                <nav class="navbar navbar-expand-lg navbar-light bg-transparent ">
+                    <div class="container">
+                        <a class="navbar-brand" href="#"><img src="{{env('APP_URL').'/storage' .'/'.general('logo')}}" alt="Logo" width="120px"></a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('services') }}">Services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('products') }}">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('blogs') }}">Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('appointments') }}">Appointment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                                </li>
+                            </ul>
+                            <a href="{{ route('appointments') }}"><button type="button" class="btn btn-regular mb-2">Book Appointment</button></a>
+                            @if (Auth::check())
+                            <a href="{{ route('user-dashboard') }}"><button type="button" class="btn btn-regular ms-3 mb-2">Dashboard</button></a>
+                            @else
+                            <a href="{{ route('login') }}"><button type="button" class="btn btn-regular ms-3 mb-2">Login</button></a>
+                            @endif
+                        </div>
+                    </div>
+                </nav>
+            </header>
 
 
-@livewire('front.footers')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-<script>
- // Function to handle the end of the video
-function handleVideoEnd() {
-  // Slide up the content container
-  document.getElementById('contentContainer').style.bottom = '0';
+            <section class="services ">
+                <h1 class="text-center bold ">Services</h1>
+                <div class="container margin-t20">
+                    <img src="assets/images/swatch.png" class="corner-image" alt="Swatch Image" width="500px">
+                    <div class="card service-card custom-margin">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 margin-col-text">
+                                    <div class="ms-4 fade-left">
+                                        <h2 class="bold-text-h mt-3 mb-3">MANICURAS PEDICURAS</h2>
+                                        <p class="bold-text-p">Déjate llevar por una manicura única! Nuestro servicio de manicura es el atributo perfecto para manos cariñosas y uñas destacadas.</p>
 
-  // Enable scrolling
-  document.body.style.overflowY = 'scroll';
+                                        <a href="#" class="btn btn-secondry mt-3">Book Appointment</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 position-relative mt-5">
+                                    <div class="containers ms-md-4 fade-right">
+                                        <img src="{{ asset('assets/images/Passeig 19.04.24-42 2.png') }}" class="main-image" alt="Manicure Pedicure">
+                                        <img src="{{ asset('assets/images/Rectangle 21.png') }}" class="overlay-image" alt="Overlay">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            @if (isset($slot))
+            {{ $slot }}
+            @else
+            @yield('content')
+            @endif
+            {{-- <section id="hero">
+                <div class="container">
+                    <div class="text-center">
+                        <div class="col-lg-8 mx-auto">
+                            <img class="d-block mx-auto mb-4 img-fluid" src="{{env('APP_URL').'/storage' .'/'.general('logo_black')}}" alt="Passeig Logo">
+            <p class="lead mb-4 p-below">Risus scelerisque a non turpis vitae malesuada sed venenatis. In
+                fringilla sollicitudin euismod sed.</p>
+        </div>
+    </div>
+    </div>
+    </section> --}}
 
-  // Animate all child elements of the content container with a fade-in-left effect
-  gsap.from('#contentContainer > *', {
-      opacity: 0,
-      x: -100,
-      duration: 1,
-      stagger: 0.2 // Optional: adds delay between the start of each animation
-  });
-}
 
-// Initially, hide the scrollbar
-document.body.style.overflow = 'hidden';
+    </div>
 
-// GSAP Animation with ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
+    @include('front.partial.footer')
+    </div>
 
-gsap.utils.toArray('.block').forEach((element) => {
-  gsap.to(element, {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      scrollTrigger: {
-          trigger: element,
-          start: 'top 80%',
-          end: 'bottom 60%',
-          scrub: 1
-      }
-  });
-});
+    {{-- <main class="content">
 
-gsap.from('.navbar-brand, .nav-link, .btn', {
-  opacity: 0,
-  x: -50,
-  duration: 1,
-  delay: 0.5
-});
+    </main> --}}
 
-// Home Slider
-$(document).ready(function(){
-  $('.customer-logos').slick({
-      slidesToShow: 5,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 1500,
-      arrows: false,
-      dots: false,
-      pauseOnHover: false,
-      responsive: [{
-          breakpoint: 768,
-          settings: {
-              slidesToShow: 4
-          }
-      }, {
-          breakpoint: 520,
-          settings: {
-              slidesToShow: 3
-          }
-      }]
-  });
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-  window.scrollTo(0, 0);
-  gsap.timeline()
-      .fromTo(".load_animation", {
-          duration: 1.5,
-          clipPath: 'inset(84% 43% 0 42% round 120px)',
-          ease: "power2.inOut"
-      },
-      {
-          duration: 1.5,
-          clipPath: 'inset(48% 43% 0 42% round 120px)',
-          ease: "power2.inOut"
-      })
-      .to(".load_animation", {
-          duration: 1.5,
-          delay: 0.4,
-          clipPath: 'inset(0% 0% 0% 0% round 0px)',
-          ease: "power2.inOut"
-      });
-});
 
-// Register the ScrollTrigger plugin with GSAP
-gsap.registerPlugin(ScrollTrigger);
+    <script src="{{ asset('assets/js/home.js')}}"></script>
 
-gsap.utils.toArray('.animation').forEach(function(element) {
-  gsap.fromTo(element,
-      {
-          opacity: 0,
-          y: 50 // Start 50px below the initial position
-      },
-      {
-          duration: 1,
-          opacity: 1,
-          y: 0, // End at the initial position
-          ease: "power2.inOut",
-          scrollTrigger: {
-              trigger: element,
-              start: "top 80%", // Trigger animation when the top of the element hits 80% of the viewport height
-              toggleActions: "play none none none", // Play animation on scroll, no repeat
-          }
-      }
-  );
-});
-
-// HOme Slider
-
-</script>
-{{-- @include('front.partial.script') --}}
+    {{-- @include('front.partial.script') --}}
 
 </body>
 

@@ -7,18 +7,18 @@
         <div id="kt_app_toolbar" class="app-toolbar py-lg-6 py-3">
             <div id="kt_app_toolbar_container" class="app-container container{{ general('layout') }} d-flex flex-stack">
                 <div class="page-title d-flex flex-column justify-content-center me-3 flex-wrap">
-                    <h1 wire:click.prevent="$dispatch('refresh')" class="page-heading d-flex text-{{ primary_color() }} fw-bold fs-3 flex-column justify-content-center pointer my-0">
+                    <h1 class="page-heading d-flex text-{{ primary_color() }} fw-bold fs-3 flex-column justify-content-center my-0">
                         {{ $page_title ?? 'Blogs' }}
                     </h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                         <div class="breadcrumb-item text-muted">
-                            {{-- {{ __('total') }} {{ 'About Us'}} --}}
+                            {{ __('total') }} {{ 'Blogs'}}
                         </div>
                         <div class="breadcrumb-item">
                             <span class="bullet w-5px h-2px bg-gray-400"></span>
                         </div>
                         <div class="breadcrumb-item text-{{ primary_color() }}">
-                            {{-- {{ count($aboutus) }} --}}
+                            {{ $totalBlogs }}
                         </div>
                     </ul>
                 </div>
@@ -29,15 +29,6 @@
                 <div class="card card-flush">
                     <div class="card-header mt-6">
                         <div class="card-title">
-                            <div class="d-flex align-items-center position-relative me-5 my-1">
-                                <span class="svg-icon svg-icon-1 position-absolute ms-6 text-{{ primary_color() }}">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
-                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                <input wire:model.debounce.500ms="search" type="text" data-kt-Users-table-filter="search" class="form-control form-control-solid w-250px ps-15 text-{{ primary_color() }} fst-italic" placeholder="Search {{ Str::singular($page_title ?? ' Claim') }} by id or name" />
-                            </div>
                         </div>
                         <div class="card-toolbar">
                             <a type="button" class="btn btn-light-{{ primary_color() }}" href="{{ route('blogs.create') }}">
@@ -48,48 +39,92 @@
                                         <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
-                                Add Blogs
+                                Add Blog
                             </a>
                         </div>
                     </div>
                     <div class="card-body scroll-x pt-0">
-                        <table class="table-row-dashed fs-6 gy-5 mb-0 table align-middle" id="kt_HeroBanners_table">
+                        <table class="table-bordered fs-6 gy-5 mb-0 table align-middle" id="kt_HeroBanners_table">
                             <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Image</th>
-                                    <th>Long Description</th>
-                                    <th>Actions</th>
+                                <tr class="fw-bold fs-7 text-uppercase gs-0 text-{{ primary_color() }} text-start">
+                                    <th class="min-w-10px">S#</th>
+                                    <th class="min-w-10px">Title</th>
+                                    <th class="min-w-10px">Long Description</th>
+                                    <th class="min-w-100px ">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($abouts as $about)
+                                @forelse($blogTitles as $index => $blogTitle)
                                 <tr>
-                                    <td>{{ $about->title }}</td>
-                                    {{-- <td>{{ \Illuminate\Support\Str::words(strip_tags($about->short_description), 10, '...') }}</td> --}}
-                                    <td>{{ \Illuminate\Support\Str::limit($about->short_description, 50) }}</td>
+                                    <td>{{ $loop->iteration + ($blogs->currentPage() - 1) * $blogs->perPage() }}</td>
+                                    <td>{{ $blogTitle->title }}</td>
+                                    <td>{{ \Illuminate\Support\Str::words(strip_tags($blogTitle->long_description), 25, '...') }}</td>
                                     <td>
-                                        @if ($about->image)
-                                        <img src="{{ asset('storage/' . $about->image) }}" alt="{{ $about->title }}" width="100">
-                                        @endif
-                                    </td>
-                                    {{-- <td>{{ \Illuminate\Support\Str::limit($about->long_description, 100) }}</td> --}}
-                                    <td>{{ \Illuminate\Support\Str::words(strip_tags($about->long_description), 10, '...') }}</td>
-
-                                    <td>
-                                        <a href="{{ route('aboutus.edit', $about->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Update About US') !!}>
+                                        <a href="{{ route('blogs.editTitle', $blogTitle->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3">
                                             <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
                                         </a>
-                                        <form action="{{ route('aboutus.destroy', $about->id) }}" method="POST" style="display:inline-block;">
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="4">No blog titles found</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                        <table class="table-row-dashed fs-6 gy-5 mb-0 table align-middle" id="kt_HeroBanners_table">
+                            <thead>
+                                <tr class="fw-bold fs-7 text-uppercase gs-0 text-{{ primary_color() }} text-start">
+                                    <th class="min-w-10px">S#</th>
+                                    <th class="min-w-10px">Image</th>
+                                    <th class="min-w-10px">Title</th>
+                                    <th class="min-w-10px">Description</th>
+                                    <th class="min-w-10px">Categories</th>
+                                    <th class="min-w-10px">Button</th>
+                                    <th class="min-w-10px">Link</th>
+                                    <th class="min-w-10px">Created By</th>
+                                    <th class="min-w-100px ">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($blogs as $index => $blog)
+                                <tr>
+                                    <td>{{ $loop->iteration + ($blogs->currentPage() - 1) * $blogs->perPage() }}</td>
+                                    <td class="">
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-50 overlay symbol-50px me-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="symbol symbol-50 overlay symbol-50px me-3">
+                                                        <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" style="width: 50px; height: 50px; border-radius: 50%;">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ $blog->title }}</td>
+                                    <td>{{ \Illuminate\Support\Str::words(strip_tags($blog->description), 10, '...') }}</td>
+                                    <td>{{ $blog->category ? $blog->category->name : 'No category' }}</td>
+                                    <td>{{ $blog->button }}</td>
+                                    <td>{{ $blog->link }}</td>
+                                    <td><small>By {{ $blog->user->name }} on {{ $blog->created_at->format('d M Y') }}</small></td>
+                                    <td>
+                                        <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3">
+                                            <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
+                                        </a>
+                                        <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" {!! confirm() !!} class="btn btn-sm btn-icon btn-light btn-active-light-{{ primary_color() }}" data-bs-placement="top" title="Delete {{ Str::singular('About US') }}" data-bs-toggle="tooltip">
+                                            <button type="submit" class="btn btn-sm btn-icon btn-light btn-active-light-{{ primary_color() }}">
                                                 <i class="fa-solid fa-trash fs-6 fw-bold fw-bolder"></i></button>
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="9">No blogs found</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -106,6 +141,78 @@
                         });
 
                     </script>
+                    @endif
+                    @if ($blogs->hasPages())
+                    <ul class="pagination justify-content-center">
+                        {{-- Previous Page Link --}}
+                        @if ($blogs->onFirstPage())
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $blogs->previousPageUrl() }}" rel="prev">&laquo;</a>
+                        </li>
+                        @endif
+
+                        {{-- First Page Link --}}
+                        <li class="page-item {{ ($blogs->currentPage() == 1) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $blogs->url(1) }}">1</a>
+                        </li>
+
+                        {{-- Second Page Link --}}
+                        @if($blogs->lastPage() > 1)
+                        <li class="page-item {{ ($blogs->currentPage() == 2) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $blogs->url(2) }}">2</a>
+                        </li>
+                        @endif
+
+                        {{-- Third Page Link --}}
+                        @if($blogs->lastPage() > 2)
+                        <li class="page-item {{ ($blogs->currentPage() == 3) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $blogs->url(3) }}">3</a>
+                        </li>
+                        @endif
+
+                        {{-- Ellipsis --}}
+                        @if ($blogs->currentPage() > 4)
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                        @endif
+
+                        {{-- Middle Page Links --}}
+                        @for ($i = max(4, $blogs->currentPage() - 1); $i <= min($blogs->lastPage() - 1, $blogs->currentPage() + 1); $i++)
+                            <li class="page-item {{ ($i == $blogs->currentPage()) ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $blogs->url($i) }}">{{ $i }}</a>
+                            </li>
+                            @endfor
+
+                            {{-- Ellipsis --}}
+                            @if ($blogs->currentPage() < $blogs->lastPage() - 2)
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                @endif
+
+                                {{-- Last Page Link --}}
+                                @if ($blogs->lastPage() > 3)
+                                <li class="page-item {{ ($blogs->currentPage() == $blogs->lastPage()) ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $blogs->url($blogs->lastPage()) }}">{{ $blogs->lastPage() }}</a>
+                                </li>
+                                @endif
+
+                                {{-- Next Page Link --}}
+                                @if ($blogs->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $blogs->nextPageUrl() }}" rel="next">&raquo;</a>
+                                </li>
+                                @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">&raquo;</span>
+                                </li>
+                                @endif
+                    </ul>
                     @endif
                 </div>
             </div>

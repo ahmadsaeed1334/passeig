@@ -74,12 +74,12 @@
                 'icon' => "fa-solid fa-calendar-check",
                 // 'counter' => auth()->user()->newThreadsCount(),
                 ])
-                @include('livewire.admin.partial.sidebar-menu-item', [
+                {{-- @include('livewire.admin.partial.sidebar-menu-item', [
                 'route' => 'admin/banner',
                 'name' => 'Banner Slider',
                 'icon' => 'fa-solid fa-sliders',
                 // 'counter' => auth()->user()->newThreadsCount(),
-                ])
+                ]) --}}
                 {{-- @include('livewire.admin.partial.sidebar-menu-item', [
                 'route' => 'admin/about',
                 'name' => 'Abouts',
@@ -98,7 +98,7 @@
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
                 @include('livewire.admin.partial.sidebar-menu-item', [
-                'route' => 'admin/blogs',
+                'route' => 'blogs.index',
                 'name' => 'Blogs',
                 'icon' => 'fa-solid fa-newspaper',
                 'counter' => count($this->slides),
@@ -120,7 +120,7 @@
                 {{-- @endcanany --}}
                 @canany(['super staff', 'super roles', 'super permissions'])
                 <!--begin:Menu item here show-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion show">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($route_name == 'admin/categories' || $route_name == 'admin/products') here show @endif">
                     <!--begin:Menu link-->
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -141,8 +141,44 @@
                         'counter' => null,
                         ])
                         @include('livewire.admin.partial.sidebar-menu-item', [
-                        'route' => 'admin/products',
+                        'route' => 'products.index',
                         'name' => 'Products',
+                        'icon' => null,
+                        'counter' => null,
+                        ])
+                    </div>
+                    <!--end:Menu sub-->
+                </div>
+                <!--end:Menu item-->
+                @endcanany
+                @include('livewire.admin.partial.sidebar-menu-header', [
+                'name' => 'Appoinment Services',
+                ])
+                @canany(['super staff', 'super roles', 'super permissions'])
+                <!--begin:Menu item here show-->
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion @if ($route_name == 'services-category.index' || $route_name == 'appointment-services.index') here show @endif">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <i class="fa-solid fa-user-gear fs-5"></i>
+                        </span>
+                        <span class="menu-title">{{ __('Appoinment Management') }}</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        {{-- @can('super staff') --}}
+                        <!--begin:Menu item-->
+                        @include('livewire.admin.partial.sidebar-menu-item', [
+                        'route' => 'services-category.index',
+                        'name' => 'Services Category',
+                        'icon' => null,
+                        'counter' => null,
+                        ])
+                        @include('livewire.admin.partial.sidebar-menu-item', [
+                        'route' => 'appointment-services.index',
+                        'name' => 'Appointment Service',
                         'icon' => null,
                         'counter' => null,
                         ])
@@ -276,6 +312,14 @@
                 'icon' => 'fa-solid fa-envelope',
                 'counter' => '3rd Party',
                 ]) --}}
+                <!--begin:Menu link-->
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'admin/appointments-view',
+                'name' => 'Appointments View',
+                'icon' => 'fa-solid fa-calendar-check',
+
+                // 'counter' => '3rd Party',
+                ])
                 <!--end:Menu item-->
                 <!--begin:Menu link-->
                 @include('livewire.admin.partial.sidebar-menu-item', [

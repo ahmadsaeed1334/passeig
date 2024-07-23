@@ -72,6 +72,8 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // Other middleware entries...
         'route.notfound' => \App\Http\Middleware\RouteNotFoundExceptionHandler::class,
+        'checkUserType' => \App\Http\Middleware\CheckUserType::class,
+        'checkAdminAccess' => \App\Http\Middleware\CheckAdminAccess::class,
     ];
-    
+
 }

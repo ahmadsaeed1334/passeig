@@ -14,12 +14,13 @@ class Products extends Component
     public $products;
     public $productTitles;
     public $appointments;
-
+    public $featuredProducts;
     public function mount()
     {
         $this->products = Product::with('categorie')->get();
         $this->productTitles = ProductTitle::all();
         $this->appointments = Appointment::all();
+        $this->featuredProducts = $this->products->take(4);
 
 
     }
@@ -29,7 +30,8 @@ class Products extends Component
         return view('livewire.front.products', [
             'products' => $this->products,
             'productTitles' => $this->productTitles
-            , 'appointments' => $this->appointments
+            , 'appointments' => $this->appointments,
+            'featuredProducts' => $this->featuredProducts
         ]);
     }
 }

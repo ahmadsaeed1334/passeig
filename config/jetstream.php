@@ -56,14 +56,16 @@ return [
     | these features or you can even remove all of these if you need to.
     |
     */
+'features' => [
+    Features::profilePhotos(),
+    Features::api(),
+    Features::teams(),
+    Features::accountDeletion(),
+    Features::twoFactorAuthentication([
+        'confirmPassword' => true,
+    ]),
+],
 
-    'features' => [
-        // Features::termsAndPrivacyPolicy(),
-        // Features::profilePhotos(),
-        // Features::api(),
-        // Features::teams(['invitations' => true]),
-        Features::accountDeletion(),
-    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -17,22 +17,22 @@
                         {{ $page_title?? 'Categories' }}
                     </h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-						<!--begin::Item-->
-						<div class="breadcrumb-item text-muted">
-							{{ __('total') }} {{ 'Categories'}}
-						</div>
-						<!--end::Item-->
-						<!--begin::Item-->
-						<div class="breadcrumb-item">
-							<span class="bullet w-5px h-2px bg-gray-400"></span>
-						</div>
-						<!--end::Item-->
-						<!--begin::Item-->
-						<div class="breadcrumb-item text-{{ primary_color() }}">
-							{{ count($blogCategories) }}
-						</div>
-						<!--end::Item-->
-					</ul>
+                        <!--begin::Item-->
+                        <div class="breadcrumb-item text-muted">
+                            {{ __('total') }} {{ 'Categories'}}
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="breadcrumb-item">
+                            <span class="bullet w-5px h-2px bg-gray-400"></span>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="breadcrumb-item text-{{ primary_color() }}">
+                            {{ $totalCategorie}}
+                        </div>
+                        <!--end::Item-->
+                    </ul>
                 </div>
                 <!--end::Page title-->
             </div>

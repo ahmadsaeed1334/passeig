@@ -9,15 +9,22 @@ use Illuminate\Support\Facades\Storage;
 
 class ServicesController extends Controller
 {
-    // Display both services and services titles
-    public function index()
+
+    public function index(Request $request)
     {
-        $services = Massage::all();
+
+        $services = Massage::orderBy('created_at', 'desc')->paginate(10);
+        // $services = Massage::all();
+        $totalServices = Massage::count(); // Get the total count of blogs
+
         $servicesTitles = ServicesTitle::all();
         return view('front.pages.our-services.index', [
             'services' => $services,
+            'totalServices' => $totalServices,
             'servicesTitles' => $servicesTitles,
-            'page_title' => 'Services'
+            'page_title' => 'Services',
+
+
         ]);
     }
 
@@ -25,35 +32,38 @@ class ServicesController extends Controller
     public function create()
     {
         return view('front.pages.our-services.create', [
-            'page_title' => 'Create Service'
+            'page_title' => 'Create Service',
+            'service' => new Massage()
+
         ]);
     }
 
     // Store service
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'short_description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'long_description' => 'required|string',
-        ]);
+    // Store service
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'short_description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'long_description' => 'required|string',
+    ]);
 
-        $imagePath = null;
+    $imagePath = null;
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('servicesImage', 'public');
-        }
-
-        Massage::create([
-            'title' => $request->title,
-            'short_description' => $request->short_description,
-            'image' => $imagePath,
-            'long_description' => $request->long_description,
-        ]);
-
-        return redirect()->route('our-services.index')->with('success', 'Service created successfully.');
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('servicesImage', 'public');
     }
+
+    $service = Massage::create([
+        'title' => $request->title,
+        'short_description' => $request->short_description,
+        'image' => $imagePath,
+        'long_description' => $request->long_description,
+    ]);
+
+    return redirect()->route('our-services.index')->with('success', 'Service created successfully.');
+}
 
     // Edit service
     public function edit(Massage $service)

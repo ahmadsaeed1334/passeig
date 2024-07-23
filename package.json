@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "owl.carousel": "^2.3.4",
+        "slick-carousel": "^1.8.1",
         "swiper": "^11.1.0"
     }
 }

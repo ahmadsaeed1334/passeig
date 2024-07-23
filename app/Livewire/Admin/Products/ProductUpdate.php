@@ -74,6 +74,7 @@ class ProductUpdate extends Component
         $product->save();
 
         $this->products = Product::all();
+        return redirect()->route('admin/products');
         $this->resetFields();
         $this->dispatch('hide-modal');
         $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Product updated successfully!']);
@@ -112,7 +113,7 @@ class ProductUpdate extends Component
     public function discardChanges()
     {
         $this->resetFields();
-        $this->dispatch('hide-modal'); 
+        $this->dispatch('hide-modal');
     }
 
     public function render()
