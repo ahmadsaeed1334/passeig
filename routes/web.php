@@ -1,64 +1,65 @@
 <?php
 
-use App\Http\Controllers\LanguageController;
-use App\Livewire\Admin\Products\ProductsForm;
-use App\Livewire\Admin\Blogs\Blogs;
-use App\Livewire\Front\Blogs as Frontblog;
-use App\Livewire\Admin\Blogs\BlogsCategories;
-use App\Livewire\Admin\Settings\Settings;
-use App\Livewire\Admin\Dashboard\Dashboard;
-use App\Livewire\Admin\Home\Abouts\Abouts;
-use App\Livewire\Admin\Home\Banners;
-use App\Livewire\Admin\Partners\Partners;
-use App\Livewire\Admin\products\Products;
-use App\Livewire\Front\Products as Product;
-use App\Livewire\Admin\Language\LanguageManager;
-use App\Livewire\Admin\Logs\LogViewer;
-use App\Livewire\Admin\Mail\Maileditor;
-use App\Livewire\Admin\Categories\Categories;
-use App\Livewire\Admin\Messenger\Messenger;
+use App\Livewire\Front\AboutUs;
+use App\Livewire\Front\HomePage;
 use App\Livewire\Admin\News\News;
-use App\Livewire\Admin\Products\ProductUpdate;
-use App\Livewire\Admin\Services\Services;
-use App\Livewire\Front\Services as FrontServices;
-use App\Livewire\Admin\Settings\Backups;
-use App\Livewire\Admin\Staff\Permissions;
+use App\Livewire\Front\SingleBlog;
+use App\Livewire\Admin\Blogs\Blogs;
 use App\Livewire\Admin\Staff\Roles;
 use App\Livewire\Admin\Staff\Staff;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Admin\Products\ProductTitles;
-
-use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\FooterController;
-use App\Http\Controllers\PassionsController;
-use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\ServicesTitleController;
-use App\Livewire\Front\AboutUs;
+use App\Livewire\Front\ProfileEdit;
+use App\Livewire\Admin\Home\Banners;
 use App\Livewire\Front\Appointments;
-use App\Livewire\Front\HomePage;
 use App\Livewire\Front\SingleService;
-use App\Livewire\Front\SingleBlog;
+use App\Livewire\Front\UserDashboard;
+use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Logs\LogViewer;
+use App\Livewire\Admin\Mail\Maileditor;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
+use App\Livewire\Admin\Settings\Backups;
 use App\Livewire\Admin\User\UserProfile;
-use App\Http\Controllers\ServicesCategoryController;
-use App\Http\Controllers\AppointmentServiceController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Livewire\Front\UserAppointments;
+use App\Livewire\Admin\Partners\Partners;
+use App\Livewire\Admin\products\Products;
+use App\Livewire\Admin\Services\Services;
+use App\Livewire\Admin\Settings\Settings;
+use App\Livewire\Admin\Staff\Permissions;
+use App\Http\Controllers\FooterController;
+use App\Livewire\Admin\Home\Abouts\Abouts;
+
+use App\Livewire\Front\Blogs as Frontblog;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Livewire\Admin\AppointmentView\AppointmentView;
-use App\Livewire\Front\ProfileEdit;
-use App\Livewire\Front\UserAppointments;
-use App\Livewire\Front\UserDashboard;
-use App\Http\Controllers\SubscriptionController;
-use App\Http\Controllers\SubscriberController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\RegisteredUserController;
-use App\Http\Controllers\VerificationController;
+use App\Livewire\Admin\Dashboard\Dashboard;
+use App\Livewire\Admin\Messenger\Messenger;
+use App\Livewire\Front\Products as Product;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PassionsController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\RevSliderController;
+use App\Livewire\Admin\Blogs\BlogsCategories;
+use App\Livewire\Admin\Categories\Categories;
+use App\Livewire\Admin\Products\ProductsForm;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SubscriberController;
+use App\Livewire\Admin\Products\ProductTitles;
+use App\Livewire\Admin\Products\ProductUpdate;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\VerificationController;
+use App\Livewire\Admin\Language\LanguageManager;
+use App\Http\Controllers\ServicesTitleController;
+use App\Livewire\Front\Services as FrontServices;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\ServicesCategoryController;
+use App\Http\Controllers\AppointmentServiceController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Livewire\Admin\AppointmentView\AppointmentView;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,162 +133,163 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
         Route::get('passions/{passion}/edit', [PassionsController::class, 'edit'])->name('passions.edit');
         Route::put('passions/{passion}', [PassionsController::class, 'update'])->name('passions.update');
         Route::delete('passions/{passion}', [PassionsController::class, 'destroy'])->name('passions.destroy');
-         // Services Routes
-         Route::get('our-services', [ServicesController::class, 'index'])->name('our-services.index');
-         Route::get('our-services/create', [ServicesController::class, 'create'])->name('our-services.create');
-         Route::post('our-services', [ServicesController::class,'store'])->name('our-services.store');
-         Route::get('our-services/{service}/edit', [ServicesController::class, 'edit'])->name('our-services.edit');
-         Route::put('our-services/{service}', [ServicesController::class, 'update'])->name('our-services.update');
-         Route::delete('our-services/{service}', [ServicesController::class, 'destroy'])->name('our-services.destroy');
+        // Services Routes
+        Route::get('our-services', [ServicesController::class, 'index'])->name('our-services.index');
+        Route::get('our-services/create', [ServicesController::class, 'create'])->name('our-services.create');
+        Route::post('our-services', [ServicesController::class, 'store'])->name('our-services.store');
+        Route::get('our-services/{service}/edit', [ServicesController::class, 'edit'])->name('our-services.edit');
+        Route::put('our-services/{service}', [ServicesController::class, 'update'])->name('our-services.update');
+        Route::delete('our-services/{service}', [ServicesController::class, 'destroy'])->name('our-services.destroy');
         Route::get('/admin/services', Services::class)->name('admin.services');
-          // Services Title Routes
-          Route::get('services-title/create', [ServicesController::class, 'createTitle'])->name('our-services.titlecreate');
-          Route::post('services-title', [ServicesController::class, 'storeTitle'])->name('our-services.titlestore');
-          Route::get('services-title/{servicesTitle}/edit', [ServicesController::class, 'editTitle'])->name('our-services.titleedit');
-          Route::put('services-title/{servicesTitle}', [ServicesController::class, 'updateTitle'])->name('our-services.titleupdate');
-          Route::delete('services-title/{servicesTitle}', [ServicesController::class, 'destroyTitle'])->name('our-services.titledestroy');
+        // Services Title Routes
+        Route::get('services-title/create', [ServicesController::class, 'createTitle'])->name('our-services.titlecreate');
+        Route::post('services-title', [ServicesController::class, 'storeTitle'])->name('our-services.titlestore');
+        Route::get('services-title/{servicesTitle}/edit', [ServicesController::class, 'editTitle'])->name('our-services.titleedit');
+        Route::put('services-title/{servicesTitle}', [ServicesController::class, 'updateTitle'])->name('our-services.titleupdate');
+        Route::delete('services-title/{servicesTitle}', [ServicesController::class, 'destroyTitle'])->name('our-services.titledestroy');
         // Footers Routes
-          Route::get('footer', [FooterController::class, 'index'])->name('footer.index');
-             Route::get('footer/create', [FooterController::class, 'create'])->name('footer.create');
-             Route::post('footer', [FooterController::class, 'store'])->name('footer.store');
-             Route::get('footer/{footer}/edit', [FooterController::class, 'edit'])->name('footer.edit');
-             Route::put('footer/{footer}', [FooterController::class, 'update'])->name('footer.update');
-             Route::delete('footer/{footer}', [FooterController::class, 'destroy'])->name('footer.destroy');
+        Route::get('footer', [FooterController::class, 'index'])->name('footer.index');
+        Route::get('footer/create', [FooterController::class, 'create'])->name('footer.create');
+        Route::post('footer', [FooterController::class, 'store'])->name('footer.store');
+        Route::get('footer/{footer}/edit', [FooterController::class, 'edit'])->name('footer.edit');
+        Route::put('footer/{footer}', [FooterController::class, 'update'])->name('footer.update');
+        Route::delete('footer/{footer}', [FooterController::class, 'destroy'])->name('footer.destroy');
 
-            // Appointment Routes
-            Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
-            Route::get('appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
-            Route::post('appointments', [AppointmentController::class, 'store'])->name('appointments.store');
-            Route::get('appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
-            Route::put('appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
-            Route::delete('appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
+        // Appointment Routes
+        Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+        Route::get('appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
+        Route::post('appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+        Route::get('appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
+        Route::put('appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
+        Route::delete('appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 
-            // Route::resource('blogs', 'Admin\BlogController');
-            Route::get('/services/preview', [ServicesController::class, 'preview'])->name('single-service-preview');
+        // Route::resource('blogs', 'Admin\BlogController');
+        Route::get('/services/preview', [ServicesController::class, 'preview'])->name('single-service-preview');
 
-            // Blogs Routes
-            Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
-            Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-            Route::post('blogs', [BlogController::class, 'store'])->name('blogs.store');
-            Route::get('blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
-            Route::put('blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
-            Route::delete('blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
-            Route::get('blogs/titles/create', [BlogController::class, 'createTitle'])->name('blogs.createTitle');
-            Route::post('blogs/titles', [BlogController::class, 'storeTitle'])->name('blogs.storeTitle');
-            Route::get('blogs/titles/{id}/edit', [BlogController::class, 'editTitle'])->name('blogs.editTitle');
-            Route::put('blogs/titles/{id}', [BlogController::class, 'updateTitle'])->name('blogs.updateTitle');
-            Route::delete('blogs/titles/{id}', [BlogController::class, 'destroyTitle'])->name('blogs.destroyTitle');
+        // Blogs Routes
+        Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
+        Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+        Route::post('blogs', [BlogController::class, 'store'])->name('blogs.store');
+        Route::get('blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+        Route::put('blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+        Route::delete('blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+        Route::get('blogs/titles/create', [BlogController::class, 'createTitle'])->name('blogs.createTitle');
+        Route::post('blogs/titles', [BlogController::class, 'storeTitle'])->name('blogs.storeTitle');
+        Route::get('blogs/titles/{id}/edit', [BlogController::class, 'editTitle'])->name('blogs.editTitle');
+        Route::put('blogs/titles/{id}', [BlogController::class, 'updateTitle'])->name('blogs.updateTitle');
+        Route::delete('blogs/titles/{id}', [BlogController::class, 'destroyTitle'])->name('blogs.destroyTitle');
 
-             // Services Category Routes
-             Route::get('services-category', [ServicesCategoryController::class, 'index'])->name('services-category.index');
-             Route::get('services-category/create', [ServicesCategoryController::class, 'create'])->name('services-category.create');
-             Route::post('services-category', [ServicesCategoryController::class, 'store'])->name('services-category.store');
-             Route::get('services-category/{category}/edit', [ServicesCategoryController::class, 'edit'])->name('services-category.edit');
-             Route::put('services-category/{category}', [ServicesCategoryController::class, 'update'])->name('services-category.update');
-             Route::delete('services-category/{category}', [ServicesCategoryController::class, 'destroy'])->name('services-category.destroy');
+        // Services Category Routes
+        Route::get('services-category', [ServicesCategoryController::class, 'index'])->name('services-category.index');
+        Route::get('services-category/create', [ServicesCategoryController::class, 'create'])->name('services-category.create');
+        Route::post('services-category', [ServicesCategoryController::class, 'store'])->name('services-category.store');
+        Route::get('services-category/{category}/edit', [ServicesCategoryController::class, 'edit'])->name('services-category.edit');
+        Route::put('services-category/{category}', [ServicesCategoryController::class, 'update'])->name('services-category.update');
+        Route::delete('services-category/{category}', [ServicesCategoryController::class, 'destroy'])->name('services-category.destroy');
 
-              // Appointment Service Routes
-              Route::get('appointment-services', [AppointmentServiceController::class, 'index'])->name('appointment-services.index');
-              Route::get('appointment-services/create', [AppointmentServiceController::class, 'create'])->name('appointment-services.create');
-              Route::post('appointment-services', [AppointmentServiceController::class, 'store'])->name('appointment-services.store');
-              Route::get('appointment-services/{service}/edit', [AppointmentServiceController::class, 'edit'])->name('appointment-services.edit');
-              Route::put('appointment-services/{service}', [AppointmentServiceController::class, 'update'])->name('appointment-services.update');
-              Route::delete('appointment-services/{service}', [AppointmentServiceController::class, 'destroy'])->name('appointment-services.destroy');
+        // Appointment Service Routes
+        Route::get('appointment-services', [AppointmentServiceController::class, 'index'])->name('appointment-services.index');
+        Route::get('appointment-services/create', [AppointmentServiceController::class, 'create'])->name('appointment-services.create');
+        Route::post('appointment-services', [AppointmentServiceController::class, 'store'])->name('appointment-services.store');
+        Route::get('appointment-services/{service}/edit', [AppointmentServiceController::class, 'edit'])->name('appointment-services.edit');
+        Route::put('appointment-services/{service}', [AppointmentServiceController::class, 'update'])->name('appointment-services.update');
+        Route::delete('appointment-services/{service}', [AppointmentServiceController::class, 'destroy'])->name('appointment-services.destroy');
 
-               // Products Routes
-               Route::get('products', [ProductController::class, 'index'])->name('products.index');
-               Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
-               Route::post('products', [ProductController::class, 'store'])->name('products.store');
-               Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-               Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
-               Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+        // Products Routes
+        Route::get('products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+        Route::post('products', [ProductController::class, 'store'])->name('products.store');
+        Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-               // Products Title Routes
-               Route::get('products/create-title', [ProductController::class, 'createTitle'])->name('products.createTitle');
-               Route::post('products/store-title', [ProductController::class, 'storeTitle'])->name('products.storeTitle');
-               Route::get('products/edit-title/{id}', [ProductController::class, 'editTitle'])->name('products.editTitle');
-               Route::put('products/update-title/{id}', [ProductController::class, 'updateTitle'])->name('products.updateTitle');
-               Route::delete('products/destroy-title/{id}', [ProductController::class, 'destroyTitle'])->name('products.destroyTitle');
-            //    Route::get('/appointments-book', AppointmentBook::class)->name('appointments');
+        // Products Title Routes
+        Route::get('products/create-title', [ProductController::class, 'createTitle'])->name('products.createTitle');
+        Route::post('products/store-title', [ProductController::class, 'storeTitle'])->name('products.storeTitle');
+        Route::get('products/edit-title/{id}', [ProductController::class, 'editTitle'])->name('products.editTitle');
+        Route::put('products/update-title/{id}', [ProductController::class, 'updateTitle'])->name('products.updateTitle');
+        Route::delete('products/destroy-title/{id}', [ProductController::class, 'destroyTitle'])->name('products.destroyTitle');
+        //    Route::get('/appointments-book', AppointmentBook::class)->name('appointments');
 
-               Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
-               
-               Route::resource('rev_slider', RevSliderController::class);
+        Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
 
-        });
+        Route::resource('rev_slider', RevSliderController::class);
     });
-        // Route::get('/download', [AboutUsController::class, 'showDownloadPage']);
+});
+// Route::get('/download', [AboutUsController::class, 'showDownloadPage']);
 
-        Route::get("/storage-link", function () {
-            Artisan::call('storage:link');
-            echo 'Symlink process successfully completed';
-        });
-        Route::get("/clear", function () {
-            Artisan::call("optimize:clear");
-            return "cleared";
-        });
-        Route::get("/optimize", function () {
-            Artisan::call("optimize");
-            return "optimized";
-        });
-        Route::get("/view-clear", function () {
-            Artisan::call("view:clear");
-            return "cleared";
-        });
-        Route::get("/view-optimize", function () {
-            Artisan::call("view:optimize");
-            return "optimized";
-        });
-        Route::get("/route-clear", function () {
-            Artisan::call("route:clear");
-            return "cleared";
-        });
-        Route::get("/route-cache", function () {
-            Artisan::call("route:cache");
-            return "cached";
-        });
-        Route::get("/config-cache", function () {
-            Artisan::call("config:cache");
-            return "cached";
-        });
-        Route::get("/view-cache", function () {
-            Artisan::call("view:cache");
-            return "cached";
-        });
-        Route::get("/clear-compiled", function () {
-            Artisan::call("cache:clear");
-            return "cleared";
-        });
-        Route::get("/config-clear", function () {
-            Artisan::call("config:clear");
-            return "cleared";
-        });
+Route::get("/storage-link", function () {
+    Artisan::call('storage:link');
+    echo 'Symlink process successfully completed';
+});
+Route::get("/clear", function () {
+    Artisan::call("optimize:clear");
+    return "cleared";
+});
+Route::get("/optimize", function () {
+    Artisan::call("optimize");
+    return "optimized";
+});
+Route::get("/view-clear", function () {
+    Artisan::call("view:clear");
+    return "cleared";
+});
+Route::get("/view-optimize", function () {
+    Artisan::call("view:optimize");
+    return "optimized";
+});
+Route::get("/route-clear", function () {
+    Artisan::call("route:clear");
+    return "cleared";
+});
+Route::get("/route-cache", function () {
+    Artisan::call("route:cache");
+    return "cached";
+});
+Route::get("/config-cache", function () {
+    Artisan::call("config:cache");
+    return "cached";
+});
+Route::get("/view-cache", function () {
+    Artisan::call("view:cache");
+    return "cached";
+});
+Route::get("/clear-compiled", function () {
+    Artisan::call("cache:clear");
+    return "cleared";
+});
+Route::get("/config-clear", function () {
+    Artisan::call("config:clear");
+    return "cleared";
+});
 
-        // Front End Pages
+// Front End Pages
 
 
 
-        Route::get('/', function () {
-            return view('home');
-        })->name('home');
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
-        Route::get('/aboutus', AboutUs::class)->name('about-us');
-        Route::get('/products', Product::class)->name('products');
-        Route::get('/blogs', Frontblog::class)->name('blogs');
-        Route::get('/services', FrontServices::class)->name('services');
-        Route::get('/services/{id}', SingleService::class)->name('single-service');
-        Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
-        Route::get('/appointments', Appointments::class)->name('appointments');
-        Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-        Route::middleware('auth')->group(function () {
-            Route::get('/profile', ProfileEdit::class)->name('profile.edit');
-            Route::get('/user-appointments', UserAppointments::class)->name('user-appointments');
-            Route::get('/user-dashboard', UserDashboard::class)->name('user-dashboard');
-            Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
-            // Route::post('/subscribe', [HomeController::class, 'store'])->name('subscribe');
+Route::get('/aboutus', AboutUs::class)->name('about-us');
+Route::get('/products', Product::class)->name('products');
+Route::get('/blogs', Frontblog::class)->name('blogs');
+Route::get('/services', FrontServices::class)->name('services');
+Route::get('/services/{id}', SingleService::class)->name('single-service');
+Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
+Route::get('/appointments', Appointments::class)->name('appointments');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', ProfileEdit::class)->name('profile.edit');
+    Route::get('/user-appointments', UserAppointments::class)->name('user-appointments');
+    Route::get('/user-dashboard', UserDashboard::class)->name('user-dashboard');
+    Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
+    // Route::post('/subscribe', [HomeController::class, 'store'])->name('subscribe');
 
-        });
+});
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
