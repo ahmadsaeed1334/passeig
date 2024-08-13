@@ -4,18 +4,18 @@
 </script>
 <!-- Include CKEditor JavaScript -->
 {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/balloon/ckeditor.js"></script> --}}
-<script src="{{ asset('assets/ckeditor.js')}}"></script>
+<script src="{{ asset('assets/ckeditor.js') }}"></script>
 <script>
 	ClassicEditor
-		.create( document.querySelector( '#editor' ), {
+		.create(document.querySelector('#editor'), {
 			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-		} )
-		.then( editor => {
+		})
+		.then(editor => {
 			window.editor = editor;
-		} )
-		.catch( err => {
-			console.error( err.stack );
-		} );
+		})
+		.catch(err => {
+			console.error(err.stack);
+		});
 </script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
@@ -92,17 +92,119 @@
 
 <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 <script>
-   
-	document.addEventListener('trix-change', function (event) {
-    var detail = event.target.value;
-    window.livewire.dispatch('trixContentChanged', detail);
-});
-  
+	document.addEventListener('trix-change', function(event) {
+		var detail = event.target.value;
+		window.livewire.dispatch('trixContentChanged', detail);
+	});
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 	$("#dob").flatpickr();
 	$("#join").flatpickr();
 </script>
+<script>
+	$(document).ready(function() {
+		// Handle reply submission via AJAX
+		$('#replyForm').on('submit', function(e) {
+			e.preventDefault(); // Prevent the default form submission which causes a page reload
+
+			var form = $(this);
+			var formData = form.serialize();
+			var modal = $('#replyModal');
+
+			$.ajax({
+				url: '{{ route('admin.comments.storeReply') }}',
+				type: 'POST',
+				data: formData,
+				success: function(response) {
+					modal.modal('hide'); // Hide the reply modal
+
+					// Find the comment container where the reply belongs
+					var parentComment = $('button[data-comment-id="' + response.comment
+						.parent_id + '"]').closest('.bg-light');
+
+					// Create the new reply HTML
+					var newReply = `
+                        <div class="bg-light position-relative mt-3 rounded border p-4">
+                            <button type="button" class="btn btn-sm btn-icon btn-light-danger position-absolute delete-comment end-0 top-0"
+                                data-comment-id="` + response.comment.id + `">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="symbol symbol-40px symbol-circle me-3">
+                                    <span class="symbol-label fs-4 bg-primary text-inverse-primary">
+                                        ` + response.comment.author_name.charAt(0).toUpperCase() + `
+                                    </span>
+                                </div>
+                                <div>
+                                    <a href="#" class="text-body fw-bold text-hover-primary fs-6">` + response.comment
+						.author_name + `</a>
+                                    <span class="text-muted d-block fs-7">` + response.comment.created_at + `</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="fs-6 text-gray-800">` + response.comment.body + `</p>
+                            </div>
+                        </div>
+                    `;
+
+					// Append the new reply to the parent comment
+					parentComment.find('.ps-10').append(newReply);
+
+					// Reattach the delete event handler for the new delete button
+					reattachDeleteHandler();
+
+					// Reopen the comments modal
+					$('#commentsModal').modal('show');
+				},
+				error: function(response) {
+					console.error('Error:', response
+					.responseText); // Log the error for debugging
+					alert('An error occurred while submitting your reply.');
+				}
+			});
+		});
+
+		// Open reply modal and set parent_id
+		$('.reply-comment').on('click', function() {
+			var parentId = $(this).data('comment-id');
+			var blogId = $(this).data('blog-id');
+
+			$('#replyParentId').val(parentId);
+			$('#replyBlogId').val(blogId); // Set the correct blog ID
+		});
+
+		// Reattach delete handler function
+		function reattachDeleteHandler() {
+			$('.delete-comment').off('click').on('click', function() {
+				var commentId = $(this).data('comment-id');
+				var commentElement = $(this).closest('.bg-light');
+
+				if (confirm('Are you sure you want to delete this comment?')) {
+					$.ajax({
+						url: '{{ route('admin.comments.destroy', ':id') }}'.replace(':id',
+							commentId),
+						type: 'DELETE',
+						data: {
+							_token: '{{ csrf_token() }}'
+						},
+						success: function(response) {
+							commentElement.remove();
+						},
+						error: function(response) {
+							console.error('Error:', response.responseText);
+							alert('An error occurred while deleting the comment.');
+						}
+					});
+				}
+			});
+		}
+
+		// Initial call to attach delete event handlers
+		reattachDeleteHandler();
+	});
+</script>
+
+
 @livewireScripts
 <x-livewire-alert::scripts />

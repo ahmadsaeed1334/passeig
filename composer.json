@@ -32,6 +32,7 @@
         "rap2hpoutre/laravel-log-viewer": "^2.3",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-backup": "^8.6",
+        "spatie/laravel-medialibrary": "^11.8",
         "spatie/laravel-permission": "^6.3",
         "stevebauman/location": "^7.1",
         "tamer-dev/laravel-env-cli": "^1.2",
