@@ -33,6 +33,7 @@ use App\Livewire\Admin\Home\Abouts\Abouts;
 use App\Livewire\Front\Blogs as Frontblog;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\Dashboard\Dashboard;
@@ -185,6 +186,22 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
 
         Route::post('comments/reply', [AdminCommentController::class, 'storeReply'])->name('admin.comments.storeReply');
         Route::delete('comments/{comment}', [AdminCommentController::class, 'destroy'])->name('admin.comments.destroy');
+
+        // Gallery Management Routes
+        Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
+        Route::post('gallery/store', [GalleryController::class, 'store'])->name('gallery.store'); // This should define the `admin.gallery.store` route
+        Route::get(
+            'gallery/edit/{id}',
+            [GalleryController::class, 'edit']
+        )->name('gallery.edit');
+        Route::post('gallery/update/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+        Route::delete('gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.delete');
+
+        // Category Management Routes
+        Route::post('gallery/category/store', [GalleryController::class, 'storeCategory'])->name('gallery.category.store');
+        Route::get('gallery/category/edit/{id}', [GalleryController::class, 'editCategory'])->name('gallery.category.edit');
+        Route::post('gallery/category/update/{id}', [GalleryController::class, 'updateCategory'])->name('gallery.category.update');
+        Route::delete('gallery/category/delete/{id}', [GalleryController::class, 'destroyCategory'])->name('gallery.category.delete');
 
         // Services Category Routes
         Route::get('services-category', [ServicesCategoryController::class, 'index'])->name('services-category.index');
