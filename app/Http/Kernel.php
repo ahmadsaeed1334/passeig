@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\EnsureUserIsVerified::class,
         ],
 
         'api' => [
@@ -74,6 +75,7 @@ class Kernel extends HttpKernel
         'route.notfound' => \App\Http\Middleware\RouteNotFoundExceptionHandler::class,
         'checkUserType' => \App\Http\Middleware\CheckUserType::class,
         'checkAdminAccess' => \App\Http\Middleware\CheckAdminAccess::class,
+        // 'verified' => \App\Http\Middleware\EnsureUserIsVerified::class,
     ];
 
 }

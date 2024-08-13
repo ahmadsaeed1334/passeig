@@ -2,35 +2,23 @@
     <div class="container">
         <div class="card service-card custom-margin">
             <div class="card-body card-body-blog">
-                <h1 class="text-aboutus bold">Blogs</h1>
+                <h1 class="text-aboutus bold moveUpDown">Blogs</h1>
                 <div class="row blog-margin">
-                    <div class="col-lg-4">
-                        <div class="card blog-card blog-card1 fade-left-blog">
-                            <img src="{{ asset('assets/images/Passeig 19.04.24-21 1.png') }}" class="card-img-top" alt="Blog 1" width="250px" height="250px">
-                            <div class="card-body text-center">
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur. Libero viverra suspendisse vel volutpat ac ornare.</p>
-                                <a href="#" class="btn btn-read">Read more</a>
+                    @if ($blogs->isEmpty())
+                        <p>No blogs available.</p>
+                    @else
+                        @foreach ($blogs as $index => $blog)
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card blog-card blog-card{{ $index + 1 }} fade-{{ $index == 0 ? 'left' : ($index == 1 ? 'in-up' : 'right') }}-blog">
+                                <img src="{{ asset('storage/' . $blog->image) }}" class="card-img-top" alt="Blog {{ $index + 1 }}">
+                                <div class="card-body text-center">
+                                    <p class="card-text">{{ \Illuminate\Support\Str::words(strip_tags($blog->description), 20, '...') }}</p>
+                                    <a href="{{ route('single-blog', $blog->id) }}" class="custom-btn btn-11">Read more</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card blog-card blog-card2 fade-in-up-blog">
-                            <img src="{{ asset('assets/images/Passeig 19.04.24-57 1.png') }}" class="card-img-top" alt="Blog 2" width="250px" height="250px">
-                            <div class="card-body text-center">
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur. Libero viverra suspendisse vel volutpat ac ornare.</p>
-                                <a href="#" class="btn btn-read">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card blog-card blog-card3 fade-right-blog">
-                            <img src="{{ asset('assets/images/Passeig 19.04.24-53 1.png') }}" class="card-img-top" alt="Blog 3" width="250px" height="250px">
-                            <div class="card-body text-center">
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur. Libero viverra suspendisse vel volutpat ac ornare.</p>
-                                <a href="#" class="btn btn-read">Read more</a>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@ class HomePage extends Component
     {
         $this->services = Massage::all();
         $this->appointments = Appointment::all();
+        $this->singleService = Massage::find(1);
 
     }
 
@@ -24,7 +25,8 @@ class HomePage extends Component
     {
         return view('livewire.front.home-page', [
             'services' => $this->services,
-            'appointments' => $this->appointments
+            'appointments' => $this->appointments,
+            'singleService' => $this->singleService
         ]);
     }
 }

@@ -17,8 +17,8 @@
             <div class="single_cards">
                 <div class="row gy-5">
                     <div class="col-12 card_main">
-                        <img src="{{ asset('storage/' . $service->image) }}" alt="services">
-                        <p>{{strip_tags($service->long_description)}}</p>
+                        <img src="{{ asset('storage/' . $service->image) }}" alt="services" style="border-radius: 30px">
+                        <p>{!! $service->long_description !!}</p>
                     </div>
                     @foreach ($relatedServices as $relatedService)
                     <div class="col-lg-6">

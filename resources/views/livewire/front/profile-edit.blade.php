@@ -1,4 +1,7 @@
 <div class="content-profile">
+<x-slot name="page_title">
+        {{ $page_title ?? 'Profie' }}
+    </x-slot>
     <div class="content-inner content-inner-panding">
         <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>

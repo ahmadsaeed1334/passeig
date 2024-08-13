@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone')->nullable()->default(null)->after('email');
-            //
+            $table->timestamp('phone_verified_at')->nullable()->after('phone');
         });
     }
 

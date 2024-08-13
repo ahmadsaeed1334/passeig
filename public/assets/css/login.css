@@ -20,40 +20,35 @@ body {
 
 }
 
-.body-width-signin{
+/* .body-width-signin {
     height: 130vh;
 }
-/* .body-width-signup{
-    height: 150vh;
-} */
-/* @media(max-width:1500px){
-    .body-width-signin{
-        height: 270vh;
-    }
-    .body-width-signup{
-        height: 150vh;
-    }
 
+.body-width-signin {
+    height: 270vh;
 } */
-@media(min-width:1200px){
-    .body-width-signin{
+
+.body-width-signup {
+    height: 100vh;
+}
+
+/* Styles for large screens */
+@media(min-width:1200px) {
+    .body-width-signin {
         height: 270vh;
     }
 
-    .body-width-signup{
-        height: 170vh;
+    .body-width-signup {
+        height: 140vh;
     }
 }
 
-
-
-@media (max-width:678px){
-    .body-width-signup{
-        height: 0vh;
+/* Styles for small screens (mobile view) */
+@media (max-width:678px) {
+    .body-width-signup {
+        height: 100vh;
     }
-
 }
-
 
 .content-login {
     background-repeat: no-repeat;
@@ -112,9 +107,10 @@ body {
     padding: 10px;
 }
 
+/* 
 .signup-container {
     margin-top: 200px;
-}
+} */
 
 .btn-boder {
     margin-left: -20px;
@@ -225,6 +221,7 @@ input[type="file"] {
     background-color: #3f7176;
     color: white;
 }
+
 .divider {
     display: flex;
     align-items: center;
@@ -266,7 +263,8 @@ input[type="file"] {
 .google-btn img {
     margin-right: 10px;
 }
-@media(max-width:520px){
+
+@media(max-width:520px) {
     .google-btn {
 
         width: 300px;
@@ -275,9 +273,10 @@ input[type="file"] {
     }
 
 }
-@media(max-width:520px){
+
+@media(max-width:520px) {
     .google-btn {
-      text-align: center;
+        text-align: center;
         width: 250px;
         height: 40px;
 

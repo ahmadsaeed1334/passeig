@@ -21,6 +21,7 @@
         "laravel/jetstream": "^4.2",
         "laravel/sanctum": "^3.3",
         "laravel/slack-notification-channel": "^3.2",
+        "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.4",
         "laravolt/avatar": "^5.0",
@@ -34,7 +35,9 @@
         "spatie/laravel-permission": "^6.3",
         "stevebauman/location": "^7.1",
         "tamer-dev/laravel-env-cli": "^1.2",
-        "tinymce/tinymce": "^7.0"
+        "tinymce/tinymce": "^7.0",
+        "twilio/sdk": "^8.2",
+        "vlucas/phpdotenv": "^5.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.10",

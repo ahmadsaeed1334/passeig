@@ -312,7 +312,7 @@ class GeneralSettings extends Component
 
     public function render()
     {
-        $this->languages = UtilityFacades::languages();
+        // $this->languages = UtilityFacades::languages();
         return view('livewire.admin.settings.general-settings');
     }
 }

@@ -20,14 +20,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center mb-lg-0 mb-5">
-                <img src="{{asset('assets/images/logo-footer.png')}}" class="img-fluid">
+                <img src="{{env('APP_URL').'/storage' .'/'.general('logo_black')}}"width="170px"
+                class="img-fluid">
             </div>
         </div>
         <div class="row align-items-center">
             <div class="col-lg-3 col-md-6 col-12 text-center order-1 mb-md-0 mb-5">
-                <a href="">{{ $footer->number }}</a><br>
+               
                 {{-- <a href="">+ 907 683 8196</a><br> --}}
                 <a href="">{{ $footer->address }}</a><br>
+                 <a href="">{{ $footer->number }}</a><br>
                 {{-- <a href="">828 Timbercrest Road, <br>Healy City, AK 99743</a><br> --}}
                 {{-- <a href="">info@celeste.com</a> --}}
             </div>
@@ -50,14 +52,19 @@
                 @endforeach
                 </div>
             </div>
+   
             <div class="col-lg-3 col-md-6 col-12 text-center  order-lg-3 order-1">
                 <p>Working hours: <br>{{ $footer->working_hours }}</p>
-                <form id="email-collector-bottom" class="d-flex">
+               <form  method="POST" id="email-collector-bottom" class="d-flex">
+                     @csrf
                     <input type="email" name="email" class="w-100 p-3 border-0 bg-transparent"
                         placeholder="Your mail">
-                    <button type="submit" class="btn"><img src="./assets/images/subscribe.svg"></button>
+                  
+                    <button type="submit" class="btn"><img src="{{asset('assets/images/subscribe.svg')}}"></button>
+
                 </form>
             </div>
+        <span class="text-danger" id="email-error"></span>
         </div>
     </div>
     <hr class="bg-white">
@@ -68,4 +75,47 @@
 
     </div>
     @endforeach
+  
+
+
+<script>
+    document.getElementById('email-collector-bottom').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var form = this;
+        var formData = new FormData(form);
+
+        fetch("{{ route('subscribe') }}", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': formData.get('_token')
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: data.message,
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message,
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'You need to log in first',
+            });
+        });
+    });
+</script>
 </footer>

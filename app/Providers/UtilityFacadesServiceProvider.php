@@ -13,7 +13,7 @@ class UtilityFacadesServiceProvider extends ServiceProvider
     public function register(): void
     {
         App::bind('utility', function () {
-            return new \App\Facades\utility;
+            return new \App\Facades\Utility;
         });
     }
 

@@ -1,21 +1,22 @@
-<div>
+<div stu>
     <x-slot name="page_title">
         {{ $page_title ?? 'Services' }}
     </x-slot>
-    <main>
+    <main  id="hero">
         @foreach($servicesTitles as $servicesTitle)
-        <section id="hero">
+        <section>
             <div class="container">
                 <div class="text-center">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="animation">{{ $servicesTitle->title }}</h2>
-                        <p class="lead mb-4 p-below animation"> {{ \Illuminate\Support\Str::words(strip_tags($servicesTitle->long_description)) }}</p>
+                        <p class="lead mb-4 p-below animation"> {!!$servicesTitle->long_description!!}</p>
+                        {{--  <p class="lead mb-4 p-below animation"> {{ \Illuminate\Support\Str::words(strip_tags($servicesTitle->long_description)) }}</p>  --}}
                     </div>
                 </div>
             </div>
         </section>
         @endforeach
-        <section class="py_section offer_section">
+        <section class="py_section offer_section" style="background-color: transparent !important;">
             <div class="container">
                 <h3 class="animation text-center">SERVICES WE OFFER</h3>
                 <p class="lead mb-4 p-below animation text-center">Be Relax' innovative, high-end and practical products will become your inseparable companions wherever you go. Uniting a sense of ultimate comfort with a perfect style, they are designed to enhance passenger’s journey and recovery.</p>
@@ -23,9 +24,10 @@
                     <div class="row gy-5">
                         @foreach ($services as $service)
                         <div class="col-lg-4">
+                        
                             <a href="{{ route('single-service', $service->id) }}" class="card_services animation">
                                 <div class="card_content">
-                                    <img src="{{ asset('storage/' . $service->image) }}" class="w-100" alt="card_img">
+                                    <img src="{{ asset('storage/' . $service->image) }}" class="w--100" width="100%" height="350px" alt="card_img">
                                     <p class="card_title animation">{{ $service->title }}</p>
                                 </div>
                             </a>
@@ -114,7 +116,7 @@
             <div class="container">
                 <div class="text-center">
                     <div class="col-12 mx-auto">
-                        <h2 class="text-uppercase text-white mb-4">{{ $appointment->title }}/h2>
+                        <h2 class="text-uppercase text-white mb-4">{{ $appointment->title }}</h2>
                             <p class="lead mb-4 p-below text-white">{{ \Illuminate\Support\Str::words(strip_tags($appointment->long_description)) }}</p>
                             <a href="{{ route('appointments') }}" class="appointment-btn mt-5">{{ $appointment->button }}</a>
                     </div>
@@ -123,21 +125,8 @@
             <img src="{{ asset('assets/images/appointment0sec-right.png')}}" alt="" class="appointment-right">
         </section>
         @endforeach
-        <!-- Subscribe Section -->
-        <section id="subscribe">
-            <img src="{{asset('assets/images/subscribe-petal-left.png')}}" alt="" class="subscribe-petal-left img-fluid">
-            <div class="container">
-                <div class="subscribe-content-wrapper">
-                    <h2 class="my-5">Subscribe To Receive <br> Waxly News & Offers</h2>
-                    <div class="col-md-7 mx-auto subscribe-email">
-                        <form id="email-collector" class="d-flex">
-                            <input type="email" name="email" class="w-100 p-3" placeholder="Email">
-                            <button type="submit" class="btn"><img src="{{asset('assets/images/submit.svg')}}"></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <img src="{{asset('assets/images/subscribe-petal-right.png')}}" alt="" class="subscribe-petal-right img-fluid">
-        </section>
+       <!-- Subscribe Section -->
+ @include('livewire.front.subscribe')
+
     </main>
 </div>

@@ -1,4 +1,7 @@
 <div class="content-profile">
+<x-slot name="page_title">
+        {{ $page_title ?? 'Dashboard' }}
+    </x-slot>
     <div class="content-inner">
         <span class="navbar-toggler" type="button" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="bi bi-list custom-icon"></i></span>
@@ -20,7 +23,7 @@
                 <div class="appointments-content mt-5">
                     <div class="content-line d-flex justify-content-between">
                         <h5>Today's Appointments</h5>
-                        <a href="#" class="see-all">See All</a>
+                        <a href="{{route('user-appointments')}}" class="see-all">See All</a>
                     </div>
                     @foreach($todayAppointments as $appointment)
                     <div class="appointment-item mt-4">
@@ -38,7 +41,7 @@
                 <!-- Upcoming Appointments -->
                 <div class="content-line d-flex justify-content-between mt-3">
                     <h5 class="">Upcoming Appointments</h5>
-                    <a href="#" class="see-all">See All</a>
+                    <a href="{{route('user-appointments')}}" class="see-all">See All</a>
                 </div>
                 <div class="appointments-content upcoming">
                     @foreach($upcomingAppointments as $appointment)

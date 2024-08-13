@@ -165,7 +165,7 @@
     </style>
     <header class="animation">
         <!-- Full-screen Header -->
-        <nav class="navbar navbar-expand-lg navbar-light position-absolute bg-transparent w-30 d-xxl-block d-none">
+        {{--  <nav class="navbar navbar-expand-lg navbar-light position-absolute bg-transparent w-30 d-xxl-block d-none">
             <div class="container">
                 <a class="navbar-brand" href="/"><img src="{{env('APP_URL').'/storage' .'/'.general('logo')}}" alt="Logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -196,7 +196,7 @@
                 </div>
                 <a href="{{ route('appointments') }}"><button type="button" class="btn btn-regular" style="border: 1px solid #645242;    border-radius: 0;
     margin-left: 35px;">Book Appointment</button></a>
-        </nav>
+        </nav>  --}}
         <!-- Mobile Header -->
         <nav class="navbar bg-body-tertiary fixed-top d-xxl-none d-block">
             <div class="container-fluid">

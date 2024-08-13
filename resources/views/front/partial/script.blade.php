@@ -1,20 +1,40 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-<!-- Script -->
-<!-- Jquery Cdn -->
-<!-- Slick JS -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-<!-- Gsap Cdn -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- Bootstrap File -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-<!-- JS File -->
-<script src="{{ asset('assets/js/login.js')}}"></script>
-<script src="{{ asset('assets/js/script.js')}}"></script>
-{{-- <script src="{{ asset('assets/js/script.js')}}"></script> --}}
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-<script type="text/javascript" src="slick/slick.min.js"></script>
 @livewireScripts
 <x-livewire-alert::scripts />
+
+<!-- JAVASCRIPT  FILES ========================================= -->
+<script src="{{ asset('assets/js/jquery-3.6.1.min.js')}}"></script><!-- JQUERY.MIN JS -->
+<script src="{{ asset('assets/js/popper.min.js')}}"></script><!-- POPPER.MIN JS -->
+<script src="{{ asset('assets/js/bootstrap.min.js')}}"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="{{ asset('assets/js/bootstrap-select.min.js')}}"></script><!-- FORM JS -->
+<script src="{{ asset('assets/js/jquery.bootstrap-touchspin.min.js')}}"></script><!-- FORM JS -->
+<script src="{{ asset('assets/js/magnific-popup.min.js')}}"></script><!-- MAGNIFIC-POPUP JS -->
+<script src="{{ asset('assets/js/waypoints.min.js')}}"></script><!-- WAYPOINTS JS -->
+<script src="{{ asset('assets/js/counterup.min.js')}}"></script><!-- COUNTERUP JS -->
+<script src="{{ asset('assets/js/waypoints-sticky.min.js')}}"></script><!-- COUNTERUP JS -->
+<script src="{{ asset('assets/js/isotope.pkgd.min.js')}}"></script><!-- MASONRY  -->
+<script src="{{ asset('assets/js/imagesloaded.pkgd.min.js')}}"></script><!-- MASONRY  -->
+<script src="{{ asset('assets/js/owl.carousel.min.js')}}"></script><!-- OWL  SLIDER  -->
+<script src="{{ asset('assets/js/scrolla.min.js')}}"></script><!-- ON SCROLL CONTENT ANIMTE   -->
+<script src="{{ asset('assets/js/custom.js')}}"></script><!-- CUSTOM FUCTIONS  -->
+<script src="{{ asset('assets/js/shortcode.js')}}"></script><!-- SHORTCODE FUCTIONS  -->
+<script src="{{ asset('assets/js/switcher.js')}}"></script><!-- SWITCHER FUCTIONS  -->
+
+<!-- REVOLUTION JS FILES -->
+
+<script src="{{ asset('assets/plugin/revolution/revolution/js/jquery.themepunch.tools.min.js')}}"></script>
+<script src="{{ asset('assets/plugin/revolution/revolution/js/jquery.themepunch.revolution.min.js')}}"></script>
+
+<!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+<script src="{{ asset('assets/plugin/revolution/revolution/js/extensions/revolution-plugin.js')}}"></script>
+
+<!-- REVOLUTION SLIDER FUNCTION  ===== -->
+<script src="{{ asset('assets/js/rev-script-5.js')}}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.circle-block-outer .nav-link').hover(function() {
+            $(this).tab('show');
+        });
+    })
+
+</script>

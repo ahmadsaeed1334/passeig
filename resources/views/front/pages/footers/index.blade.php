@@ -69,7 +69,7 @@
                     <tr>
                         <td>{{ $footer->number }}</td>
                         <td>{{ $footer->address }}</td>
-                        <td>{{ \Illuminate\Support\Str::words(strip_tags($footer->description), 10, '...') }}</td>
+                        <td>{!! \Illuminate\Support\Str::words(strip_tags($footer->description), 10, '...') !!}</td>
                         <td>
                             @foreach(json_decode($footer->icons) as $icon)
                             @if (strtolower($icon->icon) == 'facebook')

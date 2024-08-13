@@ -21,7 +21,7 @@
                         <!-- Image input -->
                         <div class="col-lg-4">
                             <label class="fs-6 fw-semibold form-label mb-2 mt-2">
-                                <span class="required">Image</span>
+                                <span class="required">Imagee</span>
                             </label>
                             <br>
                             <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">

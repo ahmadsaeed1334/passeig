@@ -18,7 +18,7 @@
 
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="service_name">Service Name</label>
-                            <input type="text" class="form-control" id="service_name" name="service_name" value="{{ $service->duration }}">
+                            <input type="text" class="form-control" id="service_name" name="service_name" value="{{ $service->service_name }}">
                             @error('service_name') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">

@@ -149,7 +149,7 @@
                                 <p class="fs-4 fw-light m-0">{{ $service->duration }} minutes</p>
                             </div>
                             <div class="d-flex flex-sm-row flex-column gap-md-5 gap-3 align-items-center order-md-2 order-1">
-                                <p class="fw-bolder fs-4 sec-clr fw-400">${{ $service->amount }}</p>
+                                <p class="fw-bolder fs-4 sec-clr fw-400">{{ $service->amount }}€</p>
                                 <button wire:click="toggleServiceSelection({{ $service->id }})">
                                     {{ in_array($service->id, $selectedServices) ? 'Deselect' : 'Select' }} Service
                                 </button>
@@ -207,23 +207,9 @@
 
 
 
-        <!-- Subscribe Section -->
-        <section id="subscribe">
-            <img src="{{ asset('assets/images/subscribe-petal-left.png')}}" alt="" class="subscribe-petal-left img-fluid">
-            <div class="container">
-                <div class="subscribe-content-wrapper">
-                    <h2 class="my-5">Subscribe To Receive <br> Waxly News & Offers</h2>
-                    <div class="col-md-7 mx-auto subscribe-email">
-                        <form id="email-collector" class="d-flex">
-                            <input type="email" name="email" class="w-100 p-3" placeholder="Email">
-                            <button type="submit" class="btn"><img src="{{ asset('assets/images/submit.svg')}}"></button>
-                        </form>
-                    </div>
-                </div>
-                <img src="{{ asset('assets/images/subscribe-petal-right.png')}}" alt="" class="subscribe-petal-right img-fluid">
-            </div>
-        </section>
-
+       <!-- Subscribe Section -->
+ @include('livewire.front.subscribe')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
         <script>

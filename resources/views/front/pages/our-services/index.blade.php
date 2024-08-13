@@ -65,7 +65,7 @@
                                 @foreach($servicesTitles as $servicesTitle)
                                 <tr>
                                     <td>{{ $servicesTitle->title }}</td>
-                                    <td>{{ \Illuminate\Support\Str::words(strip_tags($servicesTitle->long_description), 23, '...') }}</td>
+                                    <td>{!! \Illuminate\Support\Str::words(strip_tags($servicesTitle->long_description), 23, '...') !!}</td>
                                     <td>
                                         <a href="{{ route('our-services.titleedit', $servicesTitle->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Update Services') !!}>
                                             <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
@@ -83,6 +83,7 @@
                                     <th>Short Description</th>
                                     <th>Image</th>
                                     <th>Long Description</th>
+                                    <th>Price</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -97,7 +98,8 @@
                                         <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->title }}" width="100">
                                         @endif
                                     </td>
-                                    <td>{{ \Illuminate\Support\Str::words(strip_tags($service->long_description), 10, '...') }}</td>
+                                    <td>{!! \Illuminate\Support\Str::words(strip_tags($service->long_description), 10, '...') !!}</td>
+                                    <td>{{ $service->price }}</td>
                                     <td>
                                         <a href="{{ route('our-services.edit', $service->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Update Services') !!}>
                                             <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>

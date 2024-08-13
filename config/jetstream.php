@@ -61,9 +61,9 @@ return [
     Features::api(),
     Features::teams(),
     Features::accountDeletion(),
-    Features::twoFactorAuthentication([
-        'confirmPassword' => true,
-    ]),
+    // Features::twoFactorAuthentication([
+    //     'confirmPassword' => true,
+    // ]),
 ],
 
 

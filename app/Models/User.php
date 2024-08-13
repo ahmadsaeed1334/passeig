@@ -32,16 +32,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
-        'profile_photo_path',
-        'status',
-        'user_type',
-        'last_seen',
-        'lang'
+        'name', 'email', 'password', 'phone', 'verification_code', 'is_verified', 'profile_photo_path', 'user_type'
+
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,8 +56,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'phone_verified_at' => 'datetime',
     ];
-
     /**
      * The accessors to append to the model's array form.
      *

@@ -67,7 +67,7 @@
                     <tr>
                         <td>{{ $appointment->title }}</td>
 
-                        <td>{{ \Illuminate\Support\Str::words(strip_tags($appointment->long_description), 10, '...') }}</td>
+                        <td>{!! \Illuminate\Support\Str::words(strip_tags($appointment->long_description), 10, '...') !!}</td>
 
                         <td>{{ $appointment->button }}</td>
 

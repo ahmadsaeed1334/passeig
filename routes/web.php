@@ -52,6 +52,13 @@ use App\Livewire\Admin\AppointmentView\AppointmentView;
 use App\Livewire\Front\ProfileEdit;
 use App\Livewire\Front\UserAppointments;
 use App\Livewire\Front\UserDashboard;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\RevSliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -202,6 +209,11 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
                Route::put('products/update-title/{id}', [ProductController::class, 'updateTitle'])->name('products.updateTitle');
                Route::delete('products/destroy-title/{id}', [ProductController::class, 'destroyTitle'])->name('products.destroyTitle');
             //    Route::get('/appointments-book', AppointmentBook::class)->name('appointments');
+
+               Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
+               
+               Route::resource('rev_slider', RevSliderController::class);
+
         });
     });
         // Route::get('/download', [AboutUsController::class, 'showDownloadPage']);
@@ -272,4 +284,35 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
             Route::get('/profile', ProfileEdit::class)->name('profile.edit');
             Route::get('/user-appointments', UserAppointments::class)->name('user-appointments');
             Route::get('/user-dashboard', UserDashboard::class)->name('user-dashboard');
+            Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
+            // Route::post('/subscribe', [HomeController::class, 'store'])->name('subscribe');
+
         });
+
+// Auth Routes
+Route::middleware('guest')->group(function () {
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [LoginController::class, 'login'])->name('login.post');
+});
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+// Registration Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
+});
+
+// Email Verification Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/custom/verify', [VerificationController::class, 'show'])->name('custom.verification.notice');
+    Route::post('/custom/verify', [VerificationController::class, 'verify'])->name('custom.verification.verify');
+    Route::post('/custom/resend', [VerificationController::class, 'resend'])->name('custom.verification.resend');
+});
+
+// Password Reset Routes
+Route::middleware('guest')->group(function () {
+    Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request.form');
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email.form');
+    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset.form');
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update.form');
+});

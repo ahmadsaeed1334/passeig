@@ -1,8 +1,8 @@
 @extends('layouts.login')
 @section('content')
-<div class="container ">
-    <div class="content-login ">
-        <div class="signup-container">
+<div class="container">
+    <div class="content-login">
+        <div class="signup-container" style="margin-top: 200px;">
             <div class="btn-container text-end">
                 <a href="{{ route('home') }}" class="btn boder text-dark">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -11,16 +11,19 @@
                 </a>
             </div>
             <h1 class="text-start">Sign in</h1>
-            <p class="text-start">Please enter the details to create your account</p>
-            <form method="POST" action="{{ route('login') }}">
+            <p class="text-start">Please enter the details to log in to your account</p>
+            <form method="POST" action="{{ route('login.post') }}">
                 @csrf
                 <div class="center">
                     <div class="custom-input-container">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                        <label for="email_or_phone">Email or Phone</label>
+                        <input type="text" id="email_or_phone" name="email_or_phone" class="form-control" placeholder="Email or Phone" required>
+                        @error('email_or_phone') <span class="text-danger">{{ $message }}</span> @enderror
+
                     </div>
                     <div class="password-container">
                         <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                         @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                         <i class="bi bi-eye-slash" id="togglePassword"></i>
                     </div>
                 </div>
@@ -29,7 +32,7 @@
                         <input type="checkbox" class="form-check-input" id="rememberMe" name="remember">
                         <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div>
-                    <p class="mb-3"><a href="{{ route('password.request') }}" class=" text-dark">Forgot Password?</a></p>
+                    <p class="mb-3"><a href="{{ route('password.request') }}" class="text-dark">Forgot Password?</a></p>
                 </div>
                 <button type="submit" class="btn btn-primarys">Sign in</button>
                 <div class="divider mt-3">or</div>

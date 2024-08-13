@@ -10,13 +10,15 @@
             <div class="text-center">
                 <div class="col-lg-8 mx-auto">
                     <h2 class="animation">{{ $productTitle->title }}</h2>
-                    <p class="lead mb-4 p-below animation">{{\Illuminate\Support\Str::words(strip_tags( $productTitle->long_description)) }}</p>
+                    <p class="lead mb-4 p-below animation">{!!$productTitle->long_description!!}</p>
+                    {{--  <p class="lead mb-4 p-below animation">{{\Illuminate\Support\Str::words(strip_tags( $productTitle->long_description)) }}</p>  --}}
 
                 </div>
             </div>
         </div>
+         @endforeach
     </section>
-    @endforeach
+   
     {{-- <section class="py_section products_section">
         <div class="container">
             <h3 class="text-center animation">EXPLORE OUR PRODUCTS</h3>
@@ -67,7 +69,7 @@
                     <p class="product_item_title">
                         {{ $product->name }}
                     </p>
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100%" height="300px">
                 </div>
             </div>
             @endforeach
@@ -148,20 +150,7 @@
     <img src="{{ asset('assets/images/appointment0sec-right.png')}}" alt="" class="appointment-right">
 </section>
 @endforeach
-<!-- Subscribe Section -->
-<section id="subscribe">
-    <img src="{{asset('assets/images/subscribe-petal-left.png')}}" alt="" class="subscribe-petal-left img-fluid">
-    <div class="container">
-        <div class="subscribe-content-wrapper">
-            <h2 class="my-5">Subscribe To Receive <br> Waxly News & Offers</h2>
-            <div class="col-md-7 mx-auto subscribe-email">
-                <form id="email-collector" class="d-flex">
-                    <input type="email" name="email" class="w-100 p-3" placeholder="Email">
-                    <button type="submit" class="btn"><img src="{{asset('assets/images/submit.svg')}}"></button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <img src="{{asset('assets/images/subscribe-petal-right.png')}}" alt="" class="subscribe-petal-right img-fluid">
-</section>
+      <!-- Subscribe Section -->
+ @include('livewire.front.subscribe')
+
 </div>

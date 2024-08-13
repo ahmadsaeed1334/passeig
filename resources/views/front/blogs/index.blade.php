@@ -58,7 +58,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration + ($blogs->currentPage() - 1) * $blogs->perPage() }}</td>
                                     <td>{{ $blogTitle->title }}</td>
-                                    <td>{{ \Illuminate\Support\Str::words(strip_tags($blogTitle->long_description), 25, '...') }}</td>
+                                    <td>{!! \Illuminate\Support\Str::words(strip_tags($blogTitle->long_description), 25, '...') !!}</td>
                                     <td>
                                         <a href="{{ route('blogs.editTitle', $blogTitle->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3">
                                             <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
@@ -103,7 +103,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $blog->title }}</td>
-                                    <td>{{ \Illuminate\Support\Str::words(strip_tags($blog->description), 10, '...') }}</td>
+                                    <td>{!! \Illuminate\Support\Str::words(strip_tags($blog->description), 10, '...') !!}</td>
                                     <td>{{ $blog->category ? $blog->category->name : 'No category' }}</td>
                                     <td>{{ $blog->button }}</td>
                                     <td>{{ $blog->link }}</td>

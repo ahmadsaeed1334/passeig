@@ -142,6 +142,11 @@ return [
     | these features or you can even remove all of these if you need to.
     |
     */
+    'redirects' => [
+    'login' => '/',
+    'logout' => '/',
+    'password-confirmation' => '/',
+],
     'guard' => 'web',
 
     'middleware' => ['web'],

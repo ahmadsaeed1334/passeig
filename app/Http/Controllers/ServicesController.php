@@ -47,6 +47,8 @@ public function store(Request $request)
         'short_description' => 'required|string',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'long_description' => 'required|string',
+        'price'=>'nullable|string|min:0',
+
     ]);
 
     $imagePath = null;
@@ -60,6 +62,7 @@ public function store(Request $request)
         'short_description' => $request->short_description,
         'image' => $imagePath,
         'long_description' => $request->long_description,
+        'price' => $request->price,
     ]);
 
     return redirect()->route('our-services.index')->with('success', 'Service created successfully.');
@@ -82,6 +85,7 @@ public function store(Request $request)
             'short_description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'long_description' => 'required|string',
+            'price'=>'nullable|string|min:0',
         ]);
 
         $data = $request->all();

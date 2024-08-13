@@ -49,13 +49,7 @@
 					</span>
 					<!--end::Cancel-->
 					<!--begin::Remove-->
-					@if ($photo || $userAvatar)
-						<span wire:click.prevent="imagedelete()"
-							class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
-							data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove Logo">
-							<i class="bi bi-x fs-2"></i>
-						</span>
-					@endif
+					
 					<!--end::Remove-->
 				</div>
 				<!--end::Image input-->
@@ -106,13 +100,7 @@
 				</span>
 				<!--end::Cancel-->
 				<!--begin::Remove-->
-				@if ($logo || $blacklogo)
-					<span wire:click.prevent="logodelete()"
-						class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
-						data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove Logo">
-						<i class="bi bi-x fs-2"></i>
-					</span>
-				@endif
+				
 				<!--end::Remove-->
 			</div>
 			<!--end::Image input-->
@@ -163,13 +151,7 @@
 			</span>
 			<!--end::Cancel-->
 			<!--begin::Remove-->
-			@if ($icon || $favicon)
-				<span wire:click.prevent="icondelete()"
-					class="btn btn-icon btn-circle btn-active-color-{{ primary_color() }} w-25px h-25px bg-body shadow"
-					data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove Favicon">
-					<i class="bi bi-x fs-2"></i>
-				</span>
-			@endif
+		
 			<!--end::Remove-->
 		</div>
 		<!--end::Image input-->
@@ -267,7 +249,7 @@
 			App Layout <code class="text-{{ primary_color() }}">-fluid</code>
 		</span>
 	</div>
-	<div class="col-lg-2">
+	<div class="col-lg-4">
 		<label>{{ __('Primary Color') }}:</label>
 		<select wire:model="color" class="form-control" name="color" id="color">
 			<option value="white">White</option>
@@ -281,20 +263,7 @@
 			<option value="dark">Dark</option>
 		</select>
 	</div>
-	<div class="col-lg-2">
-		<label>Default Language:</label>
-		<select wire:model="language" class="form-control" name="lang" id="kt_docs_select2_country">
-			<option value="{{ $language }}" data-kt-select2-country="{{ getLanguageFlag($language) }}">
-				{{ getLanguageName($language) }}
-			</option>
-			@foreach ($languages as $key => $lang)
-				@if ($lang != 'vendor')
-					<option value="{{ $lang }}" data-kt-select2-country="{{ getLanguageFlag($lang) }}">
-						{{ getLanguageName($lang) }}</option>
-				@endif
-			@endforeach
-		</select>
-	</div>
+	
 </div>
 </div>
 <div class="card-footer">
@@ -307,31 +276,6 @@
 </div>
 </form>
 <!--end::Form-->
+
+
 </div>
-{{-- @push('scripts')
-	<script>
-		// Format options
-		var optionFormat = function(item) {
-			if (!item.id) {
-				return item.text;
-			}
-
-			var span = document.createElement('span');
-			var imgUrl = item.element.getAttribute('data-kt-select2-country');
-			var template = '';
-
-			template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
-			template += item.text;
-
-			span.innerHTML = template;
-
-			return $(span);
-		}
-
-		// Init Select2 --- more info: https://select2.org/
-		$('#kt_docs_select2_country').select2({
-			templateSelection: optionFormat,
-			templateResult: optionFormat
-		});
-	</script>
-@endpush --}}

@@ -10,7 +10,8 @@
                 <div class="blog-content">
                     <h6 class="fs-1 fw-400 mt-3">{{ $blog->title }}</h6>
                     {{-- <p class="fs-3 mt-5">{!! nl2br(($blog->description)) !!}</p> --}}
-                    <p class="fs-3 mt-5">{{ strip_tags($blog->description)}}</p>
+                    <p class="fs-3 mt-5">{!! $blog->description !!}
+                    </p>
                 </div>
             </div>
             <div class="single_cards">
@@ -25,7 +26,10 @@
 
                                 <h4 class="title">{{ $relatedBlog->title }}</h4>
                                 <div class="dic_single_card">
-                                    <p>{{ Str::limit($relatedBlog->description, 50) }}</p>
+                                    <p>{{  \Illuminate\Support\Str::words(strip_tags($relatedBlog->description), 25, '...') }}</p>
+                                    {{--  <p>{{ \Illuminate\Support\Str::limit($relatedBlog->description, 50) }}</p>  --}}
+                                   
+                                    
                                     <a href="{{ route('single-blog', $relatedBlog->id) }}" class="btn btn-regular"><img src="{{ asset('assets/images/arrow_right.png') }}" alt="arrow"></a>
                                 </div>
                             </div>

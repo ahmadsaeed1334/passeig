@@ -1,13 +1,28 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<!-- Slick CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-<!-- Helvatica Font -->
-<link href="https://fonts.cdnfonts.com/css/helvetica-neue-55" rel="stylesheet">
-<!-- Brown Sugar Font -->
-<link href="https://fonts.cdnfonts.com/css/brown-sugar-2" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+ <!-- FAVICONS ICON -->
+ <link rel="icon" href="{{ asset('assets/images/favicon.html')}}" type="image/x-icon">
+ <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+ <!-- GOOGLE FONTS -->
+ <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+ <link media="all" rel="stylesheet" href="/htdocs_error/style.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
-<!-- GSAP ScrollTrigger -->
-<link rel="stylesheet" type="text/css" href="slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+ <!-- REVOLUTION SLIDER CSS -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugin/revolution/revolution/css/settings.css')}}">
+ <!-- REVOLUTION NAVIGATION STYLE -->
+
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugin/revolution/revolution/css/navigation.css')}}">
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css')}}"><!-- BOOTSTRAP STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/fontawesome/css/font-awesome.min.css')}}">
+ <!-- FONTAWESOME STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/flaticon.min.css')}}"><!-- FLATICON STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.min.css')}}"><!-- ANIMATE STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/owl.carousel.min.css')}}"><!-- OWL CAROUSEL STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-select.min.css')}}"><!-- BOOTSTRAP SELECT BOX STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/magnific-popup.min.css')}}"><!-- MAGNIFIC POPUP STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/loader.min.css')}}">
+ <!-- LOADER STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css')}}"><!-- MAIN STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" class="skin" href="{{ asset('assets/css/skin/skin-7.css')}}">
+ <!-- THEME COLOR CHANGE STYLE SHEET -->
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/switcher.css')}}"><!-- SIDE SWITCHER STYLE SHEET -->

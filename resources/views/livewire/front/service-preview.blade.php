@@ -21,7 +21,8 @@
                         @else
                         <img src="{{ asset('default-image.jpg') }}" alt="services">
                         @endif
-                        <p>{{ \Illuminate\Support\Str::words(strip_tags($long_description)) }}</p>
+                        {!! $long_description !!}
+                        {{--  <p>{{ \Illuminate\Support\Str::words(strip_tags($long_description)) }}</p>  --}}
                     </div>
                 </div>
             </div>

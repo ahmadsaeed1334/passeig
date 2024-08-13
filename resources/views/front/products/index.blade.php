@@ -188,7 +188,7 @@
                             @forelse($productTitles as $index => $productTitle)
                             <tr>
                                 <td>{{ $productTitle->title }}</td>
-                                <td>{{ \Illuminate\Support\Str::words(strip_tags($productTitle->long_description), 25, '...') }}</td>
+                                <td>{!! \Illuminate\Support\Str::words(strip_tags($productTitle->long_description), 25, '...') !!}</td>
                                 <td>
                                     <a href="{{ route('products.editTitle', $productTitle->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3">
                                         <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
@@ -221,8 +221,8 @@
 
 
                                 <td>{{ $product->name  }}</td>
-                                <td>{{ \Illuminate\Support\Str::words(strip_tags($product->description), 10, '...') }}</td>
-                                <td>{{ \Illuminate\Support\Str::words(strip_tags($product->short_description), 10, '...') }}</td>
+                                <td>{!! \Illuminate\Support\Str::words(strip_tags($product->description), 10, '...') !!}</td>
+                                <td>{!! \Illuminate\Support\Str::words(strip_tags($product->short_description), 10, '...') !!}</td>
                                 <td>{{$product->categorie->name }}</td>
                                 <td class="">
                                     <div class="d-flex align-items-center">
@@ -253,7 +253,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{ $products->links() }}
+                    {{--  {{ $products->links() }}  --}}
 
                 </div>
                 {{-- SweetAlert --}}
@@ -270,6 +270,78 @@
 
                 </script>
                 @endif
+                   @if ($products->hasPages())
+                    <ul class="pagination justify-content-center">
+                        {{-- Previous Page Link --}}
+                        @if ($products->onFirstPage())
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $products->previousPageUrl() }}" rel="prev">&laquo;</a>
+                        </li>
+                        @endif
+
+                        {{-- First Page Link --}}
+                        <li class="page-item {{ ($products->currentPage() == 1) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $products->url(1) }}">1</a>
+                        </li>
+
+                        {{-- Second Page Link --}}
+                        @if($products->lastPage() > 1)
+                        <li class="page-item {{ ($products->currentPage() == 2) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $products->url(2) }}">2</a>
+                        </li>
+                        @endif
+
+                        {{-- Third Page Link --}}
+                        @if($products->lastPage() > 2)
+                        <li class="page-item {{ ($products->currentPage() == 3) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $products->url(3) }}">3</a>
+                        </li>
+                        @endif
+
+                        {{-- Ellipsis --}}
+                        @if ($products->currentPage() > 4)
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                        @endif
+
+                        {{-- Middle Page Links --}}
+                        @for ($i = max(4, $products->currentPage() - 1); $i <= min($products->lastPage() - 1, $products->currentPage() + 1); $i++)
+                            <li class="page-item {{ ($i == $products->currentPage()) ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                            </li>
+                            @endfor
+
+                            {{-- Ellipsis --}}
+                            @if ($products->currentPage() < $products->lastPage() - 2)
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                @endif
+
+                                {{-- Last Page Link --}}
+                                @if ($products->lastPage() > 3)
+                                <li class="page-item {{ ($products->currentPage() == $products->lastPage()) ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $products->url($products->lastPage()) }}">{{ $products->lastPage() }}</a>
+                                </li>
+                                @endif
+
+                                {{-- Next Page Link --}}
+                                @if ($products->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $products->nextPageUrl() }}" rel="next">&raquo;</a>
+                                </li>
+                                @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">&raquo;</span>
+                                </li>
+                                @endif
+                    </ul>
+                    @endif
 
             </div>
         </div>

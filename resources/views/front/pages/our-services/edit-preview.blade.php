@@ -165,9 +165,9 @@
     </style>
     <header class="animation">
         <!-- Full-screen Header -->
-        <nav class="navbar navbar-expand-lg navbar-light position-absolute bg-transparent w-30 d-xxl-block d-none">
+        {{--  <nav class="navbar navbar-expand-lg navbar-light position-absolute bg-transparent w-30 d-xxl-block d-none">
             <div class="container">
-                <a class="navbar-brand" href="/"><img src="{{env('APP_URL').'/storage' .'/'.general('logo')}}" alt="Logo"></a>
+                <a class="navbar-brand" href="/"><img src="{{env('APP_URL').'/storage' .'/'.general('logo')}}" alt="Logo" width="10px" height="30px"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -196,7 +196,7 @@
                 </div>
                 <a href="{{ route('appointments') }}"><button type="button" class="btn btn-regular" style="border: 1px solid #645242;    border-radius: 0;
     margin-left: 35px;">Book Appointment</button></a>
-        </nav>
+        </nav>  --}}
         <!-- Mobile Header -->
         <nav class="navbar bg-body-tertiary fixed-top d-xxl-none d-block">
             <div class="container-fluid">
@@ -255,7 +255,8 @@
                     <div class="col-12 card_main">
                         {{-- <img id="preview-image" src="{{ asset('assets/images/services_card1.png') }}" class="img-fluid" alt="services"> --}}
                         <img id="preview-image" src="{{ $service->image ? asset('storage/'.$service->image) : '#' }}" alt="Preview" style=" width: 100%; height: auto;">
-                        <p id="preview-long-description">{{ \Illuminate\Support\Str::words(strip_tags($service->long_description)) }}</p>
+                        <p id="preview-long-description">{!! $service->long_description !!}</p>
+                        {{--  <p id="preview-long-description">{{ \Illuminate\Support\Str::words(strip_tags($service->long_description), 25, '...') }}</p>  --}}
                     </div>
 
                 </div>

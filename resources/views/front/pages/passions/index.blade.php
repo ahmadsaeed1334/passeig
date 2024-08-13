@@ -66,7 +66,7 @@
                     <tr>
                         <td>{{ $passion->title }}</td>
 
-                        <td>{{ \Illuminate\Support\Str::words(strip_tags($passion->long_description), 23, '...') }}</td>
+                        <td>{!! \Illuminate\Support\Str::words(strip_tags($passion->long_description), 23, '...') !!}</td>
 
                         <td>
                             <a href="{{ route('passions.edit', $passion->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Update Our Passion ') !!}>

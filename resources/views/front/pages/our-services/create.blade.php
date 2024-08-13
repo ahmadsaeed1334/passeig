@@ -25,15 +25,16 @@
                                     <label class="mb-3 ms-3 required" for="short_description">Short Description</label>
                                     <input type="text" class="form-control" id="short_description" name="short_description" value="{{ old('short_description') }}" oninput="updatePreview()">
                                 </div>
+
                                 <div class="form-group ms-3 me-3 mt-3">
                                     <div class="col-lg-4">
                                         <label class="mb-3 ms-3 required" class="fs-6 fw-semibold form-label mb-2 mt-2">
                                             <span>image</span>
                                         </label>
                                         <br>
-                                        <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">
-                                            <div class="image-input-wrapper" id="image-preview" style="background-size:100% 100%;width:300px">
-                                                <img id="form-preview-image" src="#" alt="Preview" style="display: none; width: 100%; height: auto;">
+                                        <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:500px; height: 500px;">
+                                            <div class="image-input-wrapper" id="image-preview" style="background-size:100% 100%;width:500px">
+                                                <img id="form-preview-image" src="#" alt="Preview" style="display: none; width: 100%; height: 500px;">
                                             </div>
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                                 <i class="bi bi-pencil-fill fs-7"></i>
@@ -50,6 +51,10 @@
                                 <div class="form-group ms-3 me-3 mt-3">
                                     <label class="mb-3 ms-3 required" for="long_description">Long Description</label>
                                     <textarea class="form-control" id="long_description" name="long_description" rows="5" oninput="updatePreview()">{{ old('long_description') }}</textarea>
+                                </div>
+                                <div class="form-group ms-3 me-3 mt-3">
+                                    <label class="mb-3 ms-3 required" for="price">Price</label>
+                                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}" oninput="updatePreview()">
                                 </div>
                                 <button type="submit" class="btn btn-primary ms-3 mt-3 mb-5">Submit</button>
                                 <a href="{{ route('our-services.index') }}" class="btn btn-secondary ms-5 mt-3 mb-5">Cancel</a>

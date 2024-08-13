@@ -74,12 +74,12 @@
                 'icon' => "fa-solid fa-calendar-check",
                 // 'counter' => auth()->user()->newThreadsCount(),
                 ])
-                {{-- @include('livewire.admin.partial.sidebar-menu-item', [
-                'route' => 'admin/banner',
-                'name' => 'Banner Slider',
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'rev_slider.index',
+                'name' => 'Rev Slider',
                 'icon' => 'fa-solid fa-sliders',
                 // 'counter' => auth()->user()->newThreadsCount(),
-                ]) --}}
+                ])
                 {{-- @include('livewire.admin.partial.sidebar-menu-item', [
                 'route' => 'admin/about',
                 'name' => 'Abouts',
@@ -267,23 +267,8 @@
                 <!--end:Menu item-->
                 @endcanany
                 <!--begin:Menu item-->
-                @include('livewire.admin.partial.sidebar-menu-header', [
-                'name' => 'languages manage',
-                ])
-                <!--end:Menu item-->
-                <!--begin:Menu item-->
-                @include('livewire.admin.partial.sidebar-menu-item', [
-                'route' => 'admin/language-manager',
-                'name' => 'languages',
-                'icon' => 'fa-solid fa-language',
-                'counter' => null,
-                ])
-                {{-- @include('livewire.admin.partial.sidebar-menu-item', [
-                'route' => 'admin/services',
-                'name' => 'Services',
-                'icon' => 'fa-solid fa-message',
-                // 'counter' => auth()->user()->newThreadsCount(),
-                ]) --}}
+
+
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
                 @include('livewire.admin.partial.sidebar-menu-header', [
@@ -316,6 +301,13 @@
                 @include('livewire.admin.partial.sidebar-menu-item', [
                 'route' => 'admin/appointments-view',
                 'name' => 'Appointments View',
+                'icon' => 'fa-solid fa-calendar-check',
+
+                // 'counter' => '3rd Party',
+                ])
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'subscribers.index',
+                'name' => 'Subscribers',
                 'icon' => 'fa-solid fa-calendar-check',
 
                 // 'counter' => '3rd Party',

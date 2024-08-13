@@ -10,8 +10,17 @@ use App\Models\Blog;
 #[Layout('layouts.home')]
 class HomeBlogs extends Component
 {
+     public $blogs;
+
+    public function mount()
+    {
+        $this->blogs = Blog::latest()->take(3)->get();
+    }
+
     public function render()
     {
-        return view('livewire.front.home-blogs');
+        return view('livewire.front.home-blogs', [
+            'blogs' => $this->blogs
+        ]);
     }
 }

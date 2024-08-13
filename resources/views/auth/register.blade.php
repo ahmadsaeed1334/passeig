@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-
     <div class="content-login body-width-signup">
         <div class="signup-container">
             <div class="btn-container">
@@ -20,20 +19,23 @@
                     <div class="profile-circle" id="profileCircle"></div>
                     <label for="fileUpload" class="upload-text">Upload Profile Photo</label>
                     <input type="file" id="fileUpload" name="profile_photo" accept="image/*">
-                </div>
-                <div class="custom-input-container">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                    @error('profile_photo') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <input type="text" name="name" class="form-control form-input" placeholder="Full Name" required>
-                <input type="tel" name="phone" class="form-control form-input" placeholder="Phone Number" required>
+                <div class="custom-input-container">
+                    <label for="email_or_phone">Email or Phone</label>
+                    <input type="text" id="email_or_phone" name="email_or_phone" class="form-control" placeholder="Email or Phone (e.g., +1234567890)" required>
+                    @error('email_or_phone') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
                 <div class="password-container">
                     <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
                     <i class="bi bi-eye-slash" id="togglePassword"></i>
+                    @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="password-container">
                     <input type="password" name="password_confirmation" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
                     <i class="bi bi-eye-slash" id="toggleConfirmPassword"></i>
+                    @error('password_confirmation') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-check mb-3 text-start">
                     <input type="checkbox" class="form-check-input" id="rememberMe">

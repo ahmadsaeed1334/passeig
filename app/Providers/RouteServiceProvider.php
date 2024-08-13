@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = 'home';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -36,5 +36,13 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+    }
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$user->is_verified) {
+            return redirect()->route('custom.verification.notice');
+        }
+
+        return redirect()->intended($this->redirectPath());
     }
 }

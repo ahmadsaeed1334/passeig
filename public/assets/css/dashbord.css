@@ -7,6 +7,7 @@ body {
     height: 100%;
     min-height: 100vh;
 }
+
 .sidebar {
     background-color: #483A30;
     border-radius: 50px;
@@ -18,40 +19,49 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
+
 @media (max-width:990px) {
-.sidebar {
-    border-radius: 20px;
-}
+    .sidebar {
+        border-radius: 20px;
+    }
 
 }
+
 .sidebar .img-radius,
- .img-radius {
+.img-radius {
     border-radius: 50%;
 }
+
 .sidebar a {
     color: white;
     display: block;
     padding: 10px 0;
     text-decoration: none;
-    padding-left: 24px;
+    /* padding-left: 24px; */
+    margin-top: 7px;
 }
+
 .sidebar a:hover {
     background-color: #6e5849;
     border-radius: 5px;
 }
+
 .content-profile {
     padding: 20px;
     flex-grow: 1;
     overflow-y: auto;
 }
+
 .btn-save {
     background-color: #61b8a4;
     color: white;
     border: none;
 }
-.content-inner-panding{
+
+.content-inner-panding {
     padding: 13px;
 }
+
 .content-inner {
     background-color: #FFFFFF;
     border-radius: 25px;
@@ -60,12 +70,15 @@ body {
     max-width: 100%;
     margin: auto;
     /* min-width: 120vh; */
+    min-height: 900px;
 }
+
 .form-control {
     border-radius: 5px;
     padding: 25px;
     border: 2px solid #B19C3B;
 }
+
 .bt\n-save {
     text-align: end;
     margin-top: 25%;
@@ -74,6 +87,7 @@ body {
     border: none;
     padding: 15px 50px;
 }
+
 @media (max-width: 450px) {
     .bt\n-save {
         text-align: end;
@@ -90,6 +104,7 @@ body {
     color: #B19C3B;
     font-weight: 600;
 }
+
 .main-content {
     background-color: #483A30;
     border-radius: 65px;
@@ -97,85 +112,103 @@ body {
     min-height: 100vh;
     display: flex;
 }
+
 .line {
     width: 85%;
     height: 1px;
     background-color: #8B7E7E;
     margin: 0 auto;
 }
+
 @media (max-width: 992px) {
     .main-content {
-position: relative; /* Ensure the parent container is positioned relative to use height 100% in the sidebar */
-height: 100vh; /* or any other specific height */
-}
+        position: relative;
+        /* Ensure the parent container is positioned relative to use height 100% in the sidebar */
+        height: 100vh;
+        /* or any other specific height */
+    }
 
-.sidebar {
-position: absolute;
-top: 0;
-left: -250px;
-transition: left 0.3s ease;
-z-index: 1050;
-height: 100%; /* Adjust the height to match the parent container */
-}
+    .sidebar {
+        position: absolute;
+        top: 0;
+        left: -250px;
+        transition: left 0.3s ease;
+        z-index: 1050;
+        height: 100%;
+        /* Adjust the height to match the parent container */
+    }
 
     .sidebar.active {
         left: 0;
     }
+
     .content-profile {
         margin-left: 0;
     }
 
 }
+
 @media (min-width:990) {
 
-.navbar-toggler {
+    .navbar-toggler {
+        display: none;
+
+
+    }
+
+}
+
+@media (max-width:990) {
+
+    .navbar-toggler {
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        z-index: 999;
+        color: white;
+    }
+
+    .navbar-toggler-icon {
+        font-size: 30px;
+        color: white;
+    }
+}
+
+.navbar-toggler-icon {
     display: none;
-
-
-}
-
-}
-@media (max-width:990){
-
-.navbar-toggler {
-    display: block;
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    z-index: 999;
-    color: white;
-}
-.navbar-toggler-icon {
-    font-size: 30px;
-    color:white;
-}
-}
-.navbar-toggler-icon {
-display: none;
 }
 
 @media (max-width: 991.98px) {
-.navbar-toggler-icon {
+    .navbar-toggler-icon {
 
-display: block;
+        display: block;
+    }
 }
-}
+
 .notification {
     position: relative;
     display: inline-block;
     font-size: 25px;
 }
+
 .notification .badge {
     position: absolute;
-    top: -10px; /* Adjusted to match the image */
-    right: -5px; /* Adjusted to match the image */
-    padding: 3px 6px; /* Adjusted to match the image */
+    top: -10px;
+    /* Adjusted to match the image */
+    right: -5px;
+    /* Adjusted to match the image */
+    padding: 3px 6px;
+    /* Adjusted to match the image */
     border-radius: 50%;
     background-color: red;
     color: white;
-    font-size: 12px; /* Adjusted to match the image */
-    border: 1px solid white; /* Border color */
+    font-size: 12px;
+    /* Adjusted to match the image */
+    border: 1px solid white;
+    /* Border color */
 }
+
 .date-filter {
     display: flex;
     justify-content: space-between;
@@ -201,7 +234,8 @@ display: block;
     margin-bottom: 20px;
 }
 
-.appointments-table th, .appointments-table td {
+.appointments-table th,
+.appointments-table td {
     padding: 8px;
     text-align: left;
 }
@@ -210,9 +244,12 @@ display: block;
     background-color: #f4f4f4;
     color: #555;
 }
+
 .appointments-table tr {
-    border-bottom: 2px solid #333; /* Dark line between rows */
+    border-bottom: 2px solid #333;
+    /* Dark line between rows */
 }
+
 .appointments-table td {
     border-bottom: 1px solid #f4f4f4;
 }
@@ -225,6 +262,7 @@ display: block;
     font-weight: bold;
     color: #333;
 }
+
 @media (max-width: 768px) {
     .appointments-table {
         display: block;
@@ -260,9 +298,12 @@ display: block;
         text-align: left;
     }
 }
+
 .image-spacing {
-    margin-right: 10px; /* Adjust the value as needed */
+    margin-right: 10px;
+    /* Adjust the value as needed */
 }
+
 h3 span {
     float: right;
     font-size: 14px;
@@ -292,34 +333,40 @@ p {
 .price {
     color: #333;
 }
-@media(min-width:550px){
+
+@media(min-width:550px) {
     .appointment-item img {
         width: 30px;
         height: 30px;
         margin-right: 5px;
     }
+
     .appointment-item {
         display: flex;
         padding: 5px 0;
     }
+
     h3 span {
         float: right;
         font-size: 7px;
         color: #007bff;
         cursor: pointer;
     }
+
     p {
         margin: 2px 0;
     }
 
 
 }
+
 .dashboard-container {
     display: flex;
+    min-height: 900px;
 }
 
 .appointments-section {
-    background-color: white;
+    /* background-color: white; */
     padding: 20px;
     width: 63%;
 }
@@ -401,23 +448,30 @@ h2 {
     background: url('https://upload.wikimedia.org/wikipedia/commons/e/eb/Notification-icon.svg') no-repeat center center;
     background-size: cover;
 }
-.sidebar.active{
+
+.sidebar.active {
     background-color: #483A30;
 }
+
 .appointments-content.upcoming {
     max-height: 200px;
     overflow-y: scroll;
 }
-.dashboard-container .p{
+
+.dashboard-container .p {
     font-weight: 1px;
 }
+
 .content-line {
 
     border-bottom: 1px solid #eaeaea;
 }
+
 .custom-icon {
-    font-size: 2rem; /* Adjust the size as needed */
+    font-size: 2rem;
+    /* Adjust the size as needed */
 }
+
 @media (max-width: 650px) {
     .sidebar {
         position: absolute;
@@ -426,22 +480,28 @@ h2 {
         height: 100%;
         z-index: 10;
     }
+
     .sidebar.active {
         left: 0;
     }
+
     .navbar-toggler {
         display: block;
     }
+
     .content-profile {
         padding-left: 0;
         padding-right: 0;
     }
-} @media (max-width: 510px) {
-        .sidebar {
-            min-width: 200px;
-            max-width: 200px;
-        }
-        .sidebar.active {
-            /* left: -200px; */
-        }
+}
+
+@media (max-width: 510px) {
+    .sidebar {
+        min-width: 200px;
+        max-width: 200px;
     }
+
+    .sidebar.active {
+        /* left: -200px; */
+    }
+}
