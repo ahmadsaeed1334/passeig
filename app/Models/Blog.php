@@ -9,16 +9,29 @@ class Blog extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'description', 'image', 'button', 'link', 'user_id', 'category_id'
+        'title',
+        'description',
+        'image',
+        'button',
+        'link',
+        'user_id',
+        'category_id'
     ];
 
     // Define the relationship with BlogCategories
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(BlogCategorie::class, 'category_id');
     }
 
     // Define the relationship with User
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

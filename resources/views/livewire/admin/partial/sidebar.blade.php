@@ -92,6 +92,18 @@
                 'icon' => 'fa-solid fa-sliders',
                 // 'counter' => auth()->user()->newThreadsCount(),
                 ])
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'provides.index',
+                'name' => 'Provides',
+                'icon' => 'fa-solid fa-sliders',
+                // 'counter' => auth()->user()->newThreadsCount(),
+                ])
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'best_services.index',
+                'name' => 'Best Services',
+                'icon' => 'fa-solid fa-sliders',
+                // 'counter' => auth()->user()->newThreadsCount(),
+                ])
                 {{-- @include('livewire.admin.partial.sidebar-menu-item', [
                 'route' => 'admin/about',
                 'name' => 'Abouts',

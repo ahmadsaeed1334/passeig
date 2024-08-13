@@ -118,165 +118,26 @@
             Your browser does not support the video tag.
         </video>
     </div>
-    @include('front.partial.home-page-content')
+    <div id="contentContainer" class="">
+        <div class="load_animation">
+            <div class="page-wraper">
+                {{-- @include('front.partial.home-page-content') --}}
+                @include('front.partial.header')
+                <div class="page-content">
+                    @if (isset($slot))
+                    {{ $slot }}
+                    @else
 
-    {{-- <div id="videoContainer">
-        <video id="backgroundVideo" autoplay muted onended="handleVideoEnd()">
-            <source src="{{ asset('assets/1720076221375.mp4_1720076778665.mp4')}}" type="video/mp4">
-    Your browser does not support the video tag.
-    </video>
-    </div> --}}
+                    @endif
+                </div>
+                @include('front.partial.footer')
 
-    {{-- <div id="contentContainer">
-        <div class="load_animation"> --}}
-    <!-- Desktop Header -->
-
-    <!-- Desktop Header -->
-    {{-- <header class="navbar-pading desktop-header">
-                <nav class="navbar navbar-expand-lg shift navbar-light bg-transparent">
-                    <div class="container">
-                        <a class="navbar-brand moveLeftRight" href="{{ env('APP_URL') }}">
-    <img src="{{ env('APP_URL') . '/storage' . '/' . general('logo') }}" alt="Logo" width="50px" height="50px">
-    </a>
-    @php
-    $route_name = route_name();
-    @endphp
-    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto">
-            <li class="nav-item active show">
-                <a class="nav-link " href="{{ env('APP_URL') }}">Home</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'services' ? 'active show' : '' }}" href="{{ route('services') }}">Services</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'products' ? 'active show' : '' }}" href="{{ route('products') }}">Products</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'blogs' ? 'active show' : '' }}" href="{{ route('blogs') }}">Blogs</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'about-us' ? 'active show' : '' }}" href="{{ route('about-us') }}">About</a>
-            </li>
-        </ul>
-
-        <div class="d-flex align-items-center ms-auto">
-            <a href="{{ route('appointments') }}" class="ms-3">
-                <button type="button" class="custom-btn btn-11">Book Appointment
-                    <div class="dot"></div>
-                </button>
-            </a>
-            @auth
-            <a href="{{ route('user-dashboard') }}" class="ms-3">
-                <button type="button" class="custom-btn btn-11">Dashboard</button>
-            </a>
-            @else
-            <a href="{{ route('login') }}" class="ms-3">
-                <button type="button" class="custom-btn btn-11">Login</button>
-            </a>
-            @endauth
-        </div>
-    </div>
-    </div>
-    </nav>
-    </header> --}}
-
-    <!-- Mobile Header -->
-    {{-- <header class="navbar-pading mobile-header">
-                <nav class="navbar navbar-light bg-transparent">
-                    <div class="container d-flex justify-content-between">
-                        <a class="navbar-brand" href="{{ env('APP_URL') }}">
-    <img src="{{ env('APP_URL') . '/storage' . '/' . general('logo') }}" alt="Logo" width="50px" height="50px">
-    </a>
-    <button class="btn" id="mobileSidebarToggle"><i class="fa-solid fa-bars"></i></button>
-    </div>
-    </nav>
-    <div class="mobile-sidebar">
-        <nav class="navbar navbar-light bg-transparent">
-            <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="{{ env('APP_URL') }}">
-                    <img src="{{ env('APP_URL') . '/storage' . '/' . general('logo') }}" alt="Logo" width="50px" height="50px">
-                </a>
             </div>
-        </nav>
-        <ul class="navbar-nav mx-auto">
-            <li class="nav-item active show  ms-3 me-3">
-                <a class="nav-link" href="{{ env('APP_URL') }}">Home</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'services' ? 'active show' : '' }}" href="{{ route('services') }}">Services</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'products' ? 'active show' : '' }}" href="{{ route('products') }}">Products</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'blogs' ? 'active show' : '' }}" href="{{ route('blogs') }}">Blogs</a>
-            </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link {{ $route_name == 'about-us' ? 'active show' : '' }}" href="{{ route('about-us') }}">About Us</a>
-            </li>
-        </ul>
-        <div class=" align-items-center ms-auto">
-            <a href="{{ route('appointments') }}" class="ms-3">
-                <button type="button" class="custom-btn btn-11">Book Appointment
-                    <div class="dot"></div>
-                </button>
-            </a>
-            @auth
-            <a href="{{ route('user-dashboard') }}" class="ms-3">
-                <button type="button" class="custom-btn btn-11">Dashboard</button>
-            </a>
-            @else
-            <a href="{{ route('login') }}" class="ms-3">
-                <button type="button" class="custom-btn btn-11 mt-3">Login</button>
-            </a>
-            @endauth
         </div>
     </div>
-    </header> --}}
 
 
 
-
-
-
-    {{-- @if (isset($slot))
-            {{ $slot }}
-    @else
-    @yield('content')
-    @endif
-    @livewire('front.footers')
-    </div>
-
-    </div> --}}
-
-    {{-- <main class="content">
-
-    </main> --}}
-
-
-
-    {{-- <script src="path/to/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sidebarToggle = document.getElementById('mobileSidebarToggle');
-            const mobileSidebar = document.querySelector('.mobile-sidebar');
-            const body = document.querySelector('body');
-
-            sidebarToggle.addEventListener('click', () => {
-                mobileSidebar.classList.toggle('show');
-                body.classList.toggle('sidebar-open');
-            });
-
-            body.addEventListener('click', function(e) {
-                if (!mobileSidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-                    mobileSidebar.classList.remove('show');
-                    body.classList.remove('sidebar-open');
-                }
-            });
-        });
-
-    </script> --}}
     <script>
         // Function to handle the end of the video
         function handleVideoEnd() {

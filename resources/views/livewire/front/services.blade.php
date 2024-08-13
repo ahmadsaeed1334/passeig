@@ -1,8 +1,8 @@
-<div stu>
+<div>
     <x-slot name="page_title">
         {{ $page_title ?? 'Services' }}
     </x-slot>
-    <main  id="hero">
+    <main id="hero">
         @foreach($servicesTitles as $servicesTitle)
         <section>
             <div class="container">
@@ -10,7 +10,7 @@
                     <div class="col-lg-8 mx-auto">
                         <h2 class="animation">{{ $servicesTitle->title }}</h2>
                         <p class="lead mb-4 p-below animation"> {!!$servicesTitle->long_description!!}</p>
-                        {{--  <p class="lead mb-4 p-below animation"> {{ \Illuminate\Support\Str::words(strip_tags($servicesTitle->long_description)) }}</p>  --}}
+                        {{-- <p class="lead mb-4 p-below animation"> {{ \Illuminate\Support\Str::words(strip_tags($servicesTitle->long_description)) }}</p> --}}
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <div class="row gy-5">
                         @foreach ($services as $service)
                         <div class="col-lg-4">
-                        
+
                             <a href="{{ route('single-service', $service->id) }}" class="card_services animation">
                                 <div class="card_content">
                                     <img src="{{ asset('storage/' . $service->image) }}" class="w--100" width="100%" height="350px" alt="card_img">
@@ -117,16 +117,16 @@
                 <div class="text-center">
                     <div class="col-12 mx-auto">
                         <h2 class="text-uppercase text-white mb-4">{{ $appointment->title }}</h2>
-                            <p class="lead mb-4 p-below text-white">{{ \Illuminate\Support\Str::words(strip_tags($appointment->long_description)) }}</p>
-                            <a href="{{ route('appointments') }}" class="appointment-btn mt-5">{{ $appointment->button }}</a>
+                        <p class="lead mb-4 p-below text-white">{{ \Illuminate\Support\Str::words(strip_tags($appointment->long_description)) }}</p>
+                        <a href="{{ route('appointments') }}" class="appointment-btn mt-5">{{ $appointment->button }}</a>
                     </div>
                 </div>
             </div>
             <img src="{{ asset('assets/images/appointment0sec-right.png')}}" alt="" class="appointment-right">
         </section>
         @endforeach
-       <!-- Subscribe Section -->
- @include('livewire.front.subscribe')
+        <!-- Subscribe Section -->
+        @include('livewire.front.subscribe')
 
     </main>
 </div>

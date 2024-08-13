@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use App\Models\Appointment;
 use App\Models\Blog;
 
-#[Layout('layouts.home')]
+#[Layout('layouts.front')]
 class HomeBlogs extends Component
 {
      public $blogs;
