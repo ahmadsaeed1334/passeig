@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Front\AboutUs;
+use App\Models\AppointmentBook;
 use App\Livewire\Front\HomePage;
 use App\Livewire\Admin\News\News;
 use App\Livewire\Front\SingleBlog;
@@ -27,8 +28,8 @@ use App\Livewire\Admin\Services\Services;
 use App\Livewire\Admin\Settings\Settings;
 use App\Livewire\Admin\Staff\Permissions;
 use App\Http\Controllers\FooterController;
-use App\Livewire\Admin\Home\Abouts\Abouts;
 
+use App\Livewire\Admin\Home\Abouts\Abouts;
 use App\Livewire\Front\Blogs as Frontblog;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CommentController;
@@ -49,6 +50,7 @@ use App\Http\Controllers\SubscriberController;
 use App\Livewire\Admin\Products\ProductTitles;
 use App\Livewire\Admin\Products\ProductUpdate;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AdminCommentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\VerificationController;
 use App\Livewire\Admin\Language\LanguageManager;
@@ -56,6 +58,7 @@ use App\Http\Controllers\ServicesTitleController;
 use App\Livewire\Front\Services as FrontServices;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ServicesCategoryController;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 use App\Http\Controllers\AppointmentServiceController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -168,6 +171,7 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
 
         // Blogs Routes
         Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
+        Route::get('blogs/{blog}/comments', [BlogController::class, 'loadComments'])->name('blogs.loadComments');
         Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
         Route::post('blogs', [BlogController::class, 'store'])->name('blogs.store');
         Route::get('blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
@@ -178,6 +182,9 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
         Route::get('blogs/titles/{id}/edit', [BlogController::class, 'editTitle'])->name('blogs.editTitle');
         Route::put('blogs/titles/{id}', [BlogController::class, 'updateTitle'])->name('blogs.updateTitle');
         Route::delete('blogs/titles/{id}', [BlogController::class, 'destroyTitle'])->name('blogs.destroyTitle');
+
+        Route::post('comments/reply', [AdminCommentController::class, 'storeReply'])->name('admin.comments.storeReply');
+        Route::delete('comments/{comment}', [AdminCommentController::class, 'destroy'])->name('admin.comments.destroy');
 
         // Services Category Routes
         Route::get('services-category', [ServicesCategoryController::class, 'index'])->name('services-category.index');
@@ -290,6 +297,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
 
 // Auth Routes
 Route::middleware('guest')->group(function () {

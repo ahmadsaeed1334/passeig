@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,6 +22,15 @@ class BlogController extends Controller
             'page_title' => 'Blogs'
         ]);
     }
+
+    public function loadComments($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $comments = $blog->comments()->with('replies')->get();
+
+        return view('front.blogs.comments', compact('comments'))->render();
+    }
+
     public function create()
     {
         $categories = BlogCategorie::all();
