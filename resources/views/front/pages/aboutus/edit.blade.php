@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group ms-3 me-3 mt-3">
                             <div class="col-lg-4">
-                                <label class="mb-3 ms-3 required" class="fs-6 fw-semibold form-label mb-2 mt-2">
+                                <label class="mb-3 ms-3 " class="fs-6 fw-semibold form-label mb-2 mt-2">
                                     <span class="required">Image</span>
                                 </label>
                                 <br>
@@ -59,14 +59,15 @@
 
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script>
-function previewImage(event) {
-    var reader = new FileReader();
-    reader.onload = function(){
-        var output = document.getElementById('image-preview');
-        output.style.backgroundImage = 'url(' + reader.result + ')';
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('image-preview');
+            output.style.backgroundImage = 'url(' + reader.result + ')';
+        }
+        reader.readAsDataURL(event.target.files[0]);
     }
-    reader.readAsDataURL(event.target.files[0]);
-}
-CKEDITOR.replace('long_description');
+    CKEDITOR.replace('long_description');
+
 </script>
 @endsection

@@ -59,6 +59,9 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\RevSliderController;
+use App\Http\Controllers\ExpertController;
+use App\Http\Controllers\HealthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -211,9 +214,40 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
             //    Route::get('/appointments-book', AppointmentBook::class)->name('appointments');
 
                Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
-               
-               Route::resource('rev_slider', RevSliderController::class);
 
+               Route::resource('rev_slider', RevSliderController::class);
+               Route::prefix('experts')->group(function () {
+                Route::get('/', [ExpertController::class, 'index'])->name('experts.index');
+
+                // Expert Title
+                Route::get('create-title', [ExpertController::class, 'createTitle'])->name('experts.createTitle');
+                Route::post('store-title', [ExpertController::class, 'storeTitle'])->name('experts.storeTitle');
+                Route::get('edit-title/{expertTitle}', [ExpertController::class, 'editTitle'])->name('experts.editTitle');
+                Route::put('update-title/{expertTitle}', [ExpertController::class, 'updateTitle'])->name('experts.updateTitle');
+
+                // Expert
+                Route::get('create-expert', [ExpertController::class, 'createExpert'])->name('experts.createExpert');
+                Route::post('store-expert', [ExpertController::class, 'storeExpert'])->name('experts.storeExpert');
+                Route::get('edit-expert/{expert}', [ExpertController::class, 'editExpert'])->name('experts.editExpert');
+                Route::put('update-expert/{expert}', [ExpertController::class, 'updateExpert'])->name('experts.updateExpert');
+                Route::delete('delete-expert/{expert}', [ExpertController::class, 'destroyExpert'])->name('experts.destroyExpert');
+            });
+            Route::prefix('healths')->group(function () {
+                Route::get('/', [HealthController::class, 'index'])->name('healths.index');
+
+                // Health Title
+                Route::get('create-title', [HealthController::class, 'createTitle'])->name('healths.createTitle');
+                Route::post('store-title', [HealthController::class, 'storeTitle'])->name('healths.storeTitle');
+                Route::get('edit-title/{healthTitle}', [HealthController::class, 'editTitle'])->name('healths.editTitle');
+                Route::put('update-title/{healthTitle}', [HealthController::class, 'updateTitle'])->name('healths.updateTitle');
+
+                // Health
+                Route::get('create-health', [HealthController::class, 'createHealth'])->name('healths.createHealth');
+                Route::post('store-health', [HealthController::class, 'storeHealth'])->name('healths.storeHealth');
+                Route::get('edit-health/{health}', [HealthController::class, 'editHealth'])->name('healths.editHealth');
+                Route::put('update-health/{health}', [HealthController::class, 'updateHealth'])->name('healths.updateHealth');
+                Route::delete('delete-health/{health}', [HealthController::class, 'destroyHealth'])->name('healths.destroyHealth');
+            });
         });
     });
         // Route::get('/download', [AboutUsController::class, 'showDownloadPage']);

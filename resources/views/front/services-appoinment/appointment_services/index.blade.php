@@ -51,6 +51,8 @@
                                     <th>Service Name</th>
                                     <th>Duration</th>
                                     <th>Amount</th>
+                                    <th>Image</th> <!-- Add this line -->
+                                    <th>Description</th> <!-- Add this line -->
                                     <th>Category</th>
                                     <th>Actions</th>
                                 </tr>
@@ -62,9 +64,16 @@
                                     <td>{{ $service->service_name }}</td>
                                     <td>{{ $service->duration }} minutes</td>
                                     <td>${{ $service->amount }}</td>
+                                    <td>
+                                        @if ($service->image)
+                                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->service_name }}" width="100">
+                                        @endif
+                                    </td> <!-- Add this line -->
+                                    {{-- <td>{{ \Illuminate\Support\Str::limit($service->description, 50) }}</td> --}}
+                                    <td>{!! \Illuminate\Support\Str::words(strip_tags($service->description), 8, '...') !!}</td>
                                     <td>{{ $service->serviceCategory->name }}</td>
                                     <td>
-                                        <a href="{{  route('appointment-services.edit', $service->id)}}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Update blog US') !!}>
+                                        <a href="{{ route('appointment-services.edit', $service->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3">
                                             <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
                                         </a>
                                         <form action="{{ route('appointment-services.destroy', $service->id) }}" method="POST" style="display:inline-block;">
@@ -74,10 +83,10 @@
                                                 <i class="fa-solid fa-trash fs-6 fw-bold fw-bolder"></i></button>
                                         </form>
                                     </td>
-
                                 </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                     </div>
                     {{-- SweetAlert --}}

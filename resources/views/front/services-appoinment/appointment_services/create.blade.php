@@ -12,7 +12,7 @@
                             <h1>{{$page_title}}</h1>
                         </div>
                     </div>
-                    <form action="{{ route('appointment-services.store') }}" method="POST">
+                    <form action="{{ route('appointment-services.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group ms-3 me-3 mt-3">
                             <label class="mb-3 ms-3 required" for="service_name">Service Name</label>
@@ -34,25 +34,56 @@
                             <select class="form-select" id="service_category_id" name="service_category_id" required>
                                 <option value="" selected disabled>Select Category</option>
                                 @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ (isset($service) && $service->service_category_id == $category->id) ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}">
                                     {{ $category->name }}
                                 </option>
                                 @foreach($category->subcategories as $subcategory)
-                                <option value="{{ $subcategory->id }}" {{ (isset($service) && $service->service_category_id == $subcategory->id) ? 'selected' : '' }}>
+                                <option value="{{ $subcategory->id }}">
                                     -- {{ $subcategory->name }}
                                 </option>
                                 @endforeach
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary ms-3  mt-3 mb-5">Submit</button>
-                        <a href="{{ route('appointment-services.index') }}" class="btn btn-secondary ms-5  mt-3 mb-5">Cancel</a>
-
-                    </form>
+                        {{-- <div class="form-group ms-3 me-3 mt-3">
+                            <label class="mb-3 ms-3 required" for="image">Image</label>
+                            <input type="file" class="form-control" id="image" name="image">
+                            @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+                </div> --}}
+                <div class="form-group ms-3 me-3 mt-3">
+                    <div class="col-lg-4">
+                        <label class="mb-3 ms-3" class="fs-6 fw-semibold form-label mb-2 mt-2">
+                            <span class="required">image</span>
+                        </label>
+                        <br>
+                        <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">
+                            <div class="image-input-wrapper" id="image-preview" style="background-size:100% 100%;width:300px">
+                            </div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input name="image" type="file" id="image" accept=".jpeg, .png, .jpg, .gif" onchange="previewImage(event)" />
+                                <input type="hidden" name="avatar_remove" />
+                            </label>
+                            @error('image')
+                            <div class="text-primary">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-text">jpeg,png,jpg,gif.</div>
+                    </div>
                 </div>
+                <div class="form-group ms-3 me-3 mt-3">
+                    <label class="mb-3 ms-3 required" for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="5">{{ old('description') }}</textarea>
+                    @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <button type="submit" class="btn btn-primary ms-3  mt-3 mb-5">Submit</button>
+                <a href="{{ route('appointment-services.index') }}" class="btn btn-secondary ms-5  mt-3 mb-5">Cancel</a>
+                </form>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script>
@@ -64,7 +95,7 @@
         }
         reader.readAsDataURL(event.target.files[0]);
     }
-    CKEDITOR.replace('long_description');
+    CKEDITOR.replace('description');
 
 </script>
 

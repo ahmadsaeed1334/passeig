@@ -13,6 +13,8 @@ class AppointmentService extends Model
         'duration',
         'amount',
         'service_category_id',
+        'image',        // Add this line
+        'description',  // Add this line
     ];
 
     public function serviceCategory()

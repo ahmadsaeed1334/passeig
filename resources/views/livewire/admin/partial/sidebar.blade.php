@@ -80,6 +80,18 @@
                 'icon' => 'fa-solid fa-sliders',
                 // 'counter' => auth()->user()->newThreadsCount(),
                 ])
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'experts.index',
+                'name' => 'Experts',
+                'icon' => 'fa-solid fa-sliders',
+                // 'counter' => auth()->user()->newThreadsCount(),
+                ])
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'healths.index',
+                'name' => 'Healths',
+                'icon' => 'fa-solid fa-sliders',
+                // 'counter' => auth()->user()->newThreadsCount(),
+                ])
                 {{-- @include('livewire.admin.partial.sidebar-menu-item', [
                 'route' => 'admin/about',
                 'name' => 'Abouts',
