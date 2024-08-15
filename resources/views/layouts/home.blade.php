@@ -130,7 +130,7 @@
 
                     @endif
                 </div>
-                @include('front.partial.footer')
+                @livewire('front.footers')
 
             </div>
         </div>

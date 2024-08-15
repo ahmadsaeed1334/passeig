@@ -104,14 +104,14 @@ $route_name = route_name();
                 <div class="header-nav navbar-collapse collapse ">
                     <ul class=" nav navbar-nav">
                         <li class="active">
-                            <a href="javascript:;">Home<i class="fa fa-chevron-down"></i></a>
-                            <ul class="sub-menu">
+                            <a href="{{ route('home-page') }}">Home</a>
+                            {{-- <ul class="sub-menu">
                                 <li><a href="index.html">Home 1</a></li>
                                 <li><a href="index-2.html">Home 2</a></li>
                                 <li><a href="index-3.html">Home 3</a></li>
                                 <li><a href="index-4.html">Home 4</a></li>
                                 <li><a href="index-5.html">Home 5</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
 
                         <li>
@@ -125,11 +125,7 @@ $route_name = route_name();
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">FAQ</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="faq-1.html">FAQ 1</a></li>
-                                        <li><a href="faq-2.html">FAQ 2</a></li>
-                                    </ul>
+                                    <a href="{{ route('faqs') }}">FAQ</a>
                                 </li>
                                 <li>
                                     <a href="career.html">Career</a>
@@ -151,20 +147,20 @@ $route_name = route_name();
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">Services</a>
-                                    <ul class="sub-menu">
+                                    <a href="{{ route('services') }}">Services</a>
+                                    {{-- <ul class="sub-menu">
                                         <li><a href="services-1.html">Services 1</a></li>
                                         <li><a href="services-2.html">Services 2</a></li>
                                         <li><a href="services-detail.html">Services Detail</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="javascript:;">Galley</a>
-                                    <ul class="sub-menu">
+                                    <a href="{{ route('gallery') }}">Galley</a>
+                                    {{-- <ul class="sub-menu">
                                         <li><a href="gallery-grid-1.html">Galley Grid 1</a></li>
                                         <li><a href="gallery-grid-2.html">Galley Grid 2</a></li>
                                         <li><a href="gallery-grid-3.html">Galley Grid 3</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
                                     <a href="javascript:;">Error</a>
