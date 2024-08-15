@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class GalleryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        return view('front.gallery.index', compact('categories'), [
+        $categories = Category::with('images')->get();
+                return view('front.gallery.index', compact('categories'), [
             'page_title' => 'Gallery Management'
         ]);
     }
@@ -48,15 +49,17 @@ class GalleryController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $image = new Image();
-        $image->category_id = $request->category_id;
-        $image->title = $request->title;
-        $image->addMedia($request->file('image'))->toMediaCollection('gallery');
-        $image->save();
+{
 
-        return response()->json(['success' => 'Image added successfully']);
-    }
+    $image = new Image();
+    $image->category_id = $request->category_id;
+    $image->title = $request->title;
+    $image->addMedia($request->file('image'))->toMediaCollection('gallery');
+    $image->save();
+
+
+    return response()->json(['success' => 'Image added successfully']);
+}
 
     public function edit($id)
     {

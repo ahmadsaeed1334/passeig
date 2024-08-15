@@ -33,7 +33,7 @@
                 <div class="form-group ms-3 me-3 mt-3">
                     <div class="col-lg-4">
                         <label class="mb-3 ms-3 required" class="fs-6 fw-semibold form-label mb-2 mt-2">
-                            <span>Image</span>
+                            <span>Icon</span>
                         </label>
                         <br>
                         <div class="image-input image-input-outline align-items-center" style="background-image: url({{ asset('img/bg-back.jpg') }}); background-size:100% 100%;width:300px">

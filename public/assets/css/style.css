@@ -15557,6 +15557,7 @@ ol.commentlist li::after {
     float: right;
     color: #4a424b;
     font-style: italic;
+    list-style-type: none;
 }
 
 .opening-block .opening-date {

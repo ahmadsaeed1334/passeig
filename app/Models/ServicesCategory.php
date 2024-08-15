@@ -28,4 +28,8 @@ class ServicesCategory extends Model
     {
         return $this->hasMany(AppointmentService::class, 'service_category_id');
     }
+    public function services()
+    {
+        return $this->hasMany(AppointmentService::class, 'service_category_id');
+    }
 }

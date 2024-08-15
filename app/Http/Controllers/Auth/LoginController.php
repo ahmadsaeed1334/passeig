@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
     protected $rateLimiter;
-    protected $maxAttempts = 5; 
+    protected $maxAttempts = 5;
     protected $decayMinutes = 1;
 
     public function __construct(RateLimiter $rateLimiter)
@@ -47,7 +47,7 @@ class LoginController extends Controller
             $this->clearLoginAttempts($request);
 
             if (Auth::user()->is_verified) {
-                return redirect()->route('home'); 
+                return redirect()->route('home-page');
             } else {
                 Auth::logout();
                 return redirect()->route('custom.verification.notice');
@@ -113,7 +113,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('homes'); 
+        return redirect()->route('home-page');
     }
 }
-

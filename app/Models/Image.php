@@ -18,4 +18,9 @@ class Image extends Model implements HasMedia
     {
         return $this->belongsTo(Category::class);
     }
+     // Ensure your media collection is registered
+     public function registerMediaCollections(): void
+     {
+         $this->addMediaCollection('gallery')->useDisk('public');
+     }
 }

@@ -177,4 +177,10 @@ class BlogController extends Controller
 
         return redirect()->route('blogs.index')->with('success', 'Blog Title deleted successfully!');
     }
+    public function show($id)
+{
+    $blog = Blog::with('comments', 'user')->findOrFail($id);
+    return view('front.blogs.show', compact('blog'));
+}
+
 }
