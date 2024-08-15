@@ -1,121 +1,146 @@
-<footer id="footer">
-    @foreach ($footers as $footer )
+<footer class="site-footer footer-light">
+    <style>
+        .input-group {
+            width: 88% !important;
+        }
 
-                            {{-- <td>{{ $footer->address }}</td>
-                            <td>{{ \Illuminate\Support\Str::words(strip_tags($footer->description), 10, '...') }}</td>
-                            <td>
-                                @foreach(json_decode($footer->icons) as $icon)
-                                    @if (strtolower($icon->icon) == 'facebook')
-                                        <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fab fa-facebook fa-lg"></i></a>
-                                    @elseif (strtolower($icon->icon) == 'twitter')
-                                        <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fab fa-twitter fa-lg"></i></a>
-                                    @elseif (strtolower($icon->icon) == 'instagram')
-                                        <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fab fa-instagram fa-lg"></i></a>
-                                    @else
-                                        <a href="{{ $icon->link }}" target="_blank" class="me-2">{{ ucfirst($icon->icon) }}</a>
-                                    @endif
-                                @endforeach
-                            </td>
-                            <td>{{ $footer->working_hours }}</td> --}}
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center mb-lg-0 mb-5">
-                <img src="{{env('APP_URL').'/storage' .'/'.general('logo_black')}}"width="170px"
-                class="img-fluid">
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-lg-3 col-md-6 col-12 text-center order-1 mb-md-0 mb-5">
-               
-                {{-- <a href="">+ 907 683 8196</a><br> --}}
-                <a href="">{{ $footer->address }}</a><br>
-                 <a href="">{{ $footer->number }}</a><br>
-                {{-- <a href="">828 Timbercrest Road, <br>Healy City, AK 99743</a><br> --}}
-                {{-- <a href="">info@celeste.com</a> --}}
-            </div>
-            <div class="col-lg-6 col-12 text-center mt-5 order-lg-2 order-3">
-                <p class="mx-md-5 mx-2 mb-5 mt-lg-0 mt-4">{{ \Illuminate\Support\Str::words(strip_tags($footer->description)) }}</p>
-                <div class="social mt-5 d-flex gap-3 justify-content-center">
-                    {{-- <a href="#"><img src="{{asset('assets/images/facebook.svg')}}"></a>
-                    <a href="#"><img src="{{asset('assets/images/twitter.svg')}}"></a>
-                    <a href="#"><img src="{{asset('assets/images/instagram.svg')}}"></a> --}}
-                    @foreach(json_decode($footer->icons) as $icon)
-                    @if (strtolower($icon->icon) == 'facebook')
-                        <a href="{{ $icon->link }}" target="_blank" class="me-2"><img src="{{asset('assets/images/facebook.svg')}}"></i></a>
-                    @elseif (strtolower($icon->icon) == 'twitter')
-                        <a href="{{ $icon->link }}" target="_blank" class="me-2"><img src="{{asset('assets/images/twitter.svg')}}"></a>
-                    @elseif (strtolower($icon->icon) == 'instagram')
-                        <a href="{{ $icon->link }}" target="_blank" class="me-2"><img src="{{asset('assets/images/instagram.svg')}}"></a>
-                    @else
-                        <a href="{{ $icon->link }}" target="_blank" class="me-2">{{ ucfirst($icon->icon) }}</a>
-                    @endif
-                @endforeach
+    </style>
+    <!-- COLL-TO ACTION START -->
+    <div class="section-full overlay-wraper site-bg-primary" style="background-image:url({{ asset('assets/images/background/bg-7.png') }})">
+
+        <div class="section-content">
+            <!-- COLL-TO ACTION START -->
+            <div class="wt-subscribe-box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8">
+                            <div class="call-to-action-left p-tb20 p-r50">
+                                <h4 class="text-uppercase m-b10">{{ setting('general_settings.app_name') }}</h4>
+                                <p>{{ \Illuminate\Support\Str::words(strip_tags(setting('general_settings.app_description')), 25) }}</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="call-to-action-right p-tb30">
+                                <a href="{{ url('contact-1.html') }}" class="site-button-secondry text-uppercase radius-sm font-weight-600">
+                                    Contact us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-   
-            <div class="col-lg-3 col-md-6 col-12 text-center  order-lg-3 order-1">
-                <p>Working hours: <br>{{ $footer->working_hours }}</p>
-               <form  method="POST" id="email-collector-bottom" class="d-flex">
-                     @csrf
-                    <input type="email" name="email" class="w-100 p-3 border-0 bg-transparent"
-                        placeholder="Your mail">
-                  
-                    <button type="submit" class="btn"><img src="{{asset('assets/images/subscribe.svg')}}"></button>
+        </div>
+    </div>
 
-                </form>
+    <!-- FOOTER BLOCKES START -->
+    <div class="footer-top overlay-wraper">
+        <div class="overlay-main"></div>
+        <div class="container">
+            <div class="row">
+                <!-- ABOUT COMPANY -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="widget widget_about">
+                        <h4 class="widget-title">About Company</h4>
+                        <div class="logo-footer clearfix p-b15">
+                            <a href="{{ url('index.html') }}">
+                                <img src="{{ asset('storage/' . setting('general_settings.logo_black')) }}" class="img-fluid" width="230" height="67" alt="Company Logo">
+                            </a>
+                        </div>
+                        <p>{{ \Illuminate\Support\Str::words(strip_tags(setting('general_settings.app_description')), 25) }}</p>
+                    </div>
+                </div>
+                <!-- RESENT POST -->
+                {{-- <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="widget recent-posts-entry-date">
+                        <h4 class="widget-title">Recent Post</h4>
+                        <div class="widget-post-bx">
+                            <!-- Add dynamic recent posts here -->
+                        </div>
+                    </div>
+                </div> --}}
+                <!-- USEFUL LINKS -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="widget widget_services">
+                        <h4 class="widget-title">Useful links</h4>
+                        <ul>
+                            <li><a href="{{ url('about-1.html') }}">About</a></li>
+                            <li><a href="{{ url('faq-1.html') }}">FAQ</a></li>
+                            <li><a href="{{ url('career.html') }}">Career</a></li>
+                            <li><a href="{{ url('our-team.html') }}">Our Team</a></li>
+                            <li><a href="{{ url('services.html') }}">Services</a></li>
+                            <li><a href="{{ url('gallery-grid-1.html') }}">Gallery</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- NEWSLETTER -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="widget widget_newsletter">
+                        <h4 class="widget-title">Newsletter</h4>
+                        <div class="newsletter-bx">
+                            <form role="search" method="post">
+                                <div class="input-group">
+                                    <input name="news-letter" class="form-control" placeholder="ENTER YOUR EMAIL" type="text">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="site-button"><i class="fa fa-paper-plane-o"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- SOCIAL LINKS -->
+                    <div class="widget widget_social_inks">
+                        <h4 class="widget-title">Social Links</h4>
+                        <ul class="social-icons social-square social-darkest">
+                            {{-- <li><a href="javascript:void(0);" class="fa fa-facebook"></a></li>
+                            <li><a href="javascript:void(0);" class="fa fa-twitter"></a></li>
+                            <li><a href="javascript:void(0);" class="fa fa-linkedin"></a></li>
+                            <li><a href="javascript:void(0);" class="fa fa-rss"></a></li>
+                            <li><a href="javascript:void(0);" class="fa fa-youtube"></a></li>
+                            <li><a href="javascript:void(0);" class="fa fa-instagram"></a></li> --}}
+                            @foreach ($footers as $footer )
+
+
+                            @foreach(json_decode($footer->icons) as $icon)
+                            @if (strtolower($icon->icon) == 'facebook')
+                            <li><a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fa fa-facebook "></i></a></li>
+                            @elseif (strtolower($icon->icon) == 'twitter')
+                            <li><a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fa fa-twitter "></i></a></li>
+                            @elseif (strtolower($icon->icon) == 'instagram')
+                            <li> <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fa fa-instagram "></i></a></li>
+                            @elseif (strtolower($icon->icon) == 'linkedin')
+                            <li> <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fa fa-linkedin "></i></a></li>
+                            @elseif (strtolower($icon->icon) == 'youtube')
+                            <li><a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fa fa-youtube "></i></a></li>
+
+                            @else
+                            <a href="{{ $icon->link }}" target="_blank" class="me-2">{{ ucfirst($icon->icon) }}</a>
+                            @endif
+                            @endforeach
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             </div>
-        <span class="text-danger" id="email-error"></span>
         </div>
     </div>
-    <hr class="bg-white">
-    <div class="row">
-        <div class="col-12 text-center">
-            <p class="text-white fs-6 pb-3">Copyright Balanced Skin, All Rights Reserved</p>
+    <!-- FOOTER COPYRIGHT -->
+    <div class="footer-bottom overlay-wraper">
+        <div class="overlay-main"></div>
+        <div class="constrot-strip"></div>
+        <div class="container p-t30">
+            <div class="row ftr-btm">
+                <div class="wt-footer-bot-left">
+                    <span class="copyrights-text">© {{ date('Y') }} {{ setting('copy_right') }}</span>
+                </div>
+                <div class="wt-footer-bot-right">
+                    <ul class="copyrights-nav pull-right">
+                        <li><a href="javascript:void(0);">Terms & Condition</a></li>
+                        <li><a href="javascript:void(0);">Privacy Policy</a></li>
+                        <li><a href="{{ url('contact-1.html') }}">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-
     </div>
-    @endforeach
-  
-
-
-<script>
-    document.getElementById('email-collector-bottom').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var form = this;
-        var formData = new FormData(form);
-
-        fetch("{{ route('subscribe') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': formData.get('_token')
-            },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: data.message,
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: data.message,
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'You need to log in first',
-            });
-        });
-    });
-</script>
 </footer>
