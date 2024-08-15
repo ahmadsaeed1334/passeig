@@ -40,7 +40,7 @@
 						@foreach ($healths as $key => $health)
 							<div id="tab{{ $key + 1 }}" class="tab-pane @if ($key == 0) in active @endif">
 								<div class="wt-box">
-									<div class="wt-media site-text-primary m-b20">
+									<div class="wt-media wt-img-effect zoom-slow site-text-primary m-b20">
 										<img src="{{ asset('storage/' . $health->image) }}" class="radius-bx" alt="">
 									</div>
 								</div>

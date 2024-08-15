@@ -112,7 +112,7 @@
 	</style>
 </head>
 
-<body>
+<body id="bg">
 	<div id="videoContainer">
 		<video id="backgroundVideo" autoplay muted onended="handleVideoEnd()">
 			<source src="{{ asset('assets/background.mp4') }}" type="video/mp4">
@@ -131,16 +131,11 @@
 					@endif
 				</div>
 				@include('front.partial.footer')
-
-<<<<<<< HEAD
-                    @endif
-                </div>
-                @livewire('front.footers')
-=======
+				<!-- BUTTON TOP START -->
+				<button class="scroltop"><span class="iconmoon-house relative" id="btn-vibrate"></span>Top</button>
 			</div>
 		</div>
 	</div>
->>>>>>> b1ec6d407a75b1f95bcb559bc23d03efe83a90fc
 
 
 

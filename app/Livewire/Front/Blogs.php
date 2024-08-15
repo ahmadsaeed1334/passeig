@@ -2,30 +2,37 @@
 
 namespace App\Livewire\Front;
 
-use App\Models\BlogTitle;
-use Livewire\Component;
-use Livewire\Attributes\Layout;
-use App\Models\Appointment;
 use App\Models\Blog;
+use Livewire\Component;
+use App\Models\BlogTitle;
+use App\Models\Appointment;
+use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
 #[Layout('layouts.front')]
 class Blogs extends Component
 {
+    use WithPagination;
+
     public $blogTitles;
-    public $appointments;
     public $blogs;
+
     public function mount()
     {
-        $this->blogTitles = BlogTitle::all();
-        $this->appointments = Appointment::all();
-        $this->blogs = Blog::latest()->with('category')->get();
+        $this->blogTitles = BlogTitle::first();
+        $this->blogs = Blog::latest()
+            ->with(['user:id,name', 'category'])
+            ->withCount('comments')
+            ->get();
+        // dd($this->blogs);
     }
+
     public function render()
     {
-        return view('livewire.front.blogs',[
-            'blogTitles' => $this->blogTitles
-            , 'appointments' => $this->appointments,
-            'blogs' => $this->blogs
+        return view('livewire.front.blogs', [
+            'title' => $this->blogTitles,
+            'blogs' => $this->blogs,
+            'page_title' => "Blogs"
         ]);
     }
 }
