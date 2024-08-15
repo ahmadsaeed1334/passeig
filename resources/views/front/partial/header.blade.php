@@ -91,7 +91,7 @@ $route_name = route_name();
 <header class="site-header header-style-3  mobile-sider-drawer-menu">
     <!-- Search Form -->
 
-    <div class="sticky-header main-bar-wraper">
+    <div class="sticky-header main-bar-wraper ">
         <div class="main-bar site-bg-primary">
             <div class="container">
                 <div class="logo-header">

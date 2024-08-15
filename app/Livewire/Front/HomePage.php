@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Front;
 
+use App\Models\Footer;
 use App\Models\BestService;
 use App\Models\Blog;
 use App\Models\BlogTitle;
@@ -43,6 +44,7 @@ class HomePage extends Component
     public $blogs;
     public $blogTitle;
     public $partners;
+    public $footers;
 
     public function mount()
     {
@@ -62,6 +64,7 @@ class HomePage extends Component
         $this->blogs = Blog::with('user', 'comments')->latest()->take(4)->get(); // Fetch only 4 latest blogs
         $this->blogTitle = BlogTitle::first();
         $this->partners = Partner::all();
+        $this->footers = Footer::all();
     }
     public function render()
     {
@@ -81,7 +84,8 @@ class HomePage extends Component
             'productTitle' => $this->productTitle,
             'blogs' => $this->blogs,
             'blogTitle' => $this->blogTitle,
-            'partners' => $this->partners
+            'partners' => $this->partners,
+            'footers' => $this->footers
         ]);
     }
 }

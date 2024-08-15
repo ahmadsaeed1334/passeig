@@ -1,5 +1,21 @@
 <div id="rev_slider_149_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="snowaddon1" data-source="gallery" style="background-color:#2d3032;padding:0px;">
     <div id="rev_slider_149_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.1">
+        <style>
+            @media (max-width: 768px) {
+                .tp-caption {
+                    font-size: 20px !important;
+                    line-height: 28px !important;
+                    letter-spacing: 0 !important;
+                    text-align: center !important;
+                }
+
+                .tp-caption.tp-resizeme {
+                    font-size: 18px !important;
+                    line-height: 26px !important;
+                }
+            }
+
+        </style>
         <ul>
             @foreach($sliders as $slider)
             <li data-index="rs-{{ $loop->index + 1 }}" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="2000" data-thumb="{{ asset('storage/' . $slider->image) }}" data-rotate="0" data-saveperformance="off" data-title="{{ $slider->title }}" data-description="{{ $slider->description }}">

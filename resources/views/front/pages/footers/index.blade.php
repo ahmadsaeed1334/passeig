@@ -78,6 +78,11 @@
                             <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fab fa-twitter fa-lg"></i></a>
                             @elseif (strtolower($icon->icon) == 'instagram')
                             <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fab fa-instagram fa-lg"></i></a>
+                            @elseif (strtolower($icon->icon) == 'linkedin')
+                            <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                            @elseif (strtolower($icon->icon) == 'youtube')
+                            <a href="{{ $icon->link }}" target="_blank" class="me-2"><i class="fab fa-youtube fa-lg"></i></a>
+
                             @else
                             <a href="{{ $icon->link }}" target="_blank" class="me-2">{{ ucfirst($icon->icon) }}</a>
                             @endif

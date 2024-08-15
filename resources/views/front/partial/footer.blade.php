@@ -121,7 +121,7 @@
                     <div class="widget widget_about">
                         <h4 class="widget-title">About Company</h4>
                         <div class="logo-footer clearfix p-b15">
-                            <a href="index.html"><img src="{{ asset('assets/images/logo-7.png')}}" width="230" height="67" alt=""></a>
+                            <a href="index.html"> <img src="{{env('APP_URL').'/storage' .'/'.general('logo_black')}}" class="img-fluid" width="230" height="67"></a>
                         </div>
                         <p>Thewebmax ipsum dolor sit amet, interior adipiscing elit, sed diam nonummy nibh is
                             euismod tincidunt ut laoreet dolore are agna aliquam erat. wisi enim ad minim

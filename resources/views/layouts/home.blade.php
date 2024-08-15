@@ -135,18 +135,13 @@
             </div>
         </div>
     </div>
-
-
-
     <script>
         // Function to handle the end of the video
         function handleVideoEnd() {
             // Slide up the content container
             document.getElementById('contentContainer').style.bottom = '0';
-
             // Enable scrolling
             document.body.style.overflowY = 'scroll';
-
             // Animate all child elements of the content container with a fade-in-left effect
             gsap.from('#contentContainer > *', {
                 opacity: 0
@@ -173,7 +168,23 @@
 
         document.dispatchEvent(new Event('scroll'));
 
+        // Sticky Header with Color Fill on Scroll
+        document.addEventListener('scroll', function() {
+            var header = document.querySelector('.sticky-header');
+            var scrollPosition = window.scrollY;
+
+            console.log("Scroll position:", scrollPosition); // Debugging: Check the scroll position
+            if (scrollPosition > 50) { // Adjust the value as needed
+                header.classList.add('color-fill');
+                console.log("Class added"); // Debugging: Confirm if the class is being added
+            } else {
+                header.classList.remove('color-fill');
+                console.log("Class removed"); // Debugging: Confirm if the class is being removed
+            }
+        });
+
     </script>
+
     @include('front.partial.script')
 
 </body>
