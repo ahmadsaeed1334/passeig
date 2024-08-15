@@ -10,7 +10,7 @@ use App\Livewire\Admin\Staff\Roles;
 use App\Livewire\Admin\Staff\Staff;
 use App\Livewire\Admin\Home\Banners;
 use App\Livewire\Front\Appointments;
-use App\Livewire\Front\SingleService;
+// use App\Livewire\Front\SingleService;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Logs\LogViewer;
 use App\Livewire\Admin\Mail\Maileditor;
@@ -68,6 +68,11 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\RevSliderController;
 use App\Http\Controllers\ProvideController;
 use App\Http\Controllers\BestServiceController;
+use App\Livewire\Front\Pages\Faqs;
+use App\Livewire\Front\Pages\Gallerys;
+use App\Livewire\Front\Pages\Services as PagesServices;
+use App\Livewire\Front\Pages\SingleServices;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -343,11 +348,13 @@ Route::get("/config-clear", function () {
 
 
 Route::get('/', HomePage::class)->name('home-page');
+Route::get('/faqs', Faqs::class)->name('faqs');
+Route::get('/gallery', Gallerys::class)->name('gallery');
 Route::get('/aboutus', AboutUs::class)->name('about-us');
 Route::get('/products', Product::class)->name('products');
 Route::get('/blogs', Frontblog::class)->name('blogs');
-Route::get('/services', FrontServices::class)->name('services');
-Route::get('/services/{id}', SingleService::class)->name('single-service');
+Route::get('/services', PagesServices::class)->name('services');
+Route::get('/services/{id}', SingleServices::class)->name('single-service');
 Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
 Route::get('/appointments', Appointments::class)->name('appointments');
 // Route::get('/', [HomeController::class, 'index'])->name('home');

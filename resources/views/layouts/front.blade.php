@@ -18,34 +18,19 @@
 </head>
 
 <body>
+    <div class="page-wraper">
+        {{-- @include('front.partial.home-page-content') --}}
+        @include('front.partial.header')
+        <div class="page-content">
+            @if (isset($slot))
+            {{ $slot }}
+            @else
 
-    @include('front.partial.header')
-    <div class="load_animation first">
-
-
-
-        @if (isset($slot))
-        {{ $slot }}
-        @else
-        @yield('content')
-        @endif
-        {{-- <section id="hero">
-                <div class="container">
-                    <div class="text-center">
-                        <div class="col-lg-8 mx-auto">
-                            <img class="d-block mx-auto mb-4 img-fluid animation" src="assets/images/LOGO-PASSEIG.png"
-                                alt="">
-                            <p class="lead mb-4 p-below animation">Risus scelerisque a non turpis vitae
-                                malesuada sed venenatis. In fringilla
-                                sollicitudin euismod sed.</p>
-                        </div>
-                    </div>
-                </div>
-            </section> --}}
+            @endif
+        </div>
+        {{-- @include('front.partial.footer') --}}
 
     </div>
-
-    {{-- @include('front.partial.main') --}}
     @livewire('front.footers')
     @include('front.partial.script')
 </body>

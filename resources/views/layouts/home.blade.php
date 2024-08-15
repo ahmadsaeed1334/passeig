@@ -132,9 +132,15 @@
 				</div>
 				@include('front.partial.footer')
 
+<<<<<<< HEAD
+                    @endif
+                </div>
+                @livewire('front.footers')
+=======
 			</div>
 		</div>
 	</div>
+>>>>>>> b1ec6d407a75b1f95bcb559bc23d03efe83a90fc
 
 
 
