@@ -135,6 +135,8 @@
 												filter: grayscale(1) brightness(.5);
 												transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
 												will-change: transform, filter, rotateY, width;
+												overflow: hidden;
+												/* Ensure the overlay is contained within the item */
 											}
 
 											.item::before,
@@ -155,11 +157,14 @@
 											.items .item:active {
 												filter: inherit;
 												transform: translateZ(calc(var(--index) * 10));
+												z-index: 100;
 											}
 
 											.items .item:focus .overlay,
 											.items .item:active .overlay {
 												opacity: 1;
+												pointer-events: auto;
+												/* Allow interaction with overlay elements */
 											}
 
 											/*Right*/
@@ -253,7 +258,7 @@
 												text-align: center;
 												padding: 10px;
 												pointer-events: none;
-												/* Prevents interaction with overlay */
+												/* Prevent interaction until active/focused */
 											}
 
 											.overlay h5 {
@@ -296,9 +301,21 @@
 												@foreach ($category->images as $image)
 													<div class="item" tabindex="0"
 														style="background-image: url('{{ $image->getFirstMediaUrl('gallery') }}')">
+														<div class="overlay">
+															<div class="btn-container">
+																<button type="button" class="btn btn-primary btn-sm edit" data-id="{{ $image->id }}">
+																	<i class="fas fa-edit"></i>
+																</button>
+																<button type="button" class="btn btn-danger btn-sm delete" data-id="{{ $image->id }}">
+																	<i class="fas fa-trash"></i>
+																</button>
+															</div>
+															<h5 class="card-title">{{ $image->title }}</h5>
+														</div>
 													</div>
 												@endforeach
 											</div>
+
 
 											{{-- <div class="card">
 													<img src="{{ $image->getFirstMediaUrl('gallery') }}" class="card-img-top" alt="{{ $image->title }}">
