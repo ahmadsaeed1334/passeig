@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Front;
 
+use App\Models\AppointmentBook;
+use App\Models\AppointmentService;
 use App\Models\Footer;
 use App\Models\BestService;
 use App\Models\Blog;
 use App\Models\BlogTitle;
 use App\Models\Category;
+use App\Models\ContactSubmission;
 use App\Models\Expert;
 use App\Models\ExpertTitle;
 use App\Models\Health;
@@ -19,8 +22,8 @@ use App\Models\Product;
 use App\Models\ProductTitle;
 use App\Models\ServicesCategory;
 use App\Models\ServicesTitle;
-
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
@@ -45,10 +48,16 @@ class HomePage extends Component
     public $blogTitle;
     public $partners;
     public $footers;
+    public $subCategories = [];
+    public $appointmentServices = [];
+    public $selectedCategoryId;
+    public $name;
+    public $email;
+    public $message;
 
     public function mount()
     {
-        $this->categories = ServicesCategory::with(['subcategories', 'services'])->whereNull('parent_id')->get();
+        $this->categories = ServicesCategory::with('subcategories.services')->whereNull('parent_id')->get();
         $this->sliders = RevSlider::all();
         $this->provide = Provide::first();
         $this->healths = Health::all();
@@ -66,6 +75,26 @@ class HomePage extends Component
         $this->partners = Partner::all();
         $this->footers = Footer::all();
     }
+
+
+    protected $rules = [
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'message' => 'required|string',
+    ];
+
+    public function submit()
+    {
+        $this->validate();
+
+        ContactSubmission::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'message' => $this->message,
+        ]);
+
+        session()->flash('success', 'Thank you for contacting us! We will get back to you soon.');
+    }
     public function render()
     {
         return view('livewire.front.home-page',[
@@ -73,7 +102,7 @@ class HomePage extends Component
             'provide' => $this->provide,
             'healths' => $this->healths,
             'healthTitle' => $this->healthTitle,
-            'services' => $this->services,
+            // 'services' => $this->services,
             'servicesTitle' => $this->servicesTitle,
             'categories' => $this->categories,
             'category' => $this->category,
@@ -85,7 +114,8 @@ class HomePage extends Component
             'blogs' => $this->blogs,
             'blogTitle' => $this->blogTitle,
             'partners' => $this->partners,
-            'footers' => $this->footers
+            'footers' => $this->footers,
+
         ]);
     }
 }

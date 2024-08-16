@@ -34,7 +34,7 @@
                         </div>
                         <div class="wt-info p-t30 text-center">
                             <h2>{{ $product->name }}</h2>
-                            <a href="#" class="site-button text-uppercase radius-sm font-weight-700 button-lg">View</a>
+                            <a href="{{ route('products') }}" class="site-button text-uppercase radius-sm font-weight-700 button-lg">View</a>
                             {{-- <a href="{{ route('products.show', $product->id) }}" class="site-button text-uppercase radius-sm font-weight-700 button-lg">View</a> --}}
                         </div>
                     </div>

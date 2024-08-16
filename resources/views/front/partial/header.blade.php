@@ -110,9 +110,10 @@ $route_name = route_name();
 						</li>
 
 						{{-- <li class="{{ $route == 'services' ? 'active' : '' }}">
-							<a href="{{ route('services') }}">Services</a>
+                        <a href="{{ route('services') }}">Services</a>
 
-						</li> --}}
+                        </li> --}}
+
 
 						<li class="has-child">
 							<a href="{{ route('services') }}">Services<i class="fa fa-chevron-down"></i></a>
@@ -163,6 +164,55 @@ $route_name = route_name();
 								@endforeach
 							</ul>
 						</li>
+						<li class="has-child">
+							<a href="{{ route('services') }}">Services<i class="fa fa-chevron-down"></i></a>
+							<ul class="sub-menu">
+								@php
+									$menus = App\Models\ServicesCategory::with(['subcategories', 'services'])
+									    ->withCount(['subcategories', 'services'])
+									    ->get();
+								@endphp
+								@foreach ($menus as $menu)
+									<li>
+										<a href="javascript:;">{{ $menu->name }}</a>
+										@if ($menu->subcategories_count > 0)
+											<ul class="sub-menu">
+												@foreach ($menu->subcategories as $subcategory)
+													<li>
+														<a href="blog-media-list.html">
+															{{ $subcategory->name }}
+															@if ($menu->services_count > 0)
+																<ul class="sub-menu">
+																	@foreach ($menu->services as $child)
+																		<li>
+																			<a href="blog-media-list.html">
+																				{{ $child->service_name }}
+																			</a>
+																		</li>
+																	@endforeach
+																</ul>
+															@endif
+														</a>
+													</li>
+												@endforeach
+											</ul>
+										@else
+											@if ($menu->services_count > 0)
+												<ul class="sub-menu">
+													@foreach ($menu->services as $child)
+														<li>
+															<a href="blog-media-list.html">
+																{{ $child->service_name }}
+															</a>
+														</li>
+													@endforeach
+												</ul>
+											@endif
+										@endif
+									</li>
+								@endforeach
+							</ul>
+						</li>
 
 						<li class="{{ $route == 'products' ? 'active' : '' }}">
 							<a href="{{ route('products') }}">Products</a>
@@ -187,7 +237,7 @@ $route_name = route_name();
 									<a href="{{ route('gallery') }}">Galley</a>
 								</li>
 								<li>
-									<a href="{{ route('contacts') }}">Contact us</a>
+									<a href="{{ route('contact-us') }}">Contact us</a>
 								</li>
 							</ul>
 						</li>
