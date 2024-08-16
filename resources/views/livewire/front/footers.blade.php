@@ -47,7 +47,7 @@
                                 <img src="{{ asset('storage/' . setting('general_settings.logo_black')) }}" class="img-fluid" width="230" height="67" alt="Company Logo">
                             </a>
                         </div>
-                        <p>{{ \Illuminate\Support\Str::words(strip_tags(setting('general_settings.app_description')), 25) }}</p>
+                        <p>{{ \Illuminate\Support\Str::words(strip_tags(setting('general_settings.app_description')), 40) }}</p>
                     </div>
                 </div>
                 <!-- RESENT POST -->
@@ -78,14 +78,16 @@
                     <div class="widget widget_newsletter">
                         <h4 class="widget-title">Newsletter</h4>
                         <div class="newsletter-bx">
-                            <form role="search" method="post">
-                                <div class="input-group">
-                                    <input name="news-letter" class="form-control" placeholder="ENTER YOUR EMAIL" type="text">
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="site-button"><i class="fa fa-paper-plane-o"></i></button>
-                                    </span>
-                                </div>
-                            </form>
+                            {{-- <form id="newsletterForm" method="post" action="{{ route('newsletter.store') }}">
+                            <div class="input-group">
+                                <input name="email" class="form-control" placeholder="ENTER YOUR EMAIL" type="email">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="site-button"><i class="fa fa-paper-plane-o"></i></button>
+                                </span>
+                            </div>
+                            </form> --}}
+                            @include('livewire.front.pages.newsletter')
+
                         </div>
                     </div>
                     <!-- SOCIAL LINKS -->
@@ -122,6 +124,66 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 col-sm-6 p-tb20">
+                    <div class="wt-icon-box-wraper left  bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix">
+                        <div class="icon-md site-text-primary">
+                            {{-- <span class="iconmoon-travel"></span> --}}
+                            <img src="{{ asset('assets/images/location.png') }}" alt="">
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="wt-tilte text-uppercase m-b0">Address</h5>
+                            <p> {{ general('address') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-6 col-sm-6 p-tb20 ">
+                    <div class="wt-icon-box-wraper left  bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix ">
+                        <div class="icon-md site-text-primary">
+                            {{-- <span class="iconmoon-smartphone-1"></span> --}}
+                            <img src="{{ asset('assets/images/phone.png') }}" alt="">
+
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="wt-tilte text-uppercase m-b0">Phone</h5>
+                            <p class="m-b0">{{ general('phone') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 p-tb20">
+                    <div class="wt-icon-box-wraper left  bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix">
+                        <div class="icon-md site-text-primary">
+                            {{-- <span class="iconmoon-fax"></span> --}}
+                            <img src="{{ asset('assets/images/fax.png') }}" alt="">
+
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="wt-tilte text-uppercase m-b0">Fax</h5>
+                            <p class="m-b0">FAX: {{ general('fax') }}</p>
+                            {{-- <p>FAX: (123) 123-4567</p> --}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 p-tb20">
+                    <div class="wt-icon-box-wraper left  bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix">
+                        <div class="icon-md site-text-primary">
+                            {{-- <span class="iconmoon-email"></span> --}}
+                            <img src="{{ asset('assets/images/email.png') }}" alt="">
+
+                        </div>
+                        <div class="icon-content">
+                            <h5 class="wt-tilte text-uppercase m-b0">Email</h5>
+                            <p class="m-b0">{{ general('email') }}</p>
+                            {{-- <p>info@demo1234.com</p> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- FOOTER COPYRIGHT -->
@@ -143,4 +205,31 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            let formData = new FormData(this);
+            let action = this.action;
+
+            fetch(action, {
+                    method: 'POST'
+                    , body: formData
+                    , headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        this.reset(); // Reset the form after successful submission
+                    } else {
+                        alert(data.message); // Show the error message
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+    </script>
 </footer>

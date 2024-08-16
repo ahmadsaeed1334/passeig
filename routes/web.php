@@ -68,8 +68,13 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\RevSliderController;
 use App\Http\Controllers\ProvideController;
 use App\Http\Controllers\BestServiceController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\NewsletterController;
+use App\Livewire\Admin\ContactSubmissions;
+use App\Livewire\Front\Pages\Contacts;
 use App\Livewire\Front\Pages\Faqs;
 use App\Livewire\Front\Pages\Gallerys;
+use App\Livewire\Front\Pages\Products as PagesProducts;
 use App\Livewire\Front\Pages\Services as PagesServices;
 use App\Livewire\Front\Pages\SingleServices;
 
@@ -242,13 +247,22 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
         Route::put('products/update-title/{id}', [ProductController::class, 'updateTitle'])->name('products.updateTitle');
         Route::delete('products/destroy-title/{id}', [ProductController::class, 'destroyTitle'])->name('products.destroyTitle');
         //    Route::get('/appointments-book', AppointmentBook::class)->name('appointments');
+        // Faqs Routes
 
+        Route::get('faqs', [FaqController::class, 'index'])->name('faqs.index');
+        Route::get('faqs/create', [FaqController::class, 'create'])->name('faqs.create');
+        Route::post('faqs', [FaqController::class, 'store'])->name('faqs.store');
+        Route::get('faqs/{id}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
+        Route::put('faqs/{id}', [FaqController::class, 'update'])->name('faqs.update');
+        Route::delete('faqs/{id}', [FaqController::class, 'destroy'])->name('faqs.destroy');
+        Route::get('faqs/{id}', [FaqController::class, 'show'])->name('faqs.show');
                Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
+               Route::get('contact-submissions', ContactSubmissions::class,)->name('contact-submissions');
 
                Route::resource('rev_slider', RevSliderController::class);
 
-Route::prefix('experts')->group(function () {
-    Route::get('/', [ExpertController::class, 'index'])->name('experts.index');
+      Route::prefix('experts')->group(function () {
+     Route::get('/', [ExpertController::class, 'index'])->name('experts.index');
 
     // Expert Title
     Route::get('create-title', [ExpertController::class, 'createTitle'])->name('experts.createTitle');
@@ -263,7 +277,7 @@ Route::prefix('experts')->group(function () {
     Route::put('update-expert/{expert}', [ExpertController::class, 'updateExpert'])->name('experts.updateExpert');
     Route::delete('delete-expert/{expert}', [ExpertController::class, 'destroyExpert'])->name('experts.destroyExpert');
 });
-Route::prefix('healths')->group(function () {
+      Route::prefix('healths')->group(function () {
     Route::get('/', [HealthController::class, 'index'])->name('healths.index');
 
     // Health Title
@@ -351,19 +365,21 @@ Route::get('/', HomePage::class)->name('home-page');
 Route::get('/faqs', Faqs::class)->name('faqs');
 Route::get('/gallery', Gallerys::class)->name('gallery');
 Route::get('/aboutus', AboutUs::class)->name('about-us');
-Route::get('/products', Product::class)->name('products');
+Route::get('/products', PagesProducts::class)->name('products');
 Route::get('/blogs', Frontblog::class)->name('blogs');
 Route::get('/services', PagesServices::class)->name('services');
 Route::get('/services/{id}', SingleServices::class)->name('single-service');
 Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
 Route::get('/appointments', Appointments::class)->name('appointments');
-// Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contacts', Contacts::class)->name('contacts');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', ProfileEdit::class)->name('profile.edit');
     Route::get('/user-appointments', UserAppointments::class)->name('user-appointments');
     Route::get('/user-dashboard', UserDashboard::class)->name('user-dashboard');
-    Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
+    Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
+
+    // Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscription.store');
     // Route::post('/subscribe', [HomeController::class, 'store'])->name('subscribe');
 
 });

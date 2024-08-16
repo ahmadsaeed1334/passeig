@@ -1,14 +1,13 @@
 	<!-- FAVICONS ICON -->
-	<link rel="icon" href="{{ asset('assets/images/favicon.html') }}" type="image/x-icon">
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+	<link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+	{{-- <a href="{{ asset('assets/images/favicon.html') }}"></a> --}}
+
+	{{-- <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"> --}}
 	<!-- GOOGLE FONTS -->
-	<link
-		href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 	<link media="all" rel="stylesheet" href="/htdocs_error/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
 	<!-- REVOLUTION SLIDER CSS -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugin/revolution/revolution/css/settings.css') }}">

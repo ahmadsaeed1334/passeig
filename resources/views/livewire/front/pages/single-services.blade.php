@@ -126,6 +126,20 @@
         </ul>
     </div>
 
+    <!-- NEWSLETTER -->
+    <div class="widget widget_newsletter-2 bg-white">
+        <h4 class="widget-title">Newsletter</h4>
+        <div class="newsletter-bx p-a30">
+            <div class="newsletter-icon">
+                <i class="fa fa-envelope-o"></i>
+            </div>
+            <div class="newsletter-content">
+                <i>Enter your e-mail and subscribe to our newsletter.</i>
+            </div>
+
+            @include('livewire.front.pages.newsletter')
+        </div>
+    </div>
     <!-- OUR PARTNERS -->
     <div class="widget">
         <h4 class="widget-title">Our Partners</h4>

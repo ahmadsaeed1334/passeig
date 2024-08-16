@@ -162,6 +162,12 @@
                 'icon' => 'fa-solid fa-handshake',
                 // 'counter' => auth()->user()->newThreadsCount(),
                 ])
+                @include('livewire.admin.partial.sidebar-menu-item', [
+                'route' => 'faqs.index',
+                'name' => 'FAQS',
+                'icon' => 'fa-solid fa-question',
+                // 'counter' => auth()->user()->newThreadsCount(),
+                ])
 
                 @include('livewire.admin.partial.sidebar-menu-header', [
                 'name' => 'Blogs section',

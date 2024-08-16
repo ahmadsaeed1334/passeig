@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 class SubscriptionController extends Controller
 {
-    
+
      public function store(Request $request)
     {
         // Define the validation rules
@@ -29,7 +30,7 @@ class SubscriptionController extends Controller
             'message' => 'Thank you for subscribing!'
         ]);
         // Store the email in the database
-        \DB::table('subscribers')->insert([
+        DB::table('subscribers')->insert([
             'email' => $request->input('email'),
             'created_at' => now(),
             'updated_at' => now()

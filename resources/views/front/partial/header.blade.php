@@ -89,64 +89,64 @@ $route_name = route_name();
 </header> --}}
 <!-- HEADER START -->
 <header class="site-header header-style-3 mobile-sider-drawer-menu">
-	<!-- Search Form -->
-	@php
-		$route = route_name();
-	@endphp
-	<div class="sticky-header main-bar-wraper">
-		<div class="main-bar site-bg-primary">
-			<div class="container">
-				<div class="logo-header">
-					<a href="{{ route('home-page') }}">
-						<img src="{{ asset('assets/images/LOGO-PASSEIG.png') }}" width="216" height="37" alt="">
-					</a>
-				</div>
+    <!-- Search Form -->
+    @php
+    $route = route_name();
+    @endphp
+    <div class="sticky-header main-bar-wraper">
+        <div class="main-bar site-bg-primary">
+            <div class="container">
+                <div class="logo-header">
+                    <a href="{{ route('home-page') }}">
+                        <img src="{{ asset('assets/images/LOGO-PASSEIG.png') }}" width="216" height="37" alt="">
+                    </a>
+                </div>
 
-				<!-- MAIN Vav -->
-				<div class="header-nav navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="{{ $route == 'home-page' ? 'active' : '' }}">
-							<a href="{{ route('home-page') }}">Home</a>
-						</li>
+                <!-- MAIN Vav -->
+                <div class="header-nav navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="{{ $route == 'home-page' ? 'active' : '' }}">
+                            <a href="{{ route('home-page') }}">Home</a>
+                        </li>
 
-						<li class="{{ $route == 'services' ? 'active' : '' }}">
-							<a href="{{ route('services') }}">Services</a>
-							{{-- <ul class="sub-menu">
+                        <li class="{{ $route == 'services' ? 'active' : '' }}">
+                            <a href="{{ route('services') }}">Services</a>
+                            {{-- <ul class="sub-menu">
                                         <li><a href="services-1.html">Services 1</a></li>
                                         <li><a href="services-2.html">Services 2</a></li>
                                         <li><a href="services-detail.html">Services Detail</a></li>
                                     </ul> --}}
-						</li>
+                        </li>
 
-						<li class="{{ $route == 'products' ? 'active' : '' }}">
-							<a href="{{ route('products') }}">Products</a>
-						</li>
+                        <li class="{{ $route == 'products' ? 'active' : '' }}">
+                            <a href="{{ route('products') }}">Products</a>
+                        </li>
 
-						<li class="{{ $route == 'blogs' ? 'active' : '' }}">
-							<a href="{{ route('blogs') }}">Blogs</a>
-						</li>
+                        <li class="{{ $route == 'blogs' ? 'active' : '' }}">
+                            <a href="{{ route('blogs') }}">Blogs</a>
+                        </li>
 
-						<li class="{{ $route == 'about-us' ? 'active' : '' }}">
-							<a href="{{ route('about-us') }}">About</a>
-						</li>
+                        <li class="{{ $route == 'about-us' ? 'active' : '' }}">
+                            <a href="{{ route('about-us') }}">About</a>
+                        </li>
 
-						<li>
-							<a href="javascript:;">More<i class="fa fa-chevron-down"></i></a>
-							<ul class="sub-menu">
-								<li>
-									<a href="{{ route('faqs') }}">FAQ</a>
-								</li>
+                        <li>
+                            <a href="javascript:;">More<i class="fa fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="{{ route('faqs') }}">FAQ</a>
+                                </li>
 
-								<li>
-									<a href="{{ route('gallery') }}">Galley</a>
-								</li>
-								<li>
-									<a href="javascript:;">Contact us</a>
-								</li>
-							</ul>
-						</li>
+                                <li>
+                                    <a href="{{ route('gallery') }}">Galley</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('contacts') }}">Contact us</a>
+                                </li>
+                            </ul>
+                        </li>
 
-						{{-- <li class="submenu-direction">
+                        {{-- <li class="submenu-direction">
 							<a href="javascript:;">Blog<i class="fa fa-chevron-down"></i></a>
 							<ul class="sub-menu">
 								<li>
@@ -191,41 +191,39 @@ $route_name = route_name();
 								</li>
 							</ul>
 						</li> --}}
-					</ul>
-				</div>
-				<!-- NAV Toggle Button -->
-				<button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button"
-					class="navbar-toggler collapsed">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar icon-bar-first"></span>
-					<span class="icon-bar icon-bar-two"></span>
-					<span class="icon-bar icon-bar-three"></span>
-				</button>
-				<!-- ETRA Nav -->
-				<div class="extra-nav">
-					<div class="extra-cell">
-						<a href="#search" class="site-search-btn"><i class="fa fa-search"></i></a>
-					</div>
-					<div class="extra-cell">
-						<a href="#search" class="site-search-btn"><i class="fa fa-search"></i></a>
-					</div>
-				</div>
-				<!-- SITE Search -->
-				<div id="search">
-					<span class="close"></span>
-					<form role="search" id="searchform" action="https://thewebmax.org/search" method="get" class="radius-xl">
-						<div class="input-group">
-							<input value="" name="q" type="search" placeholder="Type to search">
-							<span class="input-group-btn"><button type="button" class="search-btn"><i
-										class="fa fa-search"></i></button></span>
-						</div>
-					</form>
-				</div>
+                    </ul>
+                </div>
+                <!-- NAV Toggle Button -->
+                <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button" class="navbar-toggler collapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar icon-bar-first"></span>
+                    <span class="icon-bar icon-bar-two"></span>
+                    <span class="icon-bar icon-bar-three"></span>
+                </button>
+                <!-- ETRA Nav -->
+                <div class="extra-nav">
+                    <div class="extra-cell">
+                        <a href="#search" class="site-search-btn"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="extra-cell">
+                        <a href="#search" class="site-search-btn"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+                <!-- SITE Search -->
+                <div id="search">
+                    <span class="close"></span>
+                    <form role="search" id="searchform" action="https://thewebmax.org/search" method="get" class="radius-xl">
+                        <div class="input-group">
+                            <input value="" name="q" type="search" placeholder="Type to search">
+                            <span class="input-group-btn"><button type="button" class="search-btn"><i class="fa fa-search"></i></button></span>
+                        </div>
+                    </form>
+                </div>
 
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 
 </header>
 <!-- HEADER END -->
