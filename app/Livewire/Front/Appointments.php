@@ -7,8 +7,10 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\ServicesCategory;
 use App\Models\AppointmentService;
+use App\Models\ServicesTitle;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 #[Layout('layouts.front')]
@@ -22,6 +24,7 @@ class Appointments extends Component
     public $appointmentServices;
     public $selectedServices = [];
     public $selectedDateTime = [];
+    public $servicesTitle;
     public function mount()
     {
         $this->categories = ServicesCategory::whereNull('parent_id')->get();
@@ -31,12 +34,17 @@ class Appointments extends Component
         if ($this->categories->isNotEmpty()) {
             $this->selectCategory($this->categories->first()->id);
         }
+        $this->servicesTitle = ServicesTitle::first();
+
     }
 
     public function selectCategory($categoryId)
     {
         $this->selectedCategory = ServicesCategory::with('subcategories.appointmentServices')->find($categoryId);
         $this->subCategories = $this->selectedCategory->subcategories;
+
+        // Clear subcategory and appointment services if no subcategory is selected
+        $this->selectedSubCategory = null;
         $this->appointmentServices = $this->selectedCategory->appointmentServices;
     }
 
@@ -50,105 +58,146 @@ class Appointments extends Component
     {
         if (in_array($serviceId, $this->selectedServices)) {
             $this->selectedServices = array_diff($this->selectedServices, [$serviceId]);
+            unset($this->selectedDateTime[$serviceId]); // Remove date and time if deselected
         } else {
             $this->selectedServices[] = $serviceId;
         }
     }
 
+
     public function selectDateTime($serviceId, $date, $time)
-    {
-        if (!$date || !$time) {
-            $this->alertMessage('error', 'Operation Failed', 'Please select a valid date and time.');
+{
+    Log::info('selectDateTime triggered with', ['serviceId' => $serviceId, 'date' => $date, 'time' => $time]);
+    dd($serviceId, $date, $time);
+    Log::info('selectDateTime triggered with', [
+        'serviceId' => $serviceId,
+        'date' => $date,
+        'time' => $time
+    ]);
+    if (!$date || !$time) {
+        $this->alert('error', 'Please select a valid date and time.');
+        return;
+    }
+
+    $dateTime = Carbon::parse("$date $time");
+
+    // Validate that the selected date is not in the past
+    if ($dateTime->isBefore(Carbon::today())) {
+        $this->alert('error', 'Cannot book an appointment for a past date.');
+        return;
+    }
+
+    $service = AppointmentService::find($serviceId);
+    $endTime = $dateTime->copy()->addMinutes($service->duration);
+
+    foreach ($this->selectedDateTime as $selected) {
+        if (isset($selected['service_id']) && $selected['service_id'] == $serviceId) {
+            $this->alert('error', 'This service already has a selected date and time.');
             return;
         }
 
-        $dateTime = Carbon::parse("$date $time");
+        if (isset($selected['date']) && isset($selected['time'])) {
+            $selectedStart = Carbon::parse($selected['date'] . ' ' . $selected['time']);
+            $selectedEnd = $selectedStart->copy()->addMinutes($selected['duration']);
 
-        // Validate that the selected date is not in the past
-        if ($dateTime->isBefore(Carbon::today())) {
-            $this->alert('error', 'Cannot book an appointment for a past date.');
-            return;
-        }
-
-        $service = AppointmentService::find($serviceId);
-        $endTime = $dateTime->copy()->addMinutes($service->duration);
-
-        foreach ($this->selectedDateTime as $selected) {
-            if (isset($selected['service_id']) && $selected['service_id'] == $serviceId) {
-                $this->alert('error', 'This service already has a selected date and time.');
+            if ($dateTime->between($selectedStart, $selectedEnd) || $endTime->between($selectedStart, $selectedEnd)) {
+                $this->alert('error', 'This date and time is already selected.');
                 return;
             }
+        }
+    }
 
-            if (isset($selected['date']) && isset($selected['time'])) {
-                $selectedStart = Carbon::parse($selected['date'] . ' ' . $selected['time']);
-                $selectedEnd = $selectedStart->copy()->addMinutes($selected['duration']);
+    // Check for overlapping appointments in the database
+    $conflictingAppointments = AppointmentBook::where('date', $date)
+        ->where(function ($query) use ($dateTime, $endTime) {
+            $query->whereBetween('time', [$dateTime->format('H:i:s'), $endTime->format('H:i:s')])
+                ->orWhereBetween('end_time', [$dateTime->format('H:i:s'), $endTime->format('H:i:s')]);
+        })
+        ->exists();
 
-                if ($dateTime->between($selectedStart, $selectedEnd) || $endTime->between($selectedStart, $selectedEnd)) {
-                    $this->alert('error', 'This date and time is already selected.');
-                    return;
-                }
-            }
+    if ($conflictingAppointments) {
+        $this->alert('error', 'This time slot is already booked.');
+        return;
+    }
+
+    $this->selectedDateTime[$serviceId] = [
+        'service_id' => $serviceId,
+        'date' => $date,
+        'time' => $time,
+        'duration' => $service->duration,
+    ];
+
+    $this->alert('success', 'Date and time selected successfully.');
+
+    // Debugging to ensure date and time are set correctly
+    dd($this->selectedDateTime);
+    Log::info('Selected DateTime:', $this->selectedDateTime);
+}
+
+
+
+public function bookAppointments()
+{
+    if (!Auth::check()) {
+        $this->alert('error', 'Please log in to book an appointment.');
+        return;
+    }
+    // Validate that all selected services have a valid date and time
+    foreach ($this->selectedServices as $serviceId) {
+        if (!isset($this->selectedDateTime[$serviceId]['date']) || !isset($this->selectedDateTime[$serviceId]['time'])) {
+            $this->alert('error', 'Please set date and time for all selected services.');
+            return;
+        }
+    }
+
+    // Proceed with booking the appointments
+    foreach ($this->selectedServices as $serviceId) {
+        $service = AppointmentService::find($serviceId); // Fetch the service by ID
+
+        if (!$service) {
+            $this->alert('error', 'Selected service not found.');
+            continue;
         }
 
-        // Check for overlapping appointments in the database
-        $conflictingAppointments = AppointmentBook::where('date', $date)
+        $date = $this->selectedDateTime[$serviceId]['date'];
+        $time = $this->selectedDateTime[$serviceId]['time'];
+        $dateTime = Carbon::parse("$date $time");
+        $endTime = $dateTime->copy()->addMinutes($service->duration);
+
+        // Check for conflicting appointments
+        $conflictingAppointment = AppointmentBook::where('service_id', $serviceId)
+            ->where('date', $date)
             ->where(function ($query) use ($dateTime, $endTime) {
-                $query->whereBetween('time', [$dateTime->format('H:i:s'), $endTime->format('H:i:s')])
-                    ->orWhereBetween('end_time', [$dateTime->format('H:i:s'), $endTime->format('H:i:s')]);
+                $query->where(function ($q) use ($dateTime, $endTime) {
+                    $q->where('time', '<=', $dateTime->format('H:i:s'))
+                      ->where('end_time', '>', $dateTime->format('H:i:s'));
+                })
+                ->orWhere(function ($q) use ($dateTime, $endTime) {
+                    $q->where('time', '<', $endTime->format('H:i:s'))
+                      ->where('end_time', '>=', $endTime->format('H:i:s'));
+                });
             })
             ->exists();
 
-        if ($conflictingAppointments) {
-            $this->alert('error', 'This time slot is already booked.');
+        if ($conflictingAppointment) {
+            $this->alert('error', 'This time slot is already booked for the selected service.');
             return;
         }
 
-        $this->selectedDateTime[$serviceId] = [
+        // Save the appointment if no conflict exists
+        AppointmentBook::create([
+            'user_id' => Auth::id(),
             'service_id' => $serviceId,
             'date' => $date,
             'time' => $time,
-            'duration' => $service->duration,
-        ];
-
-        $this->alert('success', 'Date and time selected successfully.');
+            'end_time' => $endTime->format('H:i'),
+        ]);
     }
 
-    public function bookAppointments()
-    {
-        if (!Auth::check()) {
-            $this->alert('error', 'Please log in to book an appointment.');
-            return;
-        }
-        // Check if all selected services have date and time set
-        foreach ($this->selectedServices as $serviceId) {
-            if (!isset($this->selectedDateTime[$serviceId]) || empty($this->selectedDateTime[$serviceId]['date']) || empty($this->selectedDateTime[$serviceId]['time'])) {
-                $this->alert('error', 'Please set date and time for all selected services.');
-                return;
-            }
-        }
+    $this->alert('success', 'Appointments booked successfully.');
+    $this->reset(['selectedServices', 'selectedDateTime']);
+}
 
-        foreach ($this->selectedDateTime as $appointment) {
-            if (!isset($appointment['service_id']) || !isset($appointment['date']) || !isset($appointment['time'])) {
-                $this->alert('error', 'Please set date and time for all selected services.');
-                return;
-            }
-
-            $service = AppointmentService::find($appointment['service_id']);
-            $startTime = Carbon::parse($appointment['date'] . ' ' . $appointment['time']);
-            $endTime = $startTime->copy()->addMinutes($service->duration);
-
-            AppointmentBook::create([
-                'user_id' => Auth::id(),
-                'service_id' => $appointment['service_id'],
-                'date' => $appointment['date'],
-                'time' => $appointment['time'],
-                'end_time' => $endTime->format('H:i'),
-            ]);
-        }
-
-        $this->alert('success', 'Appointments booked successfully.');
-        $this->reset(['selectedServices', 'selectedDateTime']);
-    }
 
 
 

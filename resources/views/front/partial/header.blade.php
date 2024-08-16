@@ -89,110 +89,110 @@ $route_name = route_name();
 </header> --}}
 <!-- HEADER START -->
 <header class="site-header header-style-3 mobile-sider-drawer-menu">
-	<!-- Search Form -->
-	@php
-		$route = route_name();
-	@endphp
-	<div class="sticky-header main-bar-wraper">
-		<div class="main-bar site-bg-primary">
-			<div class="container">
-				<div class="logo-header">
-					<a href="{{ route('home-page') }}">
-						<img src="{{ asset('assets/images/LOGO-PASSEIG.png') }}" width="216" height="37" alt="">
-					</a>
-				</div>
+    <!-- Search Form -->
+    @php
+    $route = route_name();
+    @endphp
+    <div class="sticky-header main-bar-wraper">
+        <div class="main-bar site-bg-primary">
+            <div class="container">
+                <div class="logo-header">
+                    <a href="{{ route('home-page') }}">
+                        <img src="{{ asset('assets/images/LOGO-PASSEIG.png') }}" width="216" height="37" alt="">
+                    </a>
+                </div>
 
-				<!-- MAIN Vav -->
-				<div class="header-nav navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="{{ $route == 'home-page' ? 'active' : '' }}">
-							<a href="{{ route('home-page') }}">Home</a>
-						</li>
+                <!-- MAIN Vav -->
+                <div class="header-nav navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="{{ $route == 'home-page' ? 'active' : '' }}">
+                            <a href="{{ route('home-page') }}">Home</a>
+                        </li>
 
-						{{-- <li class="{{ $route == 'services' ? 'active' : '' }}">
-							<a href="{{ route('services') }}">Services</a>
+                        {{-- <li class="{{ $route == 'services' ? 'active' : '' }}">
+                        <a href="{{ route('services') }}">Services</a>
 
-						</li> --}}
+                        </li> --}}
 
-						<li class="has-child">
-							<a href="{{ route('services') }}">Services<i class="fa fa-chevron-down"></i></a>
-							<ul class="sub-menu">
-								@php
-									$menus = App\Models\ServicesCategory::with(['subcategories', 'services'])
-									    ->withCount(['subcategories', 'services'])
-									    ->get();
-								@endphp
-								@foreach ($menus as $menu)
-									<li>
-										<a href="javascript:;">{{ $menu->name }}</a>
-										@if ($menu->subcategories_count > 0)
-											<ul class="sub-menu">
-												@foreach ($menu->subcategories as $subcategory)
-													<li>
-														<a href="blog-media-list.html">
-															{{ $subcategory->name }}
-															@if ($menu->services_count > 0)
-																<ul class="sub-menu">
-																	@foreach ($menu->services as $child)
-																		<li>
-																			<a href="blog-media-list.html">
-																				{{ $child->service_name }}
-																			</a>
-																		</li>
-																	@endforeach
-																</ul>
-															@endif
-														</a>
-													</li>
-												@endforeach
-											</ul>
-										@else
-											@if ($menu->services_count > 0)
-												<ul class="sub-menu">
-													@foreach ($menu->services as $child)
-														<li>
-															<a href="blog-media-list.html">
-																{{ $child->service_name }}
-															</a>
-														</li>
-													@endforeach
-												</ul>
-											@endif
-										@endif
-									</li>
-								@endforeach
-							</ul>
-						</li>
+                        <li class="has-child">
+                            <a href="{{ route('services') }}">Services<i class="fa fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                @php
+                                $menus = App\Models\ServicesCategory::with(['subcategories', 'services'])
+                                ->withCount(['subcategories', 'services'])
+                                ->get();
+                                @endphp
+                                @foreach ($menus as $menu)
+                                <li>
+                                    <a href="javascript:;">{{ $menu->name }}</a>
+                                    @if ($menu->subcategories_count > 0)
+                                    <ul class="sub-menu">
+                                        @foreach ($menu->subcategories as $subcategory)
+                                        <li>
+                                            <a href="blog-media-list.html">
+                                                {{ $subcategory->name }}
+                                                @if ($menu->services_count > 0)
+                                                <ul class="sub-menu">
+                                                    @foreach ($menu->services as $child)
+                                                    <li>
+                                                        <a href="blog-media-list.html">
+                                                            {{ $child->service_name }}
+                                                        </a>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                                @endif
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @else
+                                    @if ($menu->services_count > 0)
+                                    <ul class="sub-menu">
+                                        @foreach ($menu->services as $child)
+                                        <li>
+                                            <a href="blog-media-list.html">
+                                                {{ $child->service_name }}
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                    @endif
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
 
-						<li class="{{ $route == 'products' ? 'active' : '' }}">
-							<a href="{{ route('products') }}">Products</a>
-						</li>
+                        <li class="{{ $route == 'products' ? 'active' : '' }}">
+                            <a href="{{ route('products') }}">Products</a>
+                        </li>
 
-						<li class="{{ $route == 'blogs' ? 'active' : '' }}">
-							<a href="{{ route('blogs') }}">Blogs</a>
-						</li>
+                        <li class="{{ $route == 'blogs' ? 'active' : '' }}">
+                            <a href="{{ route('blogs') }}">Blogs</a>
+                        </li>
 
-						<li class="{{ $route == 'about-us' ? 'active' : '' }}">
-							<a href="{{ route('about-us') }}">About</a>
-						</li>
+                        <li class="{{ $route == 'about-us' ? 'active' : '' }}">
+                            <a href="{{ route('about-us') }}">About</a>
+                        </li>
 
-						<li>
-							<a href="javascript:;">More<i class="fa fa-chevron-down"></i></a>
-							<ul class="sub-menu">
-								<li>
-									<a href="{{ route('faqs') }}">FAQ</a>
-								</li>
+                        <li>
+                            <a href="javascript:;">More<i class="fa fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="{{ route('faqs') }}">FAQ</a>
+                                </li>
 
-								<li>
-									<a href="{{ route('gallery') }}">Galley</a>
-								</li>
-								<li>
-									<a href="{{ route('contacts') }}">Contact us</a>
-								</li>
-							</ul>
-						</li>
+                                <li>
+                                    <a href="{{ route('gallery') }}">Galley</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('contact-us') }}">Contact us</a>
+                                </li>
+                            </ul>
+                        </li>
 
-						{{-- <li class="submenu-direction">
+                        {{-- <li class="submenu-direction">
 							<a href="javascript:;">Blog<i class="fa fa-chevron-down"></i></a>
 							<ul class="sub-menu">
 								<li>
@@ -237,64 +237,62 @@ $route_name = route_name();
 								</li>
 							</ul>
 						</li> --}}
-					</ul>
-				</div>
-				<!-- NAV Toggle Button -->
-				<button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button"
-					class="navbar-toggler collapsed">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar icon-bar-first"></span>
-					<span class="icon-bar icon-bar-two"></span>
-					<span class="icon-bar icon-bar-three"></span>
-				</button>
-				<!-- ETRA Nav -->
-				<div class="extra-nav">
-					<div class="extra-cell">
-						<div id="button">
+                    </ul>
+                </div>
+                <!-- NAV Toggle Button -->
+                <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button" class="navbar-toggler collapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar icon-bar-first"></span>
+                    <span class="icon-bar icon-bar-two"></span>
+                    <span class="icon-bar icon-bar-three"></span>
+                </button>
+                <!-- ETRA Nav -->
+                <div class="extra-nav">
+                    <div class="extra-cell">
+                        <div id="button">
 
-							<div id="second">
-								<a href="#">Click me</a>
-								<div id="Third">
-									<a href="#">That's it</a>
-								</div>
-							</div>
-							<div id="first">
-								<a href="#">Login</a>
-							</div>
-						</div>
-					</div>
-					<div class="extra-cell">
-						<div id="button">
+                            <div id="second">
+                                <a href="#">Click me</a>
+                                <div id="Third">
+                                    <a href="#">That's it</a>
+                                </div>
+                            </div>
+                            <div id="first">
+                                <a href="#">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra-cell">
+                        <div id="button">
 
-							<div id="second">
-								<a href="#">Click me</a>
-								<div id="Third">
-									<a href="#">That's it</a>
-								</div>
-							</div>
-							<div id="first">
-								<a href="#">Appointment</a>
-							</div>
-						</div>
-					</div>
-				</div>
+                            <div id="second">
+                                <a href="#">Click me</a>
+                                <div id="Third">
+                                    <a href="#">That's it</a>
+                                </div>
+                            </div>
+                            <div id="first">
+                                <a href="#">Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-				<!-- SITE Search -->
-				<div id="search">
-					<span class="close"></span>
-					<form role="search" id="searchform" action="https://thewebmax.org/search" method="get" class="radius-xl">
-						<div class="input-group">
-							<input value="" name="q" type="search" placeholder="Type to search">
-							<span class="input-group-btn"><button type="button" class="search-btn"><i
-										class="fa fa-search"></i></button></span>
-						</div>
-					</form>
-				</div>
+                <!-- SITE Search -->
+                <div id="search">
+                    <span class="close"></span>
+                    <form role="search" id="searchform" action="https://thewebmax.org/search" method="get" class="radius-xl">
+                        <div class="input-group">
+                            <input value="" name="q" type="search" placeholder="Type to search">
+                            <span class="input-group-btn"><button type="button" class="search-btn"><i class="fa fa-search"></i></button></span>
+                        </div>
+                    </form>
+                </div>
 
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 
 </header>
 <!-- HEADER END -->
