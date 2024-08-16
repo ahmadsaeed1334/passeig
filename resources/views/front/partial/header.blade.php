@@ -118,24 +118,24 @@ $route_name = route_name();
 							<a href="{{ route('services') }}">Services<i class="fa fa-chevron-down"></i></a>
 							<ul class="sub-menu">
 								@php
-									$menus = App\Models\ServicesCategory::with(['subcategories', 'services'])
+									$menus = App\Models\ServicesCategory::with(['subcategories.services', 'services'])
 									    ->withCount(['subcategories', 'services'])
 									    ->get();
 								@endphp
 								@foreach ($menus as $menu)
 									<li>
-										<a href="javascript:;">{{ $menu->name }}</a>
+										<a href="{{ route('category-services', ['id' => $menu->id]) }}">{{ $menu->name }}</a>
 										@if ($menu->subcategories_count > 0)
 											<ul class="sub-menu">
 												@foreach ($menu->subcategories as $subcategory)
 													<li>
-														<a href="blog-media-list.html">
+														<a href="{{ route('category-services', ['id' => $subcategory->id]) }}">
 															{{ $subcategory->name }}
-															@if ($menu->services_count > 0)
+															@if ($subcategory->services)
 																<ul class="sub-menu">
-																	@foreach ($menu->services as $child)
+																	@foreach ($subcategory->services as $child)
 																		<li>
-																			<a href="blog-media-list.html">
+																			<a href="{{ route('single-service', $child->id) }}">
 																				{{ $child->service_name }}
 																			</a>
 																		</li>
@@ -151,7 +151,7 @@ $route_name = route_name();
 												<ul class="sub-menu">
 													@foreach ($menu->services as $child)
 														<li>
-															<a href="blog-media-list.html">
+															<a href="{{ route('single-service', $child->id) }}">
 																{{ $child->service_name }}
 															</a>
 														</li>

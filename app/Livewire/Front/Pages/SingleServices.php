@@ -3,11 +3,12 @@
 namespace App\Livewire\Front\Pages;
 
 use App\Models\Blog;
-use App\Models\Partner;
-use App\Models\Category;
 use App\Models\Massage;
+use App\Models\Partner;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\Attributes\Layout;
+use App\Models\AppointmentService;
 
 #[Layout('layouts.front')]
 class SingleServices extends Component
@@ -19,7 +20,7 @@ class SingleServices extends Component
 
     public function mount($id)
     {
-        $this->service = Massage::findOrFail($id);
+        $this->service = AppointmentService::select('id', 'service_name as title', 'description as long_description', 'image')->findOrFail($id);
         $this->blogs = Blog::with('user', 'comments')->latest()->take(4)->get();
         $this->partners = Partner::all();
         $this->category = Category::with('images')->get();

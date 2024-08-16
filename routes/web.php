@@ -256,60 +256,60 @@ Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
         Route::put('faqs/{id}', [FaqController::class, 'update'])->name('faqs.update');
         Route::delete('faqs/{id}', [FaqController::class, 'destroy'])->name('faqs.destroy');
         Route::get('faqs/{id}', [FaqController::class, 'show'])->name('faqs.show');
-               Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
-               Route::get('contact-submissions', ContactSubmissions::class,)->name('contact-submissions');
+        Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
+        Route::get('contact-submissions', ContactSubmissions::class,)->name('contact-submissions');
 
-               Route::resource('rev_slider', RevSliderController::class);
+        Route::resource('rev_slider', RevSliderController::class);
 
-      Route::prefix('experts')->group(function () {
-     Route::get('/', [ExpertController::class, 'index'])->name('experts.index');
+        Route::prefix('experts')->group(function () {
+            Route::get('/', [ExpertController::class, 'index'])->name('experts.index');
 
-    // Expert Title
-    Route::get('create-title', [ExpertController::class, 'createTitle'])->name('experts.createTitle');
-    Route::post('store-title', [ExpertController::class, 'storeTitle'])->name('experts.storeTitle');
-    Route::get('edit-title/{expertTitle}', [ExpertController::class, 'editTitle'])->name('experts.editTitle');
-    Route::put('update-title/{expertTitle}', [ExpertController::class, 'updateTitle'])->name('experts.updateTitle');
+            // Expert Title
+            Route::get('create-title', [ExpertController::class, 'createTitle'])->name('experts.createTitle');
+            Route::post('store-title', [ExpertController::class, 'storeTitle'])->name('experts.storeTitle');
+            Route::get('edit-title/{expertTitle}', [ExpertController::class, 'editTitle'])->name('experts.editTitle');
+            Route::put('update-title/{expertTitle}', [ExpertController::class, 'updateTitle'])->name('experts.updateTitle');
 
-    // Expert
-    Route::get('create-expert', [ExpertController::class, 'createExpert'])->name('experts.createExpert');
-    Route::post('store-expert', [ExpertController::class, 'storeExpert'])->name('experts.storeExpert');
-    Route::get('edit-expert/{expert}', [ExpertController::class, 'editExpert'])->name('experts.editExpert');
-    Route::put('update-expert/{expert}', [ExpertController::class, 'updateExpert'])->name('experts.updateExpert');
-    Route::delete('delete-expert/{expert}', [ExpertController::class, 'destroyExpert'])->name('experts.destroyExpert');
-});
-      Route::prefix('healths')->group(function () {
-    Route::get('/', [HealthController::class, 'index'])->name('healths.index');
+            // Expert
+            Route::get('create-expert', [ExpertController::class, 'createExpert'])->name('experts.createExpert');
+            Route::post('store-expert', [ExpertController::class, 'storeExpert'])->name('experts.storeExpert');
+            Route::get('edit-expert/{expert}', [ExpertController::class, 'editExpert'])->name('experts.editExpert');
+            Route::put('update-expert/{expert}', [ExpertController::class, 'updateExpert'])->name('experts.updateExpert');
+            Route::delete('delete-expert/{expert}', [ExpertController::class, 'destroyExpert'])->name('experts.destroyExpert');
+        });
+        Route::prefix('healths')->group(function () {
+            Route::get('/', [HealthController::class, 'index'])->name('healths.index');
 
-    // Health Title
-    Route::get('create-title', [HealthController::class, 'createTitle'])->name('healths.createTitle');
-    Route::post('store-title', [HealthController::class, 'storeTitle'])->name('healths.storeTitle');
-    Route::get('edit-title/{healthTitle}', [HealthController::class, 'editTitle'])->name('healths.editTitle');
-    Route::put('update-title/{healthTitle}', [HealthController::class, 'updateTitle'])->name('healths.updateTitle');
+            // Health Title
+            Route::get('create-title', [HealthController::class, 'createTitle'])->name('healths.createTitle');
+            Route::post('store-title', [HealthController::class, 'storeTitle'])->name('healths.storeTitle');
+            Route::get('edit-title/{healthTitle}', [HealthController::class, 'editTitle'])->name('healths.editTitle');
+            Route::put('update-title/{healthTitle}', [HealthController::class, 'updateTitle'])->name('healths.updateTitle');
 
-    // Health
-    Route::get('create-health', [HealthController::class, 'createHealth'])->name('healths.createHealth');
-    Route::post('store-health', [HealthController::class, 'storeHealth'])->name('healths.storeHealth');
-    Route::get('edit-health/{health}', [HealthController::class, 'editHealth'])->name('healths.editHealth');
-    Route::put('update-health/{health}', [HealthController::class, 'updateHealth'])->name('healths.updateHealth');
-    Route::delete('delete-health/{health}', [HealthController::class, 'destroyHealth'])->name('healths.destroyHealth');
-});
-               Route::prefix('provides')->group(function () {
-                Route::get('/', [ProvideController::class, 'index'])->name('provides.index');
-                Route::get('create', [ProvideController::class, 'create'])->name('provides.create');
-                Route::post('store', [ProvideController::class, 'store'])->name('provides.store');
-                Route::get('edit/{provide}', [ProvideController::class, 'edit'])->name('provides.edit');
-                Route::put('update/{provide}', [ProvideController::class, 'update'])->name('provides.update');
-            });
-            Route::prefix('best_services')->group(function () {
-                Route::get('/', [BestServiceController::class, 'index'])->name('best_services.index');
-                Route::get('create', [BestServiceController::class, 'create'])->name('best_services.create');
-                Route::post('store', [BestServiceController::class, 'store'])->name('best_services.store');
-                Route::get('edit/{bestService}', [BestServiceController::class, 'edit'])->name('best_services.edit');
-                Route::put('update/{bestService}', [BestServiceController::class, 'update'])->name('best_services.update');
-            });
+            // Health
+            Route::get('create-health', [HealthController::class, 'createHealth'])->name('healths.createHealth');
+            Route::post('store-health', [HealthController::class, 'storeHealth'])->name('healths.storeHealth');
+            Route::get('edit-health/{health}', [HealthController::class, 'editHealth'])->name('healths.editHealth');
+            Route::put('update-health/{health}', [HealthController::class, 'updateHealth'])->name('healths.updateHealth');
+            Route::delete('delete-health/{health}', [HealthController::class, 'destroyHealth'])->name('healths.destroyHealth');
+        });
+        Route::prefix('provides')->group(function () {
+            Route::get('/', [ProvideController::class, 'index'])->name('provides.index');
+            Route::get('create', [ProvideController::class, 'create'])->name('provides.create');
+            Route::post('store', [ProvideController::class, 'store'])->name('provides.store');
+            Route::get('edit/{provide}', [ProvideController::class, 'edit'])->name('provides.edit');
+            Route::put('update/{provide}', [ProvideController::class, 'update'])->name('provides.update');
+        });
+        Route::prefix('best_services')->group(function () {
+            Route::get('/', [BestServiceController::class, 'index'])->name('best_services.index');
+            Route::get('create', [BestServiceController::class, 'create'])->name('best_services.create');
+            Route::post('store', [BestServiceController::class, 'store'])->name('best_services.store');
+            Route::get('edit/{bestService}', [BestServiceController::class, 'edit'])->name('best_services.edit');
+            Route::put('update/{bestService}', [BestServiceController::class, 'update'])->name('best_services.update');
         });
     });
-        // Route::get('/download', [AboutUsController::class, 'showDownloadPage']);
+});
+// Route::get('/download', [AboutUsController::class, 'showDownloadPage']);
 
 Route::get("/storage-link", function () {
     Artisan::call('storage:link');
@@ -368,6 +368,7 @@ Route::get('/aboutus', AboutUs::class)->name('about-us');
 Route::get('/products', PagesProducts::class)->name('products');
 Route::get('/blogs', Frontblog::class)->name('blogs');
 Route::get('/services', PagesServices::class)->name('services');
+Route::get('/category-services/{id}', PagesServices::class)->name('category-services');
 Route::get('/services/{id}', SingleServices::class)->name('single-service');
 Route::get('/blogs/{id}', SingleBlog::class)->name('single-blog');
 Route::get('/appointments', Appointments::class)->name('appointments');
