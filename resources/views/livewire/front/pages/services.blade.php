@@ -45,7 +45,7 @@
 			<div class="section-content">
 				<div class="row">
 					@foreach ($services as $service)
-						<div class="col-lg-4 col-md-6 col-sm-12 m-b30">
+						<div class="col-lg-4 col-md-6 col-sm-12 m-b30 br-10">
 							<div class="wt-box bg-white">
 								<div class="wt-post-media wt-img-effect zoom-slow" style="border-radius: 10px">
 									<a href="{{ route('single-service', $service->id) }}">
@@ -57,8 +57,13 @@
 										<a href="{{ route('single-service', $service->id) }}">{{ $service->title }}</a>
 									</h4>
 									<p>{{ $service->short_description }}</p>
-									<a href="{{ route('single-service', $service->id) }}" class="site-button">More <i
-											class="fa fa-angle-double-right"></i></a>
+									<a href="{{ route('single-service', $service->id) }}" class="site-button animated-button1">More
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										<i class="fa fa-angle-double-right"></i>
+									</a>
 								</div>
 							</div>
 						</div>
