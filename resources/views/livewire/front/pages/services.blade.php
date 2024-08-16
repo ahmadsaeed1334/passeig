@@ -18,7 +18,7 @@
 	<div class="bg-gray-light p-tb20">
 		<div class="container">
 			<ul class="wt-breadcrumb breadcrumb-style-2">
-				<li><a href="{{ route('home-page') }}"><i class="fa fa-home"></i> Home</a></li>
+				<li><a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a></li>
 				<li>Services</li>
 			</ul>
 		</div>

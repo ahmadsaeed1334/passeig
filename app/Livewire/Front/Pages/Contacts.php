@@ -5,6 +5,7 @@ namespace App\Livewire\Front\Pages;
 use Livewire\Component;
 use App\Models\ContactSubmission;
 use Livewire\Attributes\Layout;
+
 #[Layout('layouts.front')]
 class Contacts extends Component
 {
@@ -27,8 +28,15 @@ class Contacts extends Component
             'email' => $this->email,
             'message' => $this->message,
         ]);
-
+        $this->resetFields();
         session()->flash('success', 'Thank you for contacting us! We will get back to you soon.');
+    }
+
+    private function resetFields()
+    {
+        $this->name = null;
+        $this->email = null;
+        $this->message = null;
     }
 
     public function render()

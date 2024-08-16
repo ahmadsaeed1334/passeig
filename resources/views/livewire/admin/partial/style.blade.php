@@ -14,11 +14,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" data-navigate-track />
 <!--end::Fonts-->
 <!-- Include Jodit CSS Styling -->
-<style>
-	body {
-		cursor: none;
-	}
-</style>
+
 
 <link type="text/css" href="{{ asset('assets/sample/css/sample.css') }}" rel="stylesheet" media="screen" />
 <link rel="stylesheet" href="https://unpkg.com/jodit@4.0.1/es2021/jodit.min.css" />

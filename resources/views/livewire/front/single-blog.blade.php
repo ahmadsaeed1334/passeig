@@ -17,7 +17,7 @@
 	<div class="bg-gray-light p-tb20">
 		<div class="container">
 			<ul class="wt-breadcrumb breadcrumb-style-2">
-				<li><a href="{{ route('home-page') }}"><i class="fa fa-home"></i> Home</a></li>
+				<li><a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a></li>
 				<li>
 					<a href="{{ route('blogs') }}">
 						Blogs
@@ -113,7 +113,8 @@
 										<div class="blog-post blog-grid date-style-1">
 											<div class="wt-post-media wt-img-effect zoom-slow" style="border-radius: 10px">
 												<a href="{{ route('single-blog', $relatedBlog->id) }}"><img
-														src="{{ asset('storage/' . $relatedBlog->image) }}" alt="" style="border-radius: 10px"></a>
+														src="{{ asset('storage/' . $relatedBlog->image) }}" alt=""
+														style="border-radius: 10px;height: 300px"></a>
 											</div>
 											<div class="wt-post-info p-a30 bg-white">
 												<div class="wt-post-title">

@@ -62,7 +62,7 @@
 				<!--begin::Content-->
 				<div class="d-flex flex-center flex-column flex-column-fluid pb-lg-20 p-10">
 					<!--begin::Logo-->
-					<a href="{{ url('/') }}" class="mb-12">
+					<a href="{{ route('home') }}" class="mb-12">
 						<img alt="{{ setting('general_settings.app_name') }}"
 							src="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.logo') }}"
 							class="h-100px w-lg-500px theme-dark-show" />

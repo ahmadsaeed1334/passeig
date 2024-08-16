@@ -2,9 +2,9 @@
 	<div class="section-full overlay-wraper bg-parallax" data-stellar-background-ratio="0.2" style="background-image:url({{ asset('assets/images/background/bg-11.jpg') }});">
 	    <div class="overlay-main opacity-07 bg-white"></div>
 	    <div class="container">
-	        <div class="row conntact-home">
-	            <div class="col-lg-5 col-md-5 contact-home4-left">
-	                <div class="section-content p-tb30 overlay-wraper">
+	        <div class="row conntact-home br-10">
+	            <div class="col-lg-5 col-md-5 contact-home4-left br-10">
+	                <div class="section-content p-tb30 overlay-wraper br-10">
 	                    <div class="overlay-main site-bg-primary opacity-09"></div>
 	                    <div class="p-a30" style="z-index:1; position:relative">
 	                        <h3 class="font-weight-400 m-b5 text-white">{{ $bestService->top_title ?? 'Make an' }}</h3>

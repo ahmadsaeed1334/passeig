@@ -17,7 +17,7 @@
 	<div class="bg-gray-light p-tb20">
 		<div class="container">
 			<ul class="wt-breadcrumb breadcrumb-style-2">
-				<li><a href="{{ route('home-page') }}"><i class="fa fa-home"></i> Home</a></li>
+				<li><a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a></li>
 				<li>
 					<a href="{{ route('blogs') }}">
 						Blogs
@@ -50,53 +50,7 @@
 						<p>{!! $about->long_description !!}
 						</p>
 					</div>
-					<div class="about-types row">
-						<div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-							<div class="wt-icon-box-wraper left">
-								<div class="icon-md site-text-primary">
-									<a href="#" class="icon-cell p-t5 center-block"><i class="flaticon-female-hairs"></i></a>
-								</div>
-								<div class="icon-content">
-									<h5 class="wt-tilte text-uppercase m-b0">Waxing</h5>
-									<p>Lorem ipsum dolor sit piscing sed diam nonmy end .</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-							<div class="wt-icon-box-wraper left">
-								<div class="icon-md site-text-primary">
-									<a href="#" class="icon-cell p-t5 center-block"><i class="flaticon-eye"></i></a>
-								</div>
-								<div class="icon-content">
-									<h5 class="wt-tilte text-uppercase m-b0">Hair Makeup</h5>
-									<p>Lorem ipsum dolor sit piscing sed diam nonmy end .</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-							<div class="wt-icon-box-wraper left">
-								<div class="icon-md site-text-primary">
-									<a href="#" class="icon-cell p-t5 center-block"><i class="flaticon-mirror"></i></a>
-								</div>
-								<div class="icon-content">
-									<h5 class="wt-tilte text-uppercase m-b0">Facial</h5>
-									<p>Lorem ipsum dolor sit piscing sed diam nonmy end .</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-							<div class="wt-icon-box-wraper left">
-								<div class="icon-md site-text-primary">
-									<a href="#" class="icon-cell p-t5 center-block"><i class="flaticon-spray-bottle"
-											aria-hidden="true"></i></a>
-								</div>
-								<div class="icon-content">
-									<h5 class="wt-tilte text-uppercase m-b0">Massage</h5>
-									<p>Lorem ipsum dolor sit piscing sed diam nonmy end .</p>
-								</div>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -110,29 +64,30 @@
 
 			<!-- TITLE START -->
 			<div class="section-head text-center">
-				<h3 class="text-uppercase">Our Client</h3>
+				<h3 class="text-uppercase text-white">Our Client</h3>
 				<div class="wt-separator-outer">
 					<div class="wt-separator style-icon">
-						<i class="fa fa-leaf text-black"></i>
+						<i class="fa fa-leaf text-white"></i>
 						<span class="separator-left site-bg-primary"></span>
 						<span class="separator-right site-bg-primary"></span>
 					</div>
 				</div>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+				<p class="text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+					been the industry's
 					standard dummy text ever since the 1500s.</p>
 			</div>
 			<!-- TITLE END -->
 
 			<!-- IMAGE CAROUSEL START -->
 			<div class="section-content">
-				<div class="owl-carousel client-logo-carousel m-b30">
+				<div class="owl-carousel client-logo-carousel m-b30 auto">
 
 					<!-- COLUMNS 1 -->
 					@foreach ($partners as $partner)
 						<div class="item">
-							<div class="ow-client-logo">
+							<div class="ow-client-logo br-10">
 								<div class="client-logo wt-img-effect on-color">
-									<a href="contact-1.html"><img src="{{ asset('assets/images/client-logo/logo1.png') }}" alt=""></a>
+									<a href="/contact-us"><img src="{{ Storage::url($partner->partner_image) }}" alt="{{ $partner->name }}"></a>
 								</div>
 							</div>
 						</div>

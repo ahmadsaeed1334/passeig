@@ -90,26 +90,8 @@ use App\Livewire\Front\Pages\SingleServices;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified',
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('admin/dashboard');
-//     })->name('admin/dashboard');
-// });
 Route::impersonate();
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
 
 Route::middleware(['auth', 'verified', 'checkAdminAccess'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin/dashboard');
@@ -364,6 +346,7 @@ Route::get("/config-clear", function () {
 
 
 Route::get('/', HomePage::class)->name('home-page');
+Route::get('/home', HomePage::class)->name('home');
 Route::get('/faqs', Faqs::class)->name('faqs');
 Route::get('/gallery', Gallerys::class)->name('gallery');
 Route::get('/aboutus', AboutUs::class)->name('about-us');
@@ -383,7 +366,7 @@ Route::get('/appointments', Appointments::class)->name('appointments');
 // Route::post('/appointments/book', [BookAppointmentController::class, 'bookAppointments']);
 Route::get('/contact-us', Contacts::class)->name('contact-us');
 // Route::get('/contact', [ContactController::class, 'showContactForm'])->name('contact.show');
-Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.submit');
+// Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.submit');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', ProfileEdit::class)->name('profile.edit');

@@ -29,7 +29,7 @@ class AppointmentView extends Component
             $appointment->save();
             // session()->flash('message', 'Status updated successfully.');
             $this->dispatch('showAlert', ['type' => 'success', 'message' => 'Status updated successfully.']);
-            $this->alertMessage('success', 'Operation success','Status updated successfully.');
+            $this->alertMessage('success', 'Operation success', 'Status updated successfully.');
         }
     }
 
@@ -52,6 +52,7 @@ class AppointmentView extends Component
             ->orWhereHas('service', function ($query) {
                 $query->where('service_name', 'like', '%' . $this->search . '%');
             })
+            ->latest()
             ->paginate(15);
 
         return view('livewire.admin.appointment-view.appointment-view', compact('appointments'));

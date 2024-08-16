@@ -97,7 +97,7 @@ $route_name = route_name();
 		<div class="main-bar site-bg-primary">
 			<div class="container">
 				<div class="logo-header">
-					<a href="{{ route('home-page') }}">
+					<a href="{{ route('home') }}">
 						<img src="{{ asset('assets/images/LOGO-PASSEIG.png') }}" width="216" height="37" alt="">
 					</a>
 				</div>
@@ -105,8 +105,8 @@ $route_name = route_name();
 				<!-- MAIN Vav -->
 				<div class="header-nav navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="{{ $route == 'home-page' ? 'active' : '' }}">
-							<a href="{{ route('home-page') }}">Home</a>
+						<li class="{{ $route == 'home-page' || $route == 'home' ? 'active' : '' }}">
+							<a href="{{ route('home') }}">Home</a>
 						</li>
 
 						{{-- <li class="{{ $route == 'services' ? 'active' : '' }}">
@@ -153,55 +153,6 @@ $route_name = route_name();
 													@foreach ($menu->services as $child)
 														<li>
 															<a href="{{ route('single-service', $child->id) }}">
-																{{ $child->service_name }}
-															</a>
-														</li>
-													@endforeach
-												</ul>
-											@endif
-										@endif
-									</li>
-								@endforeach
-							</ul>
-						</li>
-						<li class="has-child">
-							<a href="{{ route('services') }}">Services<i class="fa fa-chevron-down"></i></a>
-							<ul class="sub-menu">
-								@php
-									$menus = App\Models\ServicesCategory::with(['subcategories', 'services'])
-									    ->withCount(['subcategories', 'services'])
-									    ->get();
-								@endphp
-								@foreach ($menus as $menu)
-									<li>
-										<a href="javascript:;">{{ $menu->name }}</a>
-										@if ($menu->subcategories_count > 0)
-											<ul class="sub-menu">
-												@foreach ($menu->subcategories as $subcategory)
-													<li>
-														<a href="blog-media-list.html">
-															{{ $subcategory->name }}
-															@if ($menu->services_count > 0)
-																<ul class="sub-menu">
-																	@foreach ($menu->services as $child)
-																		<li>
-																			<a href="blog-media-list.html">
-																				{{ $child->service_name }}
-																			</a>
-																		</li>
-																	@endforeach
-																</ul>
-															@endif
-														</a>
-													</li>
-												@endforeach
-											</ul>
-										@else
-											@if ($menu->services_count > 0)
-												<ul class="sub-menu">
-													@foreach ($menu->services as $child)
-														<li>
-															<a href="blog-media-list.html">
 																{{ $child->service_name }}
 															</a>
 														</li>
@@ -317,13 +268,13 @@ $route_name = route_name();
 						<div id="button">
 
 							<div id="second">
-								<a href="#">Click me</a>
+								<a href="{{ route('appointments') }}">Click me</a>
 								<div id="Third">
-									<a href="#">That's it</a>
+									<a href="{{ route('appointments') }}">That's it</a>
 								</div>
 							</div>
 							<div id="first">
-								<a href="#">Appointment</a>
+								<a href="{{ route('appointments') }}">Appointment</a>
 							</div>
 						</div>
 					</div>

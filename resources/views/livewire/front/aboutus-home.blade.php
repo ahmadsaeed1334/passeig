@@ -27,10 +27,10 @@
 							<img src="images/sign.png" alt="">
 						</div>
 						<div>
-							<a href="services-1.html" class="site-button radius-sm onHover">
+							<a href="services-1.html" class="site-button radius-sm onHover br-10">
 								<span class="font-weight-700 text-uppercase p-lr15 inline-block">More</span>
 							</a>
-							<a href="services-detail.html" class="site-button-secondry radius-sm onHover">
+							<a href="services-detail.html" class="site-button-secondry radius-sm onHover br-10">
 								<span class="font-weight-700 text-uppercase p-lr15 inline-block">Services</span>
 							</a>
 						</div>

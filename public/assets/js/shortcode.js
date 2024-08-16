@@ -1,13 +1,13 @@
 
 /*--------------------------------------------------------------------------------------------
 	1. Tooltip function by = bootstrap.js
-	
+
 	2. Popovers = bootstrap.js
-	
+
 	3. Images carousel functions
 		3.1 image-carousel function by = owl.carousel.js
 		3.2 image-carousel with content function by = owl.carousel.js
-		3.3 image-carousel no margin function by = owl.carousel.js 
+		3.3 image-carousel no margin function by = owl.carousel.js
 		3.4 widget-client-carousel function by = owl.carousel.js
 
 	4. Portfolio carousel functions
@@ -18,13 +18,13 @@
 	5. Blog post Carousel functions
 	    5.1 Blog post Carousel function by = owl.carousel.js
 		5.2 Event Carousel function by = owl.carousel.js
-		
+
 	6. Client logo Carousel functions
-		6.1 Client logo Carousel function by = owl.carousel.js 
-		6.2 Client logo Carousel-4   function by = owl.carousel.js 
-		6.3 Client logo Carousel-3 Carousels  function by = owl.carousel.js 
-		6.4 Client logo Carousel-2 Carousels  function by = owl.carousel.js 
-		6.5 Client logo Carousel-1  function by = owl.carousel.js 
+		6.1 Client logo Carousel function by = owl.carousel.js
+		6.2 Client logo Carousel-4   function by = owl.carousel.js
+		6.3 Client logo Carousel-3 Carousels  function by = owl.carousel.js
+		6.4 Client logo Carousel-2 Carousels  function by = owl.carousel.js
+		6.5 Client logo Carousel-1  function by = owl.carousel.js
 
 	7. Fade slider for home function by = owl.carousel.js
 
@@ -34,23 +34,23 @@
 		9.1 Testimonial one function by = owl.carousel.js
 		9.2 Testimonial two function by = owl.carousel.js
 		9.3 Testimonial three function by = owl.carousel.js
-		9.4 Testimonial four function by = owl.carousel.js 
+		9.4 Testimonial four function by = owl.carousel.js
 
 	10. CounterUp one function by = counterup-min.js
 	11. google map 1 function custom
 	12. google map 2 function custom
 	13. google map 3 function custom
----------------------------------------------------------------------------------------------*/	
+---------------------------------------------------------------------------------------------*/
 
 
 jQuery(document).ready(function() {
     'use strict';
 
-	
+
 //  Tooltip function by = bootstrap.js ========================== //
 	jQuery('[data-toggle="tooltip"]').tooltip();
-	
-//  Popovers = bootstrap.js========================= //	
+
+//  Popovers = bootstrap.js========================= //
 	jQuery('[data-toggle="popover"]').popover();
 
 //  image-carousel function by = owl.carousel.js ========================== //
@@ -64,11 +64,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -77,7 +77,7 @@ jQuery(document).ready(function() {
 			}
 		}
 	})
-	
+
 //  image-carousel with content function by = owl.carousel.js ========================== //
 	jQuery('.img-carousel-content').owlCarousel({
 		loop:true,
@@ -89,11 +89,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -102,7 +102,7 @@ jQuery(document).ready(function() {
 			}
 		}
 	})
-	
+
 //  image-carousel no margin function by = owl.carousel.js ========================== //
 	jQuery('.img-carousel-full-screen').owlCarousel({
 		loop:true,
@@ -114,11 +114,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -126,7 +126,7 @@ jQuery(document).ready(function() {
 				items:5
 			}
 		}
-	})	
+	})
 
 //  widget-client-carousel function by = owl.carousel.js ========================== //
 
@@ -137,8 +137,8 @@ jQuery(document).ready(function() {
 		nav:false,
 		dots:true,
 		navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
-	})	
-	
+	})
+
 //  Portfolio Carousel function by = owl.carousel.js ========================== //
 	jQuery('.portfolio-carousel').owlCarousel({
 		loop:true,
@@ -150,11 +150,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -175,11 +175,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -200,11 +200,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -212,12 +212,15 @@ jQuery(document).ready(function() {
 				items:5
 			}
 		}
-		
+
 	})
-	
-     
+
+
 //  Blog post Carousel function by = owl.carousel.js ========================== //
-	jQuery('.blog-carousel').owlCarousel({
+    jQuery('.blog-carousel').owlCarousel({
+        autoplay: true,        // Enable auto-play
+    autoplayTimeout: 3000, // Set the auto-play interval (in milliseconds)
+    autoplayHoverPause: true, // Pause on hover
 		loop:true,
 		margin:30,
 		nav:true,
@@ -227,11 +230,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -239,8 +242,8 @@ jQuery(document).ready(function() {
 				items:3
 			}
 		}
-	})	
-	
+	})
+
 //  Event Carousel function by = owl.carousel.js ========================== //
 	jQuery('.event-carousel').owlCarousel({
 		loop:true,
@@ -252,11 +255,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -264,23 +267,26 @@ jQuery(document).ready(function() {
 				items:3
 			}
 		}
-	})		
-	
+	})
+
 //  Client logo Carousel function by = owl.carousel.js ========================== //
 	jQuery('.client-logo-carousel').owlCarousel({
 		loop:true,
 		margin:30,
-		nav:false,
+        nav: false,
+        autoplay: true,
+        autoplayTimeout: 3000, // Set the auto-play interval (in milliseconds)
+    autoplayHoverPause: true, // Pause on hover
 		dots: true,
 		responsive:{
 			0:{
 				items:2
 			},
-			
+
 			480:{
 				items:3
-			},			
-			
+			},
+
 			767:{
 				items:4
 			},
@@ -288,9 +294,9 @@ jQuery(document).ready(function() {
 				items:5
 			}
 		}
-	})	
-	
-// Client logo Carousel-4   function by = owl.carousel.js ========================== //	
+	})
+
+// Client logo Carousel-4   function by = owl.carousel.js ========================== //
 	jQuery('.client-logo-carousel-4').owlCarousel({
 		loop:true,
 		margin:30,
@@ -301,11 +307,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:4
 			},
@@ -313,9 +319,9 @@ jQuery(document).ready(function() {
 				items:4
 			}
 		}
-	})	
-	
-// Client logo Carousel-3 Carousels  function by = owl.carousel.js ========================== //		
+	})
+
+// Client logo Carousel-3 Carousels  function by = owl.carousel.js ========================== //
 	jQuery('.client-logo-carousel-3').owlCarousel({
 		loop:true,
 		margin:30,
@@ -326,11 +332,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -338,9 +344,9 @@ jQuery(document).ready(function() {
 				items:3
 			}
 		}
-	})	
-	
-// Client logo Carousel-2 Carousels  function by = owl.carousel.js ========================== //		
+	})
+
+// Client logo Carousel-2 Carousels  function by = owl.carousel.js ========================== //
 	jQuery('.client-logo-carousel-2').owlCarousel({
 		loop:true,
 		margin:30,
@@ -351,11 +357,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:2
 			},
@@ -363,9 +369,9 @@ jQuery(document).ready(function() {
 				items:2
 			}
 		}
-	})	
-	
-// Client logo Carousel-1  function by = owl.carousel.js ========================== //		
+	})
+
+// Client logo Carousel-1  function by = owl.carousel.js ========================== //
 	jQuery('.client-logo-carousel-1').owlCarousel({
 		loop:true,
 		margin:30,
@@ -376,11 +382,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:1
-			},			
-			
+			},
+
 			767:{
 				items:1
 			},
@@ -388,8 +394,8 @@ jQuery(document).ready(function() {
 				items:1
 			}
 		}
-	})	
-	
+	})
+
 // Fade slider for home function by = owl.carousel.js ========================== //
 	jQuery('.owl-fade-slider-one').owlCarousel({
 		loop:true,
@@ -402,8 +408,8 @@ jQuery(document).ready(function() {
 		dots: true,
 		animateOut:'fadeOut',
 	})
-	
-	
+
+
 // Slide slider for home function by = owl.carousel.js ========================== //
 	jQuery('.owl-slide-slider-one').owlCarousel({
 		loop:true,
@@ -414,8 +420,8 @@ jQuery(document).ready(function() {
 		navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
 		items:1,
 		dots: true,
-	})	
-	
+	})
+
 //  Testimonial one function by = owl.carousel.js ========================== //
 	jQuery('.testimonial-one').owlCarousel({
 		loop:false,
@@ -427,11 +433,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:1
-			},			
-			
+			},
+
 			767:{
 				items:1
 			},
@@ -440,7 +446,7 @@ jQuery(document).ready(function() {
 			}
 		}
 	});
-	
+
 //  Testimonial two function by = owl.carousel.js ========================== //
 	jQuery('.testimonial-two').owlCarousel({
 		loop:false,
@@ -452,11 +458,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -465,7 +471,7 @@ jQuery(document).ready(function() {
 			}
 		}
 	});
-		
+
 //  Testimonial three function by = owl.carousel.js ========================== //
 	jQuery('.testimonial-three').owlCarousel({
 		loop:false,
@@ -477,11 +483,11 @@ jQuery(document).ready(function() {
 			0:{
 				items:1
 			},
-			
+
 			480:{
 				items:2
-			},			
-			
+			},
+
 			767:{
 				items:3
 			},
@@ -490,7 +496,7 @@ jQuery(document).ready(function() {
 			}
 		}
 	})
-	
+
 //  Testimonial four function by = owl.carousel.js ========================== //
 	jQuery('.testimonial-four').owlCarousel({
 		loop:false,
@@ -523,7 +529,7 @@ jQuery(document).ready(function() {
 				items:2
 			}
 		}
-	})	
+	})
 //  CounterUp one function by = counterup-min.js ========================== //
 	jQuery('.counter').counterUp({
 		delay: 10,

@@ -1,4 +1,4 @@
-<div class="section-full p-t100">
+<div class="section-full p-t100 mb-10" style="margin-bottom: 100px">
 	<div class="container">
 		<!-- TITLE START-->
 		<div class="section-head text-center">

@@ -4,10 +4,13 @@
 
 	{{-- <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"> --}}
 	<!-- GOOGLE FONTS -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 	<link media="all" rel="stylesheet" href="/htdocs_error/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+	rel="stylesheet">
 
 	<!-- REVOLUTION SLIDER CSS -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugin/revolution/revolution/css/settings.css') }}">
@@ -32,3 +35,5 @@
 	<!-- THEME COLOR CHANGE STYLE SHEET -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/switcher.css') }}">
 	<!-- SIDE SWITCHER STYLE SHEET -->
+	<link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css" rel="stylesheet">
+	@stack('styles')

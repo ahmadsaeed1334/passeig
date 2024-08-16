@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
-#[Layout('layouts.home')]
+// #[Layout('layouts.home')]
 class HomePage extends Component
 {
 
@@ -97,7 +97,10 @@ class HomePage extends Component
     }
     public function render()
     {
-        return view('livewire.front.home-page',[
+        // Determine the layout based on the route
+        $layout = request()->routeIs('home') ? 'layouts.front' : 'layouts.home';
+
+        return view('livewire.front.home-page', [
             'sliders' => $this->sliders,
             'provide' => $this->provide,
             'healths' => $this->healths,
@@ -115,7 +118,6 @@ class HomePage extends Component
             'blogTitle' => $this->blogTitle,
             'partners' => $this->partners,
             'footers' => $this->footers,
-
-        ]);
+        ])->layout($layout);
     }
 }

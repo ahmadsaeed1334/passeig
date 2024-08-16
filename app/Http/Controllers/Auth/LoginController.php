@@ -47,7 +47,7 @@ class LoginController extends Controller
             $this->clearLoginAttempts($request);
 
             if (Auth::user()->is_verified) {
-                return redirect()->route('home-page');
+                return redirect()->route('home');
             } else {
                 Auth::logout();
                 return redirect()->route('custom.verification.notice');
@@ -72,7 +72,8 @@ class LoginController extends Controller
     protected function hasTooManyLoginAttempts(Request $request)
     {
         return $this->rateLimiter->tooManyAttempts(
-            $this->throttleKey($request), $this->maxAttempts
+            $this->throttleKey($request),
+            $this->maxAttempts
         );
     }
 
@@ -96,7 +97,7 @@ class LoginController extends Controller
 
     protected function throttleKey(Request $request)
     {
-        return strtolower($request->input('email_or_phone')).'|'.$request->ip();
+        return strtolower($request->input('email_or_phone')) . '|' . $request->ip();
     }
 
     protected function clearLoginAttempts(Request $request)
@@ -113,6 +114,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('home-page');
+        return redirect()->route('home');
     }
 }

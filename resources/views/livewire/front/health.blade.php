@@ -19,7 +19,7 @@
 				<div class="col-lg-4 col-md-12 m-b30">
 					@foreach ($healths->slice(0, 3) as $key => $health)
 						<div class="nav-item onHover">
-							<a class="nav-link @if ($key == 0) active @endif wt-icon-box-wraper right p-a10 m-b20"
+							<a class="nav-link @if ($key == 0) active @endif wt-icon-box-wraper right p-a10 m-b20 br-10"
 								href="#tab{{ $key + 1 }}" data-bs-toggle="tab">
 								<div class="icon-md site-text-primary radius">
 									<span class="icon-cell site-text-primary"><img src="{{ asset('storage/' . $health->icon) }}"
@@ -55,7 +55,8 @@
 				<div class="col-lg-4 col-md-12 m-b30">
 					@foreach ($healths->slice(3, 3) as $key => $health)
 						<div class="nav-item onHover">
-							<a class="nav-link wt-icon-box-wraper left p-a10 m-b20" href="#tab{{ $key + 1 }}" data-bs-toggle="tab">
+							<a class="nav-link wt-icon-box-wraper left p-a10 m-b20 br-10" href="#tab{{ $key + 1 }}"
+								data-bs-toggle="tab">
 								<div class="icon-md site-text-primary radius">
 									<span class="icon-cell site-text-primary"><img src="{{ asset('storage/' . $health->icon) }}"
 											alt=""></span>

@@ -1,6 +1,6 @@
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 	<!--begin::Logo-->
-	<a href="{{ url('/') }}">
+	<a href="{{ route('home') }}">
 		<img alt="Logo" src="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.logo') }}" width="200"
 			height="40" />
 	</a>
