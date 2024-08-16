@@ -56,7 +56,10 @@
 									<h4 class="wt-title m-t0">
 										<a href="{{ route('single-service', $service->id) }}">{{ $service->title }}</a>
 									</h4>
-									<p>{{ $service->short_description }}</p>
+									<p>
+										{!! Str::limit(strip_tags($service->short_description), 100, '...') !!}
+										{{-- {{ $service->short_description }} --}}
+									</p>
 									<a href="{{ route('single-service', $service->id) }}" class="site-button animated-button1">More
 										<span></span>
 										<span></span>
