@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\AppointmentService;
 use App\Models\ServicesCategory;
+use App\Models\ServicesTitle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,8 +13,9 @@ class AppointmentServiceController extends Controller
     {
         $services = AppointmentService::with('serviceCategory')->paginate(10);
         $totalServices = AppointmentService::count(); // Get the total count of blogs
+        $servicesTitles = ServicesTitle::all();
 
-        return view('front.services-appoinment.appointment_services.index', compact('services','totalServices'),[
+        return view('front.services-appoinment.appointment_services.index', compact('services','totalServices','servicesTitles'),[
             'page_title' => 'Appointment Services'
         ]);
     }
@@ -92,5 +94,58 @@ class AppointmentServiceController extends Controller
     {
         $service->delete();
         return redirect()->route('appointment-services.index')->with('success', 'Service deleted successfully.');
+    }
+    // Create service title
+    public function createTitle()
+    {
+        return view('front.pages.our-services.titlecreate', [
+            'page_title' => 'Create Service Title'
+        ]);
+    }
+
+    // Store service title
+    public function storeTitle(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'long_description' => 'required|string',
+        ]);
+
+        ServicesTitle::create([
+            'title' => $request->title,
+            'long_description' => $request->long_description,
+        ]);
+
+        return redirect()->route('our-services.index')->with('success', 'Service Title created successfully.');
+    }
+
+    // Edit service title
+    public function editTitle(ServicesTitle $servicesTitle)
+    {
+        return view('front.pages.our-services.titleedit', [
+            'servicesTitle' => $servicesTitle,
+            'page_title' => 'Update Service Title'
+        ]);
+    }
+
+    // Update service title
+    public function updateTitle(Request $request, ServicesTitle $servicesTitle)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'long_description' => 'required|string',
+        ]);
+
+        $servicesTitle->update($request->all());
+
+        return redirect()->route('our-services.index')->with('success', 'Service Title updated successfully.');
+    }
+
+    // Destroy service title
+    public function destroyTitle(ServicesTitle $servicesTitle)
+    {
+        $servicesTitle->delete();
+
+        return redirect()->route('our-services.index')->with('success', 'Service Title deleted successfully.');
     }
 }

@@ -44,6 +44,28 @@
                         </div>
                     </div>
                     <div class="card-body scroll-x pt-0">
+                        <table class="table-bordered fs-6 gy-5 mb-0 table align-middle" id="kt_HeroBanners_table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($servicesTitles as $servicesTitle)
+                                <tr>
+                                    <td>{{ $servicesTitle->title }}</td>
+                                    <td>{!! \Illuminate\Support\Str::words(strip_tags($servicesTitle->long_description), 23, '...') !!}</td>
+                                    <td>
+                                        <a href="{{ route('our-services.titleedit', $servicesTitle->id) }}" class="btn btn-icon btn-light btn-active-light-{{ primary_color() }} btn-sm mr-3" {!! show_toltip('Update Services') !!}>
+                                            <i class="fa-solid fa-pen-to-square fs-6 fw-bold fw-bolder"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                         <table class="table-row-dashed fs-6 gy-5 mb-0 table align-middle" id="kt_HeroBanners_table">
                             <thead>
                                 <tr>
