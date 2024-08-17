@@ -99,12 +99,6 @@
 					<div class="widget widget_social_inks">
 						<h4 class="widget-title">Social Links</h4>
 						<ul class="social-icons social-square social-darkest">
-							{{-- <li><a href="javascript:void(0);" class="fa fa-facebook"></a></li>
-                            <li><a href="javascript:void(0);" class="fa fa-twitter"></a></li>
-                            <li><a href="javascript:void(0);" class="fa fa-linkedin"></a></li>
-                            <li><a href="javascript:void(0);" class="fa fa-rss"></a></li>
-                            <li><a href="javascript:void(0);" class="fa fa-youtube"></a></li>
-                            <li><a href="javascript:void(0);" class="fa fa-instagram"></a></li> --}}
 							@foreach ($footers as $footer)
 								@foreach (json_decode($footer->icons) as $icon)
 									@if (strtolower($icon->icon) == 'facebook')

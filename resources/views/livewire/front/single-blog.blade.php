@@ -62,15 +62,15 @@
 								{!! $blog->description !!}
 							</div>
 							{{-- <div class="widget widget_tag_cloud bg-white">
-								<h4 class="tagcloud">Tags</h4>
-								<div class="tagcloud">
-									<a href="about-1.html">First tag</a>
-									<a href="about-1.html">Second tag</a>
-									<a href="about-1.html">Three tag</a>
-									<a href="about-1.html">Four tag</a>
-									<a href="about-1.html">Five tag</a>
-								</div>
-							</div> --}}
+            <h4 class="tagcloud">Tags</h4>
+            <div class="tagcloud">
+                <a href="about-1.html">First tag</a>
+                <a href="about-1.html">Second tag</a>
+                <a href="about-1.html">Three tag</a>
+                <a href="about-1.html">Four tag</a>
+                <a href="about-1.html">Five tag</a>
+            </div>
+        </div> --}}
 							<div class="wt-divider bg-gray-dark"><i class="icon-dot c-square"></i></div>
 							<div class="wt-box">
 
@@ -78,11 +78,29 @@
 									<h4 class="tagcloud pull-left m-t5 m-b10">Share this Post:</h4>
 									<div class="widget_social_inks">
 										<ul class="social-icons social-md social-square social-dark m-b0">
-											<li><a href="javascript:void(0);" class="fa fa-facebook"></a></li>
-											<li><a href="javascript:void(0);" class="fa fa-twitter"></a></li>
-											<li><a href="javascript:void(0);" class="fa fa-rss"></a></li>
-											<li><a href="javascript:void(0);" class="fa fa-youtube"></a></li>
-											<li><a href="javascript:void(0);" class="fa fa-instagram"></a></li>
+											<li>
+												<a href="https://www.facebook.com/sharer/sharer.php?u={{ route('single-blog', $blog->id) }}"
+													target="_blank" class="fa fa-facebook"></a>
+											</li>
+											<li>
+												<a
+													href="https://twitter.com/intent/tweet?text={{ urlencode($blog->title) }}&url={{ route('single-blog', $blog->id) }}"
+													target="_blank" class="fa fa-twitter"></a>
+											</li>
+											<li>
+												<a
+													href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('single-blog', $blog->id) }}&title={{ urlencode($blog->title) }}"
+													target="_blank" class="fa fa-linkedin"></a>
+											</li>
+											<li>
+												<a
+													href="https://pinterest.com/pin/create/button/?url={{ route('single-blog', $blog->id) }}&media={{ asset('storage/' . $blog->image) }}&description={{ urlencode($blog->title) }}"
+													target="_blank" class="fa fa-pinterest"></a>
+											</li>
+											<li>
+												<a href="https://wa.me/?text={{ route('single-blog', $blog->id) }}" target="_blank"
+													class="fa fa-whatsapp"></a>
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -91,6 +109,7 @@
 							<div class="wt-divider bg-gray-dark"><i class="icon-dot c-square"></i></div>
 						</div>
 					</div>
+
 
 					<div class="section-content p-t50">
 						<!-- TITLE START -->
@@ -143,11 +162,29 @@
 													</div>
 													<div class="widget_social_inks pull-right">
 														<ul class="social-icons social-radius social-dark m-b0">
-															<li><a href="javascript:void(0);" class="fa fa-facebook"></a></li>
-															<li><a href="javascript:void(0);" class="fa fa-twitter"></a></li>
-															<li><a href="javascript:void(0);" class="fa fa-rss"></a></li>
-															<li><a href="javascript:void(0);" class="fa fa-youtube"></a></li>
-															<li><a href="javascript:void(0);" class="fa fa-instagram"></a></li>
+															<li>
+																<a href="https://www.facebook.com/sharer/sharer.php?u={{ route('single-blog', $relatedBlog->id) }}"
+																	target="_blank" class="fa fa-facebook"></a>
+															</li>
+															<li>
+																<a
+																	href="https://twitter.com/intent/tweet?text={{ urlencode($relatedBlog->title) }}&url={{ route('single-blog', $relatedBlog->id) }}"
+																	target="_blank" class="fa fa-twitter"></a>
+															</li>
+															<li>
+																<a
+																	href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('single-blog', $relatedBlog->id) }}&title={{ urlencode($relatedBlog->title) }}"
+																	target="_blank" class="fa fa-linkedin"></a>
+															</li>
+															<li>
+																<a
+																	href="https://pinterest.com/pin/create/button/?url={{ route('single-blog', $relatedBlog->id) }}&media={{ asset('storage/' . $relatedBlog->image) }}&description={{ urlencode($relatedBlog->title) }}"
+																	target="_blank" class="fa fa-pinterest"></a>
+															</li>
+															<li>
+																<a href="https://wa.me/?text={{ route('single-blog', $relatedBlog->id) }}" target="_blank"
+																	class="fa fa-whatsapp"></a>
+															</li>
 														</ul>
 													</div>
 												</div>

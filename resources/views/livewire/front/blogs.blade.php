@@ -83,11 +83,29 @@
 											</div>
 											<div class="widget_social_inks pull-right">
 												<ul class="social-icons social-radius social-dark m-b0">
-													<li><a href="javascript:void(0);" class="fa fa-facebook"></a></li>
-													<li><a href="javascript:void(0);" class="fa fa-twitter"></a></li>
-													<li><a href="javascript:void(0);" class="fa fa-rss"></a></li>
-													<li><a href="javascript:void(0);" class="fa fa-youtube"></a></li>
-													<li><a href="javascript:void(0);" class="fa fa-instagram"></a></li>
+													<li>
+														<a href="https://www.facebook.com/sharer/sharer.php?u={{ route('single-blog', $blog->id) }}"
+															target="_blank" class="fa fa-facebook"></a>
+													</li>
+													<li>
+														<a
+															href="https://twitter.com/intent/tweet?text={{ urlencode($blog->title) }}&url={{ route('single-blog', $blog->id) }}"
+															target="_blank" class="fa fa-twitter"></a>
+													</li>
+													<li>
+														<a
+															href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('single-blog', $blog->id) }}&title={{ urlencode($blog->title) }}"
+															target="_blank" class="fa fa-linkedin"></a>
+													</li>
+													<li>
+														<a
+															href="https://pinterest.com/pin/create/button/?url={{ route('single-blog', $blog->id) }}&media={{ asset('storage/' . $blog->image) }}&description={{ urlencode($blog->title) }}"
+															target="_blank" class="fa fa-pinterest"></a>
+													</li>
+													<li>
+														<a href="https://wa.me/?text={{ route('single-blog', $blog->id) }}" target="_blank"
+															class="fa fa-whatsapp"></a>
+													</li>
 												</ul>
 											</div>
 										</div>
@@ -96,6 +114,7 @@
 								</div>
 							</div>
 						@endforeach
+
 					</div>
 					<!-- BLOG GRID END -->
 
