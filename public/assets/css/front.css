@@ -4,8 +4,8 @@
     --secondary-color: #225260;
     --white-clr: #fff;
     --black-clr: #000;
-    --helvatica-font: Helvatica;
-    --brownSugar-font: Brown-Sugar;
+    --helvatica-font: 'Helvatica';
+    --brownSugar-font: "Brown-Sugar";
     --bs-offcanvas-width: 800px;
 }
 
@@ -23,12 +23,12 @@ body {
 }
 
 @font-face {
-    font-family: Brown-Sugar;
+    font-family: 'Brown-Sugar';
     src: url(../fonts/Brown-Sugar.otf);
 }
 
 @font-face {
-    font-family: Helvatica;
+    font-family: 'Helvatica';
     src: url(../fonts/HelveticaNeueRoman.otf);
 }
 

@@ -11,7 +11,7 @@
                     <span class="separator-right site-bg-primary"></span>
                 </div>
             </div>
-            <p>{{ $servicesTitle->long_description ?? 'Our services description' }}</p>
+            <p>{{strip_tags( $servicesTitle->long_description ?? 'Our services description') }}</p>
         </div>
         <!-- TITLE END-->
         <div class="section-content our-services-index">
