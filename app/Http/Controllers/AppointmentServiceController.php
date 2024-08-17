@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\AppointmentService;
 use App\Models\ServicesCategory;
+use App\Models\ServicesTitle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,6 +13,7 @@ class AppointmentServiceController extends Controller
     {
         $services = AppointmentService::with('serviceCategory')->paginate(10);
         $totalServices = AppointmentService::count(); // Get the total count of blogs
+        $servicesTitles = ServicesTitle::all();
 
         return view('front.services-appoinment.appointment_services.index', compact('services','totalServices'),[
             'page_title' => 'Appointment Services'
