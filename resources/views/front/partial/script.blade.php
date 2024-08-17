@@ -34,11 +34,16 @@
 <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
 
 <script>
-	$(document).ready(function() {
-		$('.circle-block-outer .nav-link').hover(function() {
-			$(this).tab('show');
-		});
-	})
-</script>
+    $(document).ready(function() {
+        $('.circle-block-outer .nav-link').hover(function() {
+            $(this).tab('show');
+        });
+    })
 
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@livewireScripts
+<x-livewire-alert::scripts />
 @stack('scripts')

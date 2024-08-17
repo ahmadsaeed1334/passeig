@@ -1,5 +1,5 @@
 <div class="content-profile">
-<x-slot name="page_title">
+    <x-slot name="page_title">
         {{ $page_title ?? 'Appointment' }}
     </x-slot>
     <div class="content-inner content-inner-panding">
@@ -36,7 +36,7 @@
                     @foreach($appointments as $appointment)
                     <tr>
                         <td class="category" data-label="Service Category">
-                            <img src="{{ asset('storage/' . $appointment->service->serviceCategory->icon_image) }}" alt="" class="img-radius image-spacing">
+                            <img src="{{ asset('storage/' . $appointment->service->serviceCategory->icon_image) }}" alt="" class="img-radius image-spacing" width="40px">
                             {{ $appointment->service->serviceCategory->name }}
                         </td>
                         <td data-label="Subcategory">

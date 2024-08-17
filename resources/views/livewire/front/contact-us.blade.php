@@ -16,7 +16,7 @@
 	                            {{ session('success') }}
 	                        </div>
 	                        @endif
-	                        <form wire:ignore wire:submit.prevent="submit" class="cons-contact-form2 form-transparent">
+	                        <form wire:submit.prevent="submit" class="cons-contact-form2 form-transparent">
 	                            <div class="form-group">
 	                                <input wire:model="name" name="username" type="text" required class="form-control" placeholder="Name">
 	                            </div>
@@ -27,7 +27,7 @@
 	                                <input name="phone" type="text" class="form-control" required placeholder="Phone">
 	                            </div> --}}
 	                            <div class="form-group">
-	                                <textarea wire:model="email" name="message" class="form-control" rows="4" placeholder="Message"></textarea>
+	                                <textarea wire:model="message" name="message" class="form-control" rows="4" placeholder="Message"></textarea>
 	                            </div>
 	                            <button type="submit" class="site-button-secondry radius-sm">
 	                                <span class="font-weight-700 text-uppercase p-lr15 inline-block">Submit</span>
@@ -58,7 +58,7 @@
 	            <div class="col-lg-7 col-md-7 contact-home4-right p-t50 p-b50">
 	                <div class="section-content">
 	                    <div class="opening-block bdr-5 bdr-primary p-a40 text-right">
-	                        <a href="services-2.html" class="site-bg-primary book-now-btn p-tb5 p-lr15 text-uppercase font-16 font-weight-500">All Services</a>
+	                        <a href="{{ route('services') }}" class="site-bg-primary book-now-btn p-tb5 p-lr15 text-uppercase font-16 font-weight-500">All Services</a>
 	                        <h2 class="text-uppercase text-secondry m-tb0">{{ $bestService->title ?? 'Best Services' }}</h2>
 	                        <span class="font-60 font-weight-600 text-uppercase site-text-primary">Open Hours</span>
 	                        <p>{!! $bestService->description ??

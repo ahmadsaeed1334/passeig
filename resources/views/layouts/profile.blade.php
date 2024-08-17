@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track />
-            <title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
+    <link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track />
+    <title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title>
 
 
     {{-- <link rel="stylesheet" href="../assets/css/dashbord.css"> --}}
@@ -53,12 +53,12 @@
                     <span class="navbar-toggler-icon "><i class="bi bi-list"></i></span>
                 </span>
                 <div class="text-center">
-                <a href="{{ route('home') }}">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="160px" class="mt-5">
-                </a>
-                    
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="160px" class="mt-5">
+                    </a>
+
                     <br>
-                    <img src="{{ asset(auth()->user()->profile_photo_path ? 'storage/' . auth()->user()->profile_photo_path : 'assets/images/Bitmap.png') }}" alt="Profile Photo" width="65px"  height='65px' class="img-radius mt-5" id="navbarProfileImage">
+                    <img src="{{ asset(auth()->user()->profile_photo_path ? 'storage/' . auth()->user()->profile_photo_path : 'assets/images/Bitmap.png') }}" alt="Profile Photo" width="65px" height='65px' class="img-radius mt-5" id="navbarProfileImage">
                     <h4>{{ auth()->user()->name }}</h4>
                     <div class="line"></div>
                 </div>
@@ -66,7 +66,7 @@
                     <a href="{{ route('user-dashboard') }}" class="{{ request()->routeIs('user-dashboard') ? 'active' : '' }} text-center">Dashboard</a>
                     <a href="{{ route('user-appointments') }}" class="{{ request()->routeIs('user-appointments') ? 'active' : '' }} text-center">Appointments</a>
                     <a href="{{ route('profile.edit') }}" class="{{ request()->routeIs('profile.edit') ? 'active' : '' }} text-center">Profile</a>
-                    {{--  <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>  --}}
+                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }} text-center">Home</a>
                 </div>
             </div>
 

@@ -138,14 +138,25 @@ class Appointments extends Component
 
 public function bookAppointments()
 {
+    // Check if the user is logged in
     if (!Auth::check()) {
         $this->alert('error', 'Please log in to book an appointment.');
         return;
     }
+
     // Validate that all selected services have a valid date and time
     foreach ($this->selectedServices as $serviceId) {
         if (!isset($this->selectedDateTime[$serviceId]['date']) || !isset($this->selectedDateTime[$serviceId]['time'])) {
             $this->alert('error', 'Please set date and time for all selected services.');
+            return;
+        }
+
+        // Validate that the selected date is not in the past
+        $date = $this->selectedDateTime[$serviceId]['date'];
+        $dateTime = Carbon::parse($date);
+
+        if ($dateTime->isBefore(Carbon::today())) {
+            $this->alert('error', 'Cannot book an appointment for a past date.');
             return;
         }
     }
@@ -159,7 +170,6 @@ public function bookAppointments()
             continue;
         }
 
-        $date = $this->selectedDateTime[$serviceId]['date'];
         $time = $this->selectedDateTime[$serviceId]['time'];
         $dateTime = Carbon::parse("$date $time");
         $endTime = $dateTime->copy()->addMinutes($service->duration);
@@ -197,6 +207,7 @@ public function bookAppointments()
     $this->alert('success', 'Appointments booked successfully.');
     $this->reset(['selectedServices', 'selectedDateTime']);
 }
+
 
 
 

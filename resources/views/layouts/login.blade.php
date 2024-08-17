@@ -4,45 +4,55 @@
 <!--begin::Head-->
 
 <head>
-    <base href="" />
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+    <meta name="description" content="">
     {{-- <title>{{ $page_title ?? general('app_name') }} - {{ $page_title ? general('app_name') : '' }}</title> --}}
     <link rel="shortcut icon" href="{{ env('APP_URL') . '/storage' . '/' . setting('general_settings.favicon') }}" data-navigate-track />
     @include('front.partial.style')
-    <link rel="stylesheet" href="{{ asset('assets/css/login.css')}}">
-
-    </style>
+    @include('front.partial.custom-styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/util.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 </head>
 
 <body>
 
-    @include('front.partial.header')
-    <div class="load_animation first">
+    <div class="page-wraper">
+        @include('front.partial.header')
+        <div class="limiter">
 
-
-
-        @if (isset($slot))
-        {{ $slot }}
-        @else
-        @yield('content')
-        @endif
-        {{-- <section id="hero">
-                <div class="container">
-                    <div class="text-center">
-                        <div class="col-lg-8 mx-auto">
-                            <img class="d-block mx-auto mb-4 img-fluid animation" src="assets/images/LOGO-PASSEIG.png"
-                                alt="">
-                            <p class="lead mb-4 p-below animation">Risus scelerisque a non turpis vitae
-                                malesuada sed venenatis. In fringilla
-                                sollicitudin euismod sed.</p>
-                        </div>
-                    </div>
-                </div>
-            </section> --}}
-
+            @if (isset($slot))
+            {{ $slot }}
+            @else
+            @yield('content')
+            @endif
+        </div>
     </div>
+    <script>
+        $(function() {
 
-    {{-- @include('front.partial.main') --}}
-    {{-- @livewire('front.footers') --}}
+            $('.btn-link[aria-expanded="true"]').closest('.accordion-item').addClass('active');
+            $('.collapse').on('show.bs.collapse', function() {
+                $(this).closest('.accordion-item').addClass('active');
+            });
+
+            $('.collapse').on('hidden.bs.collapse', function() {
+                $(this).closest('.accordion-item').removeClass('active');
+            });
+
+
+
+        });
+
+    </script>
     @include('front.partial.script')
+
+    @include('front.partial.custom-scripts')
+    @include('front.partial.support')
 </body>
 </html>

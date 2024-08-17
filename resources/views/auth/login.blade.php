@@ -1,56 +1,71 @@
 @extends('layouts.login')
 @section('content')
-	<div class="container">
-		<div class="content-login">
-			<div class="signup-container" style="margin-top: 200px;">
-				<div class="btn-container text-end">
-					<a href="{{ route('home') }}" class="btn boder text-dark">
-						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x"
-							viewBox="0 0 16 16">
-							<path
-								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-						</svg>
-					</a>
-				</div>
-				<h1 class="text-start">Sign in</h1>
-				<p class="text-start">Please enter the details to log in to your account</p>
-				<form method="POST" action="{{ route('login.post') }}">
-					@csrf
-					<div class="center">
-						<div class="custom-input-container">
-							<label for="email_or_phone">Email or Phone</label>
-							<input type="text" id="email_or_phone" name="email_or_phone" class="form-control" placeholder="Email or Phone"
-								required>
-							@error('email_or_phone')
-								<span class="text-danger">{{ $message }}</span>
-							@enderror
 
-						</div>
-						<div class="password-container">
-							<input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-							@error('password')
-								<span class="text-danger">{{ $message }}</span>
-							@enderror
-							<i class="bi bi-eye-slash" id="togglePassword"></i>
-						</div>
-					</div>
-					<div class="d-flex justify-content-between">
-						<div class="form-check mb-3">
-							<input type="checkbox" class="form-check-input" id="rememberMe" name="remember">
-							<label class="form-check-label" for="rememberMe">Remember me</label>
-						</div>
-						<p class="mb-3"><a href="{{ route('password.request') }}" class="text-dark">Forgot Password?</a></p>
-					</div>
-					<button type="submit" class="btn btn-primarys">Sign in</button>
-					<div class="divider mt-3">or</div>
-					<div class="d-flex justify-content-center">
-						<a href="#" class="google-btn text-dark">Sign in with Google &nbsp;&nbsp;
-							<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" width="15px">
-						</a>
-					</div>
-					<p class="mt-3">Don’t have an account? <a href="{{ route('register') }}">Sign up</a></p>
-				</form>
-			</div>
-		</div>
-	</div>
+<div class="container-login100" style="background-image: url('{{ asset('assets/images/background/bg-3.jpg') }}');">
+    <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+
+        <form class="login100-form validate-form flex-sb flex-w" method="POST" action="{{ route('login.post') }}">
+            <span class="login100-form-title p-b-53">
+                Sign In With
+            </span>
+
+            @csrf
+            <a href="#" class="btn-face m-b-20">
+                <i class="fa fa-facebook-official"></i>
+                Facebook
+            </a>
+
+            <a href="#" class="btn-google m-b-20">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+                Google
+            </a>
+
+            <div class="p-t-31 p-b-9">
+                <span class="txt1">Email or Phone</span>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Username is required">
+                <input class="input100" type="text" id="email_or_phone" name="email_or_phone" placeholder="Email or Phone" required>
+                <span class="focus-input100"></span>
+                @error('email_or_phone')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="p-t-13 p-b-9">
+                <span class="txt1">
+                    Password
+                </span>
+
+                <a href="{{ route('password.request') }}" class="txt2 bo1 m-l-5">
+                    Forgot?
+                </a>
+
+            </div>
+
+            <div class="wrap-input100 validate-input" data-validate="Password is required">
+                <input class="input100" type="password" name="password" id="password" placeholder="Password" required>
+                <span class="focus-input100"></span>
+                @error('password')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="container-login100-form-btn m-t-17">
+                <button class="login100-form-btn">
+                    Sign In
+                </button>
+            </div>
+
+            <div class="w-full text-center p-t-55">
+                <span class="txt2">
+                    Not a member?
+                </span>
+
+                <a href="{{ route('register') }}" class="txt2 bo1">
+                    Sign up now
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
