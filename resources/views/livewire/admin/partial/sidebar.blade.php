@@ -59,64 +59,123 @@
 
 					@include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'aboutus.index',
-						'name' => 'About Us',
+						'name' => 'About Us (intro)',
 						'icon' => 'fa-solid fa-info',
 						// 'counter' => auth()->user()->newThreadsCount(),
 					])
-					@include('livewire.admin.partial.sidebar-menu-item', [
+					{{-- @include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'passions.index',
 						'name' => 'Our Passions',
 						'icon' => 'fa-solid fa-message',
 						// 'counter' => auth()->user()->newThreadsCount(),
-					])
-					@include('livewire.admin.partial.sidebar-menu-item', [
+					]) --}}
+					{{-- @include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'our-services.index',
 						'name' => 'Services',
 						'icon' => 'fa-brands fa-servicestack',
 						// 'counter' => auth()->user()->newThreadsCount(),
-					])
+					]) --}}
 					@include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'footer.index',
-						'name' => 'Footer',
+						'name' => 'Footer (Content)',
 						'icon' => 'fa-solid fa-shoe-prints',
 						// 'counter' => auth()->user()->newThreadsCount(),
 					])
 					@include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'appointments.index',
-						'name' => 'Appointment',
+						'name' => 'Appointment (intro)',
 						'icon' => 'fa-solid fa-calendar-check',
 						// 'counter' => auth()->user()->newThreadsCount(),
 					])
 					@include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'rev_slider.index',
-						'name' => 'Rev Slider',
-						'icon' => 'fa-solid fa-sliders',
-						// 'counter' => auth()->user()->newThreadsCount(),
-					])
-					@include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'experts.index',
-						'name' => 'Experts',
-						'icon' => 'fa-solid fa-sliders',
-						// 'counter' => auth()->user()->newThreadsCount(),
-					])
-					@include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'healths.index',
-						'name' => 'Healths',
+						'name' => 'Rev Slider (Content)',
 						'icon' => 'fa-solid fa-sliders',
 						// 'counter' => auth()->user()->newThreadsCount(),
 					])
 					@include('livewire.admin.partial.sidebar-menu-item', [
 						'route' => 'provides.index',
-						'name' => 'Provides',
+						'name' => 'Welcome (intro)',
 						'icon' => 'fa-solid fa-sliders',
 						// 'counter' => auth()->user()->newThreadsCount(),
 					])
 					@include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'best_services.index',
-						'name' => 'Best Services',
+						'route' => 'healths.index',
+						'name' => 'Healths (intro/Content)',
 						'icon' => 'fa-solid fa-sliders',
 						// 'counter' => auth()->user()->newThreadsCount(),
 					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'gallery.index',
+						'name' => 'Gallery (Content)',
+						'icon' => 'fa-solid fa-handshake',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'best_services.index',
+						'name' => 'Open Hours (intro/Content)',
+						'icon' => 'fa-solid fa-sliders',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'experts.index',
+						'name' => 'Experts (intro/Content)',
+						'icon' => 'fa-solid fa-sliders',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'admin/partners',
+						'name' => 'Partners (Content)',
+						'icon' => 'fa-solid fa-handshake',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+
+
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'faqs.index',
+						'name' => 'FAQS (Content)',
+						'icon' => 'fa-solid fa-question',
+						// 'counter' => auth()->user()->newThreadsCount(),
+					])
+
+					<!--begin:Menu item-->
+					@include('livewire.admin.partial.sidebar-menu-header', [
+						'name' => 'Product Management',
+					])
+					<!--end:Menu item-->
+					{{-- @endcanany --}}
+					<!--begin:Menu item-->
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'admin/categories',
+						'name' => 'Category',
+						'icon' => null,
+						'counter' => null,
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'products.index',
+						'name' => 'Products',
+						'icon' => null,
+						'counter' => null,
+					])
+					<!--end:Menu item-->
+					@include('livewire.admin.partial.sidebar-menu-header', [
+						'name' => 'Services Management',
+					])
+					<!--begin:Menu item-->
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'services-category.index',
+						'name' => 'Category',
+						'icon' => null,
+						'counter' => null,
+					])
+					@include('livewire.admin.partial.sidebar-menu-item', [
+						'route' => 'appointment-services.index',
+						'name' => 'Services',
+						'icon' => null,
+						'counter' => null,
+					])
+
 					{{-- @include('livewire.admin.partial.sidebar-menu-item', [
 =======
 					@include('livewire.admin.partial.sidebar-menu-item', [
@@ -162,25 +221,7 @@
                 'icon' => 'fa-solid fa-message',
                 // 'counter' => auth()->user()->newThreadsCount(),
                 ]) --}}
-					@include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'admin/partners',
-						'name' => 'Partners',
-						'icon' => 'fa-solid fa-handshake',
-						// 'counter' => auth()->user()->newThreadsCount(),
-					])
 
-					@include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'gallery.index',
-						'name' => 'Gallery',
-						'icon' => 'fa-solid fa-handshake',
-						// 'counter' => auth()->user()->newThreadsCount(),
-					])
-					@include('livewire.admin.partial.sidebar-menu-item', [
-						'route' => 'faqs.index',
-						'name' => 'FAQS',
-						'icon' => 'fa-solid fa-question',
-						// 'counter' => auth()->user()->newThreadsCount(),
-					])
 
 					@include('livewire.admin.partial.sidebar-menu-header', [
 						'name' => 'Blogs section',
@@ -202,83 +243,7 @@
 				@endcanany
 
 				<!--end:Menu item-->
-				<!--begin:Menu item-->
-				@include('livewire.admin.partial.sidebar-menu-header', [
-					'name' => 'Authentication',
-				])
-				<!--end:Menu item-->
-				{{-- @endcanany --}}
-				@canany(['super staff', 'super roles', 'super permissions'])
-					<!--begin:Menu item here show-->
-					<div data-kt-menu-trigger="click"
-						class="menu-item menu-accordion @if ($route_name == 'admin/categories' || $route_name == 'admin/products') here show @endif">
-						<!--begin:Menu link-->
-						<span class="menu-link">
-							<span class="menu-icon">
-								<i class="fa-solid fa-user-gear fs-5"></i>
-							</span>
-							<span class="menu-title">{{ __('Product management') }}</span>
-							<span class="menu-arrow"></span>
-						</span>
-						<!--end:Menu link-->
-						<!--begin:Menu sub-->
-						<div class="menu-sub menu-sub-accordion">
-							{{-- @can('super staff') --}}
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'admin/categories',
-								'name' => 'Category',
-								'icon' => null,
-								'counter' => null,
-							])
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'products.index',
-								'name' => 'Products',
-								'icon' => null,
-								'counter' => null,
-							])
-						</div>
-						<!--end:Menu sub-->
-					</div>
-					<!--end:Menu item-->
-				@endcanany
-				@include('livewire.admin.partial.sidebar-menu-header', [
-					'name' => 'Appoinment Services',
-				])
-				@canany(['super staff', 'super roles', 'super permissions'])
-					<!--begin:Menu item here show-->
-					<div data-kt-menu-trigger="click"
-						class="menu-item menu-accordion @if ($route_name == 'services-category.index' || $route_name == 'appointment-services.index') here show @endif">
-						<!--begin:Menu link-->
-						<span class="menu-link">
-							<span class="menu-icon">
-								<i class="fa-solid fa-user-gear fs-5"></i>
-							</span>
-							<span class="menu-title">{{ __('Appoinment Management') }}</span>
-							<span class="menu-arrow"></span>
-						</span>
-						<!--end:Menu link-->
-						<!--begin:Menu sub-->
-						<div class="menu-sub menu-sub-accordion">
-							{{-- @can('super staff') --}}
-							<!--begin:Menu item-->
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'services-category.index',
-								'name' => 'Services Category',
-								'icon' => null,
-								'counter' => null,
-							])
-							@include('livewire.admin.partial.sidebar-menu-item', [
-								'route' => 'appointment-services.index',
-								'name' => 'Appointment Service',
-								'icon' => null,
-								'counter' => null,
-							])
-						</div>
-						<!--end:Menu sub-->
-					</div>
-					<!--end:Menu item-->
-				@endcanany
+
 				<!--begin:Menu item-->
 				<!--begin:Menu item-->
 				{{-- @include('livewire.admin.partial.sidebar-menu-header', [
