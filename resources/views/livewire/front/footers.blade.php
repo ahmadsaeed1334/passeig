@@ -134,13 +134,12 @@
 			</div>
 			<div class="row">
 
-				<div class="col-lg-3 col-md-6 col-sm-6 p-tb20">
-					<div class="wt-icon-box-wraper left bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix onHover br-10 h-100">
-						<div class="icon-md site-text-primary">
-							{{-- <span class="iconmoon-travel"></span> --}}
-							<img src="{{ asset('assets/images/location.png') }}" alt="">
+				<div class="col-lg-3 col-md-6 col-sm-6 p-tb20 box">
+					<div class="wt-icon-box-wraper left bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix onHover br-10 h-100 circle-wrapper">
+						<div class="icon-md site-text-primary icon">
+							<img src="{{ asset('assets/images/map.gif') }}" alt="">
 						</div>
-						<div class="icon-content">
+						<div class="icon-content circle success"> <!-- Use success, error, or warning class here -->
 							<h5 class="wt-tilte text-uppercase m-b0">Address</h5>
 							<p> {{ general('address') }}</p>
 						</div>
@@ -148,11 +147,12 @@
 				</div>
 
 
+
 				<div class="col-lg-3 col-md-6 col-sm-6 p-tb20">
 					<div class="wt-icon-box-wraper left bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix onHover br-10 h-100">
 						<div class="icon-md site-text-primary">
 							{{-- <span class="iconmoon-smartphone-1"></span> --}}
-							<img src="{{ asset('assets/images/phone.png') }}" alt="">
+							<img src="{{ asset('assets/images/phone-contact.gif') }}" alt="">
 
 						</div>
 						<div class="icon-content">
@@ -166,7 +166,7 @@
 					<div class="wt-icon-box-wraper left bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix onHover br-10 h-100">
 						<div class="icon-md site-text-primary">
 							{{-- <span class="iconmoon-fax"></span> --}}
-							<img src="{{ asset('assets/images/fax.png') }}" alt="">
+							<img src="{{ asset('assets/images/fax.gif') }}" alt="">
 
 						</div>
 						<div class="icon-content">
@@ -181,7 +181,7 @@
 					<div class="wt-icon-box-wraper left bdr-1 bdr-gray-dark p-tb15 p-lr10 clearfix onHover br-10 h-100">
 						<div class="icon-md site-text-primary">
 							{{-- <span class="iconmoon-email"></span> --}}
-							<img src="{{ asset('assets/images/email.png') }}" alt="">
+							<img src="{{ asset('assets/images/email-file.gif') }}" alt="">
 
 						</div>
 						<div class="icon-content">
